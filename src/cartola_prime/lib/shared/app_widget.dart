@@ -1,4 +1,5 @@
 import 'package:cartola_prime/screens/auth/auth_page.dart';
+import 'package:cartola_prime/screens/home/home_page.dart';
 import 'package:cartola_prime/screens/menu/menu_dashboard_page.dart';
 import 'package:cartola_prime/screens/splash/splash_page.dart';
 import 'package:cartola_prime/shared/client_http.dart';
@@ -30,7 +31,7 @@ class AppWidget extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (_) => const SplashPage(),
-          '/dashboard': (_) => const MenuDashboardPage(),
+          '/home': (_) => const HomePage(title: 'Cartola Prime'),
           '/auth': (_) => const AuthPage(),
         },
       ),

@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage> {
     await Future.delayed(const Duration(seconds: 2));
 
     final storage = await _storage.read(key: "userModel");
-    Navigator.of(context).pushReplacementNamed('/dashboard');
+    Navigator.of(context).pushReplacementNamed('/home');
 
     // if (storage == null || storage.isEmpty) {
     //   Navigator.of(context).pushReplacementNamed('/auth');
@@ -32,8 +32,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    AssetImage logo = const AssetImage('assets/images/iconp.png');
-    Image image = Image(image: logo, width: 200, height: 200);
+    AssetImage logo = const AssetImage('assets/images/imagem_splash.png');
+    Image image = Image(image: logo);
     return Scaffold(
       body: Center(
         child: Column(
@@ -41,7 +41,6 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             image,
-            const CircularProgressIndicator(),
           ],
         ),
       ),
