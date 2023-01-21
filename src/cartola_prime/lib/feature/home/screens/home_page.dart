@@ -1,4 +1,4 @@
-import 'package:cartola_prime/components/resource_colors.dart';
+import 'package:cartola_prime/feature/components/resource_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 

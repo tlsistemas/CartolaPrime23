@@ -1,7 +1,6 @@
-import 'package:cartola_prime/screens/auth/auth_page.dart';
-import 'package:cartola_prime/screens/home/home_page.dart';
-import 'package:cartola_prime/screens/menu/menu_dashboard_page.dart';
-import 'package:cartola_prime/screens/splash/splash_page.dart';
+import 'package:cartola_prime/feature/auth/screens/auth_page.dart';
+import 'package:cartola_prime/feature/home/screens/home_page.dart';
+import 'package:cartola_prime/feature/splash/screens/splash_page.dart';
 import 'package:cartola_prime/shared/client_http.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

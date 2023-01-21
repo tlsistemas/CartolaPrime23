@@ -1,5 +1,4 @@
-import 'package:cartola_prime/components/resource_colors.dart';
-import 'package:cartola_prime/screens/home/home_page.dart';
+import 'package:cartola_prime/feature/components/resource_colors.dart';
 import 'package:flutter/material.dart';
 
 class MenuDashboardPage extends StatefulWidget {
