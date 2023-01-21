@@ -42,6 +42,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   flutter_secure_storage: ^7.0.1
   shrink_sidemenu: ^2.0.0+2-null-safety
+  lottie: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
     - assets/images/iconp.png
     - assets/images/imagem_splash.png
     - assets/images/thi_cartolando.png
+    - assets/json/splash_icon.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
