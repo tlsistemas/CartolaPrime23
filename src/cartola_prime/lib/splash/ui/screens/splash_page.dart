@@ -1,7 +1,8 @@
-import 'package:cartola_prime/feature/components/resource_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../../shared/ui/components/resource_colors.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

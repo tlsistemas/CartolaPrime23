@@ -1,5 +1,6 @@
-import 'package:cartola_prime/feature/components/resource_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../../../shared/ui/components/resource_colors.dart';
 
 class MenuDashboardPage extends StatefulWidget {
   const MenuDashboardPage({Key? key}) : super(key: key);

@@ -1,9 +1,10 @@
-import 'package:cartola_prime/feature/auth/screens/auth_page.dart';
-import 'package:cartola_prime/feature/home/screens/home_page.dart';
-import 'package:cartola_prime/feature/splash/screens/splash_page.dart';
-import 'package:cartola_prime/shared/client_http.dart';
+import 'package:cartola_prime/shared/services/client_http.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'auth/ui/screens/auth_page.dart';
+import 'home/ui/screens/home_page.dart';
+import 'splash/ui/screens/splash_page.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -19,7 +20,7 @@ class AppWidget extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Grupo Serval',
+        title: 'Cartola Prime',
         //home: const MenuDashboardPage(),
         theme: ThemeData(
             useMaterial3: true,

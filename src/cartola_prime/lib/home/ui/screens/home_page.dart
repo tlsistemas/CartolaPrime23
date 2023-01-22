@@ -1,6 +1,7 @@
-import 'package:cartola_prime/feature/components/resource_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
+
+import '../../../shared/ui/components/resource_colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
