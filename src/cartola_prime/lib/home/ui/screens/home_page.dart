@@ -106,7 +106,9 @@ class _HomePageState extends State<HomePage> {
               child: IconTheme(
                 data: const IconThemeData(color: backgroundColor),
                 child: Padding(
-                  padding: const EdgeInsets.all(3.0),
+                  // padding: const EdgeInsets.all(3.0),
+                  padding: const EdgeInsets.only(
+                      left: 3.0, top: 0.0, bottom: 0.0, right: 3.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
