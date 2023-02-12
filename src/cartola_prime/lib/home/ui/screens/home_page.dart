@@ -225,10 +225,13 @@ class _HomePageState extends State<HomePage> {
             // padding: EdgeInsets.zero,
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.shopping_cart,
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/classificacao");
+            },
+            leading: const Icon(Icons.list_alt_outlined,
                 size: 20.0, color: Colors.white),
-            title: const Text("Cart"),
+            title: const Text("Classificação"),
             textColor: Colors.white,
             dense: true,
 

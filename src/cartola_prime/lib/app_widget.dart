@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'auth/ui/screens/auth_page.dart';
+import 'classificacao/ui/screens/classificacao_page.dart';
 import 'home/ui/screens/home_page.dart';
 import 'splash/ui/screens/splash_page.dart';
 
@@ -33,6 +34,7 @@ class AppWidget extends StatelessWidget {
           '/': (_) => const SplashPage(),
           '/home': (_) => const HomePage(title: 'Cartola Prime'),
           '/auth': (_) => const AuthPage(),
+          '/classificacao': (_) => const ClassificacaoPage(),
         },
       ),
     );
