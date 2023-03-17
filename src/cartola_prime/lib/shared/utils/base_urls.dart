@@ -2,4 +2,6 @@ mixin baseUrls {
   static const String _baseUrl = "https://api.cartolafc.globo.com";
 
   String clubes = '$_baseUrl/clubes';
+  String rodadas = '$_baseUrl/rodadas';
+  String partidas = '$_baseUrl/partidas';
 }
