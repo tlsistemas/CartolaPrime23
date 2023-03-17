@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'auth/ui/screens/auth_page.dart';
-import 'classificacao/ui/screens/classificacao_page.dart';
+import 'classificacaoBra/ui/screens/classificacao_bra_page.dart';
 import 'home/ui/screens/home_page.dart';
 import 'splash/ui/screens/splash_page.dart';
 
