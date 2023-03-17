@@ -1,5 +1,3 @@
-import 'package:cartola_prime/classificacaoBra/ui/components/body_controle.dart';
-import 'package:cartola_prime/clube/dto/clube_dto.dart';
 import 'package:cartola_prime/clube/view_model/clube_vm.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +11,7 @@ class PartidaPage extends StatefulWidget {
 }
 
 class _PartidaPage extends State<PartidaPage> {
-  late List<ClubeDto> clubes;
+  late List<ClubeViewModel> clubes;
   final ClubeViewModel viewModel = ClubeViewModel();
 
   @override
@@ -23,6 +21,7 @@ class _PartidaPage extends State<PartidaPage> {
   }
 
   Future _getClubes() async {
+    //await viewModel.SyncSorage();
     clubes = await viewModel.getAll();
   }
 

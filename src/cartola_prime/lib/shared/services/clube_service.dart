@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cartola_prime/clube/dto/clube_dto.dart';
+import 'package:cartola_prime/shared/models/dto/clube_dto.dart';
 import 'package:cartola_prime/shared/services/client_http.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -32,8 +32,9 @@ class ClubeService extends ChangeNotifier with baseUrls {
           retorno.add(element);
         }
 
-        //await setStorage('clubes', await setStorage('user', authRequest.loginrede));
+        await setStorage('clubes', jsonEncode(retorno));
 
+        var storageJson = await _storage.read(key: "clubes");
         return true;
       }
     } on Exception catch (ex) {

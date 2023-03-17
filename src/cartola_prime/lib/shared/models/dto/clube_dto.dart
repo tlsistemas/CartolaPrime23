@@ -1,3 +1,4 @@
+import 'package:cartola_prime/clube/view_model/clube_vm.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'escudo_dto.dart';
