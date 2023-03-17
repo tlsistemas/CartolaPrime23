@@ -20,7 +20,7 @@ class _RodadaPage extends State<RodadaPage> {
   }
 
   Future _getRodadas() async {
-    await viewModel.getAll();
+    await viewModel.rodadaAtual();
   }
 
   @override

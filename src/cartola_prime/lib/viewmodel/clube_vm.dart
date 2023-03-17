@@ -1,7 +1,7 @@
 import 'package:cartola_prime/data/db_cartola.dart';
-import 'package:cartola_prime/models/dto/clube_dto.dart';
 import 'package:flutter/material.dart';
 
+import '../models/clube.dart';
 import '../repositories/clube_repo.dart';
 import '../services/clube_service.dart';
 
@@ -11,8 +11,8 @@ class ClubeViewModel extends ChangeNotifier {
 
   ClubeViewModel();
 
-  late final List<ClubeDto> clubes;
-  late final ClubeDto clube;
+  late final List<Clube> clubes;
+  late final Clube clube;
 
   Future<bool> SyncSorage() async {
     final itens = await _service.updateStorage();
@@ -25,7 +25,7 @@ class ClubeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<ClubeDto> getOne() async {
+  Future<Clube> getOne() async {
     final itens = await _service.getAllClubes();
     notifyListeners();
     return itens.first;

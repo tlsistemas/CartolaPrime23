@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:cartola_prime/data/db_cartola.dart';
-import 'package:cartola_prime/models/dto/clube_dto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../models/clube.dart';
 import 'contracts/i_clube_repo.dart';
 
 class ClubeRepository implements IClubeRepository {
@@ -22,11 +22,11 @@ class ClubeRepository implements IClubeRepository {
   }
 
   @override
-  Future<List<ClubeDto>> getAll() async {
+  Future<List<Clube>> getAll() async {
     var storageJson = await _storage.read(key: "clubes");
 
     var list = (json.decode(storageJson!) as List)
-        .map((i) => ClubeDto.fromJson(i))
+        .map((i) => Clube.fromJson(i))
         .toList();
 
     return list;

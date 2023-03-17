@@ -1,12 +1,12 @@
-class TransmissaoDto {
-  TransmissaoDto({
+class Transmissao {
+  Transmissao({
     required this.label,
     required this.url,
   });
   late final String label;
   late final String url;
 
-  TransmissaoDto.fromJson(Map<String, dynamic> json) {
+  Transmissao.fromJson(Map<String, dynamic> json) {
     label = json['label'];
     url = json['url'];
   }

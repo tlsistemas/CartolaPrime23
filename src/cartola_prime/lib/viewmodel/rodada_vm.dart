@@ -1,7 +1,6 @@
-import 'package:cartola_prime/models/dto/partida_dto.dart';
+import 'package:cartola_prime/models/rodada.dart';
 import 'package:flutter/material.dart';
 
-import '../models/dto/rodada_dto.dart';
 import '../services/rodada_service.dart';
 
 class RodadaViewModel extends ChangeNotifier {
@@ -9,10 +8,11 @@ class RodadaViewModel extends ChangeNotifier {
 
   RodadaViewModel();
 
-  late final List<RodadaDto> partidas;
+  late final Rodada rodada;
+  late final List<Rodada> rodadas;
 
-  Future<void> getAll() async {
-    partidas = await _service.getAllRodadas();
+  Future<void> rodadaAtual() async {
+    rodada = await _service.getRodadaAtual();
     notifyListeners();
   }
 }

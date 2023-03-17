@@ -1,19 +1,19 @@
-import 'partida_dto.dart';
+import 'partida.dart';
 
-class RodadaDto {
-  RodadaDto({
+class Rodada {
+  Rodada({
     required this.partidas,
     required this.rodada,
   });
 
-  late final List<PartidaDto> partidas;
+  late final List<Partida> partidas;
   late final int rodada;
-  late final List<RodadaDto> rodadas;
+  late final List<Rodada> rodadas;
 
-  RodadaDto.fromJson(Map<String, dynamic> json) {
+  Rodada.fromJson(Map<String, dynamic> json) {
     rodada = json['rodada'];
     partidas =
-        List.from(json['partidas']).map((e) => PartidaDto.fromJson(e)).toList();
+        List.from(json['partidas']).map((e) => Partida.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -23,11 +23,11 @@ class RodadaDto {
     return data;
   }
 
-  RodadaDto.fromJsonList(Map<String, dynamic> json) {
-    rodadas = <RodadaDto>[];
+  Rodada.fromJsonList(Map<String, dynamic> json) {
+    rodadas = <Rodada>[];
     rodada = json['rodada'];
     var partidasJson = json['partidas'];
-    var partidaDto = PartidaDto.fromJsonList(partidasJson);
+    var partidaDto = Partida.fromJsonList(partidasJson);
     partidas = partidaDto.partidas;
     // json.entries.forEach((v) {
     //   rodadas.add(RodadaDto.fromJson(v.value));

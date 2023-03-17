@@ -1,10 +1,10 @@
 import 'package:cartola_prime/viewmodel/clube_vm.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'escudo_dto.dart';
+import 'escudo.dart';
 
-class ClubeDto {
-  ClubeDto({
+class Clube {
+  Clube({
     required this.abreviacao,
     required this.nome,
     required this.id,
@@ -15,24 +15,24 @@ class ClubeDto {
   late final String nome;
   late final int id;
   late final String nomeFantasia;
-  late final List<ClubeDto> clubes;
-  late final EscudoDto escudos;
+  late final List<Clube> clubes;
+  late final Escudo escudos;
 
-  ClubeDto.fromJson(Map<String, dynamic> json) {
+  Clube.fromJson(Map<String, dynamic> json) {
     abreviacao = json['abreviacao'];
     nome = json['nome'];
     id = json['id'];
     // json['escudos'].forEach((v) {
     //   escudos.add(EscudoDto.fromJson(v.value));
     // });
-    escudos = EscudoDto.fromJson(json["escudos"]);
+    escudos = Escudo.fromJson(json["escudos"]);
     nomeFantasia = json['nome_fantasia'];
   }
 
-  ClubeDto.fromJsonList(Map<String, dynamic> json) {
-    clubes = <ClubeDto>[];
+  Clube.fromJsonList(Map<String, dynamic> json) {
+    clubes = <Clube>[];
     json.entries.forEach((v) {
-      clubes.add(ClubeDto.fromJson(v.value));
+      clubes.add(Clube.fromJson(v.value));
     });
   }
 

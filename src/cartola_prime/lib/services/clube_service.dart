@@ -1,9 +1,8 @@
 import 'dart:convert';
-
-import 'package:cartola_prime/models/dto/clube_dto.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../models/clube.dart';
 import '../shared/utils/base_urls.dart';
 import 'client_http.dart';
 
@@ -22,12 +21,12 @@ class ClubeService extends ChangeNotifier with baseUrls {
   Future<bool> updateStorage() async {
     try {
       final response = await _dio.get(clubes);
-      var retorno = <ClubeDto>[];
+      var retorno = <Clube>[];
 
       if (response['status'] == 'erro') {
         return false;
       } else {
-        var datas = ClubeDto.fromJsonList(response);
+        var datas = Clube.fromJsonList(response);
         for (var element in datas.clubes) {
           retorno.add(element);
         }
@@ -42,14 +41,14 @@ class ClubeService extends ChangeNotifier with baseUrls {
     }
   }
 
-  Future<List<ClubeDto>> getAllClubes() async {
+  Future<List<Clube>> getAllClubes() async {
     final response = await _dio.get(clubes);
-    var retorno = <ClubeDto>[];
+    var retorno = <Clube>[];
 
     if (response['status'] == 'erro') {
       return retorno;
     } else {
-      var datas = ClubeDto.fromJsonList(response);
+      var datas = Clube.fromJsonList(response);
       for (var element in datas.clubes) {
         retorno.add(element);
       }
