@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'auth/ui/screens/auth_page.dart';
 import 'classificacaoBra/ui/screens/classificacao_bra_page.dart';
+import 'clube/ui/screens/partida_page.dart';
 import 'home/ui/screens/home_page.dart';
 import 'splash/ui/screens/splash_page.dart';
 
@@ -14,7 +15,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(create: (_) => ClientHttp()),
+        Provider(create: (context) => ClientHttp()),
         // ChangeNotifierProvider(
         //   create: (context) => AuthController(context.read()),
         // ),
@@ -31,10 +32,11 @@ class AppWidget extends StatelessWidget {
             )),
         initialRoute: '/',
         routes: {
-          '/': (_) => const SplashPage(),
-          '/home': (_) => const HomePage(title: 'Cartola Prime'),
-          '/auth': (_) => const AuthPage(),
-          '/classificacao': (_) => const ClassificacaoPage(),
+          '/': (context) => const SplashPage(),
+          '/home': (context) => const HomePage(title: 'Cartola Prime'),
+          '/auth': (context) => const AuthPage(),
+          '/classificacao': (context) => const ClassificacaoPage(),
+          '/rodada': (context) => const PartidaPage(),
         },
       ),
     );

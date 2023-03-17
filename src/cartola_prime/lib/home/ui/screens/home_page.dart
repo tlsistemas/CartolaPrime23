@@ -215,10 +215,13 @@ class _HomePageState extends State<HomePage> {
             // padding: EdgeInsets.zero,
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.monetization_on,
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/rodada");
+            },
+            leading: const Icon(Icons.list_alt_outlined,
                 size: 20.0, color: Colors.white),
-            title: const Text("Wallet"),
+            title: const Text("Rodadas"),
             textColor: Colors.white,
             dense: true,
 
