@@ -1,6 +1,9 @@
+import 'package:cartola_prime/services/clube_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
+import '../../data/db_cartola.dart';
+import '../../repositories/clube_repo.dart';
 import '../components/resource_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +18,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _counter = 0;
   var isOpened = false;
+  final _repClube = ClubeRepository(DBCartola());
+  final _serviceClube = ClubeService();
+
+  @override
+  void initState() {
+    verificarStorage();
+    super.initState();
+  }
+
+  Future<void> verificarStorage() async {
+    var existClube = await _repClube.existStorage();
+    if (!existClube) {
+      await _serviceClube.updateStorage();
+    }
+  }
 
   final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
   final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();

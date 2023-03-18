@@ -29,8 +29,5 @@ class Rodada {
     var partidasJson = json['partidas'];
     var partidaDto = Partida.fromJsonList(partidasJson);
     partidas = partidaDto.partidas;
-    // json.entries.forEach((v) {
-    //   rodadas.add(RodadaDto.fromJson(v.value));
-    // });
   }
 }

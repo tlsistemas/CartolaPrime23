@@ -47,7 +47,15 @@ class _RodadaPage extends State<RodadaPage> {
               itemCount: snapshot.data?.length,
               itemBuilder: (context, index) {
                 var item = snapshot.data![index];
-                return Text(item.clubeCasaId.toString());
+                return ListTile(
+                  leading: CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage: NetworkImage(
+                        snapshot.data![index].clubeCasa.escudos.s60x60),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  title: Text(data![index].clubeCasa!.nomeFantasia),
+                );
               },
             ),
           );

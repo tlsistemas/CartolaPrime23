@@ -1,11 +1,18 @@
+import 'package:cartola_prime/models/clube.dart';
+import 'package:cartola_prime/models/escudo.dart';
+import 'package:cartola_prime/repositories/clube_repo.dart';
+
+import '../data/db_cartola.dart';
 import 'transmissao.dart';
 
 class Partida {
   Partida({
     required this.partidaId,
     required this.clubeCasaId,
+    required this.clubeCasa,
     required this.clubeCasaPosicao,
     required this.clubeVisitanteId,
+    required this.clubeVisitante,
     required this.aproveitamentoMandante,
     required this.aproveitamentoVisitante,
     required this.clubeVisitantePosicao,
@@ -21,10 +28,25 @@ class Partida {
     required this.periodoTr,
     required this.transmissao,
   });
+
+  final _repClube = ClubeRepository(DBCartola());
+
   late final int partidaId;
   late final int clubeCasaId;
+  late Clube clubeCasa = Clube(
+      abreviacao: "",
+      nome: "",
+      id: 0,
+      nomeFantasia: "",
+      escudos: Escudo(s30x30: "", s45x45: "", s60x60: "", Escudos: []));
   late final int clubeCasaPosicao;
   late final int clubeVisitanteId;
+  late Clube clubeVisitante = Clube(
+      abreviacao: "",
+      nome: "",
+      id: 0,
+      nomeFantasia: "",
+      escudos: Escudo(s30x30: "", s45x45: "", s60x60: "", Escudos: []));
   late final List<String> aproveitamentoMandante;
   late final List<String> aproveitamentoVisitante;
   late final int clubeVisitantePosicao;
@@ -63,6 +85,8 @@ class Partida {
     statusCronometroTr = json['status_cronometro_tr'];
     periodoTr = json['periodo_tr'];
     transmissao = Transmissao.fromJson(json['transmissao']);
+    setClubeCasa(clubeCasaId);
+    setClubeVisitante(clubeVisitanteId);
   }
 
   Map<String, dynamic> toJson() {
@@ -93,5 +117,13 @@ class Partida {
     json.forEach((v) {
       partidas.add(Partida.fromJson(v));
     });
+  }
+
+  Future setClubeCasa(int idClube) async {
+    clubeCasa = await _repClube.getId(clubeCasaId);
+  }
+
+  Future setClubeVisitante(int idClube) async {
+    clubeVisitante = await _repClube.getId(clubeVisitanteId);
   }
 }

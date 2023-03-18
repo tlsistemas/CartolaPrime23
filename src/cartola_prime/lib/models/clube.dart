@@ -1,6 +1,3 @@
-import 'package:cartola_prime/viewmodel/clube_vm.dart';
-import 'package:flutter/cupertino.dart';
-
 import 'escudo.dart';
 
 class Clube {
