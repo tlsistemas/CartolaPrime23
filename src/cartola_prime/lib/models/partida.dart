@@ -119,11 +119,13 @@ class Partida {
     });
   }
 
-  Future setClubeCasa(int idClube) async {
-    clubeCasa = await _repClube.getId(clubeCasaId);
+  setClubeCasa(int idClube) {
+    _repClube.getId(clubeCasaId).then((value) => clubeCasa = value);
+    // clubeCasa = _repClube.getId(clubeCasaId);
   }
 
-  Future setClubeVisitante(int idClube) async {
-    clubeVisitante = await _repClube.getId(clubeVisitanteId);
+  setClubeVisitante(int idClube) {
+    _repClube.getId(clubeVisitanteId).then((value) => clubeVisitante = value);
+    //clubeVisitante = _repClube.getId(clubeVisitanteId);
   }
 }

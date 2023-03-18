@@ -14,7 +14,7 @@ class RodadaPage extends StatefulWidget {
 class _RodadaPage extends State<RodadaPage> {
   late double width = MediaQuery.of(context).size.width;
   final RodadaViewModel viewModel = RodadaViewModel();
-  Future<List<Partida>>? _listPartida;
+
   @override
   void initState() {
     super.initState();
@@ -50,11 +50,11 @@ class _RodadaPage extends State<RodadaPage> {
                 return ListTile(
                   leading: CircleAvatar(
                     radius: 30.0,
-                    backgroundImage: NetworkImage(
-                        snapshot.data![index].clubeCasa.escudos.s60x60),
+                    backgroundImage:
+                        NetworkImage(item.clubeCasa.escudos.s60x60),
                     backgroundColor: Colors.transparent,
                   ),
-                  title: Text(data![index].clubeCasa!.nomeFantasia),
+                  title: Text(item.clubeCasa.nomeFantasia),
                 );
               },
             ),
