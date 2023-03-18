@@ -8,7 +8,7 @@ class RodadaViewModel extends ChangeNotifier {
 
   RodadaViewModel();
 
-  late final Rodada rodada;
+  late Rodada rodada = Rodada(partidas: [], rodada: 0);
   late final List<Rodada> rodadas;
 
   Future<void> rodadaAtual() async {
