@@ -14,15 +14,18 @@ class RodadaPage extends StatefulWidget {
 class _RodadaPage extends State<RodadaPage> {
   late double width = MediaQuery.of(context).size.width;
   final RodadaViewModel viewModel = RodadaViewModel();
+  //late List<Partida> partidas = [];
 
   @override
   void initState() {
+    //_setPartidas().then((value) => partidas = value);
     super.initState();
   }
 
   Future<List<Partida>> _setPartidas() async {
-    await viewModel.rodadaAtual();
-    return viewModel.rodada.partidas;
+    var rodada = await viewModel.rodadaAtual();
+    //partidas = rodada.partidas;
+    return rodada.partidas;
   }
 
   @override
@@ -36,36 +39,29 @@ class _RodadaPage extends State<RodadaPage> {
 
   Widget listaPartidastWidget() {
     return FutureBuilder(
-      builder: (context, snapshot) {
-        final data = snapshot.data;
-        if (snapshot.hasData ||
-            data != null ||
-            snapshot.connectionState == ConnectionState.done) {
-          return Container(
-            child: ListView.builder(
+        future: _setPartidas(),
+        builder: (context, AsyncSnapshot<List<Partida>> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            var item = snapshot.data;
+            return ListView.builder(
+              itemCount: item!.length,
+              shrinkWrap: false,
               scrollDirection: Axis.vertical,
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, index) {
-                var item = snapshot.data![index];
+              itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: CircleAvatar(
                     radius: 30.0,
                     backgroundImage:
-                        NetworkImage(item.clubeCasa.escudos.s60x60),
+                        NetworkImage(item[index].clubeCasa.escudos.s60x60!),
                     backgroundColor: Colors.transparent,
                   ),
-                  title: Text(item.clubeCasa.nomeFantasia),
+                  title: Text(item[index].clubeCasa.nome),
                 );
               },
-            ),
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-      future: _setPartidas(),
-    );
+            );
+          }
+        });
   }
 }

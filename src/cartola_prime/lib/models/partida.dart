@@ -29,24 +29,12 @@ class Partida {
     required this.transmissao,
   });
 
-  final _repClube = ClubeRepository(DBCartola());
-
   late final int partidaId;
   late final int clubeCasaId;
-  late Clube clubeCasa = Clube(
-      abreviacao: "",
-      nome: "",
-      id: 0,
-      nomeFantasia: "",
-      escudos: Escudo(s30x30: "", s45x45: "", s60x60: "", Escudos: []));
+  late final Clube clubeCasa;
   late final int clubeCasaPosicao;
   late final int clubeVisitanteId;
-  late Clube clubeVisitante = Clube(
-      abreviacao: "",
-      nome: "",
-      id: 0,
-      nomeFantasia: "",
-      escudos: Escudo(s30x30: "", s45x45: "", s60x60: "", Escudos: []));
+  late final Clube clubeVisitante;
   late final List<String> aproveitamentoMandante;
   late final List<String> aproveitamentoVisitante;
   late final int clubeVisitantePosicao;
@@ -85,8 +73,6 @@ class Partida {
     statusCronometroTr = json['status_cronometro_tr'];
     periodoTr = json['periodo_tr'];
     transmissao = Transmissao.fromJson(json['transmissao']);
-    setClubeCasa(clubeCasaId);
-    setClubeVisitante(clubeVisitanteId);
   }
 
   Map<String, dynamic> toJson() {
@@ -114,18 +100,8 @@ class Partida {
 
   Partida.fromJsonList(List json) {
     partidas = <Partida>[];
-    json.forEach((v) {
-      partidas.add(Partida.fromJson(v));
-    });
-  }
-
-  setClubeCasa(int idClube) {
-    _repClube.getId(clubeCasaId).then((value) => clubeCasa = value);
-    // clubeCasa = _repClube.getId(clubeCasaId);
-  }
-
-  setClubeVisitante(int idClube) {
-    _repClube.getId(clubeVisitanteId).then((value) => clubeVisitante = value);
-    //clubeVisitante = _repClube.getId(clubeVisitanteId);
+    for (var element in json) {
+      partidas.add(Partida.fromJson(element));
+    }
   }
 }
