@@ -80,25 +80,27 @@ class _RodadaPage extends State<RodadaPage> {
           padding: const EdgeInsets.all(5.0),
           child: Column(
             children: [
-              Text(DateFormat('dd-MM-yyyy kk:mm')
+              Text(DateFormat('dd/MM/yyyy kk:mm')
                   .format(DateTime.parse(partida.partidaData))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Column(
+                  Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Text(partida.clubeCasa.nome,
-                          style: const TextStyle(color: Colors.black)),
+                      Text("${partida.clubeCasaPosicao.toString()}°",
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 24.0),
+                          textAlign: TextAlign.end),
+                      const SizedBox(width: 30),
                       Text(partida.clubeCasa.abreviacao,
                           style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 34.0))
+                              color: Colors.black, fontSize: 24.0),
+                          textAlign: TextAlign.end)
                     ],
                   ),
                   Image.network(
@@ -121,18 +123,20 @@ class _RodadaPage extends State<RodadaPage> {
                     alignment: Alignment.centerRight,
                     centerSlice: Rect.largest,
                   ),
-                  Column(
+                  Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(partida.clubeVisitante.nomeFantasia,
-                          style: const TextStyle(color: Colors.black)),
                       Text(partida.clubeVisitante.abreviacao,
                           style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 34.0))
+                              color: Colors.black, fontSize: 24.0),
+                          textAlign: TextAlign.start),
+                      const SizedBox(width: 30),
+                      Text("${partida.clubeVisitantePosicao.toString()}°",
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 24.0),
+                          textAlign: TextAlign.start),
                     ],
                   ),
                 ],
