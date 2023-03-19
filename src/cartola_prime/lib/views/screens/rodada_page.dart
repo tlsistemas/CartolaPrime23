@@ -14,27 +14,24 @@ class RodadaPage extends StatefulWidget {
 class _RodadaPage extends State<RodadaPage> {
   late double width = MediaQuery.of(context).size.width;
   final RodadaViewModel viewModel = RodadaViewModel();
-  //late List<Partida> partidas = [];
+  late int _rodada = 0;
 
   @override
   void initState() {
-    //_setPartidas().then((value) => partidas = value);
     super.initState();
   }
 
   Future<List<Partida>> _setPartidas() async {
     var rodada = await viewModel.rodadaAtual();
-    //partidas = rodada.partidas;
+    _rodada = rodada.rodada;
     return rodada.partidas;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(58, 66, 86, 1.0),
-      appBar: AppBarControler(title: 'Partidas'),
-      body: listaPartidastWidget(),
-    );
+        appBar: AppBarControler(title: 'Partidas'),
+        body: listaPartidastWidget());
   }
 
   Widget listaPartidastWidget() {
@@ -45,22 +42,31 @@ class _RodadaPage extends State<RodadaPage> {
             return const Center(child: CircularProgressIndicator());
           } else {
             var item = snapshot.data;
-            return ListView.builder(
-              itemCount: item!.length,
-              shrinkWrap: false,
-              scrollDirection: Axis.vertical,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    radius: 30.0,
-                    backgroundImage:
-                        NetworkImage(item[index].clubeCasa.escudos.s60x60!),
-                    backgroundColor: Colors.transparent,
-                  ),
-                  title: Text(item[index].clubeCasa.nome),
-                );
-              },
-            );
+            return Column(children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 20, 20),
+                child: Text("Rodada ${_rodada.toString()}",
+                    style: const TextStyle(color: Colors.black, fontSize: 20)),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: item!.length,
+                  shrinkWrap: false,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        radius: 30.0,
+                        backgroundImage:
+                            NetworkImage(item[index].clubeCasa.escudos.s60x60!),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      title: Text(item[index].clubeCasa.nome),
+                    );
+                  },
+                ),
+              )
+            ]);
           }
         });
   }
