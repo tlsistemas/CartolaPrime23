@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cartola_prime/models/partida.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../viewmodel/rodada_vm.dart';
 import '../components/app_bar_controle.dart';
@@ -49,12 +50,6 @@ class _RodadaPage extends State<RodadaPage> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                // Padding(
-                //   padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                //   child: Text("Rodada ${_rodada.toString()}",
-                //       style:
-                //           const TextStyle(color: Colors.black, fontSize: 20)),
-                // ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
                   child: Text("Rodada ${_rodada.toString()}",
@@ -82,61 +77,69 @@ class _RodadaPage extends State<RodadaPage> {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(partida.clubeCasa.nome,
-                        style: const TextStyle(color: Colors.black)),
-                    Text(partida.clubeCasa.abreviacao,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 34.0))
-                  ],
-                ),
-                Image.network(
-                  partida.clubeCasa.escudos.s60x60!,
-                  height: 40,
-                  width: 40,
-                  alignment: Alignment.centerRight,
-                  centerSlice: Rect.largest,
-                ),
-                const Text("X",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.normal)),
-                Image.network(
-                  partida.clubeVisitante.escudos.s60x60!,
-                  height: 40,
-                  width: 40,
-                  alignment: Alignment.centerRight,
-                  centerSlice: Rect.largest,
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(partida.clubeVisitante.nomeFantasia,
-                        style: const TextStyle(color: Colors.black)),
-                    Text(partida.clubeVisitante.abreviacao,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 34.0))
-                  ],
-                ),
-              ]),
+          padding: const EdgeInsets.all(5.0),
+          child: Column(
+            children: [
+              Text(DateFormat('dd-MM-yyyy kk:mm')
+                  .format(DateTime.parse(partida.partidaData))),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(partida.clubeCasa.nome,
+                          style: const TextStyle(color: Colors.black)),
+                      Text(partida.clubeCasa.abreviacao,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 34.0))
+                    ],
+                  ),
+                  Image.network(
+                    partida.clubeCasa.escudos.s60x60!,
+                    height: 40,
+                    width: 40,
+                    alignment: Alignment.centerRight,
+                    centerSlice: Rect.largest,
+                  ),
+                  const Text("X",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.normal)),
+                  Image.network(
+                    partida.clubeVisitante.escudos.s60x60!,
+                    height: 40,
+                    width: 40,
+                    alignment: Alignment.centerRight,
+                    centerSlice: Rect.largest,
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(partida.clubeVisitante.nomeFantasia,
+                          style: const TextStyle(color: Colors.black)),
+                      Text(partida.clubeVisitante.abreviacao,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 34.0))
+                    ],
+                  ),
+                ],
+              ),
+              Text(partida.local)
+            ],
+          ),
         ),
         onTap: () {},
       )
