@@ -66,7 +66,6 @@ class _HomePageState extends State<HomePage> {
     return SideMenu(
       key: _endSideMenuKey,
       inverse: true, // end side menu
-      background: Colors.green[700],
       type: SideMenuType.slideNRotate,
       menu: Padding(
         padding: const EdgeInsets.only(left: 25.0),

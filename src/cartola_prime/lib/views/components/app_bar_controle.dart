@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'resource_colors.dart';
+
 class AppBarControler extends StatefulWidget with PreferredSizeWidget {
   // Preffered size required for PreferredSizeWidget extension
   final Size prefSize;
@@ -29,23 +31,21 @@ class _AppBarControlerState extends State<AppBarControler> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(widget.title),
-      automaticallyImplyLeading: false,
-      leading: widget.isSubPage
-          ? IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {},
-            )
-          : null,
+      leading: const BackButton(
+        color: Colors.white, // <-- SEE HERE
+      ),
+      centerTitle: true,
+      title: Text(
+        widget.title,
+        style: const TextStyle(color: Colors.white),
+      ),
+      backgroundColor: backgroundColor,
       actions: [
-        widget.hasSearchFunction
-            ? IconButton(onPressed: () => {}, icon: const Icon(Icons.search))
-            : const Icon(null),
         IconButton(
-            onPressed: () {
-              print("Don't poke me!!");
-            },
-            icon: const Icon(Icons.person))
+          color: Colors.white,
+          onPressed: () {},
+          icon: const Icon(Icons.settings),
+        ),
       ],
     );
   }
