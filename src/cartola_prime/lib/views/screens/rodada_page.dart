@@ -8,6 +8,8 @@ import '../../viewmodel/rodada_vm.dart';
 import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../components/resource_colors.dart';
+
 class RodadaPage extends StatefulWidget {
   const RodadaPage({Key? key}) : super(key: key);
 
@@ -52,9 +54,30 @@ class _RodadaPage extends State<RodadaPage> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                  child: Text("Rodada ${_rodada.toString()}",
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 20)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      IconButton(
+                        iconSize: 30,
+                        icon: const Icon(Icons.arrow_back_ios),
+                        onPressed: () {
+                          // ...
+                        },
+                      ),
+                      Text("Rodada ${_rodada.toString()}",
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 20)),
+                      IconButton(
+                        iconSize: 30,
+                        icon: const Icon(Icons.arrow_forward_ios),
+                        onPressed: () {
+                          // ...
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   height: height,
@@ -94,7 +117,7 @@ class _RodadaPage extends State<RodadaPage> {
                     children: <Widget>[
                       Text("${partida.clubeCasaPosicao.toString()}°",
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 24.0),
+                              color: Colors.black, fontSize: 16.0),
                           textAlign: TextAlign.end),
                       const SizedBox(width: 30),
                       Text(partida.clubeCasa.abreviacao,
@@ -135,7 +158,7 @@ class _RodadaPage extends State<RodadaPage> {
                       const SizedBox(width: 30),
                       Text("${partida.clubeVisitantePosicao.toString()}°",
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 24.0),
+                              color: Colors.black, fontSize: 16.0),
                           textAlign: TextAlign.start),
                     ],
                   ),
@@ -152,6 +175,7 @@ class _RodadaPage extends State<RodadaPage> {
 
   Widget _buildTile(Widget child, {required Function() onTap}) {
     return Card(
+      color: backgroundPageColor,
       child: InkWell(
           // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null

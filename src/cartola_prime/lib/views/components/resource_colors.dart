@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const backgroundColor = Color(0xFFfe7200);
 const foregroundColor = Color(0xFFef4007);
+const backgroundPageColor = Color(0xFFF5F5F5);
 const primaryColor = Color(0xFF006686);
 const secondaryColor = Color(0xFF273238);
 const buttonPrimaryColor = Color(0xFF273238);
