@@ -22,14 +22,32 @@ class _RodadaPage extends State<RodadaPage> {
   late double height = MediaQuery.of(context).size.height;
   final RodadaViewModel viewModel = RodadaViewModel();
   late int _rodada = 0;
+  late Future<List<Partida>>? _myData;
 
   @override
   void initState() {
+    _myData = _setPartidas();
     super.initState();
   }
 
   Future<List<Partida>> _setPartidas() async {
     var rodada = await viewModel.rodadaAtual();
+    _rodada = rodada.rodada;
+    return rodada.partidas;
+  }
+
+  Future<List<Partida>> _proximaRodada() async {
+    var novaRodada = _rodada + 1;
+    if (novaRodada > 38) novaRodada = 38;
+    var rodada = await viewModel.rodadaByNumero(novaRodada);
+    _rodada = rodada.rodada;
+    return rodada.partidas;
+  }
+
+  Future<List<Partida>> _voltarRodada() async {
+    var novaRodada = _rodada - 1;
+    if (novaRodada < 1) novaRodada = 1;
+    var rodada = await viewModel.rodadaByNumero(novaRodada);
     _rodada = rodada.rodada;
     return rodada.partidas;
   }
@@ -43,7 +61,7 @@ class _RodadaPage extends State<RodadaPage> {
 
   Widget listaPartidastWidget() {
     return FutureBuilder(
-      future: _setPartidas(),
+      future: _myData,
       builder: (context, AsyncSnapshot<List<Partida>> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
@@ -53,7 +71,7 @@ class _RodadaPage extends State<RodadaPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +81,9 @@ class _RodadaPage extends State<RodadaPage> {
                         iconSize: 30,
                         icon: const Icon(Icons.arrow_back_ios),
                         onPressed: () {
-                          // ...
+                          setState(() {
+                            _myData = _voltarRodada();
+                          });
                         },
                       ),
                       Text("Rodada ${_rodada.toString()}",
@@ -73,7 +93,9 @@ class _RodadaPage extends State<RodadaPage> {
                         iconSize: 30,
                         icon: const Icon(Icons.arrow_forward_ios),
                         onPressed: () {
-                          // ...
+                          setState(() {
+                            _myData = _proximaRodada();
+                          });
                         },
                       ),
                     ],
@@ -83,6 +105,7 @@ class _RodadaPage extends State<RodadaPage> {
                   height: height,
                   child: ListView.builder(
                     itemCount: item!.length,
+                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
                     itemBuilder: (BuildContext context, int index) {
                       return customCard(item[index]);
                     },

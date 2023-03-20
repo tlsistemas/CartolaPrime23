@@ -20,4 +20,15 @@ class RodadaViewModel {
     }
     return rodada;
   }
+
+  Future<Rodada> rodadaByNumero(int numero) async {
+    var rodada = await _service.getRodada(numero);
+    for (var i = 0; i < rodada.partidas.length; i++) {
+      rodada.partidas[i].clubeCasa =
+          await _repClube.getId(rodada.partidas[i].clubeCasaId);
+      rodada.partidas[i].clubeVisitante =
+          await _repClube.getId(rodada.partidas[i].clubeVisitanteId);
+    }
+    return rodada;
+  }
 }

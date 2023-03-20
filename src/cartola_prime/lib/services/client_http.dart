@@ -15,10 +15,14 @@ class ClientHttp {
 
   Future<Map<String, dynamic>> get(String url,
       {Map? data, Options? options}) async {
-    final response = await dio.get(url, options: options);
+    try {
+      final response = await dio.get(url, options: options);
 
-    final body = jsonDecode(response.toString());
-    return body;
+      final body = jsonDecode(response.toString());
+      return body;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<Response> download(String url, dynamic savePath) async {

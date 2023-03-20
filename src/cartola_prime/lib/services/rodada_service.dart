@@ -24,4 +24,16 @@ class RodadaService extends ChangeNotifier with baseUrls {
       return dados;
     }
   }
+
+  Future<Rodada> getRodada(int rodada) async {
+    var url = '$partidas/$rodada';
+    final response = await _dio.get(url);
+
+    if (response['status'] == 'erro') {
+      return Rodada(partidas: <Partida>[], rodada: 0);
+    } else {
+      var dados = Rodada.fromJsonList(response);
+      return dados;
+    }
+  }
 }
