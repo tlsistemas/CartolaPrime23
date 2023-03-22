@@ -92,7 +92,7 @@ class _RodadaPage extends State<RodadaPage> {
                       IconButton(
                         iconSize: 30,
                         icon: const Icon(Icons.arrow_forward_ios),
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {
                             _myData = _proximaRodada();
                           });
