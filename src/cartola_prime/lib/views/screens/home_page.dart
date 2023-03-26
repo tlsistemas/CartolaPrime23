@@ -222,10 +222,13 @@ class _HomePageState extends State<HomePage> {
             dense: true,
           ),
           ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.verified_user,
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/mais_escalados");
+            },
+            leading: const Icon(Icons.list_alt_outlined,
                 size: 20.0, color: Colors.white),
-            title: const Text("Profile"),
+            title: const Text("Mais Escalados"),
             textColor: Colors.white,
             dense: true,
 

@@ -1,9 +1,11 @@
+import 'package:cartola_prime/models/mais_escalados.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'services/client_http.dart';
 import 'views/screens/auth_page.dart';
 import 'views/screens/classificacao_bra_page.dart';
+import 'views/screens/mais_escalados_page.dart';
 import 'views/screens/rodada_page.dart';
 import 'views/screens/home_page.dart';
 import 'views/screens/splash_page.dart';
@@ -37,6 +39,7 @@ class AppWidget extends StatelessWidget {
           '/auth': (context) => const AuthPage(),
           '/classificacao': (context) => const ClassificacaoPage(),
           '/rodada': (context) => const RodadaPage(),
+          '/mais_escalados': (context) => const MaisEscaldosPage(),
         },
       ),
     );

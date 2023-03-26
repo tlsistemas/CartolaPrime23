@@ -25,6 +25,20 @@ class ClientHttp {
     }
   }
 
+  Future<dynamic> getData(String url, {Map? data, Options? options}) async {
+    try {
+      final response = await dio.get(url, options: options);
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static String utf8convert(String text) {
+    List<int> bytes = text.toString().codeUnits;
+    return utf8.decode(bytes);
+  }
+
   Future<Response> download(String url, dynamic savePath) async {
     final response = await dio.download(url, savePath);
 
