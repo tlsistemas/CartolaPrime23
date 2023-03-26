@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildMenu() {
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 20.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,7 +207,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 16.0),
                 Text(
-                  "Hello, John Doe",
+                  "Bem Vindo,",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "Cartola Prime",
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 20.0),
@@ -216,8 +220,11 @@ class _HomePageState extends State<HomePage> {
           ),
           ListTile(
             onTap: () {},
-            leading: const Icon(Icons.home, size: 20.0, color: Colors.white),
-            title: const Text("Home"),
+            leading: const Icon(Icons.home, size: 25.0, color: Colors.white),
+            title: const Text(
+              "Home",
+              style: TextStyle(fontSize: 14),
+            ),
             textColor: Colors.white,
             dense: true,
           ),
@@ -226,9 +233,11 @@ class _HomePageState extends State<HomePage> {
               toggleMenu();
               Navigator.pushNamed(context, "/mais_escalados");
             },
-            leading: const Icon(Icons.list_alt_outlined,
-                size: 20.0, color: Colors.white),
-            title: const Text("Mais Escalados"),
+            leading: const Icon(Icons.subject, size: 25.0, color: Colors.white),
+            title: const Text(
+              "Mais Escalados",
+              style: TextStyle(fontSize: 14),
+            ),
             textColor: Colors.white,
             dense: true,
 
@@ -239,9 +248,12 @@ class _HomePageState extends State<HomePage> {
               toggleMenu();
               Navigator.pushNamed(context, "/rodada");
             },
-            leading: const Icon(Icons.list_alt_outlined,
-                size: 20.0, color: Colors.white),
-            title: const Text("Rodadas"),
+            leading: const Icon(Icons.insert_invitation,
+                size: 25.0, color: Colors.white),
+            title: const Text(
+              "Rodada Atual",
+              style: TextStyle(fontSize: 14),
+            ),
             textColor: Colors.white,
             dense: true,
 
@@ -252,9 +264,12 @@ class _HomePageState extends State<HomePage> {
               toggleMenu();
               Navigator.pushNamed(context, "/classificacao");
             },
-            leading: const Icon(Icons.list_alt_outlined,
-                size: 20.0, color: Colors.white),
-            title: const Text("Classificação"),
+            leading: const Icon(Icons.format_list_numbered,
+                size: 25.0, color: Colors.white),
+            title: const Text(
+              "Classificação",
+              style: TextStyle(fontSize: 14),
+            ),
             textColor: Colors.white,
             dense: true,
 
