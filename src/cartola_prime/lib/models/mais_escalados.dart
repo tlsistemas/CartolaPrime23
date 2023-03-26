@@ -1,3 +1,5 @@
+import 'package:cartola_prime/models/partida.dart';
+
 import 'atleta.dart';
 
 class MaisEscalados {
@@ -9,6 +11,7 @@ class MaisEscalados {
   Atleta? atleta;
   int? clubeId;
   int? escalacoes;
+  Partida? partida;
   List<MaisEscalados> listaMaisEscaldos = <MaisEscalados>[];
 
   MaisEscalados(

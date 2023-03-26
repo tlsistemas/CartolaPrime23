@@ -1,5 +1,3 @@
-import 'package:cartola_prime/models/rodada.dart';
-
 import '../models/mercado_status.dart';
 import '../services/mercado_status_service.dart';
 

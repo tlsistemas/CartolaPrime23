@@ -3,6 +3,7 @@ import 'package:cartola_prime/models/mercado_status.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../models/enums/status_mercado_enum.dart';
 import '../../viewmodel/mais_escalados_vm.dart';
 import '../../viewmodel/mercado_status_vm.dart';
 import '../components/app_bar_controle.dart';
@@ -22,12 +23,9 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   late double height = MediaQuery.of(context).size.height;
   final MaisEscaladosViewModel viewModel = MaisEscaladosViewModel();
   late Future<List<MaisEscalados>>? _myData;
-  final MercadoStatusViewModel viewModelMercado = MercadoStatusViewModel();
-  late MercadoStatus _mercado;
 
   @override
   void initState() {
-    _setMercado();
     _myData = _setFutureBuilder();
     super.initState();
   }
@@ -35,11 +33,6 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   Future<List<MaisEscalados>> _setFutureBuilder() async {
     var retorno = await viewModel.maisEscaldosRodadaAtual();
     return retorno;
-  }
-
-  Future _setMercado() async {
-    var mercado = await viewModelMercado.statusMercado();
-    _mercado = mercado;
   }
 
   @override
@@ -163,12 +156,23 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                   )
                 ],
               ),
-              Image.network(
-                escaldo.escudoClube!,
-                height: 40,
-                width: 40,
-                centerSlice: Rect.largest,
-              ),
+              Row(
+                children: [
+                  Image.network(
+                    escaldo.partida!.clubeCasa.escudos.s30x30!,
+                    height: 25,
+                    width: 25,
+                    centerSlice: Rect.largest,
+                  ),
+                  const Text(" X "),
+                  Image.network(
+                    escaldo.partida!.clubeVisitante.escudos.s30x30!,
+                    height: 25,
+                    width: 25,
+                    centerSlice: Rect.largest,
+                  ),
+                ],
+              )
             ],
           ),
         ),
