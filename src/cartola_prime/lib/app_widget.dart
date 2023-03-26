@@ -1,4 +1,3 @@
-import 'package:cartola_prime/models/mais_escalados.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:cartola_prime/models/mais_escalados.dart';
-import 'package:cartola_prime/models/partida.dart';
+import 'package:cartola_prime/models/mercado_status.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../viewmodel/mais_escalados_vm.dart';
+import '../../viewmodel/mercado_status_vm.dart';
 import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -23,9 +22,12 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   late double height = MediaQuery.of(context).size.height;
   final MaisEscaladosViewModel viewModel = MaisEscaladosViewModel();
   late Future<List<MaisEscalados>>? _myData;
+  final MercadoStatusViewModel viewModelMercado = MercadoStatusViewModel();
+  late MercadoStatus _mercado;
 
   @override
   void initState() {
+    _setMercado();
     _myData = _setFutureBuilder();
     super.initState();
   }
@@ -33,6 +35,11 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   Future<List<MaisEscalados>> _setFutureBuilder() async {
     var retorno = await viewModel.maisEscaldosRodadaAtual();
     return retorno;
+  }
+
+  Future _setMercado() async {
+    var mercado = await viewModelMercado.statusMercado();
+    _mercado = mercado;
   }
 
   @override
