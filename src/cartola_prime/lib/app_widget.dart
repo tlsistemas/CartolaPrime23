@@ -35,7 +35,7 @@ class AppWidget extends StatelessWidget {
         routes: {
           '/': (context) => const SplashPage(),
           '/home': (context) => const HomePage(title: 'Cartola Prime'),
-          '/auth': (context) => const AuthPage(),
+          '/login': (context) => const AuthPage(),
           '/classificacao': (context) => const ClassificacaoPage(),
           '/rodada': (context) => const RodadaPage(),
           '/mais_escalados': (context) => const MaisEscaldosPage(),

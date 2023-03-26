@@ -6,4 +6,5 @@ mixin baseUrls {
   String partidas = '$_baseUrl/partidas';
   String maisEscaldos = '$_baseUrl/mercado/destaques';
   String statusMercado = '$_baseUrl/mercado/status';
+  String login = 'https://login.globo.com/api/authentication';
 }

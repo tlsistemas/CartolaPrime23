@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cartola_prime/models/partida.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

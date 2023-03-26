@@ -95,10 +95,12 @@ class _HomePageState extends State<HomePage> {
               actions: [
                 IconButton(
                   icon: const Icon(
-                    Icons.notification_add,
+                    Icons.login,
                     color: iconColorPrimary,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/login");
+                  },
                 )
               ],
               title: Text(
