@@ -1,9 +1,10 @@
+import 'package:cartola_prime/repositories/auth_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../repositories/contracts/i_auth_repo.dart';
 import '../../shared/utils/base_urls.dart';
-import '../components/web_view_stack.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> with baseUrls {
   late WebViewController controller;
+  var isGLBID = false;
+  late final IAuthRepository authRepository = AuthRepository();
   @override
   void initState() {
     super.initState();
@@ -26,7 +29,46 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
             // Update loading bar.
           },
           onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
+          onPageFinished: (String url) async {
+            final _webviewCookies = await CookieManager.instance()
+                .getCookies(url: Uri.parse(login));
+            if (_webviewCookies.any((element) => element.name == "GLBID") &&
+                !isGLBID) {
+              final _glbid = _webviewCookies
+                  .firstWhere((element) => element.name == "GLBID")
+                  .value;
+              //0setState(() {});
+              await authRepository.setGLBID(_glbid);
+
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text(
+                    'Autenticação Efetuado',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  content: const Text(
+                      'Clique em HOME para continuar no aplicativo.'),
+                  actions: <Widget>[
+                    // TextButton(
+                    //   onPressed: () => Navigator.pop(context, 'Cancel'),
+                    //   child: const Text('Cancel'),
+                    // ),
+                    TextButton(
+                      onPressed: () => Navigator.popUntil(
+                          context, ModalRoute.withName('/home')),
+                      child: const Text('HOME'),
+                    ),
+                  ],
+                ),
+              );
+
+              isGLBID = true;
+            }
+          },
           onWebResourceError: (WebResourceError error) {},
         ),
       )
@@ -36,29 +78,8 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.green,
-        appBar: AppBar(
-          title: const Text('Flutter WebView example'),
-          // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
-        ),
-        body: InAppWebView(
-          initialUrlRequest: URLRequest(url: Uri.parse(login)),
-          onWebViewCreated: (InAppWebViewController controller) {},
-          onLoadStart: (c, url) {
-            print('onLoadStart: $url');
-          },
-          onLoadError: (c, url, code, msg) {
-            print('onLoadError: $url, $code, $msg');
-          },
-          onLoadStop: (c, url) async {
-            print('onLoadStop: $url');
-            final _webviewCookies = await CookieManager.instance()
-                .getCookies(url: Uri.parse(login));
-            print('CookieManager.instance/cookies: $_webviewCookies');
-
-            print('setupCookies...');
-          },
-        ) //WebViewWidget(controller: controller),
-        );
+      backgroundColor: Colors.transparent,
+      body: WebViewWidget(controller: controller),
+    );
   }
 }
