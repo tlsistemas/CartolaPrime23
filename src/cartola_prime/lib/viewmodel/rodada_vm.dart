@@ -1,13 +1,12 @@
 import 'package:cartola_prime/models/rodada.dart';
 
-import '../data/db_cartola.dart';
 import '../repositories/clube_repo.dart';
 import '../services/rodada_service.dart';
 
 class RodadaViewModel {
   final _service = RodadaService();
 
-  final _repClube = ClubeRepository(DBCartola());
+  final _repClube = ClubeRepository();
   RodadaViewModel();
 
   Future<Rodada> rodadaAtual() async {

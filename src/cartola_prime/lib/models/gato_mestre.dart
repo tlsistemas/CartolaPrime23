@@ -3,8 +3,8 @@ import 'scout.dart';
 class GatoMestre {
   double? mediaPontosMandante;
   double? mediaPontosVisitante;
-  int? mediaMinutosJogados;
-  int? minutosJogados;
+  double? mediaMinutosJogados;
+  double? minutosJogados;
   Scout? scouts;
 
   GatoMestre(
@@ -15,10 +15,18 @@ class GatoMestre {
       this.scouts});
 
   GatoMestre.fromJson(Map<String, dynamic> json) {
-    mediaPontosMandante = json['media_pontos_mandante'];
-    mediaPontosVisitante = json['media_pontos_visitante'];
-    mediaMinutosJogados = json['media_minutos_jogados'];
-    minutosJogados = json['minutos_jogados'];
+    mediaPontosMandante = json['media_pontos_mandante'] == null
+        ? 0.0
+        : json['media_pontos_mandante'].toDouble();
+    mediaPontosVisitante = json['media_pontos_visitante'] == null
+        ? 0.0
+        : json['media_pontos_visitante'].toDouble();
+    mediaMinutosJogados = json['media_minutos_jogados'] == null
+        ? 0.0
+        : json['media_minutos_jogados'].toDouble();
+    minutosJogados = json['minutos_jogados'] == null
+        ? 0.0
+        : json['minutos_jogados'].toDouble();
     scouts = json['scouts'] != null ? new Scout.fromJson(json['scouts']) : null;
   }
 

@@ -1,4 +1,3 @@
-import 'package:cartola_prime/data/db_cartola.dart';
 import 'package:flutter/material.dart';
 
 import '../models/clube.dart';
@@ -7,7 +6,7 @@ import '../services/clube_service.dart';
 
 class ClubeViewModel extends ChangeNotifier {
   final _service = ClubeService();
-  final _repo = ClubeRepository(DBCartola());
+  final _repo = ClubeRepository();
 
   ClubeViewModel();
 

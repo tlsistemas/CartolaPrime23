@@ -1,3 +1,6 @@
+import 'package:hive/hive.dart';
+
+@HiveType(typeId: 2)
 class Time {
   int? temporadaInicial;
   String? corFundoEscudo;

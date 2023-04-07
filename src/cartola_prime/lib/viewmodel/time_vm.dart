@@ -1,7 +1,7 @@
 import 'package:cartola_prime/models/time_logado.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hive/hive.dart';
 
-import '../data/db_cartola.dart';
 import '../repositories/clube_repo.dart';
 import '../services/time_service.dart';
 
@@ -13,11 +13,14 @@ class TimeViewModel {
     ),
   );
 
-  final _repClube = ClubeRepository(DBCartola());
+  final _repClube = ClubeRepository();
   TimeViewModel();
 
   Future<TimeLogado> getTimeLogado() async {
     var time = await _service.getTimeLogado();
+    var box = await Hive.openBox('timeLogadoBox');
+    box.add(time);
+    final myModels = box.values.toList();
     return time;
   }
 

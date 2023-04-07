@@ -1,8 +1,12 @@
+import 'package:cartola_prime/models/atleta.dart';
+import 'package:hive/hive.dart';
+
 import 'ranking.dart';
 import 'time.dart';
 
+@HiveType(typeId: 1)
 class TimeLogado {
-  //List<Null>? atletas;
+  List<Atleta>? atletas;
   Time? time;
   String? pontosCampeonato;
   int? capitaoId;
@@ -19,8 +23,7 @@ class TimeLogado {
   Ranking? ranking;
 
   TimeLogado(
-      {
-      //this.atletas,
+      {this.atletas,
       this.time,
       this.pontosCampeonato,
       this.capitaoId,
@@ -37,12 +40,12 @@ class TimeLogado {
       this.ranking});
 
   TimeLogado.fromJson(Map<String, dynamic> json) {
-    // if (json['atletas'] != null) {
-    //   atletas = <Null>[];
-    //   json['atletas'].forEach((v) {
-    //     atletas!.add(new Null.fromJson(v));
-    //   });
-    // }
+    if (json['atletas'] != null) {
+      atletas = <Atleta>[];
+      json['atletas'].forEach((v) {
+        atletas!.add(new Atleta.fromJson(v));
+      });
+    }
     time = json['time'] != null ? new Time.fromJson(json['time']) : null;
     pontosCampeonato = json['pontos_campeonato'];
     capitaoId = json['capitao_id'];
@@ -67,9 +70,9 @@ class TimeLogado {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    // if (atletas != null) {
-    //   data['atletas'] = atletas!.map((v) => v.toJson()).toList();
-    // }
+    if (atletas != null) {
+      data['atletas'] = atletas!.map((v) => v.toJson()).toList();
+    }
     if (time != null) {
       data['time'] = time!.toJson();
     }
