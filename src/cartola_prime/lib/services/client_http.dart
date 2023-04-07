@@ -25,6 +25,20 @@ class ClientHttp {
     }
   }
 
+  Future<Map<String, dynamic>> getLogado(String url, String? glbid,
+      {Map? data, Options? options}) async {
+    try {
+      dio.options.headers['content-Type'] = 'application/json';
+      dio.options.headers["X-GLB-Token"] = glbid;
+      final response = await dio.get(url, options: options);
+
+      final body = jsonDecode(response.toString());
+      return body;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<dynamic> getData(String url, {Map? data, Options? options}) async {
     try {
       final response = await dio.get(url, options: options);

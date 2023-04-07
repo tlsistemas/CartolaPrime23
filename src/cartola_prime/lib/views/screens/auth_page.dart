@@ -1,4 +1,7 @@
 import 'package:cartola_prime/repositories/auth_repo.dart';
+import 'package:cartola_prime/viewmodel/time_vm.dart';
+import 'package:cartola_prime/views/screens/home_page.dart';
+import 'package:cartola_prime/views/screens/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -17,6 +20,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
   late WebViewController controller;
   var isGLBID = false;
   late final IAuthRepository authRepository = AuthRepository();
+  late final viewmodel = TimeViewModel();
   @override
   void initState() {
     super.initState();
@@ -39,6 +43,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                   .value;
               //0setState(() {});
               await authRepository.setGLBID(_glbid);
+              viewmodel.getTimeLogado();
 
               showDialog<String>(
                 context: context,
@@ -53,13 +58,17 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                   content: const Text(
                       'Clique em HOME para continuar no aplicativo.'),
                   actions: <Widget>[
-                    // TextButton(
-                    //   onPressed: () => Navigator.pop(context, 'Cancel'),
-                    //   child: const Text('Cancel'),
-                    // ),
                     TextButton(
-                      onPressed: () => Navigator.popUntil(
-                          context, ModalRoute.withName('/home')),
+                      onPressed: () async => Navigator.of(context)
+                          .pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (c) => const SplashPage()),
+                              (route) => false),
+                      // Navigator.of(context, rootNavigator: true)
+                      //     .pop('Delivered at'),
+                      //Navigator.popUntil(context, ModalRoute.withName('/')),
+                      // Navigator.of(context, rootNavigator: true)
+                      //     .popUntil((route) => route.isFirst),
                       child: const Text('HOME'),
                     ),
                   ],

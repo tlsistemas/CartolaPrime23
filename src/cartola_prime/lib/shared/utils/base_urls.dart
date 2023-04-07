@@ -8,4 +8,5 @@ mixin baseUrls {
   String statusMercado = '$_baseUrl/mercado/status';
   String login =
       'https://login.globo.com/login/438?url=https://cartolafc.globo.com';
+  String authTime = '$_baseUrl/auth/time';
 }
