@@ -10,10 +10,8 @@ class DBCartola with baseUrls {
   List<String> scriptList = [];
   Iterable<String> valueJson = [];
 
-  // make this a singleton class
   DBCartola._privateConstructor();
   static final DBCartola _db = DBCartola._privateConstructor();
-  // only have a single app-wide reference to the database
 
   factory DBCartola() {
     return _db;
@@ -23,16 +21,13 @@ class DBCartola with baseUrls {
   Future<Database?> get database async {
     if (_database != null) return _database!;
     return _initDatabase();
-    // lazily instantiate the db the first time it is accessed
   }
 
-  // this opens the database (and creates it if it doesn't exist)
   static Future<Database?> _initDatabase() async {
     if (_database != null) return _database;
     try {
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
       String path = join(documentsDirectory.path, 'cartola_prime.db');
-      //final dbPath = await getDatabasesPath();
       _database = await openDatabase(
         path,
         version: 1,
@@ -48,16 +43,9 @@ class DBCartola with baseUrls {
 
   Future<void> deleteDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    print("diretorio db: $documentsDirectory");
-    String path = join(documentsDirectory.path, 'serval.db');
-    //final dbPath = await getDatabasesPath();
+    String path = join(documentsDirectory.path, 'cartola_prime.db');
     databaseFactory.deleteDatabase(path);
   }
-
-  // static Future<void> createTables(List<ScriptDbModel> data) async {
-  //   scriptDbList = data;
-  //   await _initDatabase();
-  // }
 
   Future<Map<String, dynamic>> ifDatabaseExist() async {
     Database? db = await _db.database;
@@ -145,12 +133,6 @@ class DBCartola with baseUrls {
   // SQL code to create the database table
   static Future _onCreate(Database db, int version) async {
     print("oncreate_DB");
-    // scriptDbList.forEach((element) async {
-    //   //print("Criando tabela: ${element.nome}");
-    //   await db.execute('''
-    //       ${element.script}
-    //       ''');
-    // });
   }
 
   Future<List<Map<String, dynamic>>> getAll(String table) async {
