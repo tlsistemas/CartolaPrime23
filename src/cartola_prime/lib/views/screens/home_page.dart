@@ -1,8 +1,13 @@
-import 'package:cartola_prime/services/clube_service.dart';
+import 'package:cartola_prime/models/atleta.dart';
+import 'package:cartola_prime/models/ranking.dart';
+import 'package:cartola_prime/models/time.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
+import '../../models/time_logado.dart';
 import '../../repositories/clube_repo.dart';
+import '../../services/clube_service.dart';
+import '../../viewmodel/time_vm.dart';
 import '../components/resource_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,11 +24,32 @@ class _HomePageState extends State<HomePage> {
   var isOpened = false;
   final _repClube = ClubeRepository();
   final _serviceClube = ClubeService();
-
+  final _timeVM = TimeViewModel();
+  var timeLog = TimeLogado(
+      atletas: <Atleta>[],
+      capitaoId: 0,
+      esquemaId: 0,
+      patrimonio: 0,
+      pontos: "",
+      pontosCampeonato: "",
+      ranking: Ranking(),
+      rodadaAtual: 0,
+      time: Time(nome: "Cartola Prime"),
+      totalLigas: 0,
+      totalLigasMatamata: 0,
+      valorTime: 0,
+      variacaoPatrimonio: 0,
+      variacaoPontos: "");
+  String nomeTime = "";
   @override
   void initState() {
     verificarStorage();
+    preencherInfoTime();
     super.initState();
+  }
+
+  Future<void> preencherInfoTime() async {
+    timeLog = await _timeVM.checkTimeInfo();
   }
 
   Future<void> verificarStorage() async {
@@ -209,6 +235,10 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 16.0),
                 Text(
                   "Bem Vindo,",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "Cartola Prime",
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(

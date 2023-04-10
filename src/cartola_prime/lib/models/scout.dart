@@ -1,3 +1,6 @@
+import 'package:hive/hive.dart';
+
+@HiveType(typeId: 7)
 class Scout {
   int? A;
   int? cA;

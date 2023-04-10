@@ -1,5 +1,8 @@
+import 'package:hive/hive.dart';
+
 import 'posicao_atual.dart';
 
+@HiveType(typeId: 6)
 class Ranking {
   PosicaoAtual? atual;
   PosicaoAtual? anterior;

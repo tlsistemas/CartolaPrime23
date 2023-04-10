@@ -41,8 +41,8 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
               final _glbid = _webviewCookies
                   .firstWhere((element) => element.name == "GLBID")
                   .value;
-              //0setState(() {});
               await authRepository.setGLBID(_glbid);
+
               viewmodel.getTimeLogado();
 
               showDialog<String>(
@@ -64,11 +64,6 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                               MaterialPageRoute(
                                   builder: (c) => const SplashPage()),
                               (route) => false),
-                      // Navigator.of(context, rootNavigator: true)
-                      //     .pop('Delivered at'),
-                      //Navigator.popUntil(context, ModalRoute.withName('/')),
-                      // Navigator.of(context, rootNavigator: true)
-                      //     .popUntil((route) => route.isFirst),
                       child: const Text('HOME'),
                     ),
                   ],

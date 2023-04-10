@@ -1,8 +1,8 @@
-import 'package:cartola_prime/models/atleta.dart';
-import 'package:cartola_prime/models/ranking.dart';
-import 'package:cartola_prime/models/time.dart';
 import 'package:hive/hive.dart';
 
+import '../models/atleta.dart';
+import '../models/ranking.dart';
+import '../models/time.dart';
 import '../models/time_logado.dart';
 
 class TimeLogadoAdapter extends TypeAdapter<TimeLogado> {
@@ -41,7 +41,7 @@ class TimeLogadoAdapter extends TypeAdapter<TimeLogado> {
       ..writeInt(obj.esquemaId ?? 0)
       ..writeString(obj.pontos ?? "")
       ..writeString(obj.pontosCampeonato ?? "")
-      ..write(obj.ranking ?? "")
+      ..write(obj.ranking ?? Ranking)
       ..writeInt(obj.rodadaAtual ?? 0)
       ..write(obj.time ?? Time)
       ..writeInt(obj.totalLigas ?? 0)
