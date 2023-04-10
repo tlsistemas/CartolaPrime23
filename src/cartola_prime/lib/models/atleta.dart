@@ -1,9 +1,6 @@
-import 'package:hive/hive.dart';
-
 import 'gato_mestre.dart';
 import 'scout.dart';
 
-@HiveType(typeId: 3)
 class Atleta {
   Scout? scout;
   int? atletaId;

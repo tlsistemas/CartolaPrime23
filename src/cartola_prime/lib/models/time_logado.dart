@@ -1,10 +1,8 @@
 import 'package:cartola_prime/models/atleta.dart';
-import 'package:hive/hive.dart';
 
 import 'ranking.dart';
 import 'time.dart';
 
-@HiveType(typeId: 1)
 class TimeLogado {
   List<Atleta>? atletas;
   Time? time;

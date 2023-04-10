@@ -1,6 +1,5 @@
 import 'package:cartola_prime/models/time_logado.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:hive/hive.dart';
 
 import '../services/time_service.dart';
 
@@ -17,8 +16,6 @@ class TimeViewModel {
   Future<TimeLogado?> getTimeLogado() async {
     try {
       var time = await _service.getTimeLogado();
-      var box = await Hive.openBox('timeLogadoBox');
-      box.add(time);
       return time;
     } catch (ex) {
       return null;
@@ -26,10 +23,7 @@ class TimeViewModel {
   }
 
   Future<TimeLogado> getTimeDB() async {
-    var teste = await Hive.boxExists("timeLogadoBox");
-    var box = await Hive.openBox<TimeLogado>('timeLogadoBox');
-    final time = box.values.toList().first;
-    return time;
+    return TimeLogado();
   }
 
   Future<TimeLogado> checkTimeInfo() async {
