@@ -5,8 +5,8 @@ class TimeLogadoModel {
   int? temporadaInicial;
   String nomeCartola = "Cartola Prime";
   String? globoId;
-  String? nome;
-  String urlEscudoPng = 'assets/images/iconp.png';
+  String nome = "Cartola Prime";
+  String urlEscudoPng = '';
   String? urlCamisaPng;
   String? slug;
   int? clubeId;
@@ -17,8 +17,8 @@ class TimeLogadoModel {
       {this.temporadaInicial,
       this.nomeCartola = "Cartola Prime",
       this.globoId,
-      this.nome,
-      this.urlEscudoPng = 'assets/images/iconp.png',
+      this.nome = "Cartola Prime",
+      this.urlEscudoPng = '',
       this.urlCamisaPng,
       this.slug,
       this.timeId,
@@ -58,8 +58,8 @@ class TimeLogadoModel {
     temporadaInicial = timeLogado.time!.temporadaInicial;
     nomeCartola = timeLogado.time!.nomeCartola ?? "Cartola Prime";
     globoId = timeLogado.time!.globoId;
-    nome = timeLogado.time!.nome;
-    urlEscudoPng = timeLogado.time!.urlEscudoPng ?? 'assets/images/iconp.png';
+    nome = timeLogado.time!.nome ?? "Cartola Prime";
+    urlEscudoPng = timeLogado.time!.urlEscudoPng ?? '';
     urlCamisaPng = timeLogado.time!.urlCamisaPng;
     slug = timeLogado.time!.slug;
     timeId = timeLogado.time!.timeId;
@@ -71,8 +71,8 @@ class TimeLogadoModel {
     temporadaInicial = time.temporadaInicial;
     nomeCartola = time.nomeCartola ?? "Cartola Prime";
     globoId = time.globoId;
-    nome = time.nome;
-    urlEscudoPng = time.urlEscudoPng ?? 'assets/images/iconp.png';
+    nome = time.nome ?? "Cartola Prime";
+    urlEscudoPng = time.urlEscudoPng ?? '';
     urlCamisaPng = time.urlCamisaPng;
     slug = time.slug;
     timeId = time.timeId;

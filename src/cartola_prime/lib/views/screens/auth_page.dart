@@ -20,7 +20,7 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> with baseUrls {
   late WebViewController controller;
-  var isGLBID = false;
+  var isGLBID = true;
   late final IAuthRepository authRepository = AuthRepository();
   late final viewmodel = TimeViewModel();
   @override
@@ -39,7 +39,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
             final _webviewCookies = await CookieManager.instance()
                 .getCookies(url: Uri.parse(login));
             if (_webviewCookies.any((element) => element.name == "GLBID") &&
-                !isGLBID) {
+                isGLBID) {
               final _glbid = _webviewCookies
                   .firstWhere((element) => element.name == "GLBID")
                   .value;
@@ -77,7 +77,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                 ),
               );
 
-              isGLBID = true;
+              isGLBID = false;
             }
           },
           onWebResourceError: (WebResourceError error) {},

@@ -1,12 +1,6 @@
-import 'dart:developer';
-
-import 'package:cartola_prime/models/atleta.dart';
-import 'package:cartola_prime/models/ranking.dart';
-import 'package:cartola_prime/models/time.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
-import '../../models/time_logado.dart';
 import '../../models/time_logado_model.dart';
 import '../../repositories/clube_repository.dart';
 import '../../services/clube_service.dart';
@@ -33,6 +27,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    _timeVM.isLogado().then((value) => _isLogado = value);
     verificarClubes();
     preencherInfoTime();
     super.initState();
@@ -40,7 +35,10 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> preencherInfoTime() async {
     timeLog = await _timeVM.checkTimeInfo();
-    _isLogado = timeLog.nome!.isEmpty ? false : true;
+  }
+
+  Future<void> isLogado() async {
+    _isLogado = await _timeVM.isLogado();
   }
 
   Future<void> verificarClubes() async {
@@ -79,6 +77,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _timeVM.isLogado().then((value) => _isLogado = value);
     return SideMenu(
       key: _endSideMenuKey,
       inverse: true, // end side menu
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage> {
               ),
               actions: [
                 Visibility(
-                  visible: true,
+                  visible: _isLogado ? false : true,
                   child: IconButton(
                     icon: const Icon(
                       Icons.login,
@@ -219,20 +218,24 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(timeLog.urlEscudoPng),
-                  radius: 35.0,
-                  //backgroundImage: AssetImage('assets/images/iconp.png'),
-                ),
+                timeLog.urlEscudoPng != ""
+                    ? Image.network(
+                        timeLog.urlEscudoPng,
+                        height: 100,
+                      )
+                    : const CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: 35.0,
+                        backgroundImage: AssetImage('assets/images/iconp.png'),
+                      ),
                 const SizedBox(height: 16.0),
                 const Text(
                   "Bem Vindo,",
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(
-                  timeLog.nome!,
-                  style: const TextStyle(color: Colors.white),
+                  timeLog.nome,
+                  style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 const SizedBox(height: 20.0),
               ],
