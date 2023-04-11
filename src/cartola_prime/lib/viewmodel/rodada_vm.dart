@@ -8,7 +8,7 @@ class RodadaViewModel {
   final _repClube = ClubeRepository();
   RodadaViewModel();
 
-  Future<Rodada> rodadaAtual() async {
+  Future<RodadaDto> rodadaAtual() async {
     var rodada = await _service.getRodadaAtual();
     for (var i = 0; i < rodada.partidas.length; i++) {
       rodada.partidas[i].clubeCasa =
@@ -19,7 +19,7 @@ class RodadaViewModel {
     return rodada;
   }
 
-  Future<Rodada> rodadaByNumero(int numero) async {
+  Future<RodadaDto> rodadaByNumero(int numero) async {
     var rodada = await _service.getRodada(numero);
     for (var i = 0; i < rodada.partidas.length; i++) {
       rodada.partidas[i].clubeCasa =

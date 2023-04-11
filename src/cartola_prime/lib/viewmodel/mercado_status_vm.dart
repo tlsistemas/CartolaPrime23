@@ -4,7 +4,7 @@ import '../services/mercado_status_service.dart';
 class MercadoStatusViewModel {
   final _service = MercadoStatusService();
 
-  Future<MercadoStatus> statusMercado() async {
+  Future<MercadoStatusDto> statusMercado() async {
     var mercado = await _service.getStatusMercado();
     return mercado;
   }

@@ -19,22 +19,22 @@ class ClubeRepository implements IClubeRepository {
   }
 
   @override
-  Future<List<Clube>> getAll() async {
+  Future<List<ClubeDto>> getAll() async {
     var storageJson = await _storage.read(key: "clubes");
 
     var list = (json.decode(storageJson!) as List)
-        .map((i) => Clube.fromJson(i))
+        .map((i) => ClubeDto.fromJson(i))
         .toList();
 
     return list;
   }
 
   @override
-  Future<Clube> getId(int idClube) async {
+  Future<ClubeDto> getId(int idClube) async {
     var storageJson = await _storage.read(key: "clubes");
 
     var list = (json.decode(storageJson!) as List)
-        .map((i) => Clube.fromJson(i))
+        .map((i) => ClubeDto.fromJson(i))
         .toList();
 
     var clube = list.firstWhere((element) => element.id == idClube);

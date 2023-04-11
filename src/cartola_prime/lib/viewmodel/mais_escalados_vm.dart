@@ -8,7 +8,7 @@ class MaisEscaladosViewModel {
 
   MaisEscaladosViewModel();
 
-  Future<List<MaisEscalados>> maisEscaldosRodadaAtual() async {
+  Future<List<MaisEscaladosDto>> maisEscaldosRodadaAtual() async {
     var escalados = await _service.getAll();
     var rodadas = await _viewmodelRodada.rodadaAtual();
 

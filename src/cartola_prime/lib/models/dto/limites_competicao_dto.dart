@@ -1,16 +1,16 @@
-class LimitesCompeticao {
+class LimitesCompeticaoDto {
   int? totalConfrontoPro;
   int? totalConfrontoFree;
   int? criacaoConfrontoPro;
   int? criacaoConfrontoFree;
 
-  LimitesCompeticao(
+  LimitesCompeticaoDto(
       {this.totalConfrontoPro,
       this.totalConfrontoFree,
       this.criacaoConfrontoPro,
       this.criacaoConfrontoFree});
 
-  LimitesCompeticao.fromJson(Map<String, dynamic> json) {
+  LimitesCompeticaoDto.fromJson(Map<String, dynamic> json) {
     totalConfrontoPro = json['total_confronto_pro'];
     totalConfrontoFree = json['total_confronto_free'];
     criacaoConfrontoPro = json['criacao_confronto_pro'];

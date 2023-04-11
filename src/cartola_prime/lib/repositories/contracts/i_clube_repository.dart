@@ -1,7 +1,7 @@
 import '../../models/dto/clube_dto.dart';
 
 abstract class IClubeRepository {
-  Future<List<Clube>> getAll();
-  Future<Clube> getId(int idClube);
+  Future<List<ClubeDto>> getAll();
+  Future<ClubeDto> getId(int idClube);
   Future<bool> existStorage();
 }

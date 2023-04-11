@@ -19,7 +19,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
   final MaisEscaladosViewModel viewModel = MaisEscaladosViewModel();
-  late Future<List<MaisEscalados>>? _myData;
+  late Future<List<MaisEscaladosDto>>? _myData;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
     super.initState();
   }
 
-  Future<List<MaisEscalados>> _setFutureBuilder() async {
+  Future<List<MaisEscaladosDto>> _setFutureBuilder() async {
     var retorno = await viewModel.maisEscaldosRodadaAtual();
     return retorno;
   }
@@ -42,7 +42,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   Widget listaPartidastWidget() {
     return FutureBuilder(
       future: _myData,
-      builder: (context, AsyncSnapshot<List<MaisEscalados>> snapshot) {
+      builder: (context, AsyncSnapshot<List<MaisEscaladosDto>> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         } else {
@@ -68,7 +68,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
     );
   }
 
-  Widget customCard(MaisEscalados escaldo) {
+  Widget customCard(MaisEscaladosDto escaldo) {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(

@@ -1,4 +1,4 @@
-class Time {
+class TimeDto {
   int? temporadaInicial;
   String? corFundoEscudo;
   String? corCamisa;
@@ -35,7 +35,7 @@ class Time {
   bool? lgpdRemovido;
   bool? lgpdQuarentena;
 
-  Time(
+  TimeDto(
       {this.temporadaInicial,
       this.corFundoEscudo,
       this.corCamisa,
@@ -72,7 +72,7 @@ class Time {
       this.lgpdRemovido,
       this.lgpdQuarentena});
 
-  Time.fromJson(Map<String, dynamic> json) {
+  TimeDto.fromJson(Map<String, dynamic> json) {
     temporadaInicial = json['temporada_inicial'];
     corFundoEscudo = json['cor_fundo_escudo'];
     corCamisa = json['cor_camisa'];

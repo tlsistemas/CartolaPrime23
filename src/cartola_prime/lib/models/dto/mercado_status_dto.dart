@@ -1,7 +1,7 @@
 import 'fechamento_dto.dart';
 import 'limites_competicao_dto.dart';
 
-class MercadoStatus {
+class MercadoStatusDto {
   int? rodadaAtual;
   int? statusMercado;
   int? esquemaDefaultId;
@@ -17,15 +17,15 @@ class MercadoStatus {
   int? temporada;
   bool? reativar;
   bool? exibeSorteioPro;
-  Fechamento? fechamento;
-  LimitesCompeticao? limitesCompeticao;
+  FechamentoDto? fechamento;
+  LimitesCompeticaoDto? limitesCompeticao;
   int? timesEscalados;
   bool? mercadoPosRodada;
   bool? novoMesRanking;
   bool? degustacaoGatomestre;
   String? nomeRodada;
 
-  MercadoStatus(
+  MercadoStatusDto(
       {this.rodadaAtual,
       this.statusMercado,
       this.esquemaDefaultId,
@@ -49,7 +49,7 @@ class MercadoStatus {
       this.degustacaoGatomestre,
       this.nomeRodada});
 
-  MercadoStatus.fromJson(Map<String, dynamic> json) {
+  MercadoStatusDto.fromJson(Map<String, dynamic> json) {
     rodadaAtual = json['rodada_atual'];
     statusMercado = json['status_mercado'];
     esquemaDefaultId = json['esquema_default_id'];
@@ -66,10 +66,10 @@ class MercadoStatus {
     reativar = json['reativar'];
     exibeSorteioPro = json['exibe_sorteio_pro'];
     fechamento = json['fechamento'] != null
-        ? new Fechamento.fromJson(json['fechamento'])
+        ? new FechamentoDto.fromJson(json['fechamento'])
         : null;
     limitesCompeticao = json['limites_competicao'] != null
-        ? new LimitesCompeticao.fromJson(json['limites_competicao'])
+        ? new LimitesCompeticaoDto.fromJson(json['limites_competicao'])
         : null;
     timesEscalados = json['times_escalados'];
     mercadoPosRodada = json['mercado_pos_rodada'];
@@ -109,7 +109,7 @@ class MercadoStatus {
     return data;
   }
 
-  MercadoStatus.fromJsonDynamic(dynamic json) {
+  MercadoStatusDto.fromJsonDynamic(dynamic json) {
     rodadaAtual = json['rodada_atual'];
     statusMercado = json['status_mercado'];
     esquemaDefaultId = json['esquema_default_id'];
@@ -126,10 +126,10 @@ class MercadoStatus {
     reativar = json['reativar'];
     exibeSorteioPro = json['exibe_sorteio_pro'];
     fechamento = json['fechamento'] != null
-        ? new Fechamento.fromJson(json['fechamento'])
+        ? new FechamentoDto.fromJson(json['fechamento'])
         : null;
     limitesCompeticao = json['limites_competicao'] != null
-        ? new LimitesCompeticao.fromJson(json['limites_competicao'])
+        ? new LimitesCompeticaoDto.fromJson(json['limites_competicao'])
         : null;
     timesEscalados = json['times_escalados'];
     mercadoPosRodada = json['mercado_pos_rodada'];

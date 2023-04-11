@@ -1,7 +1,7 @@
 import 'escudo_dto.dart';
 
-class Clube {
-  Clube({
+class ClubeDto {
+  ClubeDto({
     required this.abreviacao,
     required this.nome,
     required this.id,
@@ -12,24 +12,24 @@ class Clube {
   late final String nome;
   late final int id;
   late final String nomeFantasia;
-  late final List<Clube> clubes;
-  late final Escudo escudos;
+  late final List<ClubeDto> clubes;
+  late final EscudoDto escudos;
 
-  Clube.fromJson(Map<String, dynamic> json) {
+  ClubeDto.fromJson(Map<String, dynamic> json) {
     abreviacao = json['abreviacao'];
     nome = json['nome'];
     id = json['id'];
     // json['escudos'].forEach((v) {
     //   escudos.add(EscudoDto.fromJson(v.value));
     // });
-    escudos = Escudo.fromJson(json["escudos"]);
+    escudos = EscudoDto.fromJson(json["escudos"]);
     nomeFantasia = json['nome_fantasia'];
   }
 
-  Clube.fromJsonList(Map<String, dynamic> json) {
-    clubes = <Clube>[];
+  ClubeDto.fromJsonList(Map<String, dynamic> json) {
+    clubes = <ClubeDto>[];
     json.entries.forEach((v) {
-      clubes.add(Clube.fromJson(v.value));
+      clubes.add(ClubeDto.fromJson(v.value));
     });
   }
 

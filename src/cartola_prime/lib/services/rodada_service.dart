@@ -14,25 +14,25 @@ class RodadaService extends ChangeNotifier with baseUrls {
     ),
   );
 
-  Future<Rodada> getRodadaAtual() async {
+  Future<RodadaDto> getRodadaAtual() async {
     final response = await _dio.get(partidas);
 
     if (response['status'] == 'erro') {
-      return Rodada(partidas: <Partida>[], rodada: 0);
+      return RodadaDto(partidas: <PartidaDto>[], rodada: 0);
     } else {
-      var dados = Rodada.fromJsonList(response);
+      var dados = RodadaDto.fromJsonList(response);
       return dados;
     }
   }
 
-  Future<Rodada> getRodada(int rodada) async {
+  Future<RodadaDto> getRodada(int rodada) async {
     var url = '$partidas/$rodada';
     final response = await _dio.get(url);
 
     if (response['status'] == 'erro') {
-      return Rodada(partidas: <Partida>[], rodada: 0);
+      return RodadaDto(partidas: <PartidaDto>[], rodada: 0);
     } else {
-      var dados = Rodada.fromJsonList(response);
+      var dados = RodadaDto.fromJsonList(response);
       return dados;
     }
   }

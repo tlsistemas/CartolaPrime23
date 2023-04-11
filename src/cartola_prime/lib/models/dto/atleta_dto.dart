@@ -1,8 +1,8 @@
 import 'gato_mestre_dto.dart';
 import 'scout_dto.dart';
 
-class Atleta {
-  Scout? scout;
+class AtletaDto {
+  ScoutDto? scout;
   int? atletaId;
   int? rodadaId;
   int? clubeId;
@@ -14,7 +14,7 @@ class Atleta {
   int? mediaNum;
   int? jogosNum;
   double? minimoParaValorizar;
-  GatoMestre? gatoMestre;
+  GatoMestreDto? gatoMestre;
   String? slug;
   String? apelido;
   String? apelidoAbreviado;
@@ -22,7 +22,7 @@ class Atleta {
   String? foto;
   int? precoEditorial;
 
-  Atleta(
+  AtletaDto(
       {this.scout,
       this.atletaId,
       this.rodadaId,
@@ -43,8 +43,8 @@ class Atleta {
       this.foto,
       this.precoEditorial});
 
-  Atleta.fromJson(Map<String, dynamic> json) {
-    scout = json['scout'] != null ? new Scout.fromJson(json['scout']) : null;
+  AtletaDto.fromJson(Map<String, dynamic> json) {
+    scout = json['scout'] != null ? new ScoutDto.fromJson(json['scout']) : null;
     atletaId = json['atleta_id'];
     rodadaId = json['rodada_id'];
     clubeId = json['clube_id'];
@@ -57,7 +57,7 @@ class Atleta {
     jogosNum = json['jogos_num'];
     minimoParaValorizar = json['minimo_para_valorizar'];
     gatoMestre = json['gato_mestre'] != null
-        ? new GatoMestre.fromJson(json['gato_mestre'])
+        ? new GatoMestreDto.fromJson(json['gato_mestre'])
         : null;
     slug = json['slug'];
     apelido = json['apelido'];

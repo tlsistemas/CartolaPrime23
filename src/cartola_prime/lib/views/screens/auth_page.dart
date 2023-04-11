@@ -43,7 +43,8 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                   .value;
               await authRepository.setGLBID(_glbid);
 
-              var timeLogado = await viewmodel.getTimeLogado() ?? TimeLogado();
+              var timeLogado =
+                  await viewmodel.getTimeLogado() ?? TimeLogadoDto();
               var isTimeInserido = await viewmodel.insertTimeLogado(timeLogado);
 
               var textoDialog = "Clique em HOME para continuar no aplicativo.";

@@ -1,19 +1,19 @@
 import 'atleta_dto.dart';
 import 'partida_dto.dart';
 
-class MaisEscalados {
+class MaisEscaladosDto {
   String? posicao;
   String? posicaoAbreviacao;
   String? clube;
   String? clubeNome;
   String? escudoClube;
-  Atleta? atleta;
+  AtletaDto? atleta;
   int? clubeId;
   int? escalacoes;
-  Partida? partida;
-  List<MaisEscalados> listaMaisEscaldos = <MaisEscalados>[];
+  PartidaDto? partida;
+  List<MaisEscaladosDto> listaMaisEscaldos = <MaisEscaladosDto>[];
 
-  MaisEscalados(
+  MaisEscaladosDto(
       {this.posicao,
       this.posicaoAbreviacao,
       this.clube,
@@ -23,14 +23,14 @@ class MaisEscalados {
       this.clubeId,
       this.escalacoes});
 
-  MaisEscalados.fromJson(Map<String, dynamic> json) {
+  MaisEscaladosDto.fromJson(Map<String, dynamic> json) {
     posicao = json['posicao'];
     posicaoAbreviacao = json['posicao_abreviacao'];
     clube = json['clube'];
     clubeNome = json['clube_nome'];
     escudoClube = json['escudo_clube'];
     atleta =
-        json['Atleta'] != null ? new Atleta.fromJson(json['Atleta']) : null;
+        json['Atleta'] != null ? new AtletaDto.fromJson(json['Atleta']) : null;
     clubeId = json['clube_id'];
     escalacoes = json['escalacoes'];
   }
@@ -50,28 +50,28 @@ class MaisEscalados {
     return data;
   }
 
-  MaisEscalados.fromJsonList(Map<String, dynamic> json) {
-    listaMaisEscaldos = <MaisEscalados>[];
+  MaisEscaladosDto.fromJsonList(Map<String, dynamic> json) {
+    listaMaisEscaldos = <MaisEscaladosDto>[];
     for (var v in json.entries) {
-      listaMaisEscaldos.add(MaisEscalados.fromJson(v.value));
+      listaMaisEscaldos.add(MaisEscaladosDto.fromJson(v.value));
     }
   }
 
-  MaisEscalados.fromJsonListDynamic(dynamic json) {
-    listaMaisEscaldos = <MaisEscalados>[];
+  MaisEscaladosDto.fromJsonListDynamic(dynamic json) {
+    listaMaisEscaldos = <MaisEscaladosDto>[];
     for (var v in json) {
-      listaMaisEscaldos.add(MaisEscalados.fromJsonDynamic(v));
+      listaMaisEscaldos.add(MaisEscaladosDto.fromJsonDynamic(v));
     }
   }
 
-  MaisEscalados.fromJsonDynamic(dynamic json) {
+  MaisEscaladosDto.fromJsonDynamic(dynamic json) {
     posicao = json['posicao'];
     posicaoAbreviacao = json['posicao_abreviacao'];
     clube = json['clube'];
     clubeNome = json['clube_nome'];
     escudoClube = json['escudo_clube'];
     atleta =
-        json['Atleta'] != null ? new Atleta.fromJson(json['Atleta']) : null;
+        json['Atleta'] != null ? new AtletaDto.fromJson(json['Atleta']) : null;
     clubeId = json['clube_id'];
     escalacoes = json['escalacoes'];
   }

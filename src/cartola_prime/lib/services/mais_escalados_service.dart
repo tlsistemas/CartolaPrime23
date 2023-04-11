@@ -13,13 +13,13 @@ class MaisEscaldosService extends ChangeNotifier with baseUrls {
     ),
   );
 
-  Future<List<MaisEscalados>> getAll() async {
+  Future<List<MaisEscaladosDto>> getAll() async {
     final response = await _dio.getData(maisEscaldos);
 
     if (response == null || response == '') {
-      return <MaisEscalados>[];
+      return <MaisEscaladosDto>[];
     } else {
-      var dados = MaisEscalados.fromJsonListDynamic(response);
+      var dados = MaisEscaladosDto.fromJsonListDynamic(response);
       return dados.listaMaisEscaldos;
     }
   }

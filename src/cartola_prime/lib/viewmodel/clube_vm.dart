@@ -10,8 +10,8 @@ class ClubeViewModel extends ChangeNotifier {
 
   ClubeViewModel();
 
-  late final List<Clube> clubes;
-  late final Clube clube;
+  late final List<ClubeDto> clubes;
+  late final ClubeDto clube;
 
   Future<bool> SyncSorage() async {
     final itens = await _service.updateStorage();
@@ -24,7 +24,7 @@ class ClubeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Clube> getOne() async {
+  Future<ClubeDto> getOne() async {
     final itens = await _service.getAllClubes();
     notifyListeners();
     return itens.first;

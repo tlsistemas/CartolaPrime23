@@ -7,13 +7,13 @@ import 'client_http.dart';
 class MercadoStatusService extends ChangeNotifier with baseUrls {
   final ClientHttp _dio = ClientHttp();
 
-  Future<MercadoStatus> getStatusMercado() async {
+  Future<MercadoStatusDto> getStatusMercado() async {
     final response = await _dio.get(statusMercado);
 
     if (response['status'] == 'erro') {
-      return MercadoStatus();
+      return MercadoStatusDto();
     } else {
-      var dados = MercadoStatus.fromJsonDynamic(response);
+      var dados = MercadoStatusDto.fromJsonDynamic(response);
       return dados;
     }
   }

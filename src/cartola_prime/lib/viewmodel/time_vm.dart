@@ -21,7 +21,7 @@ class TimeViewModel {
 
   TimeViewModel();
 
-  Future<TimeLogado?> getTimeLogado() async {
+  Future<TimeLogadoDto?> getTimeLogado() async {
     try {
       var time = await _service.getTimeLogado();
       return time;
@@ -51,7 +51,7 @@ class TimeViewModel {
     }
   }
 
-  Future<bool> insertTime(Time time) async {
+  Future<bool> insertTime(TimeDto time) async {
     try {
       await _timeRepository.insert(TimeLogadoModel.fromTimeDTO(time));
       return true;
@@ -60,7 +60,7 @@ class TimeViewModel {
     }
   }
 
-  Future<bool> insertTimeLogado(TimeLogado time) async {
+  Future<bool> insertTimeLogado(TimeLogadoDto time) async {
     try {
       await _timeRepository.insert(TimeLogadoModel.fromDTO(time));
       return true;

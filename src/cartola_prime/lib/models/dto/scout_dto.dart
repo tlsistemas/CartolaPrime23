@@ -1,4 +1,4 @@
-class Scout {
+class ScoutDto {
   int? A;
   int? cA;
   int? cV;
@@ -21,7 +21,7 @@ class Scout {
   int? dS;
   int? dE;
 
-  Scout(
+  ScoutDto(
       {this.A,
       this.cA,
       this.cV,
@@ -44,7 +44,7 @@ class Scout {
       this.dS,
       this.dE});
 
-  Scout.fromJson(Map<String, dynamic> json) {
+  ScoutDto.fromJson(Map<String, dynamic> json) {
     A = json['A'];
     cA = json['cA'];
     cV = json['cV'];

@@ -1,8 +1,8 @@
 import 'clube_dto.dart';
 import 'transmissao_dto.dart';
 
-class Partida {
-  Partida({
+class PartidaDto {
+  PartidaDto({
     required this.partidaId,
     required this.clubeCasaId,
     required this.clubeCasa,
@@ -27,10 +27,10 @@ class Partida {
 
   late final int partidaId;
   late final int clubeCasaId;
-  late final Clube clubeCasa;
+  late final ClubeDto clubeCasa;
   late final int clubeCasaPosicao;
   late final int clubeVisitanteId;
-  late final Clube clubeVisitante;
+  late final ClubeDto clubeVisitante;
   late final List<String> aproveitamentoMandante;
   late final List<String> aproveitamentoVisitante;
   late final int clubeVisitantePosicao;
@@ -44,11 +44,11 @@ class Partida {
   late final String inicioCronometroTr;
   late final String statusCronometroTr;
   late final String periodoTr;
-  late final Transmissao transmissao;
+  late final TransmissaoDto transmissao;
 
-  late final List<Partida> partidas;
+  late final List<PartidaDto> partidas;
 
-  Partida.fromJson(Map<String, dynamic> json) {
+  PartidaDto.fromJson(Map<String, dynamic> json) {
     partidaId = json['partida_id'];
     clubeCasaId = json['clube_casa_id'];
     clubeCasaPosicao = json['clube_casa_posicao'];
@@ -68,7 +68,7 @@ class Partida {
     inicioCronometroTr = json['inicio_cronometro_tr'];
     statusCronometroTr = json['status_cronometro_tr'];
     periodoTr = json['periodo_tr'];
-    transmissao = Transmissao.fromJson(json['transmissao']);
+    transmissao = TransmissaoDto.fromJson(json['transmissao']);
   }
 
   Map<String, dynamic> toJson() {
@@ -94,10 +94,10 @@ class Partida {
     return data;
   }
 
-  Partida.fromJsonList(List json) {
-    partidas = <Partida>[];
+  PartidaDto.fromJsonList(List json) {
+    partidas = <PartidaDto>[];
     for (var element in json) {
-      partidas.add(Partida.fromJson(element));
+      partidas.add(PartidaDto.fromJson(element));
     }
   }
 }

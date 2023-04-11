@@ -1,4 +1,4 @@
-class Fechamento {
+class FechamentoDto {
   int? dia;
   int? mes;
   int? ano;
@@ -6,10 +6,10 @@ class Fechamento {
   int? minuto;
   int? timestamp;
 
-  Fechamento(
+  FechamentoDto(
       {this.dia, this.mes, this.ano, this.hora, this.minuto, this.timestamp});
 
-  Fechamento.fromJson(Map<String, dynamic> json) {
+  FechamentoDto.fromJson(Map<String, dynamic> json) {
     dia = json['dia'];
     mes = json['mes'];
     ano = json['ano'];

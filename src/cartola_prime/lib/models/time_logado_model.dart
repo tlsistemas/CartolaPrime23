@@ -54,7 +54,7 @@ class TimeLogadoModel {
     return data;
   }
 
-  TimeLogadoModel.fromDTO(TimeLogado timeLogado) {
+  TimeLogadoModel.fromDTO(TimeLogadoDto timeLogado) {
     temporadaInicial = timeLogado.time!.temporadaInicial;
     nomeCartola = timeLogado.time!.nomeCartola ?? "Cartola Prime";
     globoId = timeLogado.time!.globoId;
@@ -67,7 +67,7 @@ class TimeLogadoModel {
     assinante = timeLogado.time!.assinante;
   }
 
-  TimeLogadoModel.fromTimeDTO(Time time) {
+  TimeLogadoModel.fromTimeDTO(TimeDto time) {
     temporadaInicial = time.temporadaInicial;
     nomeCartola = time.nomeCartola ?? "Cartola Prime";
     globoId = time.globoId;

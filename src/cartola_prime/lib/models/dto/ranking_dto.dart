@@ -1,17 +1,18 @@
 import 'posicao_atual_dto.dart';
 
-class Ranking {
-  PosicaoAtual? atual;
-  PosicaoAtual? anterior;
+class RankingDto {
+  PosicaoAtualDto? atual;
+  PosicaoAtualDto? anterior;
   int? melhorRankingId;
 
-  Ranking({this.atual, this.anterior, this.melhorRankingId});
+  RankingDto({this.atual, this.anterior, this.melhorRankingId});
 
-  Ranking.fromJson(Map<String, dynamic> json) {
-    atual =
-        json['atual'] != null ? new PosicaoAtual.fromJson(json['atual']) : null;
+  RankingDto.fromJson(Map<String, dynamic> json) {
+    atual = json['atual'] != null
+        ? new PosicaoAtualDto.fromJson(json['atual'])
+        : null;
     anterior = json['anterior'] != null
-        ? new PosicaoAtual.fromJson(json['anterior'])
+        ? new PosicaoAtualDto.fromJson(json['anterior'])
         : null;
     melhorRankingId = json['melhor_ranking_id'];
   }

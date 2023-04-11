@@ -20,7 +20,7 @@ class _RodadaPage extends State<RodadaPage> {
   late double height = MediaQuery.of(context).size.height;
   final RodadaViewModel viewModel = RodadaViewModel();
   late int _rodada = 0;
-  late Future<List<Partida>>? _myData;
+  late Future<List<PartidaDto>>? _myData;
 
   @override
   void initState() {
@@ -28,13 +28,13 @@ class _RodadaPage extends State<RodadaPage> {
     super.initState();
   }
 
-  Future<List<Partida>> _setPartidas() async {
+  Future<List<PartidaDto>> _setPartidas() async {
     var rodada = await viewModel.rodadaAtual();
     _rodada = rodada.rodada;
     return rodada.partidas;
   }
 
-  Future<List<Partida>> _proximaRodada() async {
+  Future<List<PartidaDto>> _proximaRodada() async {
     var novaRodada = _rodada + 1;
     if (novaRodada > 38) novaRodada = 38;
     var rodada = await viewModel.rodadaByNumero(novaRodada);
@@ -42,7 +42,7 @@ class _RodadaPage extends State<RodadaPage> {
     return rodada.partidas;
   }
 
-  Future<List<Partida>> _voltarRodada() async {
+  Future<List<PartidaDto>> _voltarRodada() async {
     var novaRodada = _rodada - 1;
     if (novaRodada < 1) novaRodada = 1;
     var rodada = await viewModel.rodadaByNumero(novaRodada);
@@ -60,7 +60,7 @@ class _RodadaPage extends State<RodadaPage> {
   Widget listaPartidastWidget() {
     return FutureBuilder(
       future: _myData,
-      builder: (context, AsyncSnapshot<List<Partida>> snapshot) {
+      builder: (context, AsyncSnapshot<List<PartidaDto>> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         } else {
@@ -117,7 +117,7 @@ class _RodadaPage extends State<RodadaPage> {
     );
   }
 
-  Widget customCard(Partida partida) {
+  Widget customCard(PartidaDto partida) {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(

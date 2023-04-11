@@ -10,15 +10,15 @@ class TimeService extends ChangeNotifier with baseUrls {
   late final IAuthRepository authRepository = AuthRepository();
   final ClientHttp _dio = ClientHttp();
 
-  Future<TimeLogado> getTimeLogado() async {
+  Future<TimeLogadoDto> getTimeLogado() async {
     var glbid = await authRepository.getGLBID();
 
     final response = await _dio.getLogado(authTime, glbid);
 
     if (response['status'] == 'erro') {
-      return TimeLogado();
+      return TimeLogadoDto();
     } else {
-      var dados = TimeLogado.fromJson(response);
+      var dados = TimeLogadoDto.fromJson(response);
       return dados;
     }
   }

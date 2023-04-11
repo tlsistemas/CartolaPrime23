@@ -21,12 +21,12 @@ class ClubeService extends ChangeNotifier with baseUrls {
   Future<bool> updateStorage() async {
     try {
       final response = await _dio.get(clubes);
-      var retorno = <Clube>[];
+      var retorno = <ClubeDto>[];
 
       if (response['status'] == 'erro') {
         return false;
       } else {
-        var datas = Clube.fromJsonList(response);
+        var datas = ClubeDto.fromJsonList(response);
         for (var element in datas.clubes) {
           retorno.add(element);
         }
@@ -41,14 +41,14 @@ class ClubeService extends ChangeNotifier with baseUrls {
     }
   }
 
-  Future<List<Clube>> getAllClubes() async {
+  Future<List<ClubeDto>> getAllClubes() async {
     final response = await _dio.get(clubes);
-    var retorno = <Clube>[];
+    var retorno = <ClubeDto>[];
 
     if (response['status'] == 'erro') {
       return retorno;
     } else {
-      var datas = Clube.fromJsonList(response);
+      var datas = ClubeDto.fromJsonList(response);
       for (var element in datas.clubes) {
         retorno.add(element);
       }

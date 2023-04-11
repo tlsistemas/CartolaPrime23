@@ -1,11 +1,11 @@
-class PosicaoAtual {
+class PosicaoAtualDto {
   int? rankingId;
   int? mes;
   int? posicao;
 
-  PosicaoAtual({this.rankingId, this.mes, this.posicao});
+  PosicaoAtualDto({this.rankingId, this.mes, this.posicao});
 
-  PosicaoAtual.fromJson(Map<String, dynamic> json) {
+  PosicaoAtualDto.fromJson(Map<String, dynamic> json) {
     rankingId = json['ranking_id'];
     mes = json['mes'];
     posicao = json['posicao'];

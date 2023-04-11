@@ -2,9 +2,9 @@ import 'atleta_dto.dart';
 import 'ranking_dto.dart';
 import 'time_dto.dart';
 
-class TimeLogado {
-  List<Atleta>? atletas;
-  Time? time;
+class TimeLogadoDto {
+  List<AtletaDto>? atletas;
+  TimeDto? time;
   String? pontosCampeonato;
   int? capitaoId;
   String? pontos;
@@ -17,9 +17,9 @@ class TimeLogado {
   int? variacaoPatrimonio;
   String? variacaoPontos;
   //List<Null>? servicos;
-  Ranking? ranking;
+  RankingDto? ranking;
 
-  TimeLogado(
+  TimeLogadoDto(
       {this.atletas,
       this.time,
       this.pontosCampeonato,
@@ -36,14 +36,14 @@ class TimeLogado {
       //this.servicos,
       this.ranking});
 
-  TimeLogado.fromJson(Map<String, dynamic> json) {
+  TimeLogadoDto.fromJson(Map<String, dynamic> json) {
     if (json['atletas'] != null) {
-      atletas = <Atleta>[];
+      atletas = <AtletaDto>[];
       json['atletas'].forEach((v) {
-        atletas!.add(new Atleta.fromJson(v));
+        atletas!.add(new AtletaDto.fromJson(v));
       });
     }
-    time = json['time'] != null ? new Time.fromJson(json['time']) : null;
+    time = json['time'] != null ? new TimeDto.fromJson(json['time']) : null;
     pontosCampeonato = json['pontos_campeonato'];
     capitaoId = json['capitao_id'];
     pontos = json['pontos'];
@@ -61,8 +61,9 @@ class TimeLogado {
     //     servicos!.add(new Null.fromJson(v));
     //   });
     // }
-    ranking =
-        json['ranking'] != null ? new Ranking.fromJson(json['ranking']) : null;
+    ranking = json['ranking'] != null
+        ? new RankingDto.fromJson(json['ranking'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
