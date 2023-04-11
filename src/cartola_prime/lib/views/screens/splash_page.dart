@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../data/database_connection.dart';
 import '../components/resource_colors.dart';
 
 class SplashPage extends StatefulWidget {
@@ -16,14 +17,22 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    _checkDb();
     _checkAuth();
+  }
+
+  Future<void> _checkDb() async {
+    var db = DatabaseConnection();
+    if (!await db.ifDatabaseExist()) {
+      db.setDatabase();
+    }
   }
 
   Future<void> _checkAuth() async {
     //REMOVER DELAY DEPOIS DE HOMOLOGADO
     await Future.delayed(const Duration(seconds: 5));
 
-    final storage = await _storage.read(key: "userModel");
+    // final storage = await _storage.read(key: "userModel");
     Navigator.of(context).pushReplacementNamed('/home');
 
     // if (storage == null || storage.isEmpty) {

@@ -39,9 +39,9 @@ class DatabaseConnection {
     databaseFactory.deleteDatabase(path);
   }
 
-  Future<Map<String, dynamic>> ifDatabaseExist() async {
+  Future<bool> ifDatabaseExist() async {
     Database? db = await _db.database;
     var res = await db!.rawQuery("select * from time_logado");
-    return res.first;
+    return res.isNotEmpty ? true : false;
   }
 }
