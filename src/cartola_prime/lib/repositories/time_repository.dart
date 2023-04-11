@@ -26,6 +26,12 @@ class TimeRepository implements ITimeRepository {
     return item != null ? TimeLogadoModel.fromJson(item) : null;
   }
 
+  Future<TimeLogadoModel?> _getOneTimeId(int timeId) async {
+    var item = await _dataBaseRepository.getOneCampoIdOrderBy(
+        table, "time_id", timeId, "nome");
+    return item != null ? TimeLogadoModel.fromJson(item) : null;
+  }
+
   @override
   Future<void> insert(TimeLogadoModel model) async {
     await _dataBaseRepository.insert(table, model.toJson());

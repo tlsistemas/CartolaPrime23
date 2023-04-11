@@ -27,9 +27,16 @@ class DatabaseConnection {
     return database;
   }
 
+  Future<Database> initDatabase() async {
+    var documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, 'cartola_prime.db');
+    var database = await openDatabase(path, version: 1);
+    return database;
+  }
+
   Future<void> _createDatabase(Database database, int version) async {
     String sqlScout =
-        "CREATE TABLE 'time_logado' (timeId INT, assinante INT, nomeCartola TEXT, globoId TEXT, nome TEXT, urlEscudoPng TEXT, urlCamisaPng TEXT, slug TEXT, clubeId INT, temporadaInicial INT);";
+        "CREATE TABLE time_logado (id INTEGER PRIMARY KEY, time_id INT, assinante INT, nome_cartola TEXT, globo_id TEXT, nome TEXT, url_escudo_png TEXT, url_camisa_png TEXT, slug TEXT, clube_id INT, temporada_inicial INT, UNIQUE(time_id));";
     await database.execute(sqlScout);
   }
 

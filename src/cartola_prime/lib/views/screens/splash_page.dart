@@ -17,15 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _checkDb();
     _checkAuth();
-  }
-
-  Future<void> _checkDb() async {
-    var db = DatabaseConnection();
-    if (!await db.ifDatabaseExist()) {
-      db.setDatabase();
-    }
   }
 
   Future<void> _checkAuth() async {

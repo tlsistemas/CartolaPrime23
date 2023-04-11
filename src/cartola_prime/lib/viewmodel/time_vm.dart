@@ -32,7 +32,7 @@ class TimeViewModel {
 
   Future<TimeLogadoModel> getTimeDB() async {
     var times = await _timeRepository.getAll();
-    return times.first;
+    return times.isNotEmpty ? times.first : TimeLogadoModel();
   }
 
   Future<TimeLogadoModel> checkTimeInfo() async {

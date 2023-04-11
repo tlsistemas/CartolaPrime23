@@ -4,7 +4,8 @@ import 'database_connection.dart';
 
 class DataBaseRepository {
   late DatabaseConnection _databaseConnection;
-  Repository() {
+
+  DataBaseRepository() {
     _databaseConnection = DatabaseConnection();
   }
 
@@ -27,6 +28,7 @@ class DataBaseRepository {
         data,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
+      var res = await connection!.query(table);
     } catch (e) {
       print('DbException' + e.toString());
     }

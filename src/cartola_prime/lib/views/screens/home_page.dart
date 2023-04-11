@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cartola_prime/models/atleta.dart';
 import 'package:cartola_prime/models/ranking.dart';
 import 'package:cartola_prime/models/time.dart';
@@ -27,19 +29,21 @@ class _HomePageState extends State<HomePage> {
   final _serviceClube = ClubeService();
   final _timeVM = TimeViewModel();
   var timeLog = TimeLogadoModel();
-  String nomeTime = "";
+  bool _isLogado = false;
+
   @override
   void initState() {
-    verificarStorage();
+    verificarClubes();
     preencherInfoTime();
     super.initState();
   }
 
   Future<void> preencherInfoTime() async {
     timeLog = await _timeVM.checkTimeInfo();
+    _isLogado = timeLog.nome!.isEmpty ? false : true;
   }
 
-  Future<void> verificarStorage() async {
+  Future<void> verificarClubes() async {
     var existClube = await _repClube.existStorage();
     if (!existClube) {
       await _serviceClube.updateStorage();
@@ -105,15 +109,18 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () => toggleMenu(),
               ),
               actions: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.login,
-                    color: iconColorPrimary,
+                Visibility(
+                  visible: true,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.login,
+                      color: iconColorPrimary,
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/login");
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/login");
-                  },
-                )
+                ),
               ],
               title: Text(
                 widget.title,
@@ -211,28 +218,23 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(left: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  // backgroundImage: NetworkImage(
-                  //     "http://store-images.s-microsoft.com/image/apps.18960.13510798887500799.9201af1d-26ef-4e81-9381-a305ebdae3d4.36a0ba82-f3a7-4489-ae72-be2589354eac"),
+                  backgroundImage: NetworkImage(timeLog.urlEscudoPng),
                   radius: 35.0,
-                  backgroundImage: AssetImage('assets/images/iconp.png'),
+                  //backgroundImage: AssetImage('assets/images/iconp.png'),
                 ),
-                SizedBox(height: 16.0),
-                Text(
+                const SizedBox(height: 16.0),
+                const Text(
                   "Bem Vindo,",
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(
-                  "Cartola Prime",
-                  style: TextStyle(color: Colors.white),
+                  timeLog.nome!,
+                  style: const TextStyle(color: Colors.white),
                 ),
-                Text(
-                  "Cartola Prime",
-                  style: TextStyle(color: Colors.white),
-                ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
               ],
             ),
           ),

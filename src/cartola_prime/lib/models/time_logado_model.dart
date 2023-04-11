@@ -3,10 +3,10 @@ import 'package:cartola_prime/models/time_logado.dart';
 
 class TimeLogadoModel {
   int? temporadaInicial;
-  String? nomeCartola;
+  String nomeCartola = "Cartola Prime";
   String? globoId;
   String? nome;
-  String? urlEscudoPng;
+  String urlEscudoPng = 'assets/images/iconp.png';
   String? urlCamisaPng;
   String? slug;
   int? clubeId;
@@ -15,10 +15,10 @@ class TimeLogadoModel {
 
   TimeLogadoModel(
       {this.temporadaInicial,
-      this.nomeCartola,
+      this.nomeCartola = "Cartola Prime",
       this.globoId,
       this.nome,
-      this.urlEscudoPng,
+      this.urlEscudoPng = 'assets/images/iconp.png',
       this.urlCamisaPng,
       this.slug,
       this.timeId,
@@ -35,7 +35,8 @@ class TimeLogadoModel {
     slug = json['slug'];
     timeId = json['time_id'];
     clubeId = json['clube_id'];
-    assinante = json['assinante'];
+    var assinante = json['assinante'] == null ? false : true;
+    assinante = assinante;
   }
 
   Map<String, dynamic> toJson() {
@@ -55,10 +56,10 @@ class TimeLogadoModel {
 
   TimeLogadoModel.fromDTO(TimeLogado timeLogado) {
     temporadaInicial = timeLogado.time!.temporadaInicial;
-    nomeCartola = timeLogado.time!.nomeCartola;
+    nomeCartola = timeLogado.time!.nomeCartola ?? "Cartola Prime";
     globoId = timeLogado.time!.globoId;
     nome = timeLogado.time!.nome;
-    urlEscudoPng = timeLogado.time!.urlEscudoPng;
+    urlEscudoPng = timeLogado.time!.urlEscudoPng ?? 'assets/images/iconp.png';
     urlCamisaPng = timeLogado.time!.urlCamisaPng;
     slug = timeLogado.time!.slug;
     timeId = timeLogado.time!.timeId;
@@ -68,10 +69,10 @@ class TimeLogadoModel {
 
   TimeLogadoModel.fromTimeDTO(Time time) {
     temporadaInicial = time.temporadaInicial;
-    nomeCartola = time.nomeCartola;
+    nomeCartola = time.nomeCartola ?? "Cartola Prime";
     globoId = time.globoId;
     nome = time.nome;
-    urlEscudoPng = time.urlEscudoPng;
+    urlEscudoPng = time.urlEscudoPng ?? 'assets/images/iconp.png';
     urlCamisaPng = time.urlCamisaPng;
     slug = time.slug;
     timeId = time.timeId;
