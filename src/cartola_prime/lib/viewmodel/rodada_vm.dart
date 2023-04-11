@@ -1,6 +1,6 @@
 import 'package:cartola_prime/models/rodada.dart';
 
-import '../repositories/clube_repo.dart';
+import '../repositories/clube_repository.dart';
 import '../services/rodada_service.dart';
 
 class RodadaViewModel {

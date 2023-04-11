@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/clube.dart';
-import '../repositories/clube_repo.dart';
+import '../repositories/clube_repository.dart';
 import '../services/clube_service.dart';
 
 class ClubeViewModel extends ChangeNotifier {

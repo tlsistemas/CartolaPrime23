@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../../models/time_logado.dart';
-import '../../repositories/clube_repo.dart';
+import '../../repositories/clube_repository.dart';
 import '../../services/clube_service.dart';
 import '../../viewmodel/time_vm.dart';
 import '../components/resource_colors.dart';

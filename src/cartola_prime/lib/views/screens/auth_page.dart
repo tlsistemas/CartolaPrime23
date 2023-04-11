@@ -1,4 +1,4 @@
-import 'package:cartola_prime/repositories/auth_repo.dart';
+import 'package:cartola_prime/repositories/auth_repository.dart';
 import 'package:cartola_prime/viewmodel/time_vm.dart';
 import 'package:cartola_prime/views/screens/home_page.dart';
 import 'package:cartola_prime/views/screens/splash_page.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../repositories/contracts/i_auth_repo.dart';
+import '../../repositories/contracts/i_auth_repository.dart';
 import '../../shared/utils/base_urls.dart';
 
 class AuthPage extends StatefulWidget {

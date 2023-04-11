@@ -1,6 +1,6 @@
 import 'package:cartola_prime/models/clube.dart';
 import 'package:cartola_prime/models/escudo.dart';
-import 'package:cartola_prime/repositories/clube_repo.dart';
+import 'package:cartola_prime/repositories/clube_repository.dart';
 
 import 'transmissao.dart';
 

@@ -1,7 +1,7 @@
 import 'package:cartola_prime/models/lesson.dart';
 import 'package:flutter/material.dart';
 
-import '../repositories/classificacao_repo.dart';
+import '../repositories/classificacao_repository.dart';
 
 class ClassificacaoVM extends ChangeNotifier {
   final _myRepo = ClassificacaoRepo();
