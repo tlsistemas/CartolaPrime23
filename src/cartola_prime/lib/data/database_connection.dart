@@ -29,7 +29,7 @@ class DatabaseConnection {
 
   Future<void> _createDatabase(Database database, int version) async {
     String sqlScout =
-        "CREATE TABLE 'time_logado' (nomeCartola TEXT,globoId TEXT,nome TEXT, urlEscudoPng TEXT, urlCamisaPng TEXT, slug TEXT, clubeId INT);";
+        "CREATE TABLE 'time_logado' (timeId INT, assinante INT, nomeCartola TEXT, globoId TEXT, nome TEXT, urlEscudoPng TEXT, urlCamisaPng TEXT, slug TEXT, clubeId INT, temporadaInicial INT);";
     await database.execute(sqlScout);
   }
 

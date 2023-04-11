@@ -1,5 +1,6 @@
+import 'package:cartola_prime/models/time_logado_model.dart';
+
 import '../data/data_base_repository.dart';
-import '../models/time.dart';
 import 'contracts/i_time_repository.dart';
 
 class TimeRepository implements ITimeRepository {
@@ -14,30 +15,30 @@ class TimeRepository implements ITimeRepository {
   }
 
   @override
-  Future<List<Time>> getAll() async {
+  Future<List<TimeLogadoModel>> getAll() async {
     var items = await _dataBaseRepository.getAll(table);
-    return items.map((item) => Time.fromJson(item)).toList();
+    return items.map((item) => TimeLogadoModel.fromJson(item)).toList();
   }
 
   @override
-  Future<Time?> getOne(int id) async {
+  Future<TimeLogadoModel?> getOne(int id) async {
     var item = await _dataBaseRepository.getOne(table, id);
-    return item != null ? Time.fromJson(item) : null;
+    return item != null ? TimeLogadoModel.fromJson(item) : null;
   }
 
   @override
-  Future<void> insert(Time model) async {
+  Future<void> insert(TimeLogadoModel model) async {
     await _dataBaseRepository.insert(table, model.toJson());
   }
 
   @override
-  Future<void> insertBach(List<Time> modelList) async {
+  Future<void> insertBach(List<TimeLogadoModel> modelList) async {
     var modelMaps = modelList.map((model) => model.toJson()).toList();
     await _dataBaseRepository.insertBatch(table, modelMaps);
   }
 
   @override
-  Future<void> update(Time model) {
+  Future<void> update(TimeLogadoModel model) {
     throw UnimplementedError();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cartola_prime/models/time_logado.dart';
 import 'package:cartola_prime/repositories/auth_repository.dart';
 import 'package:cartola_prime/viewmodel/time_vm.dart';
 import 'package:cartola_prime/views/screens/home_page.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../../models/time.dart';
 import '../../repositories/contracts/i_auth_repository.dart';
 import '../../shared/utils/base_urls.dart';
 
@@ -43,8 +45,14 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                   .value;
               await authRepository.setGLBID(_glbid);
 
-              viewmodel.getTimeLogado();
+              var timeLogado = await viewmodel.getTimeLogado() ?? TimeLogado();
+              var isTimeInserido = await viewmodel.insertTimeLogado(timeLogado);
 
+              var textoDialog = "Clique em HOME para continuar no aplicativo.";
+              if (!isTimeInserido) {
+                textoDialog =
+                    "Tivemos um problema no seu login, tente novamente mais tarde. \nClique em HOME para continuar no aplicativo.";
+              }
               showDialog<String>(
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
@@ -55,8 +63,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  content: const Text(
-                      'Clique em HOME para continuar no aplicativo.'),
+                  content: Text(textoDialog.toString()),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () async => Navigator.of(context)
