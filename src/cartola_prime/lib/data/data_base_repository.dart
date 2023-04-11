@@ -1,9 +1,8 @@
-import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'database_connection.dart';
 
-class Repository {
+class DataBaseRepository {
   late DatabaseConnection _databaseConnection;
   Repository() {
     _databaseConnection = DatabaseConnection();
