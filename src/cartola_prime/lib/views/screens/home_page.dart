@@ -234,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(color: Colors.white),
                 ),
                 Text(
-                  timeLog.nome,
+                  timeLog.nomeCartola,
                   style: const TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 const SizedBox(height: 20.0),

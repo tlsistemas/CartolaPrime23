@@ -1,11 +1,11 @@
-import 'dto/time_dto.dart';
+import 'package:cartola_prime/models/dto/time_dto.dart';
 import 'dto/time_logado_dto.dart';
 
 class TimeLogadoModel {
   int? temporadaInicial;
   String nomeCartola = "Cartola Prime";
   String? globoId;
-  String nome = "Cartola Prime";
+  String? nome;
   String urlEscudoPng = '';
   String? urlCamisaPng;
   String? slug;
@@ -17,7 +17,7 @@ class TimeLogadoModel {
       {this.temporadaInicial,
       this.nomeCartola = "Cartola Prime",
       this.globoId,
-      this.nome = "Cartola Prime",
+      this.nome,
       this.urlEscudoPng = '',
       this.urlCamisaPng,
       this.slug,
@@ -58,7 +58,7 @@ class TimeLogadoModel {
     temporadaInicial = timeLogado.time!.temporadaInicial;
     nomeCartola = timeLogado.time!.nomeCartola ?? "Cartola Prime";
     globoId = timeLogado.time!.globoId;
-    nome = timeLogado.time!.nome ?? "Cartola Prime";
+    nome = timeLogado.time!.nome;
     urlEscudoPng = timeLogado.time!.urlEscudoPng ?? '';
     urlCamisaPng = timeLogado.time!.urlCamisaPng;
     slug = timeLogado.time!.slug;
@@ -71,7 +71,7 @@ class TimeLogadoModel {
     temporadaInicial = time.temporadaInicial;
     nomeCartola = time.nomeCartola ?? "Cartola Prime";
     globoId = time.globoId;
-    nome = time.nome ?? "Cartola Prime";
+    nome = time.nome;
     urlEscudoPng = time.urlEscudoPng ?? '';
     urlCamisaPng = time.urlCamisaPng;
     slug = time.slug;
