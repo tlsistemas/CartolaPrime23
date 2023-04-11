@@ -1,4 +1,4 @@
-import 'escudo.dart';
+import 'escudo_dto.dart';
 
 class Clube {
   Clube({

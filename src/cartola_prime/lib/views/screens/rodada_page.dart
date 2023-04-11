@@ -1,7 +1,7 @@
-import 'package:cartola_prime/models/partida.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../models/dto/partida_dto.dart';
 import '../../viewmodel/rodada_vm.dart';
 import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

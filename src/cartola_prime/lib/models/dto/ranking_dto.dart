@@ -1,4 +1,4 @@
-import 'posicao_atual.dart';
+import 'posicao_atual_dto.dart';
 
 class Ranking {
   PosicaoAtual? atual;

@@ -1,6 +1,6 @@
-import 'package:cartola_prime/models/lesson.dart';
 import 'package:flutter/material.dart';
 
+import '../models/dto/lesson_dto.dart';
 import '../repositories/classificacao_repository.dart';
 
 class ClassificacaoVM extends ChangeNotifier {

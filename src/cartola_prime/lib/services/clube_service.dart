@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../models/clube.dart';
+import '../models/dto/clube_dto.dart';
 import '../shared/utils/base_urls.dart';
 import 'client_http.dart';
 

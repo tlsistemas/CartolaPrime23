@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../models/dto/lesson_dto.dart';
 import '../screens/auth_page.dart';
-import '../../models/lesson.dart';
 
 class MarkeListTile extends StatelessWidget {
   const MarkeListTile({Key? key, required Lesson? lesson})

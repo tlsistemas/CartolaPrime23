@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
-
-import '../../models/lesson.dart';
+import '../models/dto/lesson_dto.dart';
 
 class ClassificacaoRepo {
   List getLessons() {

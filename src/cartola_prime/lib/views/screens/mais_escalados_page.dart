@@ -1,11 +1,8 @@
-import 'package:cartola_prime/models/mais_escalados.dart';
-import 'package:cartola_prime/models/mercado_status.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/enums/status_mercado_enum.dart';
+import '../../models/dto/mais_escalados_dto.dart';
 import '../../viewmodel/mais_escalados_vm.dart';
-import '../../viewmodel/mercado_status_vm.dart';
 import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 

@@ -1,4 +1,4 @@
-import 'partida.dart';
+import 'partida_dto.dart';
 
 class Rodada {
   Rodada({

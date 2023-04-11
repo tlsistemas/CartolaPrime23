@@ -1,10 +1,10 @@
-import 'package:cartola_prime/models/time.dart';
-import 'package:cartola_prime/models/time_logado.dart';
-import 'package:cartola_prime/models/time_logado_model.dart';
-import 'package:cartola_prime/repositories/contracts/i_time_repository.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../data/data_base_repository.dart';
+import '../models/dto/time_dto.dart';
+import '../models/dto/time_logado_dto.dart';
+import '../models/time_logado_model.dart';
+import '../repositories/contracts/i_time_repository.dart';
 import '../repositories/time_repository.dart';
 import '../services/time_service.dart';
 

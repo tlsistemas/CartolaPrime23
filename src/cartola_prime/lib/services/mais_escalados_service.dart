@@ -1,7 +1,7 @@
-import 'package:cartola_prime/models/mais_escalados.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../models/dto/mais_escalados_dto.dart';
 import '../shared/utils/base_urls.dart';
 import 'client_http.dart';
 

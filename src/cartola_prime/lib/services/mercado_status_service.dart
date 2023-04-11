@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../models/mercado_status.dart';
+import '../models/dto/mercado_status_dto.dart';
 import '../shared/utils/base_urls.dart';
 import 'client_http.dart';
 

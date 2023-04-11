@@ -1,7 +1,6 @@
-import 'package:cartola_prime/models/mais_escalados.dart';
-import 'package:cartola_prime/viewmodel/rodada_vm.dart';
-
+import '../models/dto/mais_escalados_dto.dart';
 import '../services/mais_escalados_service.dart';
+import 'rodada_vm.dart';
 
 class MaisEscaladosViewModel {
   final _service = MaisEscaldosService();
@@ -19,6 +18,6 @@ class MaisEscaladosViewModel {
           (x) => x.clubeCasaId == clubeId || x.clubeVisitanteId == clubeId);
     }
 
-    return escalados;
+    return escalados.toList();
   }
 }

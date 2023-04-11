@@ -1,4 +1,4 @@
-import 'scout.dart';
+import 'scout_dto.dart';
 
 class GatoMestre {
   double? mediaPontosMandante;

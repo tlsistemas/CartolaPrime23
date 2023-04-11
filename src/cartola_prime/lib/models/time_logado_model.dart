@@ -1,5 +1,5 @@
-import 'package:cartola_prime/models/time.dart';
-import 'package:cartola_prime/models/time_logado.dart';
+import 'dto/time_dto.dart';
+import 'dto/time_logado_dto.dart';
 
 class TimeLogadoModel {
   int? temporadaInicial;

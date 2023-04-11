@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../models/clube.dart';
+import '../models/dto/clube_dto.dart';
 import 'contracts/i_clube_repository.dart';
 
 class ClubeRepository implements IClubeRepository {

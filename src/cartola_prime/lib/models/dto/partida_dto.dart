@@ -1,8 +1,5 @@
-import 'package:cartola_prime/models/clube.dart';
-import 'package:cartola_prime/models/escudo.dart';
-import 'package:cartola_prime/repositories/clube_repository.dart';
-
-import 'transmissao.dart';
+import 'clube_dto.dart';
+import 'transmissao_dto.dart';
 
 class Partida {
   Partida({

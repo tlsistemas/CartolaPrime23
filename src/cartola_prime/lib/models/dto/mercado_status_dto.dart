@@ -1,5 +1,5 @@
-import 'fechamento.dart';
-import 'limites_competicao.dart';
+import 'fechamento_dto.dart';
+import 'limites_competicao_dto.dart';
 
 class MercadoStatus {
   int? rodadaAtual;

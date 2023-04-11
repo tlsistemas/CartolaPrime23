@@ -1,4 +1,4 @@
-import '../models/mercado_status.dart';
+import '../models/dto/mercado_status_dto.dart';
 import '../services/mercado_status_service.dart';
 
 class MercadoStatusViewModel {

@@ -1,5 +1,5 @@
-import 'gato_mestre.dart';
-import 'scout.dart';
+import 'gato_mestre_dto.dart';
+import 'scout_dto.dart';
 
 class Atleta {
   Scout? scout;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/lesson.dart';
+import '../../models/dto/lesson_dto.dart';
 import 'make_list_tile.dart';
 
 class CardList extends StatelessWidget {

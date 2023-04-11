@@ -1,8 +1,8 @@
-import 'package:cartola_prime/models/partida.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../models/rodada.dart';
+import '../models/dto/partida_dto.dart';
+import '../models/dto/rodada_dto.dart';
 import '../shared/utils/base_urls.dart';
 import 'client_http.dart';
 

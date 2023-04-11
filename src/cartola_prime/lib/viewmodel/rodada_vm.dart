@@ -1,5 +1,4 @@
-import 'package:cartola_prime/models/rodada.dart';
-
+import '../models/dto/rodada_dto.dart';
 import '../repositories/clube_repository.dart';
 import '../services/rodada_service.dart';
 

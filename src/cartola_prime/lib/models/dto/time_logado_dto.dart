@@ -1,7 +1,6 @@
-import 'package:cartola_prime/models/atleta.dart';
-
-import 'ranking.dart';
-import 'time.dart';
+import 'atleta_dto.dart';
+import 'ranking_dto.dart';
+import 'time_dto.dart';
 
 class TimeLogado {
   List<Atleta>? atletas;

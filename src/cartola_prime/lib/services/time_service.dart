@@ -1,6 +1,6 @@
-import 'package:cartola_prime/models/time_logado.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../models/dto/time_logado_dto.dart';
 import '../repositories/auth_repository.dart';
 import '../repositories/contracts/i_auth_repository.dart';
 import '../shared/utils/base_urls.dart';

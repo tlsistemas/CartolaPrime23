@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/clube.dart';
+import '../models/dto/clube_dto.dart';
 import '../repositories/clube_repository.dart';
 import '../services/clube_service.dart';
 

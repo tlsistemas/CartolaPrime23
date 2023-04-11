@@ -1,6 +1,5 @@
-import 'package:cartola_prime/models/partida.dart';
-
-import 'atleta.dart';
+import 'atleta_dto.dart';
+import 'partida_dto.dart';
 
 class MaisEscalados {
   String? posicao;
