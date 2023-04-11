@@ -30,16 +30,17 @@ class TimeViewModel {
     }
   }
 
-  Future<TimeLogado> getTimeDB() async {
-    return TimeLogado();
+  Future<TimeLogadoModel> getTimeDB() async {
+    var times = await _timeRepository.getAll();
+    return times.first;
   }
 
-  Future<TimeLogado> checkTimeInfo() async {
+  Future<TimeLogadoModel> checkTimeInfo() async {
     if (await isLogado()) {
       return getTimeDB();
     }
 
-    return TimeLogado();
+    return TimeLogadoModel();
   }
 
   Future<bool> isLogado() async {

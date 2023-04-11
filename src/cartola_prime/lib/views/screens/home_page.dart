@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../../models/time_logado.dart';
+import '../../models/time_logado_model.dart';
 import '../../repositories/clube_repository.dart';
 import '../../services/clube_service.dart';
 import '../../viewmodel/time_vm.dart';
@@ -25,21 +26,7 @@ class _HomePageState extends State<HomePage> {
   final _repClube = ClubeRepository();
   final _serviceClube = ClubeService();
   final _timeVM = TimeViewModel();
-  var timeLog = TimeLogado(
-      atletas: <Atleta>[],
-      capitaoId: 0,
-      esquemaId: 0,
-      patrimonio: 0,
-      pontos: "",
-      pontosCampeonato: "",
-      ranking: Ranking(),
-      rodadaAtual: 0,
-      time: Time(nome: "Cartola Prime"),
-      totalLigas: 0,
-      totalLigasMatamata: 0,
-      valorTime: 0,
-      variacaoPatrimonio: 0,
-      variacaoPontos: "");
+  var timeLog = TimeLogadoModel();
   String nomeTime = "";
   @override
   void initState() {
