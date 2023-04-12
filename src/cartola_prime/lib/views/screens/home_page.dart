@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
   final _timeVM = TimeViewModel();
   var timeLog = TimeLogadoModel();
   bool _isLogado = false;
+  late double width = MediaQuery.of(context).size.width;
+  late double height = MediaQuery.of(context).size.height;
 
   @override
   void initState() {
@@ -129,8 +131,7 @@ class _HomePageState extends State<HomePage> {
             ),
             body: const Center(child: Text('Bem Vindo:')),
             extendBody: true,
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/buscar_times");
@@ -139,69 +140,6 @@ class _HomePageState extends State<HomePage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100)),
               child: const Icon(Icons.add, color: iconColorPrimary),
-            ),
-            bottomNavigationBar: BottomAppBar(
-              shape: const CircularNotchedRectangle(),
-              color: backgroundColor,
-              child: IconTheme(
-                data: const IconThemeData(color: backgroundColor),
-                child: Padding(
-                  // padding: const EdgeInsets.all(3.0),
-                  padding: const EdgeInsets.only(
-                      left: 3.0, top: 0.0, bottom: 0.0, right: 3.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          IconButton(
-                              icon: const Icon(Icons.home,
-                                  color: iconColorPrimary),
-                              onPressed: () {}),
-                          const Text('Home',
-                              style: TextStyle(color: textColorPrimary)),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          IconButton(
-                              icon: const Icon(Icons.list,
-                                  color: iconColorPrimary),
-                              onPressed: () {}),
-                          const Text('Completos',
-                              style: TextStyle(color: textColorPrimary)),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          IconButton(
-                              icon: const Icon(Icons.person,
-                                  color: iconColorPrimary),
-                              onPressed: () {
-                                Navigator.pushNamed(context, "/perfil");
-                              }),
-                          const Text('Perfil',
-                              style: TextStyle(color: textColorPrimary)),
-                        ],
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          IconButton(
-                              icon: const Icon(Icons.update,
-                                  color: iconColorPrimary),
-                              onPressed: () {}),
-                          const Text('Sync',
-                              style: TextStyle(color: textColorPrimary)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
             ),
           ),
         ),
