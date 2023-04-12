@@ -132,7 +132,9 @@ class _HomePageState extends State<HomePage> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/buscar_times");
+              },
               backgroundColor: foregroundColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100)),

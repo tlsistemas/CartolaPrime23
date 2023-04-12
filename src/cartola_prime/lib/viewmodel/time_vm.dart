@@ -1,3 +1,4 @@
+import 'package:cartola_prime/models/dto/time_busca_dto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../data/data_base_repository.dart';
@@ -24,6 +25,15 @@ class TimeViewModel {
   Future<TimeLogadoDto?> getTimeLogado() async {
     try {
       var time = await _service.getTimeLogado();
+      return time;
+    } catch (ex) {
+      return null;
+    }
+  }
+
+  Future<List<TimeBuscaDto>?> getTimeBusca(String q) async {
+    try {
+      var time = await _service.getTimeBusca(q);
       return time;
     } catch (ex) {
       return null;

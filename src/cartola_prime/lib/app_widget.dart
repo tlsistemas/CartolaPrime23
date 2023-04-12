@@ -1,3 +1,4 @@
+import 'package:cartola_prime/views/screens/buscar_times_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +40,7 @@ class AppWidget extends StatelessWidget {
           '/classificacao': (context) => const ClassificacaoPage(),
           '/rodada': (context) => const RodadaPage(),
           '/mais_escalados': (context) => const MaisEscaldosPage(),
+          '/buscar_times': (context) => const BuscarTimePage(),
         },
       ),
     );
