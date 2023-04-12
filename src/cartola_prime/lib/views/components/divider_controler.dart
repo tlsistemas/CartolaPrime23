@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 class DividerControler extends StatelessWidget {
   const DividerControler({Key? key, required String? texto})

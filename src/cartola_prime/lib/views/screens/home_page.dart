@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           IconButton(
                               icon: const Icon(Icons.home,
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           IconButton(
                               icon: const Icon(Icons.list,
@@ -175,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           IconButton(
                               icon: const Icon(Icons.person,
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           IconButton(
                               icon: const Icon(Icons.update,

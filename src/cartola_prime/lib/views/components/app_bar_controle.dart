@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'resource_colors.dart';
 
-class AppBarControler extends StatefulWidget with PreferredSizeWidget {
+class AppBarControler extends StatefulWidget implements PreferredSizeWidget {
   // Preffered size required for PreferredSizeWidget extension
   final Size prefSize;
   // App bar title depending on the screen
