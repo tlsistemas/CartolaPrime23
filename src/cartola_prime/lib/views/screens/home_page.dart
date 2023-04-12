@@ -5,6 +5,7 @@ import '../../models/time_logado_model.dart';
 import '../../repositories/clube_repository.dart';
 import '../../services/clube_service.dart';
 import '../../viewmodel/time_vm.dart';
+import '../components/divider_controler.dart';
 import '../components/resource_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -246,6 +247,17 @@ class _HomePageState extends State<HomePage> {
             leading: const Icon(Icons.home, size: 25.0, color: Colors.white),
             title: const Text(
               "Home",
+              style: TextStyle(fontSize: 14),
+            ),
+            textColor: Colors.white,
+            dense: true,
+          ),
+          const DividerControler(texto: "Administrar"),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(Icons.home, size: 25.0, color: Colors.white),
+            title: const Text(
+              "Ligas",
               style: TextStyle(fontSize: 14),
             ),
             textColor: Colors.white,
