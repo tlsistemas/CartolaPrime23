@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
@@ -21,23 +22,37 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   late double height = MediaQuery.of(context).size.height;
   final TimeViewModel viewModel = TimeViewModel();
   late Future<List<TimeBuscaDto>>? _myData;
+  late TextEditingController _textController;
 
   @override
   void initState() {
     _myData = _setPartidas();
+    _textController = TextEditingController(text: 'initial text');
     super.initState();
   }
 
   Future<List<TimeBuscaDto>> _setPartidas() async {
     var rodada = await viewModel.getTimeBusca("thi-carto");
-    return rodada!;
+    return rodada!.take(15).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBarControler(title: 'Buscar Times'),
-        body: listaTimesWidget());
+      appBar: AppBarControler(title: 'Buscar Times'),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CupertinoSearchTextField(controller: _textController),
+            listaTimesWidget(),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget listaTimesWidget() {
@@ -48,21 +63,20 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
           return const Center(child: CircularProgressIndicator());
         } else {
           var item = snapshot.data;
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: height,
-                  child: ListView.builder(
-                    itemCount: item!.length,
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-                    itemBuilder: (BuildContext context, int index) {
-                      return customCard(item[index]);
-                    },
-                  ),
+          return Column(
+            children: [
+              SizedBox(
+                height: height,
+                child: ListView.builder(
+                  itemCount: item!.length,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return customCard(item[index]);
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         }
       },
@@ -74,42 +88,74 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
       _buildTile(
         Padding(
           padding: const EdgeInsets.all(5.0),
-          child: Column(
-            children: [
-              Text(timeBusca.nome.toString()),
-              Row(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  timeBusca.urlEscudoPng == null
+                      ? const Image(
+                          height: 40,
+                          image: AssetImage('assets/images/iconp.png'))
+                      : Image.network(
+                          timeBusca.urlEscudoPng!,
+                          height: 40,
+                          width: 40,
+                          alignment: Alignment.center,
+                          centerSlice: Rect.largest,
+                        ),
+                ],
+              ),
+              const SizedBox(width: 10),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    timeBusca.nome.toString(),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      timeBusca.urlEscudoPng == null
-                          ? const Image(
-                              height: 40,
-                              image: AssetImage('assets/images/iconp.png'))
-                          : Image.network(
-                              timeBusca.urlEscudoPng!,
-                              height: 40,
-                              width: 40,
-                              alignment: Alignment.centerRight,
-                              centerSlice: Rect.largest,
-                            ),
-                      const SizedBox(width: 30),
-                      SvgPicture.asset(PRO)
+                      SvgPicture.asset(
+                        PRO,
+                        height: 15,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(timeBusca.nomeCartola.toString()),
                     ],
                   ),
                 ],
               ),
-              Text(timeBusca.slug.toString())
+              Expanded(
+                child: Align(
+                  // <---  these 2 lines fixed it
+                  alignment:
+                      Alignment.centerRight, // <---  these 2 lines fixed it
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    radius: 20,
+                    child: IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(Icons.add),
+                      color: Colors.white,
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
         onTap: () {},
-      )
+      ),
     ]);
   }
 
