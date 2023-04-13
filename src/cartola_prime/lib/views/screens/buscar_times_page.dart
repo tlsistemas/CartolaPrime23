@@ -23,6 +23,15 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   late Future<List<TimeBuscaDto>>? _myData;
   late TextEditingController _textController;
   TextEditingController editingController = TextEditingController();
+  Icon customIcon = const Icon(
+    Icons.search,
+    color: Colors.white,
+    size: 28,
+  );
+  Widget customSearchBar = const Text(
+    'Buscar Time',
+    style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
+  );
 
   @override
   void initState() {
@@ -48,7 +57,60 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarControler(title: 'Buscar Times'),
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.white, // <-- SEE HERE
+        ),
+        title: customSearchBar,
+        automaticallyImplyLeading: false,
+        backgroundColor: backgroundColor,
+        actions: [
+          IconButton(
+            color: Colors.white,
+            onPressed: () {
+              setState(() {
+                if (customIcon.icon == Icons.search) {
+                  customIcon = const Icon(Icons.cancel);
+                  customSearchBar = ListTile(
+                    leading: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                    title: TextField(
+                      autofocus: true,
+                      onSubmitted: (value) {
+                        filterSearchResults(value);
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Nome do Time',
+                        hintStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                } else {
+                  customIcon = const Icon(Icons.search);
+                  customSearchBar = const Text(
+                    'Buscar Time',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.normal),
+                  );
+                }
+              });
+            },
+            icon: customIcon,
+          )
+        ],
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -56,21 +118,6 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                onSubmitted: (value) {
-                  filterSearchResults(value);
-                },
-                controller: editingController,
-                decoration: const InputDecoration(
-                    labelText: "Search",
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
-              ),
-            ),
             listaTimesWidget(),
           ],
         ),
@@ -89,7 +136,6 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
           return Column(
             children: [
               SizedBox(
-                height: height,
                 child: ListView.builder(
                   itemCount: item!.length,
                   shrinkWrap: true,
