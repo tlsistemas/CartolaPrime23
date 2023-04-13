@@ -61,9 +61,8 @@ class TimeLogadoDto {
     //     servicos!.add(new Null.fromJson(v));
     //   });
     // }
-    ranking = json['ranking'] != null
-        ? new RankingDto.fromJson(json['ranking'])
-        : null;
+    ranking =
+        json['ranking'] != null ? RankingDto.fromJson(json['ranking']) : null;
   }
 
   Map<String, dynamic> toJson() {

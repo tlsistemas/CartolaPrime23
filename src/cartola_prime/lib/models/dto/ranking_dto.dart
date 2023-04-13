@@ -8,11 +8,10 @@ class RankingDto {
   RankingDto({this.atual, this.anterior, this.melhorRankingId});
 
   RankingDto.fromJson(Map<String, dynamic> json) {
-    atual = json['atual'] != null
-        ? new PosicaoAtualDto.fromJson(json['atual'])
-        : null;
+    atual =
+        json['atual'] != null ? PosicaoAtualDto.fromJson(json['atual']) : null;
     anterior = json['anterior'] != null
-        ? new PosicaoAtualDto.fromJson(json['anterior'])
+        ? PosicaoAtualDto.fromJson(json['anterior'])
         : null;
     melhorRankingId = json['melhor_ranking_id'];
   }

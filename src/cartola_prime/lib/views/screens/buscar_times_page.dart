@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,17 +22,27 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   final TimeViewModel viewModel = TimeViewModel();
   late Future<List<TimeBuscaDto>>? _myData;
   late TextEditingController _textController;
+  TextEditingController editingController = TextEditingController();
 
   @override
   void initState() {
-    _myData = _setPartidas();
+    _myData = _setPartidas("");
     _textController = TextEditingController(text: 'initial text');
     super.initState();
   }
 
-  Future<List<TimeBuscaDto>> _setPartidas() async {
-    var rodada = await viewModel.getTimeBusca("thi-carto");
-    return rodada!.take(15).toList();
+  Future<List<TimeBuscaDto>> _setPartidas(String q) async {
+    if (q.isNotEmpty) {
+      var times = await viewModel.getTimeBusca(q);
+      return times!;
+    }
+    return <TimeBuscaDto>[];
+  }
+
+  void filterSearchResults(String query) {
+    setState(() {
+      _myData = _setPartidas(query);
+    });
   }
 
   @override
@@ -47,7 +56,21 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CupertinoSearchTextField(controller: _textController),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onSubmitted: (value) {
+                  filterSearchResults(value);
+                },
+                controller: editingController,
+                decoration: const InputDecoration(
+                    labelText: "Search",
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              ),
+            ),
             listaTimesWidget(),
           ],
         ),

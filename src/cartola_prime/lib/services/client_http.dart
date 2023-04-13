@@ -19,10 +19,13 @@ class ClientHttp {
     try {
       var request = http.Request('GET', Uri.parse(url));
 
-      http.StreamedResponse response = await request.send();
+      // http.StreamedResponse response = await request.send();
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
 
       if (response.statusCode == 200) {
-        var json = await response.stream.bytesToString();
+        // var json = await response.stream.bytesToString();
+        var json = response.body;
         final body = jsonDecode(json);
         return body;
       } else {
