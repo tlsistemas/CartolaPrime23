@@ -1,5 +1,5 @@
 import 'package:cartola_prime/repositories/auth_repository.dart';
-import 'package:cartola_prime/viewmodel/time_vm.dart';
+import 'package:cartola_prime/viewmodel/time_logado_vm.dart';
 import 'package:cartola_prime/views/screens/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -20,7 +20,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
   late WebViewController controller;
   var isGLBID = true;
   late final IAuthRepository authRepository = AuthRepository();
-  late final viewmodel = TimeViewModel();
+  late final viewmodel = TimeLogadoViewModel();
   @override
   void initState() {
     super.initState();

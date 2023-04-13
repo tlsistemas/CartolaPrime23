@@ -9,10 +9,10 @@ import '../repositories/contracts/i_time_repository.dart';
 import '../repositories/time_repository.dart';
 import '../services/time_service.dart';
 
-class TimeViewModel {
+class TimeLogadoViewModel {
   final _service = TimeService();
-  late final ITimeRepository _timeRepository =
-      TimeRepository(DataBaseRepository());
+  late final ITimeLogadoRepository _timeRepository =
+      TimeLogadoRepository(DataBaseRepository());
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
@@ -20,20 +20,11 @@ class TimeViewModel {
     ),
   );
 
-  TimeViewModel();
+  TimeLogadoViewModel();
 
   Future<TimeLogadoDto?> getTimeLogado() async {
     try {
       var time = await _service.getTimeLogado();
-      return time;
-    } catch (ex) {
-      return null;
-    }
-  }
-
-  Future<List<TimeBuscaDto>?> getTimeBusca(String q) async {
-    try {
-      var time = await _service.getTimeBusca(q);
       return time;
     } catch (ex) {
       return null;

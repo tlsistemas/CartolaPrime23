@@ -1,6 +1,6 @@
 import '../../models/time_logado_model.dart';
 
-abstract class ITimeRepository {
+abstract class ITimeLogadoRepository {
   Future<List<TimeLogadoModel>> getAll();
   Future<TimeLogadoModel?> getOne(int id);
   Future<void> insert(TimeLogadoModel model);

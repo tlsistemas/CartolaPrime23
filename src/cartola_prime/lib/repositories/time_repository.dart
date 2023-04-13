@@ -3,11 +3,11 @@ import 'package:cartola_prime/models/time_logado_model.dart';
 import '../data/data_base_repository.dart';
 import 'contracts/i_time_repository.dart';
 
-class TimeRepository implements ITimeRepository {
+class TimeLogadoRepository implements ITimeLogadoRepository {
   final DataBaseRepository _dataBaseRepository;
   final table = "time_logado";
 
-  TimeRepository(this._dataBaseRepository);
+  TimeLogadoRepository(this._dataBaseRepository);
 
   @override
   Future<void> delete(int id) {

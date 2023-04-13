@@ -35,9 +35,12 @@ class DatabaseConnection {
   }
 
   Future<void> _createDatabase(Database database, int version) async {
-    String sqlScout =
+    String sqlTimeLogado =
         "CREATE TABLE time_logado (id INTEGER PRIMARY KEY, time_id INT, assinante INT, nome_cartola TEXT, globo_id TEXT, nome TEXT, url_escudo_png TEXT, url_camisa_png TEXT, slug TEXT, clube_id INT, temporada_inicial INT, UNIQUE(time_id));";
-    await database.execute(sqlScout);
+    String sqlTimeCartola =
+        "CREATE TABLE time_cartola (id INTEGER PRIMARY KEY, time_id INT, assinante INT, nome_cartola TEXT, globo_id TEXT, nome TEXT, url_escudo_png TEXT, url_camisa_png TEXT, slug TEXT, clube_id INT, temporada_inicial INT, UNIQUE(time_id));";
+    await database.execute(sqlTimeLogado);
+    await database.execute(sqlTimeCartola);
   }
 
   Future<void> deleteDatabase() async {

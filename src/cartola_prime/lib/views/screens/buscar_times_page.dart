@@ -4,9 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../models/dto/time_busca_dto.dart';
 import '../../shared/utils/base_svg.dart';
-import '../../viewmodel/time_vm.dart';
-import '../components/app_bar_controle.dart';
 
+import '../../viewmodel/time_cartola_vm.dart';
 import '../components/resource_colors.dart';
 
 class BuscarTimePage extends StatefulWidget {
@@ -19,9 +18,8 @@ class BuscarTimePage extends StatefulWidget {
 class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
-  final TimeViewModel viewModel = TimeViewModel();
+  final TimeCartolaViewModel timeLogadoVM = TimeCartolaViewModel();
   late Future<List<TimeBuscaDto>>? _myData;
-  late TextEditingController _textController;
   TextEditingController editingController = TextEditingController();
   Icon customIcon = const Icon(
     Icons.search,
@@ -36,13 +34,12 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   @override
   void initState() {
     _myData = _setPartidas("");
-    _textController = TextEditingController(text: 'initial text');
     super.initState();
   }
 
   Future<List<TimeBuscaDto>> _setPartidas(String q) async {
     if (q.isNotEmpty) {
-      var times = await viewModel.getTimeBusca(q);
+      var times = await timeLogadoVM.getTimeBusca(q);
       return times!;
     }
     return <TimeBuscaDto>[];

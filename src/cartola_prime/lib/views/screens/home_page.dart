@@ -4,7 +4,7 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import '../../models/time_logado_model.dart';
 import '../../repositories/clube_repository.dart';
 import '../../services/clube_service.dart';
-import '../../viewmodel/time_vm.dart';
+import '../../viewmodel/time_logado_vm.dart';
 import '../components/divider_controler.dart';
 import '../components/resource_colors.dart';
 
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   var isOpened = false;
   final _repClube = ClubeRepository();
   final _serviceClube = ClubeService();
-  final _timeVM = TimeViewModel();
+  final _timeLogadoVM = TimeLogadoViewModel();
   var timeLog = TimeLogadoModel();
   bool _isLogado = false;
   late double width = MediaQuery.of(context).size.width;
@@ -30,18 +30,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _timeVM.isLogado().then((value) => _isLogado = value);
+    _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     verificarClubes();
     preencherInfoTime();
     super.initState();
   }
 
   Future<void> preencherInfoTime() async {
-    timeLog = await _timeVM.checkTimeInfo();
+    timeLog = await _timeLogadoVM.checkTimeInfo();
   }
 
   Future<void> isLogado() async {
-    _isLogado = await _timeVM.isLogado();
+    _isLogado = await _timeLogadoVM.isLogado();
   }
 
   Future<void> verificarClubes() async {
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _timeVM.isLogado().then((value) => _isLogado = value);
+    _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     return SideMenu(
       key: _endSideMenuKey,
       inverse: true, // end side menu
