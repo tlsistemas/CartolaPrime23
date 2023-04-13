@@ -1,3 +1,4 @@
+import 'package:cartola_prime/views/components/dialog_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,7 +21,7 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   late double height = MediaQuery.of(context).size.height;
   final TimeCartolaViewModel timeLogadoVM = TimeCartolaViewModel();
   late Future<List<TimeBuscaDto>>? _myData;
-  TextEditingController editingController = TextEditingController();
+  String textoFiltro = "";
   Icon customIcon = const Icon(
     Icons.search,
     color: Colors.white,
@@ -40,7 +41,7 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   Future<List<TimeBuscaDto>> _setPartidas(String q) async {
     if (q.isNotEmpty) {
       var times = await timeLogadoVM.getTimeBusca(q);
-      return times!;
+      return times ?? <TimeBuscaDto>[];
     }
     return <TimeBuscaDto>[];
   }
@@ -77,6 +78,7 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
                     title: TextField(
                       autofocus: true,
                       onSubmitted: (value) {
+                        textoFiltro = value;
                         filterSearchResults(value);
                       },
                       decoration: const InputDecoration(
@@ -202,19 +204,66 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
               ),
               Expanded(
                 child: Align(
-                  // <---  these 2 lines fixed it
-                  alignment:
-                      Alignment.centerRight, // <---  these 2 lines fixed it
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 20,
-                    child: IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: const Icon(Icons.add),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ),
+                  alignment: Alignment.centerRight,
+                  child: timeBusca.gravado == true
+                      ? CircleAvatar(
+                          backgroundColor: Colors.green,
+                          radius: 20,
+                          child: IconButton(
+                            padding: EdgeInsets.zero,
+                            icon: const Icon(Icons.check),
+                            color: Colors.white,
+                            onPressed: () {},
+                          ),
+                        )
+                      : CircleAvatar(
+                          backgroundColor: Colors.blue,
+                          radius: 20,
+                          child: IconButton(
+                            padding: EdgeInsets.zero,
+                            icon: const Icon(Icons.add),
+                            color: Colors.white,
+                            onPressed: () async {
+                              var isInsert =
+                                  await timeLogadoVM.insertTime(timeBusca);
+                              if (isInsert) {
+                                // ignore: use_build_context_synchronously
+                                showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text(
+                                      'Sucesso',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    content: Text(
+                                        "${timeBusca.nome}, inserido em sua lista de favoritos."),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () async => {
+                                          filterSearchResults(textoFiltro),
+                                          Navigator.pop(context, 'OK'),
+                                        },
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                                //_setPartidas(textoFiltro);
+                              } else {
+                                const DialogPopUp(
+                                    header: "Atenção",
+                                    body:
+                                        "Tivemos um problema ao tentar inserir seu time favorido, verifique sua conexão com a internet, ou tente novamente mais tarde! Obrigado pela compreensão.",
+                                    isCancel: false,
+                                    isOk: true);
+                              }
+                            },
+                          ),
+                        ),
                 ),
               ),
             ],

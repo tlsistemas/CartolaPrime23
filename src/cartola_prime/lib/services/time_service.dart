@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../models/dto/time_busca_dto.dart';
+import '../models/dto/time_cartola_dto.dart';
 import '../models/dto/time_logado_dto.dart';
 import '../repositories/auth_repository.dart';
 import '../repositories/contracts/i_auth_repository.dart';
@@ -32,6 +33,17 @@ class TimeService extends ChangeNotifier with baseUrls {
     } else {
       var dados = TimeBuscaDto.fromJsonListDynamic(response);
       return dados.listaTimes;
+    }
+  }
+
+  Future<TimeCartolaDto> getTimeBuscaId(int timeId) async {
+    final response = await _clientHttp.get(buscaTimeId + timeId.toString());
+
+    if (!response.isNotEmpty) {
+      return TimeCartolaDto();
+    } else {
+      var dados = TimeCartolaDto.fromJson(response);
+      return dados;
     }
   }
 }

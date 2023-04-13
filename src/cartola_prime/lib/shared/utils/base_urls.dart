@@ -10,4 +10,5 @@ mixin baseUrls {
       'https://login.globo.com/login/438?url=https://cartolafc.globo.com';
   String authTime = '$_baseUrl/auth/time';
   String buscaTime = '$_baseUrl/busca?q=';
+  String buscaTimeId = '$_baseUrl/time/id/';
 }

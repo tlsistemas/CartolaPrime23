@@ -18,7 +18,7 @@ class TimeDto {
   String? corSecundariaEstampaCamisa;
   String? corPrimariaEstampaEscudo;
   int? rodadaTimeId;
-  String? facebookId;
+  int? facebookId;
   int? tipoEscudo;
   int? timeId;
   int? tipoAdorno;
@@ -148,5 +148,43 @@ class TimeDto {
     data['lgpd_removido'] = lgpdRemovido;
     data['lgpd_quarentena'] = lgpdQuarentena;
     return data;
+  }
+
+  TimeDto.fromJsonDynamic(dynamic json) {
+    temporadaInicial = json['temporada_inicial'];
+    corFundoEscudo = json['cor_fundo_escudo'];
+    corCamisa = json['cor_camisa'];
+    corBordaEscudo = json['cor_borda_escudo'];
+    fotoPerfil = json['foto_perfil'];
+    nomeCartola = json['nome_cartola'];
+    globoId = json['globo_id'];
+    nome = json['nome'];
+    urlEscudoSvg = json['url_escudo_svg'];
+    urlEscudoPng = json['url_escudo_png'];
+    urlCamisaSvg = json['url_camisa_svg'];
+    urlCamisaPng = json['url_camisa_png'];
+    slug = json['slug'];
+    corSecundariaEstampaEscudo = json['cor_secundaria_estampa_escudo'];
+    sorteioProNum = json['sorteio_pro_num'];
+    corPrimariaEstampaCamisa = json['cor_primaria_estampa_camisa'];
+    corSecundariaEstampaCamisa = json['cor_secundaria_estampa_camisa'];
+    corPrimariaEstampaEscudo = json['cor_primaria_estampa_escudo'];
+    rodadaTimeId = json['rodada_time_id'];
+    facebookId = json['facebook_id'];
+    tipoEscudo = json['tipo_escudo'];
+    timeId = json['time_id'];
+    tipoAdorno = json['tipo_adorno'];
+    esquemaId = json['esquema_id'];
+    tipoEstampaCamisa = json['tipo_estampa_camisa'];
+    tipoEstampaEscudo = json['tipo_estampa_escudo'];
+    patrocinador1Id = json['patrocinador1_id'];
+    clubeId = json['clube_id'];
+    tipoCamisa = json['tipo_camisa'];
+    patrocinador2Id = json['patrocinador2_id'];
+    assinante = json['assinante'];
+    simplificado = json['simplificado'];
+    cadastroCompleto = json['cadastro_completo'];
+    lgpdRemovido = json['lgpd_removido'];
+    lgpdQuarentena = json['lgpd_quarentena'];
   }
 }

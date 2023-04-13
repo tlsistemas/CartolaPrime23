@@ -37,6 +37,26 @@ class ClientHttp {
     }
   }
 
+  Future<List<dynamic>> getHttpStreamBytes(String url,
+      {Map? data, Options? options}) async {
+    try {
+      var request = http.Request('GET', Uri.parse(url));
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        var json = await response.stream.bytesToString();
+        final body = jsonDecode(json);
+        return body;
+      } else {
+        var json = response.reasonPhrase;
+        return jsonDecode(json!);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<Map<String, dynamic>> get(String url,
       {Map? data, Options? options}) async {
     try {

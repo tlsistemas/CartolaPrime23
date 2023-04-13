@@ -7,4 +7,5 @@ abstract class ITimeCartolaRepository {
   Future<void> insertBach(List<TimeCartolaModel> modelList);
   Future<void> update(TimeCartolaModel model);
   Future<void> delete(int id);
+  Future<bool> exist(int timeId);
 }

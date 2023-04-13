@@ -23,6 +23,13 @@ class TimeCartolaViewModel {
   Future<List<TimeBuscaDto>?> getTimeBusca(String q) async {
     try {
       var time = await _service.getTimeBusca(q);
+      time.removeWhere((element) => element.timeId == null);
+      for (var i = 0; i < time.length; i++) {
+        var existeNoDb = await _timeRepository.exist(time[i]!.timeId!);
+        if (existeNoDb) {
+          time[i].gravado = true;
+        }
+      }
       return time;
     } catch (ex) {
       return null;
@@ -34,9 +41,11 @@ class TimeCartolaViewModel {
     return times.isNotEmpty ? times.first : TimeCartolaModel();
   }
 
-  Future<bool> insertTime(TimeCartolaModel time) async {
+  Future<bool> insertTime(TimeBuscaDto time) async {
     try {
-      await _timeRepository.insert(time);
+      var timeCompleto = await _service.getTimeBuscaId(time.timeId!);
+      await _timeRepository
+          .insert(TimeCartolaModel.fromTimeCartolaDTO(timeCompleto));
       return true;
     } catch (ex) {
       return false;

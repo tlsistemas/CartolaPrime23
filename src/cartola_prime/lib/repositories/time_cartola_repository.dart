@@ -46,4 +46,11 @@ class TimeCartolaRepository implements ITimeCartolaRepository {
   Future<void> update(TimeCartolaModel model) {
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> exist(int timeId) async {
+    var items =
+        await _dataBaseRepository.getByWhere(table, "time_id=${timeId}");
+    return items.length > 0 ? true : false;
+  }
 }

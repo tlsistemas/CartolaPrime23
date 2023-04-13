@@ -1,5 +1,5 @@
-import 'package:cartola_prime/models/dto/time_dto.dart';
-import 'dto/time_logado_dto.dart';
+import 'dto/time_cartola_dto.dart';
+import 'dto/time_dto.dart';
 
 class TimeCartolaModel {
   int? temporadaInicial;
@@ -54,19 +54,6 @@ class TimeCartolaModel {
     return data;
   }
 
-  TimeCartolaModel.fromDTO(TimeLogadoDto timeLogado) {
-    temporadaInicial = timeLogado.time!.temporadaInicial;
-    nomeCartola = timeLogado.time!.nomeCartola ?? "Cartola Prime";
-    globoId = timeLogado.time!.globoId;
-    nome = timeLogado.time!.nome;
-    urlEscudoPng = timeLogado.time!.urlEscudoPng ?? '';
-    urlCamisaPng = timeLogado.time!.urlCamisaPng;
-    slug = timeLogado.time!.slug;
-    timeId = timeLogado.time!.timeId;
-    clubeId = timeLogado.time!.clubeId;
-    assinante = timeLogado.time!.assinante;
-  }
-
   TimeCartolaModel.fromTimeDTO(TimeDto time) {
     temporadaInicial = time.temporadaInicial;
     nomeCartola = time.nomeCartola ?? "Cartola Prime";
@@ -78,5 +65,18 @@ class TimeCartolaModel {
     timeId = time.timeId;
     clubeId = time.clubeId;
     assinante = time.assinante;
+  }
+
+  TimeCartolaModel.fromTimeCartolaDTO(TimeCartolaDto time) {
+    temporadaInicial = time.time!.temporadaInicial;
+    nomeCartola = time.time!.nomeCartola ?? "Cartola Prime";
+    globoId = time.time!.globoId;
+    nome = time.time!.nome;
+    urlEscudoPng = time.time!.urlEscudoPng ?? '';
+    urlCamisaPng = time.time!.urlCamisaPng;
+    slug = time.time!.slug;
+    timeId = time.time!.timeId;
+    clubeId = time.time!.clubeId;
+    assinante = time.time!.assinante;
   }
 }

@@ -1,6 +1,3 @@
-import 'package:cartola_prime/models/dto/ranking_dto.dart';
-import 'package:cartola_prime/models/dto/time_dto.dart';
-
 class TimeBuscaDto {
   int? timeId;
   String? nome;
@@ -10,6 +7,7 @@ class TimeBuscaDto {
   String? urlEscudoSvg;
   String? fotoPerfil;
   bool? assinante;
+  bool? gravado = false;
   List<TimeBuscaDto> listaTimes = <TimeBuscaDto>[];
 
   TimeBuscaDto(
@@ -20,7 +18,8 @@ class TimeBuscaDto {
       this.urlEscudoPng,
       this.urlEscudoSvg,
       this.fotoPerfil,
-      this.assinante});
+      this.assinante,
+      this.gravado});
 
   TimeBuscaDto.fromJson(Map<String, dynamic> json) {
     timeId = json['time_id'];
