@@ -5,17 +5,14 @@ import 'package:intl/intl.dart';
 import '../../models/time_cartola_model.dart';
 import 'resource_colors.dart';
 
-class ListaTimesCartola extends StatelessWidget {
-  const ListaTimesCartola({Key? key, required this.myData}) : super(key: key);
+class ListaTimesCartolaControler extends StatelessWidget {
+  const ListaTimesCartolaControler({Key? key, required this.myData})
+      : super(key: key);
 
   final Future<List<TimeCartolaModel>> myData;
 
   @override
   Widget build(BuildContext context) {
-    return listaPartidastWidget();
-  }
-
-  Widget listaPartidastWidget() {
     return FutureBuilder(
       future: myData,
       builder: (context, AsyncSnapshot<List<TimeCartolaModel>> snapshot) {
@@ -23,65 +20,77 @@ class ListaTimesCartola extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else {
           var item = snapshot.data;
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: item!.length,
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-                    itemBuilder: (BuildContext context, int index) {
-                      return customCard(item[index]);
-                    },
-                  ),
+          return Column(
+            children: [
+              SizedBox(
+                child: ListView.builder(
+                  itemCount: item!.length,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return customCard(item[index], index);
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         }
       },
     );
   }
 
-  Widget customCard(TimeCartolaModel timeCartola) {
+  Widget customCard(TimeCartolaModel timeCartola, int index) {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(3.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
-            children: [
-              Image.network(
-                timeCartola!.urlEscudoPng!,
-                height: 90,
-                width: 90,
-                centerSlice: Rect.largest,
+            children: <Widget>[
+              Text("${(index + 1).toString()}º",
+                  style: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold)),
+              timeCartola.urlEscudoPng == null
+                  ? const Image(
+                      height: 50, image: AssetImage('assets/images/iconp.png'))
+                  : Image.network(
+                      timeCartola.urlEscudoPng,
+                      height: 50,
+                      width: 50,
+                      alignment: Alignment.center,
+                      centerSlice: Rect.largest,
+                    ),
+              const SizedBox(
+                width: 20.0,
+                height: 0.0,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Text(
-                    timeCartola.nome!,
+                    timeCartola.nome ?? "",
                     style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 21,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Row(
                       children: [
-                        Text("${timeCartola.esquemaId!} ",
+                        Text("${timeCartola.esquema?.texto} ",
                             style: const TextStyle(
                                 color: Colors.black,
-                                fontSize: 10,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold)),
                         Text(" ${timeCartola.nomeCartola}",
                             style: const TextStyle(
-                                color: Colors.black, fontSize: 10))
+                                color: Colors.black, fontSize: 12))
                       ],
                     ),
                   ),
@@ -91,12 +100,12 @@ class ListaTimesCartola extends StatelessWidget {
                         children: [
                           Text(
                             NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                                .format(timeCartola.patrimonio),
+                                .format(timeCartola.patrimonio ?? 0),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
-                            width: 90.0,
+                            width: 100.0,
                             height: 0.0,
                           ),
                           const Text(
@@ -108,14 +117,14 @@ class ListaTimesCartola extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            NumberFormat.decimalPattern('pt-BR')
-                                .format(timeCartola.pontosCampeonato!),
+                            NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                                .format(timeCartola.pontosCampeonato ?? 0),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.right,
                           ),
                           const SizedBox(
-                            width: 90.0,
+                            width: 100.0,
                             height: 0.0,
                           ),
                           const Text(
@@ -128,13 +137,15 @@ class ListaTimesCartola extends StatelessWidget {
                   )
                 ],
               ),
-              Text(
-                NumberFormat.decimalPattern('pt-BR')
-                    .format(timeCartola.pontos!),
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.right,
-              ),
+              Expanded(
+                child: Text(
+                  NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                      .format(timeCartola.pontos ?? 0.00),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.end,
+                ),
+              )
             ],
           ),
         ),

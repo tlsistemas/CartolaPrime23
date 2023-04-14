@@ -14,7 +14,6 @@ enum StatusMercadoEnum {
         return 'Em Manutenção';
       case StatusMercadoEnum.inexistente:
         return "NDA";
-        break;
     }
   }
 }

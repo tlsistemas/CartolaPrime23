@@ -3,6 +3,7 @@ import 'dto/time_dto.dart';
 import 'enums/esquema_time_enum.dart';
 
 class TimeCartolaModel {
+  int? index;
   int? temporadaInicial;
   String nomeCartola = "Cartola Prime";
   String? globoId;

@@ -23,13 +23,13 @@ class TimeLogadoRepository implements ITimeLogadoRepository {
   @override
   Future<TimeLogadoModel?> getOne(int id) async {
     var item = await _dataBaseRepository.getOne(table, id);
-    return item != null ? TimeLogadoModel.fromJson(item) : null;
+    return item.isNotEmpty ? TimeLogadoModel.fromJson(item) : null;
   }
 
   Future<TimeLogadoModel?> _getOneTimeId(int timeId) async {
     var item = await _dataBaseRepository.getOneCampoIdOrderBy(
         table, "time_id", timeId, "nome");
-    return item != null ? TimeLogadoModel.fromJson(item) : null;
+    return item.isNotEmpty ? TimeLogadoModel.fromJson(item) : null;
   }
 
   @override

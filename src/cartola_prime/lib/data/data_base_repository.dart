@@ -28,7 +28,7 @@ class DataBaseRepository {
         data,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
-      var res = await connection.query(table);
+      await connection.query(table);
     } catch (e) {
       print('DbException' + e.toString());
     }
