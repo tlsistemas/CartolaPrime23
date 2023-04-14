@@ -330,45 +330,51 @@ class _HomePageState extends State<HomePage> {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(3.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               timeCartola.urlEscudoPng == null
                   ? const Image(
-                      height: 90, image: AssetImage('assets/images/iconp.png'))
+                      height: 50, image: AssetImage('assets/images/iconp.png'))
                   : Image.network(
                       timeCartola.urlEscudoPng,
-                      height: 90,
-                      width: 90,
+                      height: 50,
+                      width: 50,
                       alignment: Alignment.center,
                       centerSlice: Rect.largest,
                     ),
+              const SizedBox(
+                width: 20.0,
+                height: 0.0,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Text(
                     timeCartola.nome ?? "",
                     style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 21,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Row(
                       children: [
-                        Text("${timeCartola.esquemaId ?? 0} ",
+                        Text("${timeCartola.esquema?.texto} ",
                             style: const TextStyle(
                                 color: Colors.black,
-                                fontSize: 10,
+                                fontSize: 12,
                                 fontWeight: FontWeight.bold)),
                         Text(" ${timeCartola.nomeCartola}",
                             style: const TextStyle(
-                                color: Colors.black, fontSize: 10))
+                                color: Colors.black, fontSize: 12))
                       ],
                     ),
                   ),
@@ -383,7 +389,7 @@ class _HomePageState extends State<HomePage> {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
-                            width: 90.0,
+                            width: 100.0,
                             height: 0.0,
                           ),
                           const Text(
@@ -402,7 +408,7 @@ class _HomePageState extends State<HomePage> {
                             textAlign: TextAlign.right,
                           ),
                           const SizedBox(
-                            width: 90.0,
+                            width: 100.0,
                             height: 0.0,
                           ),
                           const Text(
@@ -415,13 +421,15 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               ),
-              Text(
-                NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                    .format(timeCartola.pontos ?? 0),
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.right,
-              ),
+              Expanded(
+                child: Text(
+                  NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                      .format(timeCartola.pontos ?? 0.00),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.end,
+                ),
+              )
             ],
           ),
         ),

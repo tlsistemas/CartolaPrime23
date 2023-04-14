@@ -7,6 +7,8 @@ enum EsquemaTimeEnum {
   p532,
   p541;
 
+  static EsquemaTimeEnum fromJson(String json) => values.byName(json);
+
   String? get texto {
     switch (this) {
       case EsquemaTimeEnum.p343:
