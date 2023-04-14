@@ -1,3 +1,5 @@
+import '../enums/esquema_time_enum.dart';
+
 class TimeDto {
   int? temporadaInicial;
   String? corFundoEscudo;
@@ -34,6 +36,7 @@ class TimeDto {
   bool? cadastroCompleto;
   bool? lgpdRemovido;
   bool? lgpdQuarentena;
+  EsquemaTimeEnum? esquema;
 
   TimeDto(
       {this.temporadaInicial,
@@ -108,6 +111,7 @@ class TimeDto {
     cadastroCompleto = json['cadastro_completo'];
     lgpdRemovido = json['lgpd_removido'];
     lgpdQuarentena = json['lgpd_quarentena'];
+    esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
   }
 
   Map<String, dynamic> toJson() {
@@ -186,5 +190,6 @@ class TimeDto {
     cadastroCompleto = json['cadastro_completo'];
     lgpdRemovido = json['lgpd_removido'];
     lgpdQuarentena = json['lgpd_quarentena'];
+    esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
   }
 }

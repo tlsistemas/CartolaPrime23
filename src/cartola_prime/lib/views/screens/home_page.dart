@@ -1,4 +1,7 @@
+import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
+import 'package:cartola_prime/viewmodel/mercado_status_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../../models/time_cartola_model.dart';
@@ -25,20 +28,25 @@ class _HomePageState extends State<HomePage> {
   final _serviceClube = ClubeService();
   final _timeLogadoVM = TimeLogadoViewModel();
   final TimeCartolaViewModel timeLogadoVM = TimeCartolaViewModel();
+  final MercadoStatusViewModel mercadoViewModel = MercadoStatusViewModel();
   var timeLog = TimeLogadoModel();
   late Future<List<TimeCartolaModel>> _myData;
+  late MercadoStatusDto mercado;
 
   var counter = 0;
   var isOpened = false;
   bool _isLogado = false;
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
+  String statusMercado = "";
+  String fechamentoMercado = "";
 
   @override
   void initState() {
     _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     verificarClubes();
     preencherInfoTime();
+    preecherStatusMercado();
     _myData = _setTimes();
     super.initState();
   }
@@ -60,6 +68,17 @@ class _HomePageState extends State<HomePage> {
     var existClube = await _repClube.existStorage();
     if (!existClube) {
       await _serviceClube.updateStorage();
+    }
+  }
+
+  Future<void> preecherStatusMercado() async {
+    mercado = await mercadoViewModel.statusMercado();
+    statusMercado = "Mercado ${mercado.statusMercadoDesc!.texto}";
+    if (mercado.statusMercado == 1) {
+      final DateTime date1 = DateTime.fromMillisecondsSinceEpoch(
+          mercado.fechamento!.timestamp! * 1000);
+      fechamentoMercado =
+          DateFormat("'Fecha em' dd/MM/yyyy hh:mm").format(date1);
     }
   }
 
@@ -180,32 +199,56 @@ class _HomePageState extends State<HomePage> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Column(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 timeLog.urlEscudoPng != ""
                     ? Image.network(
                         timeLog.urlEscudoPng,
-                        height: 100,
+                        height: 60,
                       )
                     : const CircleAvatar(
                         backgroundColor: Colors.transparent,
                         radius: 35.0,
                         backgroundImage: AssetImage('assets/images/iconp.png'),
                       ),
-                const SizedBox(height: 16.0),
-                const Text(
-                  "Bem Vindo,",
-                  style: TextStyle(color: Colors.white),
-                ),
-                Text(
-                  timeLog.nomeCartola,
-                  style: const TextStyle(color: Colors.white, fontSize: 16),
-                ),
-                const SizedBox(height: 20.0),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Bem Vindo,",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        )),
+                    Text(
+                      timeLog.nome!,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      timeLog.nomeCartola,
+                      textAlign: TextAlign.start,
+                      style: const TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
+          const SizedBox(height: 15),
+          DividerControler(texto: statusMercado),
+          Center(
+            child: Text(fechamentoMercado,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 14, color: Colors.white)),
+          ),
+          const SizedBox(height: 15),
           ListTile(
             onTap: () {},
             leading: const Icon(Icons.home, size: 25.0, color: Colors.white),
@@ -216,12 +259,12 @@ class _HomePageState extends State<HomePage> {
             textColor: Colors.white,
             dense: true,
           ),
-          const DividerControler(texto: "Administrar"),
           ListTile(
             onTap: () {},
-            leading: const Icon(Icons.home, size: 25.0, color: Colors.white),
+            leading: const Icon(Icons.military_tech,
+                size: 25.0, color: Colors.white),
             title: const Text(
-              "Ligas",
+              "Minhas Ligas",
               style: TextStyle(fontSize: 14),
             ),
             textColor: Colors.white,

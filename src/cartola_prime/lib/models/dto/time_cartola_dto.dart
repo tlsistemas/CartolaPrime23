@@ -1,3 +1,4 @@
+import '../enums/esquema_time_enum.dart';
 import 'atleta_dto.dart';
 import 'ranking_dto.dart';
 import 'time_dto.dart';
@@ -9,6 +10,7 @@ class TimeCartolaDto {
   String? capitaoId;
   String? pontos;
   int? esquemaId;
+  EsquemaTimeEnum? esquema;
   int? rodadaAtual;
   int? patrimonio;
   int? valorTime;
@@ -43,6 +45,7 @@ class TimeCartolaDto {
     valorTime = json['valor_time'];
     ranking =
         json['ranking'] != null ? RankingDto.fromJson(json['ranking']) : null;
+    esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
   }
 
   Map<String, dynamic> toJson() {

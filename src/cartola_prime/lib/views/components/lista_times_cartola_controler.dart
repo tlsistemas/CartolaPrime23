@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
+import 'package:path/path.dart';
 
 import '../../models/time_cartola_model.dart';
 import 'resource_colors.dart';
@@ -28,7 +29,7 @@ class ListaTimesCartolaControler extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const ScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                    return customCard(item[index], index);
+                    return customCard(item[index], index, context);
                   },
                 ),
               ),
@@ -39,7 +40,8 @@ class ListaTimesCartolaControler extends StatelessWidget {
     );
   }
 
-  Widget customCard(TimeCartolaModel timeCartola, int index) {
+  Widget customCard(
+      TimeCartolaModel timeCartola, int index, BuildContext context) {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(
@@ -149,7 +151,13 @@ class ListaTimesCartolaControler extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            "/atletas",
+            arguments: timeCartola.timeId,
+          );
+        },
       )
     ]);
   }

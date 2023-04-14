@@ -1,4 +1,5 @@
 enum StatusMercadoEnum {
+  start,
   aberto,
   fechado,
   inexistente,
@@ -13,6 +14,8 @@ enum StatusMercadoEnum {
       case StatusMercadoEnum.suporte:
         return 'Em Manutenção';
       case StatusMercadoEnum.inexistente:
+        return "NDA";
+      case StatusMercadoEnum.start:
         return "NDA";
     }
   }

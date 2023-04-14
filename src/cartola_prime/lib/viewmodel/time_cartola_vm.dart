@@ -1,4 +1,5 @@
 import 'package:cartola_prime/models/dto/time_busca_dto.dart';
+import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../data/data_base_repository.dart';
@@ -9,7 +10,8 @@ import '../services/time_service.dart';
 
 class TimeCartolaViewModel {
   final _service = TimeService();
-  late final ITimeCartolaRepository _timeRepository =
+  final TimeService timeService = TimeService();
+  final ITimeCartolaRepository _timeRepository =
       TimeCartolaRepository(DataBaseRepository());
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage(
@@ -49,6 +51,15 @@ class TimeCartolaViewModel {
       return true;
     } catch (ex) {
       return false;
+    }
+  }
+
+  Future<TimeCartolaDto> getTimeId(int timeId) async {
+    try {
+      var timeCompleto = await _service.getTimeBuscaId(timeId);
+      return timeCompleto;
+    } catch (ex) {
+      return TimeCartolaDto();
     }
   }
 

@@ -1,9 +1,12 @@
+import 'package:cartola_prime/models/enums/status_mercado_enum.dart';
+
 import 'fechamento_dto.dart';
 import 'limites_competicao_dto.dart';
 
 class MercadoStatusDto {
   int? rodadaAtual;
   int? statusMercado;
+  StatusMercadoEnum? statusMercadoDesc;
   int? esquemaDefaultId;
   int? cartoletaInicial;
   int? maxLigasFree;
@@ -66,16 +69,17 @@ class MercadoStatusDto {
     reativar = json['reativar'];
     exibeSorteioPro = json['exibe_sorteio_pro'];
     fechamento = json['fechamento'] != null
-        ? new FechamentoDto.fromJson(json['fechamento'])
+        ? FechamentoDto.fromJson(json['fechamento'])
         : null;
     limitesCompeticao = json['limites_competicao'] != null
-        ? new LimitesCompeticaoDto.fromJson(json['limites_competicao'])
+        ? LimitesCompeticaoDto.fromJson(json['limites_competicao'])
         : null;
     timesEscalados = json['times_escalados'];
     mercadoPosRodada = json['mercado_pos_rodada'];
     novoMesRanking = json['novo_mes_ranking'];
     degustacaoGatomestre = json['degustacao_gatomestre'];
     nomeRodada = json['nome_rodada'];
+    statusMercadoDesc = StatusMercadoEnum.values[statusMercado ?? 3];
   }
 
   Map<String, dynamic> toJson() {
@@ -126,15 +130,16 @@ class MercadoStatusDto {
     reativar = json['reativar'];
     exibeSorteioPro = json['exibe_sorteio_pro'];
     fechamento = json['fechamento'] != null
-        ? new FechamentoDto.fromJson(json['fechamento'])
+        ? FechamentoDto.fromJson(json['fechamento'])
         : null;
     limitesCompeticao = json['limites_competicao'] != null
-        ? new LimitesCompeticaoDto.fromJson(json['limites_competicao'])
+        ? LimitesCompeticaoDto.fromJson(json['limites_competicao'])
         : null;
     timesEscalados = json['times_escalados'];
     mercadoPosRodada = json['mercado_pos_rodada'];
     novoMesRanking = json['novo_mes_ranking'];
     degustacaoGatomestre = json['degustacao_gatomestre'];
     nomeRodada = json['nome_rodada'];
+    statusMercadoDesc = StatusMercadoEnum.values[statusMercado ?? 3];
   }
 }
