@@ -51,4 +51,9 @@ class TimeCartolaViewModel {
       return false;
     }
   }
+
+  Future<List<TimeCartolaModel>> getTimesDB() async {
+    var times = await _timeRepository.getAll();
+    return times.isNotEmpty ? times : <TimeCartolaModel>[];
+  }
 }

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:intl/intl.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
+import '../../models/dto/time_cartola_dto.dart';
+import '../../models/time_cartola_model.dart';
 import '../../models/time_logado_model.dart';
 import '../../repositories/clube_repository.dart';
 import '../../services/clube_service.dart';
+import '../../viewmodel/time_cartola_vm.dart';
 import '../../viewmodel/time_logado_vm.dart';
 import '../components/divider_controler.dart';
+import '../components/lista_times_cartola.dart';
 import '../components/resource_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,13 +33,21 @@ class _HomePageState extends State<HomePage> {
   bool _isLogado = false;
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
+  final TimeCartolaViewModel timeLogadoVM = TimeCartolaViewModel();
+  late Future<List<TimeCartolaModel>> _myData;
 
   @override
   void initState() {
     _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     verificarClubes();
     preencherInfoTime();
+    _myData = _setTimes();
     super.initState();
+  }
+
+  Future<List<TimeCartolaModel>> _setTimes() async {
+    var times = await timeLogadoVM.getTimesDB();
+    return times;
   }
 
   Future<void> preencherInfoTime() async {
@@ -129,7 +143,17 @@ class _HomePageState extends State<HomePage> {
                 style: const TextStyle(color: textColorPrimary),
               ),
             ),
-            body: const Center(child: Text('Bem Vindo:')),
+            body: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  listaTimesWidget(),
+                ],
+              ),
+            ),
             extendBody: true,
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: FloatingActionButton(
@@ -144,6 +168,33 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget listaTimesWidget() {
+    return FutureBuilder(
+      future: _myData,
+      builder: (context, AsyncSnapshot<List<TimeCartolaModel>> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          var item = snapshot.data;
+          return Column(
+            children: [
+              SizedBox(
+                child: ListView.builder(
+                  itemCount: item!.length,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return customCard(item[index]);
+                  },
+                ),
+              ),
+            ],
+          );
+        }
+      },
     );
   }
 
@@ -272,6 +323,124 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget customCard(TimeCartolaModel timeCartola) {
+    return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
+      _buildTile(
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              timeCartola.urlEscudoPng == null
+                  ? const Image(
+                      height: 40, image: AssetImage('assets/images/iconp.png'))
+                  : Image.network(
+                      timeCartola.urlEscudoPng,
+                      height: 40,
+                      width: 40,
+                      alignment: Alignment.center,
+                      centerSlice: Rect.largest,
+                    ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    timeCartola.nome ?? "",
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.start,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    child: Row(
+                      children: [
+                        Text("${timeCartola.esquemaId ?? 0} ",
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold)),
+                        Text(" ${timeCartola.nomeCartola}",
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 10))
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                                .format(timeCartola.patrimonio ?? 0),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 90.0,
+                            height: 0.0,
+                          ),
+                          const Text(
+                            "Patrimônio C\$",
+                            style: TextStyle(color: Colors.black, fontSize: 10),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                                .format(timeCartola.pontosCampeonato ?? 0),
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.right,
+                          ),
+                          const SizedBox(
+                            width: 90.0,
+                            height: 0.0,
+                          ),
+                          const Text(
+                            "Pontos CA",
+                            style: TextStyle(color: Colors.black, fontSize: 10),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              Text(
+                NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                    .format(timeCartola.pontos ?? 0),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.right,
+              ),
+            ],
+          ),
+        ),
+        onTap: () {},
+      )
+    ]);
+  }
+
+  Widget _buildTile(Widget child, {required Function() onTap}) {
+    return Card(
+      color: backgroundPageColor,
+      child: InkWell(
+          // Do onTap() if it isn't null, otherwise do print()
+          onTap: onTap != null
+              ? () => onTap()
+              : () {
+                  print('Not set yet');
+                },
+          child: child),
     );
   }
 }

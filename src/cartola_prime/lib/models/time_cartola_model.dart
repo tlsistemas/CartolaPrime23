@@ -13,6 +13,14 @@ class TimeCartolaModel {
   int? timeId;
   bool? assinante;
 
+  int? patrimonio;
+  int? esquemaId;
+  String? pontosCampeonato;
+  String? pontos;
+  String? capitaoId;
+  int? valorTime;
+  int? rodadaAtual;
+
   TimeCartolaModel(
       {this.temporadaInicial,
       this.nomeCartola = "Cartola Prime",
@@ -23,7 +31,14 @@ class TimeCartolaModel {
       this.slug,
       this.timeId,
       this.clubeId,
-      this.assinante});
+      this.assinante,
+      this.patrimonio,
+      this.esquemaId,
+      this.pontosCampeonato,
+      this.pontos,
+      this.capitaoId,
+      this.valorTime,
+      this.rodadaAtual});
 
   TimeCartolaModel.fromJson(Map<String, dynamic> json) {
     temporadaInicial = json['temporada_inicial'];
@@ -78,5 +93,13 @@ class TimeCartolaModel {
     timeId = time.time!.timeId;
     clubeId = time.time!.clubeId;
     assinante = time.time!.assinante;
+
+    patrimonio = time.patrimonio;
+    esquemaId = time.esquemaId;
+    pontosCampeonato = time.pontosCampeonato;
+    pontos = time.pontos;
+    capitaoId = time.capitaoId;
+    valorTime = time.valorTime;
+    rodadaAtual = time.rodadaAtual;
   }
 }

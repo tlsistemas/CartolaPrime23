@@ -38,7 +38,7 @@ class DatabaseConnection {
     String sqlTimeLogado =
         "CREATE TABLE time_logado (id INTEGER PRIMARY KEY, time_id INT, assinante INT, nome_cartola TEXT, globo_id TEXT, nome TEXT, url_escudo_png TEXT, url_camisa_png TEXT, slug TEXT, clube_id INT, temporada_inicial INT, UNIQUE(time_id));";
     String sqlTimeCartola =
-        "CREATE TABLE time_cartola (id INTEGER PRIMARY KEY, time_id INT, assinante INT, nome_cartola TEXT, globo_id TEXT, nome TEXT, url_escudo_png TEXT, url_camisa_png TEXT, slug TEXT, clube_id INT, temporada_inicial INT, UNIQUE(time_id));";
+        "CREATE TABLE time_cartola (id INTEGER PRIMARY KEY, time_id INT, assinante INT, nome_cartola TEXT, globo_id TEXT, nome TEXT, url_escudo_png TEXT, url_camisa_png TEXT, slug TEXT, clube_id INT, temporada_inicial INT, patrimonio INT, esquema_id INT, pontos_campeonato TEXT, pontos TEXT, capitao_id INT, valor_time INT, rodada_atual INT, UNIQUE(time_id));";
     await database.execute(sqlTimeLogado);
     await database.execute(sqlTimeCartola);
   }
