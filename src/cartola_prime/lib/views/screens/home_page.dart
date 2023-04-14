@@ -338,11 +338,11 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               timeCartola.urlEscudoPng == null
                   ? const Image(
-                      height: 40, image: AssetImage('assets/images/iconp.png'))
+                      height: 90, image: AssetImage('assets/images/iconp.png'))
                   : Image.network(
                       timeCartola.urlEscudoPng,
-                      height: 40,
-                      width: 40,
+                      height: 90,
+                      width: 90,
                       alignment: Alignment.center,
                       centerSlice: Rect.largest,
                     ),

@@ -54,6 +54,27 @@ class TimeCartolaModel {
     assinante = assinante;
   }
 
+  TimeCartolaModel.fromDataBase(Map<String, dynamic> json) {
+    temporadaInicial = json['temporada_inicial'];
+    nomeCartola = json['nome_cartola'];
+    globoId = json['globo_id'];
+    nome = json['nome'];
+    urlEscudoPng = json['url_escudo_png'];
+    urlCamisaPng = json['url_camisa_png'];
+    slug = json['slug'];
+    timeId = json['time_id'];
+    clubeId = json['clube_id'];
+    var assinante = json['assinante'] == null ? false : true;
+    assinante = assinante;
+    patrimonio = json['patrimonio'];
+    esquemaId = json['esquemaId'];
+    pontosCampeonato = json['pontos_campeonato'];
+    pontos = json['pontos'];
+    capitaoId = json['capitao_id'];
+    valorTime = json['valor_time'];
+    rodadaAtual = json['rodada_atual'];
+  }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['temporada_inicial'] = temporadaInicial;
@@ -66,6 +87,29 @@ class TimeCartolaModel {
     data['time_id'] = timeId;
     data['clube_id'] = clubeId;
     data['assinante'] = assinante;
+    return data;
+  }
+
+  Map<String, dynamic> toDataBase() {
+    final data = <String, dynamic>{};
+    data['temporada_inicial'] = temporadaInicial;
+    data['nome_cartola'] = nomeCartola;
+    data['globo_id'] = globoId;
+    data['nome'] = nome;
+    data['url_escudo_png'] = urlEscudoPng;
+    data['url_camisa_png'] = urlCamisaPng;
+    data['slug'] = slug;
+    data['time_id'] = timeId;
+    data['clube_id'] = clubeId;
+    data['assinante'] = assinante;
+    data['patrimonio'] = patrimonio;
+    data['esquema_id'] = esquemaId;
+    data['pontos_campeonato'] = pontosCampeonato;
+    data['pontos'] = pontos;
+    data['capitao_id'] = capitaoId;
+    data['valor_time'] = valorTime;
+    data['rodada_atual'] = rodadaAtual;
+
     return data;
   }
 

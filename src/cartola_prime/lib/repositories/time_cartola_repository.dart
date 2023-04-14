@@ -16,7 +16,7 @@ class TimeCartolaRepository implements ITimeCartolaRepository {
   @override
   Future<List<TimeCartolaModel>> getAll() async {
     var items = await _dataBaseRepository.getAll(table);
-    return items.map((item) => TimeCartolaModel.fromJson(item)).toList();
+    return items.map((item) => TimeCartolaModel.fromDataBase(item)).toList();
   }
 
   @override
@@ -33,7 +33,7 @@ class TimeCartolaRepository implements ITimeCartolaRepository {
 
   @override
   Future<void> insert(TimeCartolaModel model) async {
-    await _dataBaseRepository.insert(table, model.toJson());
+    await _dataBaseRepository.insert(table, model.toDataBase());
   }
 
   @override
