@@ -52,7 +52,7 @@ class ListaTimesCartolaControler extends StatelessWidget {
               Text("${(index + 1).toString()}º",
                   style: const TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold)),
-              timeCartola.urlEscudoPng == null
+              timeCartola.urlEscudoPng.isEmpty
                   ? const Image(
                       height: 50, image: AssetImage('assets/images/iconp.png'))
                   : Image.network(
