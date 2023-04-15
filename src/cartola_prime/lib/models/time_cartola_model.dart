@@ -18,9 +18,9 @@ class TimeCartolaModel {
   int? patrimonio;
   int? esquemaId;
   EsquemaTimeEnum? esquema;
-  String? pontosCampeonato;
-  String? pontos;
-  String? capitaoId;
+  double? pontosCampeonato;
+  double? pontos;
+  int? capitaoId;
   int? valorTime;
   int? rodadaAtual;
 

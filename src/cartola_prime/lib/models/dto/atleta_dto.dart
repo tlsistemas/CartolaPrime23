@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'gato_mestre_dto.dart';
 import 'scout_dto.dart';
 
@@ -8,10 +10,10 @@ class AtletaDto {
   int? clubeId;
   int? posicaoId;
   int? statusId;
-  int? pontosNum;
-  int? precoNum;
-  int? variacaoNum;
-  int? mediaNum;
+  double? pontosNum;
+  double? precoNum;
+  double? variacaoNum;
+  double? mediaNum;
   int? jogosNum;
   double? minimoParaValorizar;
   GatoMestreDto? gatoMestre;
@@ -50,14 +52,14 @@ class AtletaDto {
     clubeId = json['clube_id'];
     posicaoId = json['posicao_id'];
     statusId = json['status_id'];
-    pontosNum = json['pontos_num'];
-    precoNum = json['preco_num'];
-    variacaoNum = json['variacao_num'];
-    mediaNum = json['media_num'];
+    pontosNum = double.tryParse(json['pontos_num'].toString());
+    precoNum = double.tryParse(json['preco_num'].toString());
+    variacaoNum = double.tryParse(json['variacao_num'].toString());
+    mediaNum = double.tryParse(json['media_num'].toString());
     jogosNum = json['jogos_num'];
     minimoParaValorizar = json['minimo_para_valorizar'];
     gatoMestre = json['gato_mestre'] != null
-        ? new GatoMestreDto.fromJson(json['gato_mestre'])
+        ? GatoMestreDto.fromJson(json['gato_mestre'])
         : null;
     slug = json['slug'];
     apelido = json['apelido'];

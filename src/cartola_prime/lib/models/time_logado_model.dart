@@ -3,7 +3,7 @@ import 'dto/time_logado_dto.dart';
 
 class TimeLogadoModel {
   int? temporadaInicial;
-  String nomeCartola = "Cartola Prime";
+  String? nomeCartola;
   String? globoId;
   String? nome;
   String urlEscudoPng = '';
@@ -15,7 +15,7 @@ class TimeLogadoModel {
 
   TimeLogadoModel(
       {this.temporadaInicial,
-      this.nomeCartola = "Cartola Prime",
+      this.nomeCartola,
       this.globoId,
       this.nome,
       this.urlEscudoPng = '',

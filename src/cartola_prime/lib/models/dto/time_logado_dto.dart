@@ -5,9 +5,9 @@ import 'time_dto.dart';
 class TimeLogadoDto {
   List<AtletaDto>? atletas;
   TimeDto? time;
-  String? pontosCampeonato;
+  double? pontosCampeonato;
   int? capitaoId;
-  String? pontos;
+  double? pontos;
   int? esquemaId;
   int? rodadaAtual;
   int? patrimonio;

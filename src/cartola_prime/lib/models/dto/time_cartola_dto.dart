@@ -6,9 +6,9 @@ import 'time_dto.dart';
 class TimeCartolaDto {
   List<AtletaDto>? atletas;
   TimeDto? time;
-  String? pontosCampeonato;
-  String? capitaoId;
-  String? pontos;
+  double? pontosCampeonato;
+  int? capitaoId;
+  double? pontos;
   int? esquemaId;
   EsquemaTimeEnum? esquema;
   int? rodadaAtual;
@@ -29,12 +29,14 @@ class TimeCartolaDto {
       this.ranking});
 
   TimeCartolaDto.fromJson(Map<String, dynamic> json) {
-    if (json['atletas'] != null) {
-      atletas = <AtletaDto>[];
-      json['atletas'].forEach((v) {
-        atletas!.add(AtletaDto.fromJson(v));
-      });
-    }
+    // if (json['atletas'] != null) {
+    //   atletas = <AtletaDto>[];
+    //   json['atletas'].forEach((v) {
+    //     atletas!.add(AtletaDto.fromJson(v));
+    //   });
+    // }
+    atletas =
+        List.from(json['atletas']).map((e) => AtletaDto.fromJson(e)).toList();
     time = json['time'] != null ? TimeDto.fromJson(json['time']) : null;
     pontosCampeonato = json['pontos_campeonato'];
     capitaoId = json['capitao_id'];

@@ -223,16 +223,42 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                           fontSize: 12,
                         )),
+                    timeLog.nome != null
+                        ? Text(
+                            timeLog.nome ?? "",
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          )
+                        : InkWell(
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text('Logar',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold)),
+                                Icon(
+                                  Icons.login,
+                                  color: Colors.white,
+                                  size: 24.0,
+                                  semanticLabel:
+                                      'Text to announce in accessibility modes',
+                                ),
+                              ],
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, "/login");
+                            },
+                          ),
                     Text(
-                      timeLog.nome!,
-                      textAlign: TextAlign.start,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      timeLog.nomeCartola,
+                      timeLog.nomeCartola ?? "",
                       textAlign: TextAlign.start,
                       style: const TextStyle(color: Colors.white, fontSize: 12),
                     ),
@@ -259,16 +285,19 @@ class _HomePageState extends State<HomePage> {
             textColor: Colors.white,
             dense: true,
           ),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.military_tech,
-                size: 25.0, color: Colors.white),
-            title: const Text(
-              "Minhas Ligas",
-              style: TextStyle(fontSize: 14),
+          Visibility(
+            visible: _isLogado,
+            child: ListTile(
+              onTap: () {},
+              leading: const Icon(Icons.military_tech,
+                  size: 25.0, color: Colors.white),
+              title: const Text(
+                "Minhas Ligas",
+                style: TextStyle(fontSize: 14),
+              ),
+              textColor: Colors.white,
+              dense: true,
             ),
-            textColor: Colors.white,
-            dense: true,
           ),
           ListTile(
             onTap: () {

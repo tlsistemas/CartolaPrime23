@@ -241,7 +241,7 @@ class _AtletasPage extends State<AtletasPage> {
                         children: [
                           Text(
                             NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                                .format(atleta.precoEditorial!),
+                                .format(atleta.precoNum!),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -259,7 +259,7 @@ class _AtletasPage extends State<AtletasPage> {
                         children: [
                           Text(
                             NumberFormat.decimalPattern('pt-BR')
-                                .format(atleta.pontosNum!),
+                                .format(atleta.minimoParaValorizar!),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.right,
@@ -269,7 +269,7 @@ class _AtletasPage extends State<AtletasPage> {
                             height: 0.0,
                           ),
                           const Text(
-                            "PONTOS",
+                            "MÍM P/ VAL",
                             style: TextStyle(color: Colors.black, fontSize: 10),
                           ),
                         ],
@@ -278,6 +278,21 @@ class _AtletasPage extends State<AtletasPage> {
                   )
                 ],
               ),
+              Column(
+                children: [
+                  Text(
+                    NumberFormat.decimalPattern('pt-BR')
+                        .format(atleta.pontosNum!),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.right,
+                  ),
+                  const Text(
+                    "Pts",
+                    style: TextStyle(color: Colors.black, fontSize: 10),
+                  ),
+                ],
+              )
               // Row(
               //   children: [
               //     Image.network(
