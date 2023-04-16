@@ -37,6 +37,7 @@ class TimeCartolaDto {
     // }
     atletas =
         List.from(json['atletas']).map((e) => AtletaDto.fromJson(e)).toList();
+    atletas?.sort((a, b) => a.posicaoId!.compareTo(b.posicaoId!));
     time = json['time'] != null ? TimeDto.fromJson(json['time']) : null;
     pontosCampeonato = json['pontos_campeonato'];
     capitaoId = json['capitao_id'];

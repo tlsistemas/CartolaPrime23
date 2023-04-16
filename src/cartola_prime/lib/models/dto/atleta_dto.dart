@@ -52,7 +52,7 @@ class AtletaDto {
       this.precoEditorial});
 
   AtletaDto.fromJson(Map<String, dynamic> json) {
-    scout = json['scout'] != null ? new ScoutDto.fromJson(json['scout']) : null;
+    scout = json['scout'] != null ? ScoutDto.fromJson(json['scout']) : null;
     atletaId = json['atleta_id'];
     rodadaId = json['rodada_id'];
     clubeId = json['clube_id'];

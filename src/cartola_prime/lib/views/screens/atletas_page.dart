@@ -3,7 +3,6 @@ import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/time_cartola_model.dart';
 import '../../viewmodel/time_cartola_vm.dart';
 import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
