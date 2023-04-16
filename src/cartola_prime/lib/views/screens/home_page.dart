@@ -1,5 +1,5 @@
 import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
-import 'package:cartola_prime/viewmodel/mercado_status_vm.dart';
+import 'package:cartola_prime/viewmodel/mercado_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   final _serviceClube = ClubeService();
   final _timeLogadoVM = TimeLogadoViewModel();
   final TimeCartolaViewModel timeLogadoVM = TimeCartolaViewModel();
-  final MercadoStatusViewModel mercadoViewModel = MercadoStatusViewModel();
+  final MercadoViewModel mercadoViewModel = MercadoViewModel();
   var timeLog = TimeLogadoModel();
   late Future<List<TimeCartolaModel>> _myData;
   late MercadoStatusDto mercado;
@@ -72,6 +72,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> preecherStatusMercado() async {
+    var pontuados = await mercadoViewModel.pontuadosMercado();
+
     mercado = await mercadoViewModel.statusMercado();
     statusMercado = "Mercado ${mercado.statusMercadoDesc!.texto}";
     if (mercado.statusMercado == 1) {

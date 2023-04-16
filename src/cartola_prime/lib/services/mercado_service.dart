@@ -1,10 +1,11 @@
+import 'package:cartola_prime/models/dto/pontuados_dto.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../models/dto/mercado_status_dto.dart';
 import '../shared/utils/base_urls.dart';
 import 'client_http.dart';
 
-class MercadoStatusService extends ChangeNotifier with baseUrls {
+class MercadoService extends ChangeNotifier with baseUrls {
   final ClientHttp _dio = ClientHttp();
 
   Future<MercadoStatusDto> getStatusMercado() async {
@@ -15,6 +16,17 @@ class MercadoStatusService extends ChangeNotifier with baseUrls {
     } else {
       var dados = MercadoStatusDto.fromJsonDynamic(response);
       return dados;
+    }
+  }
+
+  Future<List<PontuadosDto>?> getPontuadosMercado() async {
+    final response = await _dio.get(pontuadosMercado);
+
+    if (response['status'] == 'erro') {
+      return <PontuadosDto>[];
+    } else {
+      var dados = PontuadosDto.fromJsonWithAtleta(response);
+      return dados.atletas;
     }
   }
 }
