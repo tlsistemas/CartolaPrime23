@@ -224,14 +224,17 @@ class _AtletasPage extends State<AtletasPage> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                     child: Row(
                       children: [
-                        Text("${atleta.posicaoId} ",
+                        Text("${atleta.posicao} ",
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold)),
-                        Text(" ${atleta.clubeId}",
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 10))
+                        Image.network(
+                          atleta.clube!.escudos.s30x30!,
+                          height: 15,
+                          width: 15,
+                          centerSlice: Rect.largest,
+                        ),
                       ],
                     ),
                   ),

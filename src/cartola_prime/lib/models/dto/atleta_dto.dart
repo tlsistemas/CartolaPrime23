@@ -1,5 +1,9 @@
 import 'dart:convert';
 
+import 'package:cartola_prime/repositories/clube_repository.dart';
+
+import '../../shared/utils/posicao_converter.dart';
+import 'clube_dto.dart';
 import 'gato_mestre_dto.dart';
 import 'scout_dto.dart';
 
@@ -8,7 +12,9 @@ class AtletaDto {
   int? atletaId;
   int? rodadaId;
   int? clubeId;
+  ClubeDto? clube;
   int? posicaoId;
+  String? posicao;
   int? statusId;
   double? pontosNum;
   double? precoNum;
@@ -50,7 +56,9 @@ class AtletaDto {
     atletaId = json['atleta_id'];
     rodadaId = json['rodada_id'];
     clubeId = json['clube_id'];
+    ClubeRepository().getId(clubeId!).then((value) => clube = value);
     posicaoId = json['posicao_id'];
+    posicao = PosicaoConverter.getPosicaoMin(posicaoId!);
     statusId = json['status_id'];
     pontosNum = double.tryParse(json['pontos_num'].toString());
     precoNum = double.tryParse(json['preco_num'].toString());
