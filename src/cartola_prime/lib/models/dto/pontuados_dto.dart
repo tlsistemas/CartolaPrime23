@@ -1,5 +1,9 @@
 import 'scout_dto.dart';
+import 'package:hive/hive.dart';
 
+part '../adapter/pontuados_dto.g.dart';
+
+@HiveType(typeId: 1)
 class PontuadosDto {
   int? atletaId;
   ScoutDto? scout;
@@ -47,6 +51,24 @@ class PontuadosDto {
     entrouEmCampo = json['entrou_em_campo'];
   }
 
+  PontuadosDto.fromJsonListDynamic(dynamic json) {
+    atletas = <PontuadosDto>[];
+    for (var v in json) {
+      atletas?.add(PontuadosDto.fromJsonDynamic(v));
+    }
+  }
+
+  PontuadosDto.fromJsonDynamic(dynamic json) {
+    scout = ScoutDto.fromJsonDynamic(json.scout);
+    apelido = json.apelido;
+    foto = json.foto;
+    pontuacao = json.pontuacao;
+    posicaoId = json.posicaoId;
+    clubeId = json.clubeId;
+    entrouEmCampo = json.entrouEmCampo;
+    atletaId = json.atletaId;
+  }
+
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (scout != null) {
@@ -61,7 +83,7 @@ class PontuadosDto {
     return data;
   }
 
-  PontuadosDto.fromJsonDynamic(dynamic json) {
+  PontuadosDto.toJsonDynamic(dynamic json) {
     final data = <String, dynamic>{};
     if (scout != null) {
       data['scout'] = scout!.toJson();

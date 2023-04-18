@@ -1,3 +1,8 @@
+import 'package:hive/hive.dart';
+
+part '../adapter/scout_dto.g.dart';
+
+@HiveType(typeId: 2)
 class ScoutDto {
   int? A;
   int? cA;
@@ -66,6 +71,30 @@ class ScoutDto {
     pI = json['PI'];
     dS = json['DS'];
     dE = json['DE'];
+  }
+
+  ScoutDto.fromJsonDynamic(dynamic json) {
+    A = json.A;
+    cA = json.cA;
+    cV = json.cV;
+    dD = json.dD;
+    dP = json.dP;
+    fC = json.fC;
+    fD = json.fD;
+    fF = json.fF;
+    fS = json.fS;
+    fT = json.fT;
+    G = json.G;
+    gC = json.gC;
+    gS = json.gS;
+    I = json.I;
+    pE = json.pE;
+    pP = json.pP;
+    rB = json.rB;
+    sG = json.sG;
+    pI = json.pI;
+    dS = json.dS;
+    dE = json.dE;
   }
 
   Map<String, dynamic> toJson() {

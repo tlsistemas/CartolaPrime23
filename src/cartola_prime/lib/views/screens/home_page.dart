@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/viewmodel/mercado_vm.dart';
 import 'package:flutter/material.dart';
@@ -205,9 +206,20 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 timeLog.urlEscudoPng != ""
-                    ? Image.network(
-                        timeLog.urlEscudoPng,
-                        height: 60,
+                    ? CachedNetworkImage(
+                        imageUrl: timeLog.urlEscudoPng,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.red,
+                                BlendMode.colorBurn,
+                              ),
+                            ),
+                          ),
+                        ),
                       )
                     : const CircleAvatar(
                         backgroundColor: Colors.transparent,
