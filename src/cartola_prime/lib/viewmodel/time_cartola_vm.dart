@@ -1,8 +1,10 @@
+import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/models/dto/time_busca_dto.dart';
 import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../data/data_base_repository.dart';
+import '../models/dto/pontuados_dto.dart';
 import '../models/time_cartola_model.dart';
 import '../repositories/contracts/i_time_cartola_repository.dart';
 import '../repositories/time_cartola_repository.dart';
@@ -65,6 +67,18 @@ class TimeCartolaViewModel {
 
   Future<List<TimeCartolaModel>> getTimesDB() async {
     var times = await _timeRepository.getAll();
+    return times.isNotEmpty ? times : <TimeCartolaModel>[];
+  }
+
+    
+  Future<List<TimeCartolaModel>> getTimesDBMercado(List<PontuadosDto>? pontuados) async {
+    var times = await _timeRepository.getAll();
+    for (var i = 0; i < times.length; i++) {
+      times[i].
+    }
+
+
+
     return times.isNotEmpty ? times : <TimeCartolaModel>[];
   }
 }

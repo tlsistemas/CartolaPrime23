@@ -1,7 +1,12 @@
+import 'package:hive/hive.dart';
+
 import 'atleta_dto.dart';
 import 'ranking_dto.dart';
 import 'time_dto.dart';
 
+part '../adapter/time_logado_dto.g.dart';
+
+@HiveType(typeId: 7)
 class TimeLogadoDto {
   List<AtletaDto>? atletas;
   TimeDto? time;

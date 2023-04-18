@@ -1,3 +1,8 @@
+import 'package:hive/hive.dart';
+
+part '../adapter/posicao_atual_dto.g.dart';
+
+@HiveType(typeId: 5)
 class PosicaoAtualDto {
   int? rankingId;
   int? mes;

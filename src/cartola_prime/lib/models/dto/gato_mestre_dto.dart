@@ -1,5 +1,9 @@
-import 'scout_dto.dart';
+import 'package:hive/hive.dart';
 
+import 'scout_dto.dart';
+part '../adapter/gato_mestre_dto.g.dart';
+
+@HiveType(typeId: 4)
 class GatoMestreDto {
   double? mediaPontosMandante;
   double? mediaPontosVisitante;

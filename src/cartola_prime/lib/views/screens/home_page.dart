@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<List<TimeCartolaModel>> _setTimes() async {
+    var pontuados = await mercadoViewModel.pontuadosMercado();
     var times = await timeLogadoVM.getTimesDB();
     return times;
   }
@@ -73,8 +74,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> preecherStatusMercado() async {
-    var pontuados = await mercadoViewModel.pontuadosMercado();
-
     mercado = await mercadoViewModel.statusMercado();
     statusMercado = "Mercado ${mercado.statusMercadoDesc!.texto}";
     if (mercado.statusMercado == 1) {

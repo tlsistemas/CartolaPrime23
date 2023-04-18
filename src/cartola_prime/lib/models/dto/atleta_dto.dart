@@ -1,12 +1,14 @@
-import 'dart:convert';
-
 import 'package:cartola_prime/repositories/clube_repository.dart';
+import 'package:hive/hive.dart';
 
 import '../../shared/utils/posicao_converter.dart';
 import 'clube_dto.dart';
 import 'gato_mestre_dto.dart';
 import 'scout_dto.dart';
 
+part '../adapter/atleta_dto.g.dart';
+
+@HiveType(typeId: 3)
 class AtletaDto {
   ScoutDto? scout;
   int? atletaId;

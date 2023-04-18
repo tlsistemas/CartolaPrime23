@@ -1,5 +1,10 @@
+import 'package:hive/hive.dart';
+
 import '../enums/esquema_time_enum.dart';
 
+part '../adapter/time_dto.g.dart';
+
+@HiveType(typeId: 8)
 class TimeDto {
   int? temporadaInicial;
   String? corFundoEscudo;

@@ -1,5 +1,9 @@
-import 'posicao_atual_dto.dart';
+import 'package:hive/hive.dart';
 
+import 'posicao_atual_dto.dart';
+part '../adapter/ranking_dto.g.dart';
+
+@HiveType(typeId: 6)
 class RankingDto {
   PosicaoAtualDto? atual;
   PosicaoAtualDto? anterior;
