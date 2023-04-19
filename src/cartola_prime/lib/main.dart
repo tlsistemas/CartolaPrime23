@@ -1,3 +1,9 @@
+import 'package:cartola_prime/models/dto/atleta_dto.dart';
+import 'package:cartola_prime/models/dto/gato_mestre_dto.dart';
+import 'package:cartola_prime/models/dto/posicao_atual_dto.dart';
+import 'package:cartola_prime/models/dto/ranking_dto.dart';
+import 'package:cartola_prime/models/dto/time_dto.dart';
+import 'package:cartola_prime/models/dto/time_logado_dto.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:cartola_prime/app_widget.dart';
@@ -22,6 +28,12 @@ Future<void> main() async {
 
   Hive.registerAdapter(PontuadosDtoAdapter());
   Hive.registerAdapter(ScoutDtoAdapter());
+  Hive.registerAdapter(AtletaDtoAdapter());
+  Hive.registerAdapter(GatoMestreDtoAdapter());
+  Hive.registerAdapter(PosicaoAtualDtoAdapter());
+  Hive.registerAdapter(RankingDtoAdapter());
+  Hive.registerAdapter(TimeDtoAdapter());
+  Hive.registerAdapter(TimeLogadoDtoAdapter());
 
   setupLocator();
   runApp(const AppWidget());

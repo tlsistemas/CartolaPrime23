@@ -25,6 +25,24 @@ class PontuadosDto {
       this.clubeId,
       this.entrouEmCampo});
 
+  PontuadosDto.fromJsonWithAtletaPontuado(dynamic json) {
+    atletas = <PontuadosDto>[];
+    var alt = json['atletas'];
+    alt.forEach((key, value) {
+      var pontuado = PontuadosDto();
+      pontuado.scout =
+          alt['scout'] != null ? ScoutDto.fromJson(value['scout']) : null;
+      pontuado.apelido = value['apelido'];
+      pontuado.foto = value['foto'];
+      pontuado.pontuacao = double.tryParse(value['pontuacao'].toString());
+      pontuado.posicaoId = value['posicao_id'];
+      pontuado.clubeId = value['clube_id'];
+      pontuado.entrouEmCampo = value['entrou_em_campo'];
+      pontuado.atletaId = int.parse(key);
+      atletas!.add(pontuado);
+    });
+  }
+
   PontuadosDto.fromJsonWithAtleta(Map<String, dynamic> json) {
     atletas = <PontuadosDto>[];
     json['atletas'].forEach((key, value) {
@@ -41,6 +59,7 @@ class PontuadosDto {
       atletas!.add(pontuado);
     });
   }
+
   PontuadosDto.fromJson(Map<String, dynamic> json) {
     scout = json['scout'] != null ? ScoutDto.fromJson(json['scout']) : null;
     apelido = json['apelido'];

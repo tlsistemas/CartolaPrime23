@@ -12,8 +12,8 @@ class TimeCartolaDto {
   int? esquemaId;
   EsquemaTimeEnum? esquema;
   int? rodadaAtual;
-  int? patrimonio;
-  int? valorTime;
+  double? patrimonio;
+  double? valorTime;
   RankingDto? ranking;
 
   TimeCartolaDto(
@@ -29,23 +29,17 @@ class TimeCartolaDto {
       this.ranking});
 
   TimeCartolaDto.fromJson(Map<String, dynamic> json) {
-    // if (json['atletas'] != null) {
-    //   atletas = <AtletaDto>[];
-    //   json['atletas'].forEach((v) {
-    //     atletas!.add(AtletaDto.fromJson(v));
-    //   });
-    // }
     atletas =
         List.from(json['atletas']).map((e) => AtletaDto.fromJson(e)).toList();
     atletas?.sort((a, b) => a.posicaoId!.compareTo(b.posicaoId!));
     time = json['time'] != null ? TimeDto.fromJson(json['time']) : null;
-    pontosCampeonato = json['pontos_campeonato'];
+    pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());
     capitaoId = json['capitao_id'];
-    pontos = json['pontos'];
+    pontos = double.tryParse(json['pontos'].toString());
     esquemaId = json['esquema_id'];
     rodadaAtual = json['rodada_atual'];
-    patrimonio = json['patrimonio'];
-    valorTime = json['valor_time'];
+    patrimonio = double.tryParse(json['patrimonio'].toString());
+    valorTime = double.tryParse(json['valor_time'].toString());
     ranking =
         json['ranking'] != null ? RankingDto.fromJson(json['ranking']) : null;
     esquema = EsquemaTimeEnum.values[esquemaId ?? 2];

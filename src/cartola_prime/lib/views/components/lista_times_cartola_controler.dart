@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
-import 'package:path/path.dart';
 
 import '../../models/time_cartola_model.dart';
 import 'resource_colors.dart';

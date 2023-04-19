@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   final MercadoViewModel mercadoViewModel = MercadoViewModel();
   var timeLog = TimeLogadoModel();
   late Future<List<TimeCartolaModel>> _myData;
-  late MercadoStatusDto mercado;
+  var mercado = MercadoStatusDto();
 
   var counter = 0;
   var isOpened = false;
@@ -45,16 +45,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _timeLogadoVM.isLogado().then((value) => _isLogado = value);
+    preecherStatusMercado();
     verificarClubes();
     preencherInfoTime();
-    preecherStatusMercado();
     _myData = _setTimes();
     super.initState();
   }
 
   Future<List<TimeCartolaModel>> _setTimes() async {
-    var pontuados = await mercadoViewModel.pontuadosMercado();
-    var times = await timeLogadoVM.getTimesDB();
+    var times = await timeLogadoVM.getTimesDB(mercado);
     return times;
   }
 

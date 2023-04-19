@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:cartola_prime/models/dto/pontuados_dto.dart';
 import 'package:cartola_prime/shared/utils/base_table.dart';
+import 'package:flutter/services.dart';
 
 import '../models/dto/mercado_status_dto.dart';
 import '../services/hive_service.dart';
@@ -27,5 +30,14 @@ class MercadoViewModel {
       await hiveService.addBoxes(retorno, baseTable.pontuadosTable);
     }
     return retorno;
+  }
+
+  Future<List<PontuadosDto>?> pontuadosMercadoMock() async {
+    final String response =
+        await rootBundle.loadString('assets/json/pontuados.json');
+    var data = await json.decode(response);
+
+    var lstPontuados = PontuadosDto.fromJsonWithAtletaPontuado(data);
+    return lstPontuados.atletas;
   }
 }

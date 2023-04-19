@@ -1,3 +1,5 @@
+import 'package:cartola_prime/models/dto/atleta_dto.dart';
+
 import 'dto/time_cartola_dto.dart';
 import 'dto/time_dto.dart';
 import 'enums/esquema_time_enum.dart';
@@ -15,14 +17,15 @@ class TimeCartolaModel {
   int? timeId;
   bool? assinante;
 
-  int? patrimonio;
+  double? patrimonio;
   int? esquemaId;
   EsquemaTimeEnum? esquema;
   double? pontosCampeonato;
   double? pontos;
   int? capitaoId;
-  int? valorTime;
+  double? valorTime;
   int? rodadaAtual;
+  List<AtletaDto>? atletas;
 
   TimeCartolaModel(
       {this.temporadaInicial,
@@ -71,10 +74,10 @@ class TimeCartolaModel {
     assinante = assinante;
     patrimonio = json['patrimonio'];
     esquemaId = json['esquemaId'];
-    pontosCampeonato = json['pontos_campeonato'];
-    pontos = json['pontos'];
+    pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());
+    pontos = double.tryParse(json['pontos'].toString());
     capitaoId = json['capitao_id'];
-    valorTime = json['valor_time'];
+    valorTime = double.tryParse(json['valor_time'].toString());
     rodadaAtual = json['rodada_atual'];
     esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
     // esquema = EsquemaTimeEnum.fromJson(
@@ -151,5 +154,13 @@ class TimeCartolaModel {
     capitaoId = time.capitaoId;
     valorTime = time.valorTime;
     rodadaAtual = time.rodadaAtual;
+  }
+
+  double getParcialTime() {
+    double pontosParcial = 0;
+    for (var element in atletas!) {
+      pontosParcial = pontosParcial + element.pontosNum!;
+    }
+    return pontosParcial;
   }
 }

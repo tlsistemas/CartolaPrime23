@@ -11,11 +11,11 @@ class GatoMestreDtoAdapter extends TypeAdapter<GatoMestreDto> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GatoMestreDto(
-        mediaMinutosJogados: fields['mediaMinutosJogados'] as double,
-        mediaPontosMandante: fields['mediaPontosMandante'] as double,
-        mediaPontosVisitante: fields['mediaPontosVisitante'] as double,
-        minutosJogados: fields['minutosJogados'] as double,
-        scouts: fields['scouts'] as ScoutDto);
+        mediaMinutosJogados: fields['mediaMinutosJogados'],
+        mediaPontosMandante: fields['mediaPontosMandante'],
+        mediaPontosVisitante: fields['mediaPontosVisitante'],
+        minutosJogados: fields['minutosJogados'],
+        scouts: fields['scouts']);
   }
 
   @override
