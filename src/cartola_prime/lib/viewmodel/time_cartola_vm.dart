@@ -1,4 +1,3 @@
-import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/models/enums/status_mercado_enum.dart';
 import 'package:cartola_prime/repositories/mercado_repository.dart';
 import 'package:cartola_prime/shared/utils/base_table.dart';

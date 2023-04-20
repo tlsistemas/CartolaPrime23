@@ -1,49 +1,59 @@
 import 'dart:convert';
-
+import 'package:cartola_prime/shared/utils/base_table.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/dto/clube_dto.dart';
+import '../services/hive_service.dart';
+import '../shared/utils/locator.dart';
 import 'contracts/i_clube_repository.dart';
 
 class ClubeRepository implements IClubeRepository {
   ClubeRepository();
-
+  final HiveService hiveService = locator<HiveService>();
   final FlutterSecureStorage _storage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ),
   );
 
-  Future setStorage(String key, String value) async {
-    await _storage.write(key: key, value: value);
+  Future setStorage(String key, List<ClubeDto> value) async {
+    await hiveService.addBoxes(value, baseTable.clubesTable);
+    // await _storage.write(key: key, value: value);
   }
 
   @override
   Future<List<ClubeDto>> getAll() async {
-    var storageJson = await _storage.read(key: "clubes");
+    // var storageJson = await _storage.read(key: "clubes");
 
-    var list = (json.decode(storageJson!) as List)
-        .map((i) => ClubeDto.fromJson(i))
-        .toList();
+    // var list = (json.decode(storageJson!) as List)
+    //     .map((i) => ClubeDto.fromJson(i))
+    //     .toList();
 
-    return list;
+    var clubes = await hiveService.getBoxes(baseTable.clubesTable);
+    var list = ClubeDto.fromJsonListDynamic(clubes);
+
+    return list.clubes!;
   }
 
   @override
   Future<ClubeDto> getId(int idClube) async {
-    var storageJson = await _storage.read(key: "clubes");
+    // var storageJson = await _storage.read(key: "clubes");
 
-    var list = (json.decode(storageJson!) as List)
-        .map((i) => ClubeDto.fromJson(i))
-        .toList();
+    // var list = (json.decode(storageJson!) as List)
+    //     .map((i) => ClubeDto.fromJson(i))
+    //     .toList();
 
-    var clube = list.firstWhere((element) => element.id == idClube);
+    var clubes = await hiveService.getBoxes(baseTable.clubesTable);
+    var list = ClubeDto.fromJsonListDynamic(clubes);
+
+    var clube = list.clubes!.firstWhere((element) => element.id == idClube);
     return clube;
   }
 
   @override
   Future<bool> existStorage() async {
-    var exist = await _storage.containsKey(key: "clubes");
+    // var exist = await _storage.containsKey(key: "clubes");
+    var exist = await hiveService.isExists(boxName: baseTable.clubesTable);
     return exist;
   }
 }

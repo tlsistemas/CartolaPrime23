@@ -229,7 +229,7 @@ class _AtletasPage extends State<AtletasPage> {
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold)),
                         Image.network(
-                          atleta.clube!.escudos.s30x30!,
+                          atleta.clube!.escudos!.s30x30!,
                           height: 15,
                           width: 15,
                           centerSlice: Rect.largest,

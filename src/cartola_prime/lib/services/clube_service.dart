@@ -1,13 +1,16 @@
-import 'dart:convert';
+import 'package:cartola_prime/shared/utils/base_table.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/dto/clube_dto.dart';
 import '../shared/utils/base_urls.dart';
+import '../shared/utils/locator.dart';
 import 'client_http.dart';
+import 'hive_service.dart';
 
 class ClubeService extends ChangeNotifier with baseUrls {
   final ClientHttp _dio = ClientHttp();
+  final HiveService hiveService = locator<HiveService>();
   final FlutterSecureStorage _storage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
@@ -27,13 +30,13 @@ class ClubeService extends ChangeNotifier with baseUrls {
         return false;
       } else {
         var datas = ClubeDto.fromJsonList(response);
-        for (var element in datas.clubes) {
+        for (var element in datas.clubes!) {
           retorno.add(element);
         }
-
-        await setStorage('clubes', jsonEncode(retorno));
-
-        var storageJson = await _storage.read(key: "clubes");
+        await hiveService.addBoxes(retorno, baseTable.clubesTable);
+        var clubes = hiveService.getBoxes(baseTable.clubesTable);
+        //await setStorage('clubes', jsonEncode(retorno));
+        //var storageJson = await _storage.read(key: "clubes");
         return true;
       }
     } on Exception catch (ex) {
@@ -49,7 +52,7 @@ class ClubeService extends ChangeNotifier with baseUrls {
       return retorno;
     } else {
       var datas = ClubeDto.fromJsonList(response);
-      for (var element in datas.clubes) {
+      for (var element in datas.clubes!) {
         retorno.add(element);
       }
       return retorno;

@@ -22,10 +22,13 @@ class MercadoRepository implements IMercadoRepository {
   @override
   Future<MercadoStatusDto> get() async {
     var storageJson = await _storage.read(key: "mercado");
+    if (storageJson != null) {
+      var item = json.decode(storageJson!);
+      var retorno = MercadoStatusDto.fromJsonDynamic(item);
+      return retorno;
+    }
 
-    var item = json.decode(storageJson!);
-    var retorno = MercadoStatusDto.fromJsonDynamic(item);
-    return retorno;
+    return MercadoStatusDto();
   }
 
   @override

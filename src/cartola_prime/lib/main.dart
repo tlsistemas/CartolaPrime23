@@ -11,6 +11,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import 'models/dto/clube_dto.dart';
+import 'models/dto/escudo_dto.dart';
 import 'models/dto/pontuados_dto.dart';
 import 'models/dto/scout_dto.dart';
 import 'shared/utils/locator.dart';
@@ -34,6 +36,8 @@ Future<void> main() async {
   Hive.registerAdapter(RankingDtoAdapter());
   Hive.registerAdapter(TimeDtoAdapter());
   Hive.registerAdapter(TimeLogadoDtoAdapter());
+  Hive.registerAdapter(ClubeDtoAdapter());
+  Hive.registerAdapter(EscudoDtoAdapter());
 
   setupLocator();
   runApp(const AppWidget());

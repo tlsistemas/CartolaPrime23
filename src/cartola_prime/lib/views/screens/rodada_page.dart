@@ -141,14 +141,14 @@ class _RodadaPage extends State<RodadaPage> {
                               color: Colors.black, fontSize: 16.0),
                           textAlign: TextAlign.end),
                       const SizedBox(width: 30),
-                      Text(partida.clubeCasa.abreviacao,
+                      Text(partida.clubeCasa.abreviacao!,
                           style: const TextStyle(
                               color: Colors.black, fontSize: 24.0),
                           textAlign: TextAlign.end)
                     ],
                   ),
                   Image.network(
-                    partida.clubeCasa.escudos.s60x60!,
+                    partida.clubeCasa.escudos!.s60x60!,
                     height: 40,
                     width: 40,
                     alignment: Alignment.centerRight,
@@ -161,7 +161,7 @@ class _RodadaPage extends State<RodadaPage> {
                           fontSize: 30,
                           fontWeight: FontWeight.normal)),
                   Image.network(
-                    partida.clubeVisitante.escudos.s60x60!,
+                    partida.clubeVisitante.escudos!.s60x60!,
                     height: 40,
                     width: 40,
                     alignment: Alignment.centerRight,
@@ -172,7 +172,7 @@ class _RodadaPage extends State<RodadaPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(partida.clubeVisitante.abreviacao,
+                      Text(partida.clubeVisitante.abreviacao!,
                           style: const TextStyle(
                               color: Colors.black, fontSize: 24.0),
                           textAlign: TextAlign.start),

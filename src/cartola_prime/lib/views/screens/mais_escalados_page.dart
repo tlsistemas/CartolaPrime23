@@ -156,14 +156,14 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
               Row(
                 children: [
                   Image.network(
-                    escaldo.partida!.clubeCasa.escudos.s30x30!,
+                    escaldo.partida!.clubeCasa.escudos!.s30x30!,
                     height: 25,
                     width: 25,
                     centerSlice: Rect.largest,
                   ),
                   const Text(" X "),
                   Image.network(
-                    escaldo.partida!.clubeVisitante.escudos.s30x30!,
+                    escaldo.partida!.clubeVisitante.escudos!.s30x30!,
                     height: 25,
                     width: 25,
                     centerSlice: Rect.largest,

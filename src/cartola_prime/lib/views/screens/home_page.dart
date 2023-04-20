@@ -44,8 +44,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    preecherStatusMercado();
     _timeLogadoVM.isLogado().then((value) => _isLogado = value);
+    preecherStatusMercado();
     verificarClubes();
     preencherInfoTime();
     super.initState();
