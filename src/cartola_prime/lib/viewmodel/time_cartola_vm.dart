@@ -69,6 +69,29 @@ class TimeCartolaViewModel {
   Future<TimeCartolaDto> getTimeId(int timeId) async {
     try {
       var timeCompleto = await _service.getTimeBuscaId(timeId);
+      List<PontuadosDto>? pontuados;
+      var mercado = await _mercadoRepository.get();
+
+      if (mercado.statusMercado == StatusMercadoEnum.fechado.index) {
+        pontuados = await mercadoViewModel.pontuadosMercado();
+        // pontuados = await mercadoViewModel.pontuadosRodadaMercado(1);
+
+        if (timeCompleto.atletas == null) {
+          for (var i = 0; i < timeCompleto.atletas!.length; i++) {
+            var exist = pontuados!.indexWhere((element) =>
+                element.atletaId == timeCompleto.atletas![i].atletaId);
+            if (exist > 0) {
+              var altletaPontuado = pontuados.firstWhere((element) =>
+                  element.atletaId == timeCompleto.atletas![i].atletaId);
+              timeCompleto.atletas![i].pontosNum =
+                  altletaPontuado.pontuacao ?? 0;
+            }
+          }
+
+          timeCompleto.pontos = timeCompleto.getParcialTime();
+        }
+      }
+
       return timeCompleto;
     } catch (ex) {
       return TimeCartolaDto();
