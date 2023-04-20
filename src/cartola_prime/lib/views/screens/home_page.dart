@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   final _repClube = ClubeRepository();
   final _serviceClube = ClubeService();
   final _timeLogadoVM = TimeLogadoViewModel();
-  final TimeCartolaViewModel timeLogadoVM = TimeCartolaViewModel();
+  final TimeCartolaViewModel _timeCartolaVM = TimeCartolaViewModel();
   final MercadoViewModel mercadoViewModel = MercadoViewModel();
   var timeLog = TimeLogadoModel();
   late Future<List<TimeCartolaModel>> _myData;
@@ -44,16 +44,27 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     preecherStatusMercado();
+    _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     verificarClubes();
     preencherInfoTime();
-    _myData = _setTimes();
     super.initState();
+    _myData = _setTimes();
+  }
+
+  Future<void> preecherStatusMercado() async {
+    mercado = await mercadoViewModel.getMercado();
+    statusMercado = "Mercado ${mercado.statusMercadoDesc!.texto}";
+    if (mercado.statusMercado == 1) {
+      final DateTime date1 = DateTime.fromMillisecondsSinceEpoch(
+          mercado.fechamento!.timestamp! * 1000);
+      fechamentoMercado =
+          DateFormat("'Fecha em' dd/MM/yyyy hh:mm").format(date1);
+    }
   }
 
   Future<List<TimeCartolaModel>> _setTimes() async {
-    var times = await timeLogadoVM.getTimesDB(mercado);
+    var times = await _timeCartolaVM.getTimesDB();
     return times;
   }
 
@@ -69,17 +80,6 @@ class _HomePageState extends State<HomePage> {
     var existClube = await _repClube.existStorage();
     if (!existClube) {
       await _serviceClube.updateStorage();
-    }
-  }
-
-  Future<void> preecherStatusMercado() async {
-    mercado = await mercadoViewModel.statusMercado();
-    statusMercado = "Mercado ${mercado.statusMercadoDesc!.texto}";
-    if (mercado.statusMercado == 1) {
-      final DateTime date1 = DateTime.fromMillisecondsSinceEpoch(
-          mercado.fechamento!.timestamp! * 1000);
-      fechamentoMercado =
-          DateFormat("'Fecha em' dd/MM/yyyy hh:mm").format(date1);
     }
   }
 

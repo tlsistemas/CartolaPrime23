@@ -1,5 +1,6 @@
 import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/models/enums/status_mercado_enum.dart';
+import 'package:cartola_prime/repositories/mercado_repository.dart';
 import 'package:cartola_prime/shared/utils/base_table.dart';
 import 'package:cartola_prime/models/dto/time_busca_dto.dart';
 import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../data/data_base_repository.dart';
 import '../models/dto/pontuados_dto.dart';
 import '../models/time_cartola_model.dart';
+import '../repositories/contracts/i_mercado_repository.dart';
 import '../repositories/contracts/i_time_cartola_repository.dart';
 import '../repositories/time_cartola_repository.dart';
 import '../services/hive_service.dart';
@@ -20,6 +22,7 @@ class TimeCartolaViewModel {
   final TimeService timeService = TimeService();
   final ITimeCartolaRepository _timeRepository =
       TimeCartolaRepository(DataBaseRepository());
+  final IMercadoRepository _mercadoRepository = MercadoRepository();
   final HiveService hiveService = locator<HiveService>();
   final MercadoViewModel mercadoViewModel = MercadoViewModel();
 
@@ -73,7 +76,9 @@ class TimeCartolaViewModel {
     }
   }
 
-  Future<List<TimeCartolaModel>> getTimesDB(MercadoStatusDto mercado) async {
+  Future<List<TimeCartolaModel>> getTimesDB() async {
+    var mercado = await _mercadoRepository.get();
+    // mercado.statusMercado = 2;
     var times = await _timeRepository.getAll();
     List<PontuadosDto>? pontuados;
 
@@ -81,37 +86,31 @@ class TimeCartolaViewModel {
       return times;
     }
 
-    if (mercado.statusMercado == StatusMercadoEnum.fechado as int) {
-      pontuados = await mercadoViewModel.pontuadosMercadoMock();
-    }
+    if (mercado.statusMercado == StatusMercadoEnum.fechado.index) {
+      pontuados = await mercadoViewModel.pontuadosMercado();
+      // pontuados = await mercadoViewModel.pontuadosRodadaMercado(1);
 
-    for (var i = 0; i < times.length; i++) {
-      if (times[i].atletas == null) {
-        var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
-        times[i].atletas = timeCompleto.atletas;
-      }
+      for (var i = 0; i < times.length; i++) {
+        if (times[i].atletas == null) {
+          var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
+          times[i].atletas = timeCompleto.atletas;
 
-      if (mercado.statusMercado == StatusMercadoEnum.suporte as int) {
-        return times;
-      }
+          var atletas = times[i].atletas!;
 
-      if (mercado.statusMercado == StatusMercadoEnum.aberto as int) {
-        return times;
-      }
-
-      var atletas = times[i].atletas!;
-
-      for (var x = 0; x < atletas.length; x++) {
-        var exist = pontuados!
-            .indexWhere((element) => element.atletaId == atletas[x].atletaId);
-        if (exist > 0) {
-          var altletaPontuado = pontuados
-              .firstWhere((element) => element.atletaId == atletas[i].atletaId);
-          times[i].atletas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
+          for (var x = 0; x < atletas.length; x++) {
+            var exist = pontuados!.indexWhere(
+                (element) => element.atletaId == atletas[x].atletaId);
+            if (exist > 0) {
+              var altletaPontuado = pontuados.firstWhere(
+                  (element) => element.atletaId == atletas[x].atletaId);
+              times[i].atletas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
+            }
+          }
         }
+
+        times[i].pontos = times[i].getParcialTime();
       }
     }
-
     return times;
   }
 

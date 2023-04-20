@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cartola_prime/models/dto/pontuados_dto.dart';
+import 'package:cartola_prime/repositories/mercado_repository.dart';
 import 'package:cartola_prime/shared/utils/base_table.dart';
 import 'package:flutter/services.dart';
 
@@ -12,10 +13,17 @@ import '../shared/utils/locator.dart';
 class MercadoViewModel {
   final _service = MercadoService();
   final HiveService hiveService = locator<HiveService>();
+  final MercadoRepository mercadoRepository = MercadoRepository();
 
-  Future<MercadoStatusDto> statusMercado() async {
-    var mercado = await _service.getStatusMercado();
-    return mercado;
+  Future<MercadoStatusDto> getMercado() async {
+    var exist = await mercadoRepository.existStorage();
+    if (exist) {
+      return mercadoRepository.get();
+    } else {
+      var mercado = await _service.getStatusMercado();
+      mercadoRepository.setStorage(jsonEncode(mercado));
+      return mercado;
+    }
   }
 
   Future<List<PontuadosDto>?> pontuadosMercado() async {
@@ -26,9 +34,18 @@ class MercadoViewModel {
       var lstPontuados = PontuadosDto.fromJsonListDynamic(pontuados);
       retorno = lstPontuados.atletas;
     } else {
+      hiveService.clearBox(boxName: baseTable.pontuadosTable);
       retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
       await hiveService.addBoxes(retorno, baseTable.pontuadosTable);
     }
+    return retorno;
+  }
+
+  Future<List<PontuadosDto>?> pontuadosRodadaMercado(int rodada) async {
+    var retorno =
+        await _service.getPontuadosRodadaMercado(rodada) ?? <PontuadosDto>[];
+    await hiveService.addBoxes(retorno, baseTable.pontuadosTable);
+
     return retorno;
   }
 

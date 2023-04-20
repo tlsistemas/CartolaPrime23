@@ -159,7 +159,11 @@ class TimeCartolaModel {
   double getParcialTime() {
     double pontosParcial = 0;
     for (var element in atletas!) {
-      pontosParcial = pontosParcial + element.pontosNum!;
+      if (element.atletaId == capitaoId) {
+        pontosParcial = pontosParcial + (element.pontosNum! * 1.5);
+      } else {
+        pontosParcial = pontosParcial + element.pontosNum!;
+      }
     }
     return pontosParcial;
   }

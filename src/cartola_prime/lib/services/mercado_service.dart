@@ -29,4 +29,15 @@ class MercadoService extends ChangeNotifier with baseUrls {
       return dados.atletas;
     }
   }
+
+  Future<List<PontuadosDto>?> getPontuadosRodadaMercado(int rodada) async {
+    final response = await _dio.get("$pontuadosMercado/$rodada");
+
+    if (response['status'] == 'erro') {
+      return <PontuadosDto>[];
+    } else {
+      var dados = PontuadosDto.fromJsonWithAtleta(response);
+      return dados.atletas;
+    }
+  }
 }
