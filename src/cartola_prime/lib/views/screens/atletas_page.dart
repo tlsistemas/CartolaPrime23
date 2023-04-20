@@ -260,7 +260,7 @@ class _AtletasPage extends State<AtletasPage> {
                       Column(
                         children: [
                           Text(
-                            NumberFormat.decimalPattern('pt-BR')
+                            NumberFormat.decimalPatternDigits(decimalDigits: 2)
                                 .format(atleta.minimoParaValorizar!),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
@@ -283,7 +283,7 @@ class _AtletasPage extends State<AtletasPage> {
               Column(
                 children: [
                   Text(
-                    NumberFormat.decimalPattern('pt-BR')
+                    NumberFormat.decimalPatternDigits(decimalDigits: 2)
                         .format(atleta.pontosNum!),
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.bold),
