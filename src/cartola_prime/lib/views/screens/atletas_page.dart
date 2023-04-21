@@ -42,15 +42,19 @@ class _AtletasPage extends State<AtletasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarControler(title: 'Jogadores '),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const NeverScrollableScrollPhysics(),
-              child: listaPartidastWidget(),
+      body: Container(
+        padding: const EdgeInsets.all(0),
+        alignment: Alignment.topCenter,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: listaPartidastWidget(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -183,7 +187,7 @@ class _AtletasPage extends State<AtletasPage> {
                 height: height,
                 child: ListView.builder(
                   itemCount: item.atletas!.length,
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 70),
                   itemBuilder: (BuildContext context, int index) {
                     return customCard(item.atletas![index]);
                   },
