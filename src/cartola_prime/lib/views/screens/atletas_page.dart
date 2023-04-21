@@ -46,12 +46,8 @@ class _AtletasPage extends State<AtletasPage> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  listaPartidastWidget(),
-                  const Text("data"),
-                ],
-              ),
+              physics: const NeverScrollableScrollPhysics(),
+              child: listaPartidastWidget(),
             ),
           ),
         ],
