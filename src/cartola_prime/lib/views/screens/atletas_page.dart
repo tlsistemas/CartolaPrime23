@@ -34,7 +34,7 @@ class _AtletasPage extends State<AtletasPage> {
   }
 
   Future<TimeCartolaDto> _getTimes() async {
-    var times = await timeViewModel.getTimeId(widget.idTime);
+    var times = await timeViewModel.getTimeIdDbAtletas(widget.idTime);
     return times;
   }
 

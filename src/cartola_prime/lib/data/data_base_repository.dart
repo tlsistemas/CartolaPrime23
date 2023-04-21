@@ -95,7 +95,7 @@ class DataBaseRepository {
       String table, String campo, int id, String? order) async {
     var connection = await database;
     var res = await connection!
-        .rawQuery("select * from $table where $campo=$id $order");
+        .rawQuery("select * from $table where $campo=$id order by $order");
     return res.first;
   }
 

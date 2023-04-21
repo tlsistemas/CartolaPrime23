@@ -15,6 +15,7 @@ import 'models/dto/clube_dto.dart';
 import 'models/dto/escudo_dto.dart';
 import 'models/dto/pontuados_dto.dart';
 import 'models/dto/scout_dto.dart';
+import 'models/dto/time_cartola_dto.dart';
 import 'shared/utils/locator.dart';
 
 Future<void> main() async {
@@ -38,6 +39,7 @@ Future<void> main() async {
   Hive.registerAdapter(TimeLogadoDtoAdapter());
   Hive.registerAdapter(ClubeDtoAdapter());
   Hive.registerAdapter(EscudoDtoAdapter());
+  Hive.registerAdapter(TimeCartolaDtoAdapter());
 
   setupLocator();
   runApp(const AppWidget());

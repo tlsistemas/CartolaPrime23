@@ -25,10 +25,13 @@ class TimeCartolaRepository implements ITimeCartolaRepository {
     return item.isNotEmpty ? TimeCartolaModel.fromJson(item) : null;
   }
 
-  Future<TimeCartolaModel?> _getOneTimeId(int timeId) async {
+  @override
+  Future<TimeCartolaModel> getOneTimeId(int timeId) async {
     var item = await _dataBaseRepository.getOneCampoIdOrderBy(
         table, "time_id", timeId, "nome");
-    return item.isNotEmpty ? TimeCartolaModel.fromJson(item) : null;
+    return item.isNotEmpty
+        ? TimeCartolaModel.fromJson(item)
+        : TimeCartolaModel();
   }
 
   @override

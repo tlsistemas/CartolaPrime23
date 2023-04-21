@@ -44,7 +44,8 @@ class TimeCartolaModel {
       this.pontos,
       this.capitaoId,
       this.valorTime,
-      this.rodadaAtual});
+      this.rodadaAtual,
+      this.atletas});
 
   TimeCartolaModel.fromJson(Map<String, dynamic> json) {
     temporadaInicial = json['temporada_inicial'];

@@ -59,16 +59,19 @@ class TimeCartolaViewModel {
       var timeCompleto = await _service.getTimeBuscaId(time.timeId!);
       await _timeRepository
           .insert(TimeCartolaModel.fromTimeCartolaDTO(timeCompleto));
-      await hiveService.addBoxes(timeCompleto.atletas!, baseTable.atletasTable);
+      await hiveService.addBox(timeCompleto, baseTable.timeCartolaTable);
       return true;
     } catch (ex) {
       return false;
     }
   }
 
-  Future<TimeCartolaDto> getTimeId(int timeId) async {
+  Future<TimeCartolaDto> getTimeIdDbAtletas(int timeId) async {
     try {
+      var times = await _timeRepository.getOneTimeId(timeId);
+
       var timeCompleto = await _service.getTimeBuscaId(timeId);
+
       List<PontuadosDto>? pontuados;
       var mercado = await _mercadoRepository.get();
 

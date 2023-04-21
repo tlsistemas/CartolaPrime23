@@ -1,4 +1,3 @@
-import 'package:cartola_prime/models/dto/time_busca_dto.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../data/data_base_repository.dart';

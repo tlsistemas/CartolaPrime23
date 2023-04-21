@@ -8,4 +8,5 @@ abstract class ITimeCartolaRepository {
   Future<void> update(TimeCartolaModel model);
   Future<void> delete(int id);
   Future<bool> exist(int timeId);
+  Future<TimeCartolaModel> getOneTimeId(int timeId);
 }

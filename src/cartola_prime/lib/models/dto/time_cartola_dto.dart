@@ -1,8 +1,12 @@
+import 'package:hive/hive.dart';
+
 import '../enums/esquema_time_enum.dart';
 import 'atleta_dto.dart';
 import 'ranking_dto.dart';
 import 'time_dto.dart';
+part '../adapter/time_cartola_dto.g.dart';
 
+@HiveType(typeId: 11)
 class TimeCartolaDto {
   List<AtletaDto>? atletas;
   TimeDto? time;
