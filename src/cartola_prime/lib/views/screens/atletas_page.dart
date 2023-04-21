@@ -1,6 +1,7 @@
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
 import 'package:flutter/material.dart';
+import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 
 import '../../viewmodel/time_cartola_vm.dart';
@@ -186,11 +187,25 @@ class _AtletasPage extends State<AtletasPage> {
               ),
               SizedBox(
                 height: height - 230,
-                child: ListView.builder(
-                  itemCount: item.atletas!.length,
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  itemBuilder: (BuildContext context, int index) {
-                    return customCard(item.atletas![index]);
+                child: GroupedListView<dynamic, String>(
+                  elements: item.atletas!,
+                  groupBy: (element) => element.titularReserva.toString(),
+                  groupComparator: (value1, value2) => value2.compareTo(value1),
+                  itemComparator: (item1, item2) =>
+                      item1.posicaoId.compareTo(item2.posicaoId),
+                  order: GroupedListOrder.ASC,
+                  // useStickyGroupSeparators: true,
+                  groupSeparatorBuilder: (String value) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      value,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  itemBuilder: (c, element) {
+                    return customCard(element);
                   },
                 ),
               ),

@@ -34,7 +34,7 @@ class AtletaDto {
   String? foto;
   int? precoEditorial;
   List<AtletaDto>? atletas;
-  CondicaoAtletaEnum? titulaReserva;
+  String? titularReserva;
 
   AtletaDto(
       {this.scout,
@@ -83,7 +83,7 @@ class AtletaDto {
     nome = json['nome'];
     foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
     precoEditorial = json['preco_editorial'];
-    titulaReserva = eTitulaOuReserva;
+    titularReserva = eTitulaOuReserva.texto;
   }
 
   Map<String, dynamic> toJson() {
