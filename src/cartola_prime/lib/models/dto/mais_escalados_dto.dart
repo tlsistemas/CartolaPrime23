@@ -1,3 +1,4 @@
+import '../enums/condicao_atleta_enum.dart';
 import 'atleta_dto.dart';
 import 'partida_dto.dart';
 
@@ -29,8 +30,9 @@ class MaisEscaladosDto {
     clube = json['clube'];
     clubeNome = json['clube_nome'];
     escudoClube = json['escudo_clube'];
-    atleta =
-        json['Atleta'] != null ? new AtletaDto.fromJson(json['Atleta']) : null;
+    atleta = json['Atleta'] != null
+        ? AtletaDto.fromJson(json['Atleta'], CondicaoAtletaEnum.titular)
+        : null;
     clubeId = json['clube_id'];
     escalacoes = json['escalacoes'];
   }
@@ -70,8 +72,9 @@ class MaisEscaladosDto {
     clube = json['clube'];
     clubeNome = json['clube_nome'];
     escudoClube = json['escudo_clube'];
-    atleta =
-        json['Atleta'] != null ? new AtletaDto.fromJson(json['Atleta']) : null;
+    atleta = json['Atleta'] != null
+        ? AtletaDto.fromJson(json['Atleta'], CondicaoAtletaEnum.titular)
+        : null;
     clubeId = json['clube_id'];
     escalacoes = json['escalacoes'];
   }

@@ -2,6 +2,7 @@ import 'package:cartola_prime/repositories/clube_repository.dart';
 import 'package:hive/hive.dart';
 
 import '../../shared/utils/posicao_converter.dart';
+import '../enums/condicao_atleta_enum.dart';
 import 'clube_dto.dart';
 import 'gato_mestre_dto.dart';
 import 'scout_dto.dart';
@@ -33,6 +34,7 @@ class AtletaDto {
   String? foto;
   int? precoEditorial;
   List<AtletaDto>? atletas;
+  CondicaoAtletaEnum? titulaReserva;
 
   AtletaDto(
       {this.scout,
@@ -55,7 +57,8 @@ class AtletaDto {
       this.foto,
       this.precoEditorial});
 
-  AtletaDto.fromJson(Map<String, dynamic> json) {
+  AtletaDto.fromJson(
+      Map<String, dynamic> json, CondicaoAtletaEnum eTitulaOuReserva) {
     scout = json['scout'] != null ? ScoutDto.fromJson(json['scout']) : null;
     atletaId = json['atleta_id'];
     rodadaId = json['rodada_id'];
@@ -80,6 +83,7 @@ class AtletaDto {
     nome = json['nome'];
     foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
     precoEditorial = json['preco_editorial'];
+    titulaReserva = eTitulaOuReserva;
   }
 
   Map<String, dynamic> toJson() {

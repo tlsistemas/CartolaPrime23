@@ -1,3 +1,4 @@
+import 'package:cartola_prime/models/enums/condicao_atleta_enum.dart';
 import 'package:hive/hive.dart';
 
 import '../enums/esquema_time_enum.dart';
@@ -9,6 +10,7 @@ part '../adapter/time_cartola_dto.g.dart';
 @HiveType(typeId: 11)
 class TimeCartolaDto {
   List<AtletaDto>? atletas;
+  List<AtletaDto>? reservas;
   TimeDto? time;
   double? pontosCampeonato;
   int? capitaoId;
@@ -33,8 +35,12 @@ class TimeCartolaDto {
       this.ranking});
 
   TimeCartolaDto.fromJson(Map<String, dynamic> json) {
-    atletas =
-        List.from(json['atletas']).map((e) => AtletaDto.fromJson(e)).toList();
+    atletas = List.from(json['atletas'])
+        .map((e) => AtletaDto.fromJson(e, CondicaoAtletaEnum.titular))
+        .toList();
+    reservas = List.from(json['reservas'])
+        .map((e) => AtletaDto.fromJson(e, CondicaoAtletaEnum.reserva))
+        .toList();
     atletas?.sort((a, b) => a.posicaoId!.compareTo(b.posicaoId!));
     time = json['time'] != null ? TimeDto.fromJson(json['time']) : null;
     pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());

@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 
+import '../enums/condicao_atleta_enum.dart';
 import 'atleta_dto.dart';
 import 'ranking_dto.dart';
 import 'time_dto.dart';
@@ -9,6 +10,7 @@ part '../adapter/time_logado_dto.g.dart';
 @HiveType(typeId: 7)
 class TimeLogadoDto {
   List<AtletaDto>? atletas;
+  List<AtletaDto>? reservas;
   TimeDto? time;
   double? pontosCampeonato;
   int? capitaoId;
@@ -45,10 +47,16 @@ class TimeLogadoDto {
     if (json['atletas'] != null) {
       atletas = <AtletaDto>[];
       json['atletas'].forEach((v) {
-        atletas!.add(new AtletaDto.fromJson(v));
+        atletas!.add(AtletaDto.fromJson(v, CondicaoAtletaEnum.titular));
       });
     }
-    time = json['time'] != null ? new TimeDto.fromJson(json['time']) : null;
+    if (json['reservas'] != null) {
+      reservas = <AtletaDto>[];
+      json['reservas'].forEach((v) {
+        atletas!.add(AtletaDto.fromJson(v, CondicaoAtletaEnum.reserva));
+      });
+    }
+    time = json['time'] != null ? TimeDto.fromJson(json['time']) : null;
     pontosCampeonato = json['pontos_campeonato'];
     capitaoId = json['capitao_id'];
     pontos = json['pontos'];

@@ -35,6 +35,7 @@ class _AtletasPage extends State<AtletasPage> {
 
   Future<TimeCartolaDto> _getTimes() async {
     var times = await timeViewModel.getTimeIdDbAtletas(widget.idTime);
+    times.atletas?.addAll(times.reservas!);
     return times;
   }
 
@@ -184,10 +185,10 @@ class _AtletasPage extends State<AtletasPage> {
                 onTap: () {},
               ),
               SizedBox(
-                height: height,
+                height: height - 230,
                 child: ListView.builder(
                   itemCount: item.atletas!.length,
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 70),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   itemBuilder: (BuildContext context, int index) {
                     return customCard(item.atletas![index]);
                   },
