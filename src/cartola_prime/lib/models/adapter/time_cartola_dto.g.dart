@@ -6,28 +6,32 @@ class TimeCartolaDtoAdapter extends TypeAdapter<TimeCartolaDto> {
 
   @override
   TimeCartolaDto read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return TimeCartolaDto(
-      time: fields['time'] as TimeDto,
-      ranking: fields['ranking'] as RankingDto,
-      esquemaId: fields['esquemaId'] as int,
-      capitaoId: fields['capitaoId'] as int,
-      patrimonio: fields['patrimonio'] as double?,
-      pontos: fields['pontos'] as double?,
-      pontosCampeonato: fields['pontosCampeonato'] as double?,
-      rodadaAtual: fields['rodadaAtual'] as int?,
-      valorTime: fields['valorTime'] as double?,
-      atletas: fields['atletas'] as List<AtletaDto>?,
-    );
+    try {
+      final numOfFields = reader.readByte();
+      final fields = <int, dynamic>{
+        for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+      };
+      return TimeCartolaDto(
+        time: fields['time'] as TimeDto,
+        ranking: fields['ranking'] as RankingDto,
+        esquemaId: fields['esquemaId'] as int,
+        capitaoId: fields['capitaoId'] as int,
+        patrimonio: fields['patrimonio'] as double?,
+        pontos: fields['pontos'] as double?,
+        pontosCampeonato: fields['pontosCampeonato'] as double?,
+        rodadaAtual: fields['rodadaAtual'] as int?,
+        valorTime: fields['valorTime'] as double?,
+        atletas: fields['atletas'] as List<AtletaDto>?,
+      );
+    } catch (e) {
+      return TimeCartolaDto();
+    }
   }
 
   @override
   void write(BinaryWriter writer, TimeCartolaDto obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.time)
       ..writeByte(1)
@@ -47,7 +51,9 @@ class TimeCartolaDtoAdapter extends TypeAdapter<TimeCartolaDto> {
       ..writeByte(8)
       ..write(obj.valorTime)
       ..writeByte(9)
-      ..write(obj.atletas);
+      ..write(obj.atletas)
+      ..writeByte(10)
+      ..write(obj.esquema!.index);
   }
 
   @override

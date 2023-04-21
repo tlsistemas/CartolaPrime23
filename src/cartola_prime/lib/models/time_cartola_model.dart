@@ -73,7 +73,7 @@ class TimeCartolaModel {
     clubeId = json['clube_id'];
     var assinante = json['assinante'] == null ? false : true;
     assinante = assinante;
-    patrimonio = json['patrimonio'];
+    patrimonio = double.tryParse(json['patrimonio'].toString());
     esquemaId = json['esquemaId'];
     pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());
     pontos = double.tryParse(json['pontos'].toString());

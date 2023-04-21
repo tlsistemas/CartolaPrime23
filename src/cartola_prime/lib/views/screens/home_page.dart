@@ -143,17 +143,26 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () => toggleMenu(),
               ),
               actions: [
-                Visibility(
-                  visible: _isLogado ? false : true,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.login,
-                      color: iconColorPrimary,
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/login");
-                    },
+                // Visibility(
+                //   visible: _isLogado ? false : true,
+                //   child: IconButton(
+                //     icon: const Icon(
+                //       Icons.login,
+                //       color: iconColorPrimary,
+                //     ),
+                //     onPressed: () {
+                //       Navigator.pushNamed(context, "/login");
+                //     },
+                //   ),
+                // ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.add,
+                    color: iconColorPrimary,
                   ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/buscar_times");
+                  },
                 ),
               ],
               title: Text(
@@ -178,12 +187,14 @@ class _HomePageState extends State<HomePage> {
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/buscar_times");
+                setState(() {
+                  _myData = _setTimes();
+                });
               },
               backgroundColor: foregroundColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100)),
-              child: const Icon(Icons.add, color: iconColorPrimary),
+              child: const Icon(Icons.refresh, color: iconColorPrimary),
             ),
           ),
         ),
@@ -193,6 +204,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildMenu() {
     return SingleChildScrollView(
+      //physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -260,8 +272,7 @@ class _HomePageState extends State<HomePage> {
                                   Icons.login,
                                   color: Colors.white,
                                   size: 24.0,
-                                  semanticLabel:
-                                      'Text to announce in accessibility modes',
+                                  semanticLabel: 'Logar',
                                 ),
                               ],
                             ),
