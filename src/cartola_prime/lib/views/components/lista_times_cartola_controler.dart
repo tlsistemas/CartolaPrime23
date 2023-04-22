@@ -41,20 +41,36 @@ class ListaTimesCartolaControler extends StatelessWidget {
           );
         } else {
           var item = snapshot.data;
-          return Column(
-            children: [
-              SizedBox(
-                child: ListView.builder(
-                  itemCount: item!.length,
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return customCard(item[index], index, context);
-                  },
-                ),
+          if (item!.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                      width: MediaQuery.of(context).size.width * 1,
+                      height: MediaQuery.of(context).size.height * 0.80,
+                      color: backgroundPageColor,
+                      child: Image.asset('assets/images/fundo_home.png')),
+                ],
               ),
-            ],
-          );
+            );
+          } else {
+            return Column(
+              children: [
+                SizedBox(
+                  child: ListView.builder(
+                    itemCount: item.length,
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return customCard(item[index], index, context);
+                    },
+                  ),
+                ),
+              ],
+            );
+          }
         }
       },
     );

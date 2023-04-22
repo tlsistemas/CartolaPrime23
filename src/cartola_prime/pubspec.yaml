@@ -93,6 +93,7 @@ flutter:
     - assets/images/iconp.png
     - assets/images/imagem_splash.png
     - assets/images/thi_cartolando.png
+    - assets/images/fundo_home.png
     - assets/json/splash_icon.json
     - assets/json/pontuados.json
     - assets/svg/selo-cartoleiro-pro.svg

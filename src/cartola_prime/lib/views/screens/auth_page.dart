@@ -47,7 +47,8 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                   await viewmodel.getTimeLogado() ?? TimeLogadoDto();
               var isTimeInserido = await viewmodel.insertTimeLogado(timeLogado);
 
-              var textoDialog = "Clique em HOME para continuar no aplicativo.";
+              var textoDialog =
+                  "Autenticação efetuada a com Sucesso! Clique em HOME para continuar no aplicativo.";
               if (!isTimeInserido) {
                 textoDialog =
                     "Tivemos um problema no seu login, tente novamente mais tarde. \nClique em HOME para continuar no aplicativo.";
@@ -56,7 +57,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: const Text(
-                    'Autenticação Efetuado',
+                    'Atenção',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
