@@ -63,7 +63,28 @@ class _RodadaPage extends State<RodadaPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<List<PartidaDto>> snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Padding(
+            padding: EdgeInsets.all(50.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  CircularProgressIndicator(
+                    backgroundColor: backgroundPageColor,
+                    color: backgroundColor,
+                    strokeWidth: 2,
+                  ),
+                  SizedBox(height: 15),
+                  Text("Carregando...",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.end),
+                ],
+              ),
+            ),
+          );
         } else {
           var item = snapshot.data;
           return SingleChildScrollView(

@@ -5,9 +5,9 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 
 import '../../viewmodel/time_cartola_vm.dart';
-import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../components/app_bar_update_controle.dart';
 import '../components/resource_colors.dart';
 
 class AtletasPage extends StatefulWidget {
@@ -44,7 +44,16 @@ class _AtletasPage extends State<AtletasPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPageColor,
-      appBar: AppBarControler(title: 'Jogadores '),
+      appBar: AppBarUpdateControler(
+        title: 'Jogadores ',
+        onPressedUpdate: () => {
+          setState(
+            () {
+              _myData = _getTimes();
+            },
+          ),
+        },
+      ),
       body: Container(
         padding: const EdgeInsets.all(0),
         alignment: Alignment.topCenter,
@@ -67,7 +76,28 @@ class _AtletasPage extends State<AtletasPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<TimeCartolaDto> snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Padding(
+            padding: EdgeInsets.all(50.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  CircularProgressIndicator(
+                    backgroundColor: backgroundPageColor,
+                    color: backgroundColor,
+                    strokeWidth: 2,
+                  ),
+                  SizedBox(height: 15),
+                  Text("Carregando...",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.end),
+                ],
+              ),
+            ),
+          );
         } else {
           var item = snapshot.data;
           return StaggeredGrid.count(
@@ -286,7 +316,7 @@ class _AtletasPage extends State<AtletasPage> {
                         children: [
                           Text(
                             NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                                .format(atleta.minimoParaValorizar!),
+                                .format(atleta.minimoParaValorizar ?? 0),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.right,
