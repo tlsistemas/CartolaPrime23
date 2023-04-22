@@ -163,7 +163,7 @@ class ListaTimesCartolaControler extends StatelessWidget {
 
   Widget _buildTile(Widget child, {required Function() onTap}) {
     return Card(
-      color: backgroundPageColor,
+      color: cardColor,
       child: InkWell(
           // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null

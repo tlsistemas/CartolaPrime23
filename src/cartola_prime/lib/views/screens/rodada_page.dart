@@ -53,6 +53,7 @@ class _RodadaPage extends State<RodadaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: backgroundPageColor,
         appBar: AppBarControler(title: 'Partidas'),
         body: listaPartidastWidget());
   }
@@ -196,7 +197,7 @@ class _RodadaPage extends State<RodadaPage> {
 
   Widget _buildTile(Widget child, {required Function() onTap}) {
     return Card(
-      color: backgroundPageColor,
+      color: cardColor,
       child: InkWell(
           // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null

@@ -3,6 +3,7 @@ import 'package:cartola_prime/viewmodel/classificacao_bra_vm.dart';
 import 'package:flutter/material.dart';
 
 import '../components/app_bar_controle.dart';
+import '../components/resource_colors.dart';
 
 // consumir https://www.api-futebol.com.br/documentacao/tabela
 class ClassificacaoPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _ClassificacaoPageState extends State<ClassificacaoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(58, 66, 86, 1.0),
+      backgroundColor: backgroundPageColor,
       appBar: AppBarControler(title: 'Classificação'),
       body: BodyControle(item: lessons.first),
     );

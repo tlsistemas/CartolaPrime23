@@ -43,6 +43,7 @@ class _AtletasPage extends State<AtletasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundPageColor,
       appBar: AppBarControler(title: 'Jogadores '),
       body: Container(
         padding: const EdgeInsets.all(0),
@@ -346,7 +347,7 @@ class _AtletasPage extends State<AtletasPage> {
 
   Widget _buildTile(Widget child, {required Function() onTap}) {
     return Card(
-      color: backgroundPageColor,
+      color: cardColor,
       child: InkWell(
           // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null

@@ -135,6 +135,7 @@ class _HomePageState extends State<HomePage> {
         child: IgnorePointer(
           ignoring: isOpened,
           child: Scaffold(
+            backgroundColor: backgroundPageColor,
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: backgroundColor,

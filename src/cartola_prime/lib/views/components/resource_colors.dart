@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const backgroundColor = Color(0xFFfe7200);
 const foregroundColor = Color(0xFFef4007);
-const backgroundPageColor = Color(0xFFF5F5F5);
+const backgroundPageColor = Color(0xFFE9E9E9);
 const primaryColor = Color(0xFF006686);
 const secondaryColor = Color(0xFF273238);
 const buttonPrimaryColor = Color(0xFF273238);
@@ -16,3 +16,4 @@ const textColorSecondary = Color(0xFF273238);
 const closeColorSecondary = Color(0xFFef5350);
 const snackBarColorError = Color.fromARGB(255, 191, 88, 81);
 const snackBarColorSucess = Color.fromARGB(255, 15, 109, 38);
+const cardColor = Color(0xFFFFFFFF);

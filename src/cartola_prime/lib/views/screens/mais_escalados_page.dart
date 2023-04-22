@@ -35,6 +35,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: backgroundPageColor,
         appBar: AppBarControler(title: 'Mais Escalados'),
         body: listaPartidastWidget());
   }
@@ -180,7 +181,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
 
   Widget _buildTile(Widget child, {required Function() onTap}) {
     return Card(
-      color: backgroundPageColor,
+      color: cardColor,
       child: InkWell(
           // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null

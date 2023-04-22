@@ -55,6 +55,7 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundPageColor,
       appBar: AppBar(
         leading: const BackButton(
           color: Colors.white, // <-- SEE HERE
@@ -276,7 +277,7 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
 
   Widget _buildTile(Widget child, {required Function() onTap}) {
     return Card(
-      color: backgroundPageColor,
+      color: cardColor,
       child: InkWell(
           // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null
