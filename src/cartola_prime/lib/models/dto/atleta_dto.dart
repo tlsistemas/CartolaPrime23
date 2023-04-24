@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:cartola_prime/repositories/clube_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import '../../shared/utils/posicao_converter.dart';
@@ -35,6 +38,7 @@ class AtletaDto {
   int? precoEditorial;
   List<AtletaDto>? atletas;
   String? titularReserva;
+  Color? pontoCor = const Color.fromARGB(255, 118, 118, 118);
 
   AtletaDto(
       {this.scout,
@@ -84,6 +88,7 @@ class AtletaDto {
     foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
     precoEditorial = json['preco_editorial'];
     titularReserva = eTitulaOuReserva.texto;
+    pontoCor = pontosNum! > 0 ? Colors.green : Colors.red;
   }
 
   Map<String, dynamic> toJson() {
@@ -147,5 +152,6 @@ class AtletaDto {
     foto = json.foto.toString().replaceAll("FORMATO", "220x220");
     precoEditorial = json.preco_editorial;
     timeId = json.time_id;
+    pontoCor = pontosNum! > 0 ? Colors.green : Colors.red;
   }
 }

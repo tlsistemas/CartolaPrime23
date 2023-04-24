@@ -38,11 +38,12 @@ class _AtletasPage extends State<AtletasPage> {
     // var times = await timeViewModel.getTimeIdDbAtletas(widget.idTime);
     // times.atletas?.addAll(times.reservas!);
     // return times;
+    var times = widget.idTime.atletas?.addAll(widget.idTime.reservas!);
     return widget.idTime;
   }
 
   Future<TimeCartolaModel> _updateTimes() async {
-    var times = await _timeViewModel.getTimesDB();
+    var times = await _timeViewModel.getTimeIdDbAtletas(widget.idTime.timeId!);
     return times;
   }
 
@@ -189,8 +190,9 @@ class _AtletasPage extends State<AtletasPage> {
                                             decimalDigits: 2)
                                         .format(item.pontosCampeonato ?? 0),
                                     style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                     textAlign: TextAlign.right,
                                   ),
                                   const SizedBox(
@@ -346,8 +348,10 @@ class _AtletasPage extends State<AtletasPage> {
                   Text(
                     NumberFormat.decimalPatternDigits(decimalDigits: 2)
                         .format(atleta.pontosNum!),
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: atleta.pontoCor),
                     textAlign: TextAlign.right,
                   ),
                   const Text(

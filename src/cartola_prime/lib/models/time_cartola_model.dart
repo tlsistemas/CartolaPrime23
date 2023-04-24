@@ -1,4 +1,6 @@
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'dto/time_cartola_dto.dart';
 import 'dto/time_dto.dart';
@@ -21,11 +23,13 @@ class TimeCartolaModel {
   int? esquemaId = 2;
   EsquemaTimeEnum? esquema;
   double? pontosCampeonato;
-  double? pontos;
+  double? pontos = 0;
+  Color? pontoCor = const Color.fromARGB(255, 118, 118, 118);
   int? capitaoId;
   double? valorTime;
   int? rodadaAtual;
   List<AtletaDto>? atletas;
+  List<AtletaDto>? reservas;
 
   TimeCartolaModel(
       {this.temporadaInicial,
@@ -45,7 +49,8 @@ class TimeCartolaModel {
       this.capitaoId,
       this.valorTime,
       this.rodadaAtual,
-      this.atletas});
+      this.atletas,
+      this.reservas});
 
   TimeCartolaModel.fromJson(Map<String, dynamic> json) {
     temporadaInicial = json['temporada_inicial'];
@@ -67,6 +72,7 @@ class TimeCartolaModel {
     valorTime = double.tryParse(json['valor_time'].toString());
     rodadaAtual = json['rodada_atual'];
     esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
+    pontoCor = pontos! > 0 ? Colors.green : Colors.red;
   }
 
   TimeCartolaModel.fromDataBase(Map<String, dynamic> json) {
@@ -89,6 +95,7 @@ class TimeCartolaModel {
     valorTime = double.tryParse(json['valor_time'].toString());
     rodadaAtual = json['rodada_atual'];
     esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
+    pontoCor = pontos! > 0 ? Colors.green : Colors.red;
     // esquema = EsquemaTimeEnum.fromJson(
     //     esquemaId == null ? "2" : esquemaId.toString());
   }
@@ -146,6 +153,7 @@ class TimeCartolaModel {
 
   TimeCartolaModel.fromTimeCartolaDTO(TimeCartolaDto time) {
     atletas = time.atletas;
+    reservas = time.reservas;
     temporadaInicial = time.time!.temporadaInicial;
     nomeCartola = time.time!.nomeCartola ?? "Cartola Prime";
     globoId = time.time!.globoId;
