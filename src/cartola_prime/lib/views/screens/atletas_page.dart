@@ -1,5 +1,5 @@
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
-import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
+import 'package:cartola_prime/models/time_cartola_model.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +16,7 @@ class AtletasPage extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  final int idTime;
+  final TimeCartolaModel idTime;
 
   @override
   State<AtletasPage> createState() => _AtletasPage();
@@ -25,8 +25,8 @@ class AtletasPage extends StatefulWidget {
 class _AtletasPage extends State<AtletasPage> {
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
-  final TimeCartolaViewModel timeViewModel = TimeCartolaViewModel();
-  late Future<TimeCartolaDto>? _myData;
+  final TimeCartolaViewModel _timeViewModel = TimeCartolaViewModel();
+  late Future<TimeCartolaModel>? _myData;
 
   @override
   void initState() {
@@ -34,9 +34,15 @@ class _AtletasPage extends State<AtletasPage> {
     super.initState();
   }
 
-  Future<TimeCartolaDto> _getTimes() async {
-    var times = await timeViewModel.getTimeIdDbAtletas(widget.idTime);
-    times.atletas?.addAll(times.reservas!);
+  Future<TimeCartolaModel> _getTimes() async {
+    // var times = await timeViewModel.getTimeIdDbAtletas(widget.idTime);
+    // times.atletas?.addAll(times.reservas!);
+    // return times;
+    return widget.idTime;
+  }
+
+  Future<TimeCartolaModel> _updateTimes() async {
+    var times = await _timeViewModel.getTimesDB();
     return times;
   }
 
@@ -49,7 +55,7 @@ class _AtletasPage extends State<AtletasPage> {
         onPressedUpdate: () => {
           setState(
             () {
-              _myData = _getTimes();
+              _myData = _updateTimes();
             },
           ),
         },
@@ -74,7 +80,7 @@ class _AtletasPage extends State<AtletasPage> {
   Widget listaPartidastWidget() {
     return FutureBuilder(
       future: _myData,
-      builder: (context, AsyncSnapshot<TimeCartolaDto> snapshot) {
+      builder: (context, AsyncSnapshot<TimeCartolaModel> snapshot) {
         if (!snapshot.hasData) {
           return const Padding(
             padding: EdgeInsets.all(50.0),
@@ -111,12 +117,12 @@ class _AtletasPage extends State<AtletasPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      item!.time!.urlEscudoPng!.isEmpty
+                      item!.urlEscudoPng!.isEmpty
                           ? const Image(
                               height: 50,
                               image: AssetImage('assets/images/iconp.png'))
                           : Image.network(
-                              item.time!.urlEscudoPng!,
+                              item.urlEscudoPng!,
                               height: 50,
                               alignment: Alignment.center,
                               centerSlice: Rect.largest,
@@ -131,7 +137,7 @@ class _AtletasPage extends State<AtletasPage> {
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           Text(
-                            item.time!.nome ?? "",
+                            item.nome ?? "",
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -142,12 +148,12 @@ class _AtletasPage extends State<AtletasPage> {
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                             child: Row(
                               children: [
-                                Text("${item.time!.esquema?.texto} ",
+                                Text("${item.esquema?.texto} ",
                                     style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 12,
                                         fontWeight: FontWeight.bold)),
-                                Text(" ${item.time!.nome!}",
+                                Text(" ${item.nome!}",
                                     style: const TextStyle(
                                         color: Colors.black, fontSize: 12))
                               ],
