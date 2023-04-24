@@ -16,14 +16,14 @@ class MercadoViewModel {
   final MercadoRepository mercadoRepository = MercadoRepository();
 
   Future<MercadoStatusDto> getMercado() async {
-    var exist = await mercadoRepository.existStorage();
-    if (exist) {
-      return mercadoRepository.get();
-    } else {
-      var mercado = await _service.getStatusMercado();
-      mercadoRepository.setStorage(jsonEncode(mercado));
-      return mercado;
-    }
+    // var exist = await mercadoRepository.existStorage();
+    // if (exist) {
+    //   return mercadoRepository.get();
+    // } else {
+    var mercado = await _service.getStatusMercado();
+    mercadoRepository.setStorage(jsonEncode(mercado));
+    return mercado;
+    // }
   }
 
   Future<List<PontuadosDto>?> pontuadosMercado() async {

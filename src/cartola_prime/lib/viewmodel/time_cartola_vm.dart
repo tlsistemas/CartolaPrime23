@@ -66,10 +66,19 @@ class TimeCartolaViewModel {
     }
   }
 
+  Future<bool> updateTime(TimeCartolaModel timeCompleto) async {
+    try {
+      await _timeRepository.update(timeCompleto);
+      return true;
+    } catch (ex) {
+      return false;
+    }
+  }
+
   Future<TimeCartolaDto> getTimeIdDbAtletas(int timeId) async {
     try {
-      var times = await _timeRepository.getOneTimeId(timeId);
-
+      var time = await _timeRepository.getOneTimeId(timeId);
+      var timeCompletoHive = hiveService.getBoxes(baseTable.timeCartolaTable);
       var timeCompleto = await _service.getTimeBuscaId(timeId);
 
       List<PontuadosDto>? pontuados;
@@ -79,6 +88,7 @@ class TimeCartolaViewModel {
         pontuados = await mercadoViewModel.pontuadosMercado();
         // pontuados = await mercadoViewModel.pontuadosRodadaMercado(1);
 
+        double pontosRodada = 0;
         if (timeCompleto.atletas == null) {
           for (var i = 0; i < timeCompleto.atletas!.length; i++) {
             var exist = pontuados!.indexWhere((element) =>
@@ -86,12 +96,23 @@ class TimeCartolaViewModel {
             if (exist > 0) {
               var altletaPontuado = pontuados.firstWhere((element) =>
                   element.atletaId == timeCompleto.atletas![i].atletaId);
-              timeCompleto.atletas![i].pontosNum =
-                  altletaPontuado.pontuacao ?? 0;
-            }
-          }
 
-          timeCompleto.pontos = timeCompleto.getParcialTime();
+              if (timeCompleto.atletas![i].atletaId == timeCompleto.capitaoId) {
+                timeCompleto.atletas![i].pontosNum =
+                    timeCompleto.atletas![i].pontosNum! +
+                        (timeCompleto.atletas![i].pontosNum! * 1.5);
+              } else {
+                timeCompleto.atletas![i].pontosNum =
+                    altletaPontuado.pontuacao ?? 0;
+              }
+
+              pontosRodada = pontosRodada + timeCompleto.atletas![i].pontosNum!;
+            }
+
+            timeCompleto.pontosCampeonato =
+                timeCompleto.pontosCampeonato! + pontosRodada;
+            timeCompleto.pontos = pontosRodada;
+          }
         }
       }
 
@@ -102,41 +123,51 @@ class TimeCartolaViewModel {
   }
 
   Future<List<TimeCartolaModel>> getTimesDB() async {
-    var mercado = await _mercadoRepository.get();
-    // mercado.statusMercado = 2;
+    var mercado = await mercadoViewModel.getMercado();
     var times = await _timeRepository.getAll();
-    List<PontuadosDto>? pontuados;
-
+    var timesRetorno = <TimeCartolaModel>[];
+    List<PontuadosDto>? pontuados = <PontuadosDto>[];
     if (mercado.statusMercado == null) {
       return times;
     }
 
     if (mercado.statusMercado == StatusMercadoEnum.fechado.index) {
       pontuados = await mercadoViewModel.pontuadosMercado();
-      // pontuados = await mercadoViewModel.pontuadosRodadaMercado(1);
-
       for (var i = 0; i < times.length; i++) {
-        if (times[i].atletas == null) {
-          var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
-          times[i].atletas = timeCompleto.atletas;
+        var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
+        var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
 
-          var atletas = times[i].atletas!;
+        var retorno = await preencherPontosAtletas(timeModel, pontuados);
 
-          for (var x = 0; x < atletas.length; x++) {
-            var exist = pontuados!.indexWhere(
-                (element) => element.atletaId == atletas[x].atletaId);
-            if (exist > 0) {
-              var altletaPontuado = pontuados.firstWhere(
-                  (element) => element.atletaId == atletas[x].atletaId);
-              times[i].atletas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
-            }
-          }
-        }
+        retorno.pontos = retorno.getParcialTimeSemCapitao();
+        retorno.pontosCampeonato = retorno.pontosCampeonato! + retorno.pontos!;
 
-        times[i].pontos = times[i].getParcialTime();
+        updateTime(retorno);
+
+        timesRetorno.add(retorno);
       }
     }
-    return times;
+
+    return timesRetorno;
+  }
+
+  Future<TimeCartolaModel> preencherPontosAtletas(
+      TimeCartolaModel time, List<PontuadosDto>? pontuados) async {
+    for (var x = 0; x < time.atletas!.length; x++) {
+      var exist = pontuados!.indexWhere(
+          (element) => element.atletaId == time.atletas![x].atletaId);
+      if (exist > 0) {
+        var altletaPontuado = pontuados.firstWhere(
+            (element) => element.atletaId == time.atletas![x].atletaId);
+        if (time.atletas![x].atletaId == time.capitaoId) {
+          time.atletas![x].pontosNum =
+              time.atletas![x].pontosNum! + (altletaPontuado.pontuacao! * 1.5);
+        } else {
+          time.atletas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
+        }
+      }
+    }
+    return time;
   }
 
   Future<List<TimeCartolaModel>> getTimesDBMercado(

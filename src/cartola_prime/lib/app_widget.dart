@@ -1,4 +1,5 @@
 import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
+import 'package:cartola_prime/models/time_cartola_model.dart';
 import 'package:cartola_prime/views/screens/atletas_page.dart';
 import 'package:cartola_prime/views/screens/buscar_times_page.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +44,8 @@ class AppWidget extends StatelessWidget {
           '/rodada': (context) => const RodadaPage(),
           '/mais_escalados': (context) => const MaisEscaldosPage(),
           '/buscar_times': (context) => const BuscarTimePage(),
-          '/atletas': (context) =>
-              AtletasPage(ModalRoute.of(context)!.settings.arguments as int),
+          '/atletas': (context) => AtletasPage(
+              ModalRoute.of(context)!.settings.arguments as TimeCartolaModel),
         },
       ),
     );

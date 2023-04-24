@@ -76,15 +76,15 @@ class TimeCartolaDto {
     return data;
   }
 
-  double getParcialTime() {
-    double pontosParcial = 0;
-    for (var element in atletas!) {
-      if (element.atletaId == capitaoId) {
-        pontosParcial = pontosParcial + (element.pontosNum! * 1.5);
-      } else {
-        pontosParcial = pontosParcial + element.pontosNum!;
-      }
-    }
-    return pontosParcial;
-  }
+  // double getParcialTime() {
+  //   double pontosParcial = 0;
+  //   for (var element in atletas!) {
+  //     if (element.atletaId == capitaoId) {
+  //       pontosParcial = pontosParcial + (element.pontosNum! * 1.5);
+  //     } else {
+  //       pontosParcial = pontosParcial + element.pontosNum!;
+  //     }
+  //   }
+  //   return pontosParcial;
+  // }
 }

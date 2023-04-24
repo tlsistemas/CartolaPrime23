@@ -18,7 +18,7 @@ class TimeCartolaModel {
   bool? assinante;
 
   double? patrimonio;
-  int? esquemaId;
+  int? esquemaId = 2;
   EsquemaTimeEnum? esquema;
   double? pontosCampeonato;
   double? pontos;
@@ -59,6 +59,14 @@ class TimeCartolaModel {
     clubeId = json['clube_id'];
     var assinante = json['assinante'] == null ? false : true;
     assinante = assinante;
+    patrimonio = double.tryParse(json['patrimonio'].toString());
+    esquemaId = json['esquemaId'];
+    pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());
+    pontos = double.tryParse(json['pontos'].toString());
+    capitaoId = json['capitao_id'];
+    valorTime = double.tryParse(json['valor_time'].toString());
+    rodadaAtual = json['rodada_atual'];
+    esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
   }
 
   TimeCartolaModel.fromDataBase(Map<String, dynamic> json) {
@@ -137,6 +145,7 @@ class TimeCartolaModel {
   }
 
   TimeCartolaModel.fromTimeCartolaDTO(TimeCartolaDto time) {
+    atletas = time.atletas;
     temporadaInicial = time.time!.temporadaInicial;
     nomeCartola = time.time!.nomeCartola ?? "Cartola Prime";
     globoId = time.time!.globoId;
@@ -155,6 +164,8 @@ class TimeCartolaModel {
     capitaoId = time.capitaoId;
     valorTime = time.valorTime;
     rodadaAtual = time.rodadaAtual;
+
+    esquema = EsquemaTimeEnum.values[esquemaId ?? 2];
   }
 
   double getParcialTime() {
@@ -165,6 +176,14 @@ class TimeCartolaModel {
       } else {
         pontosParcial = pontosParcial + element.pontosNum!;
       }
+    }
+    return pontosParcial;
+  }
+
+  double getParcialTimeSemCapitao() {
+    double pontosParcial = 0;
+    for (var element in atletas!) {
+      pontosParcial = pontosParcial + element.pontosNum!;
     }
     return pontosParcial;
   }

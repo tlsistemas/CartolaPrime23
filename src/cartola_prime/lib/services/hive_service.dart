@@ -34,4 +34,9 @@ class HiveService {
     final openBox = await Hive.openBox(boxName!);
     openBox.clear();
   }
+
+  removeBoxFirstItem({String? boxName}) async {
+    final openBox = await Hive.openBox(boxName!);
+    openBox.deleteAt(0);
+  }
 }

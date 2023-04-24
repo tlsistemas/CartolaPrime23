@@ -46,8 +46,8 @@ class TimeCartolaRepository implements ITimeCartolaRepository {
   }
 
   @override
-  Future<void> update(TimeCartolaModel model) {
-    throw UnimplementedError();
+  Future<void> update(TimeCartolaModel model) async {
+    await _dataBaseRepository.update(table, model.toDataBase());
   }
 
   @override

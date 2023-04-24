@@ -191,7 +191,7 @@ class ListaTimesCartolaControler extends StatelessWidget {
           Navigator.pushNamed(
             context,
             "/atletas",
-            arguments: timeCartola.timeId,
+            arguments: timeCartola,
           );
         },
       )

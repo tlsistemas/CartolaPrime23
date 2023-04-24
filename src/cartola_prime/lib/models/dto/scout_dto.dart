@@ -4,27 +4,27 @@ part '../adapter/scout_dto.g.dart';
 
 @HiveType(typeId: 2)
 class ScoutDto {
-  int? A;
-  int? cA;
-  int? cV;
-  int? dD;
-  int? dP;
-  int? fC;
-  int? fD;
-  int? fF;
-  int? fS;
-  int? fT;
-  int? G;
-  int? gC;
-  int? gS;
-  int? I;
-  int? pE;
-  int? pP;
-  int? rB;
-  int? sG;
-  int? pI;
-  int? dS;
-  int? dE;
+  int? A = 0;
+  int? cA = 0;
+  int? cV = 0;
+  int? dD = 0;
+  int? dP = 0;
+  int? fC = 0;
+  int? fD = 0;
+  int? fF = 0;
+  int? fS = 0;
+  int? fT = 0;
+  int? G = 0;
+  int? gC = 0;
+  int? gS = 0;
+  int? I = 0;
+  int? pE = 0;
+  int? pP = 0;
+  int? rB = 0;
+  int? sG = 0;
+  int? pI = 0;
+  int? dS = 0;
+  int? dE = 0;
 
   ScoutDto(
       {this.A,
@@ -74,27 +74,29 @@ class ScoutDto {
   }
 
   ScoutDto.fromJsonDynamic(dynamic json) {
-    A = json.A;
-    cA = json.cA;
-    cV = json.cV;
-    dD = json.dD;
-    dP = json.dP;
-    fC = json.fC;
-    fD = json.fD;
-    fF = json.fF;
-    fS = json.fS;
-    fT = json.fT;
-    G = json.G;
-    gC = json.gC;
-    gS = json.gS;
-    I = json.I;
-    pE = json.pE;
-    pP = json.pP;
-    rB = json.rB;
-    sG = json.sG;
-    pI = json.pI;
-    dS = json.dS;
-    dE = json.dE;
+    if (json != null) {
+      A = json.A;
+      cA = json.cA;
+      cV = json.cV;
+      dD = json.dD;
+      dP = json.dP;
+      fC = json.fC;
+      fD = json.fD;
+      fF = json.fF;
+      fS = json.fS;
+      fT = json.fT;
+      G = json.G;
+      gC = json.gC;
+      gS = json.gS;
+      I = json.I;
+      pE = json.pE;
+      pP = json.pP;
+      rB = json.rB;
+      sG = json.sG;
+      pI = json.pI;
+      dS = json.dS;
+      dE = json.dE;
+    }
   }
 
   Map<String, dynamic> toJson() {

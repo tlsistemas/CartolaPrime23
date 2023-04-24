@@ -127,19 +127,20 @@ class DataBaseRepository {
   Future<int?> update(String table, Map<String, dynamic> data) async {
     try {
       var connection = await database;
-      return await connection!
-          .update(table, data, where: "id = ?", whereArgs: [data['id']]);
+      var retorno = await connection!.update(table, data,
+          where: "time_id = ?", whereArgs: [data['time_id']]);
+      return retorno;
     } catch (e) {
       print('DbException' + e.toString());
       return null;
     }
   }
 
-  Future<int?> delete(String table, String id) async {
+  Future<int?> delete(String table, String time_id) async {
     try {
       var connection = await database;
-      var result =
-          await connection!.delete(table, where: "id = ?", whereArgs: [id]);
+      var result = await connection!
+          .delete(table, where: "time_id = ?", whereArgs: [time_id]);
       return result;
     } catch (e) {
       print('DbException' + e.toString());
