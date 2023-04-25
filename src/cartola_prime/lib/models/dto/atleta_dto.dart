@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cartola_prime/repositories/clube_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -38,7 +36,9 @@ class AtletaDto {
   int? precoEditorial;
   List<AtletaDto>? atletas;
   String? titularReserva;
+  IconData? iconSubstituicao;
   Color? pontoCor = const Color.fromARGB(255, 118, 118, 118);
+  bool? capitao = false;
 
   AtletaDto(
       {this.scout,

@@ -12,4 +12,5 @@ mixin baseUrls {
   String authTime = '$_baseUrl/auth/time';
   String buscaTime = '$_baseUrl/busca?q=';
   String buscaTimeId = '$_baseUrl/time/id/';
+  String buscaTimeIdSubstituicoes = '$_baseUrl/time/substituicoes/';
 }

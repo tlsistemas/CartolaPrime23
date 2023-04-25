@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../models/dto/time_busca_dto.dart';
 import '../models/dto/time_cartola_dto.dart';
 import '../models/dto/time_logado_dto.dart';
+import '../models/dto/time_subtituicoes_dto.dart';
 import '../repositories/auth_repository.dart';
 import '../repositories/contracts/i_auth_repository.dart';
 import '../shared/utils/base_urls.dart';
@@ -44,6 +45,31 @@ class TimeService extends ChangeNotifier with baseUrls {
     } else {
       var dados = TimeCartolaDto.fromJson(response);
       return dados;
+    }
+  }
+
+  Future<List<TimeSubtituicoesDto>> getTimeSubtituicoes(int timeId) async {
+    final response =
+        await _clientHttp.get(buscaTimeIdSubstituicoes + timeId.toString());
+
+    if (!response.isNotEmpty) {
+      return <TimeSubtituicoesDto>[];
+    } else {
+      var dados = TimeSubtituicoesDto.fromJsonList(response);
+      return dados.subtituicoes!;
+    }
+  }
+
+  Future<List<TimeSubtituicoesDto>> getTimeSubtituicoesRodada(
+      int timeId, int rodada) async {
+    final response =
+        await _clientHttp.getHttp("$buscaTimeIdSubstituicoes$timeId/$rodada");
+
+    if (!response.isNotEmpty) {
+      return <TimeSubtituicoesDto>[];
+    } else {
+      var dados = TimeSubtituicoesDto.fromJsonList(response);
+      return dados.subtituicoes!;
     }
   }
 }

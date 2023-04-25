@@ -27,17 +27,18 @@ class MercadoViewModel {
   }
 
   Future<List<PontuadosDto>?> pontuadosMercado() async {
-    bool exists = await hiveService.isExists(boxName: baseTable.pontuadosTable);
+    // bool exists = await hiveService.isExists(boxName: baseTable.pontuadosTable);
     List<PontuadosDto>? retorno = <PontuadosDto>[];
-    if (exists) {
-      var pontuados = await hiveService.getBoxes(baseTable.pontuadosTable);
-      var lstPontuados = PontuadosDto.fromJsonListDynamic(pontuados);
-      retorno = lstPontuados.atletas;
-    } else {
-      hiveService.clearBox(boxName: baseTable.pontuadosTable);
-      retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
-      await hiveService.addBoxes(retorno, baseTable.pontuadosTable);
-    }
+    retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
+    // if (exists) {
+    //   var pontuados = await hiveService.getBoxes(baseTable.pontuadosTable);
+    //   var lstPontuados = PontuadosDto.fromJsonListDynamic(pontuados);
+    //   retorno = lstPontuados.atletas;
+    // } else {
+    //   hiveService.clearBox(boxName: baseTable.pontuadosTable);
+    //   retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
+    //   await hiveService.addBoxes(retorno, baseTable.pontuadosTable);
+    // }
     return retorno;
   }
 

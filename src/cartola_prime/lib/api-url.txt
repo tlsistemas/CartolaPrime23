@@ -37,3 +37,4 @@ time_adv: "//api.cartolafc.globo.com/time/slug/{slug}/{rodada}", // opcionalment
 time_id: "//api.cartolafc.globo.com/time/id/{id}/{rodada}", // opcionalmente aceita a rodada
 time: "//api.cartolafc.globo.com/auth/time",
 validarAssinaturaUsuarioSemTime: "//api.cartolafc.globo.com/logged/time/validar-pro"
+time_substituição: https://api.cartolafc.globo.com/time/substituicoes/961332

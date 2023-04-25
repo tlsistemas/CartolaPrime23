@@ -9,6 +9,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../data/data_base_repository.dart';
 import '../models/dto/pontuados_dto.dart';
+import '../models/dto/time_subtituicoes_dto.dart';
 import '../models/time_cartola_model.dart';
 import '../repositories/contracts/i_mercado_repository.dart';
 import '../repositories/contracts/i_time_cartola_repository.dart';
@@ -120,6 +121,8 @@ class TimeCartolaViewModel {
       pontuados = await mercadoViewModel.pontuadosMercado();
       for (var i = 0; i < times.length; i++) {
         var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
+        var substituicoes =
+            await _service.getTimeSubtituicoes(times[i].timeId!);
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
 
         var retorno = await preencherPontosAtletas(timeModel, pontuados);
@@ -133,7 +136,43 @@ class TimeCartolaViewModel {
       }
     }
 
+    if (mercado.statusMercado == StatusMercadoEnum.aberto.index) {
+      for (var i = 0; i < times.length; i++) {
+        var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
+        var substituicoes = await _service.getTimeSubtituicoesRodada(
+            times[i].timeId!, (mercado.rodadaAtual! - 1));
+
+        if (substituicoes.isNotEmpty) {
+          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+        }
+
+        var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
+        timeModel.atletas!
+            .firstWhere((element) => element.atletaId == timeModel.capitaoId)
+            .capitao = true;
+
+        updateTime(timeModel);
+
+        timesRetorno.add(timeModel);
+      }
+    }
+
     return timesRetorno;
+  }
+
+  TimeCartolaDto preencherSubstituicoes(
+      List<TimeSubtituicoesDto> substituicoes, TimeCartolaDto timeCompleto) {
+    for (var itemSubs in substituicoes) {
+      var entrou = timeCompleto.atletas!.firstWhere(
+          (element) => element.atletaId == itemSubs.entrou!.atletaId);
+      entrou.iconSubstituicao = Icons.arrow_circle_up;
+
+      var saiu = timeCompleto.reservas!
+          .firstWhere((element) => element.atletaId == itemSubs.saiu!.atletaId);
+      saiu.iconSubstituicao = Icons.arrow_circle_down;
+    }
+
+    return timeCompleto;
   }
 
   Future<TimeCartolaModel> preencherPontosAtletas(
@@ -147,11 +186,32 @@ class TimeCartolaViewModel {
         if (time.atletas![x].atletaId == time.capitaoId) {
           time.atletas![x].pontosNum =
               time.atletas![x].pontosNum! + (altletaPontuado.pontuacao! * 1.5);
+          time.atletas![x].capitao = true;
         } else {
           time.atletas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
         }
         time.atletas![x].pontoCor =
             time.atletas![x].pontosNum! > 0 ? Colors.green : Colors.red;
+        time.atletas![x].pontoCor = time.atletas![x].pontosNum! == 0
+            ? const Color.fromARGB(255, 90, 90, 90)
+            : time.atletas![x].pontoCor!;
+      }
+    }
+
+    for (var x = 0; x < time.reservas!.length; x++) {
+      var exist = pontuados!.indexWhere(
+          (element) => element.atletaId == time.reservas![x].atletaId);
+      if (exist > 0) {
+        var altletaPontuado = pontuados.firstWhere(
+            (element) => element.atletaId == time.reservas![x].atletaId);
+
+        time.reservas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
+
+        time.reservas![x].pontoCor =
+            time.reservas![x].pontosNum! > 0 ? Colors.green : Colors.red;
+        time.reservas![x].pontoCor = time.reservas![x].pontosNum! == 0
+            ? const Color.fromARGB(255, 90, 90, 90)
+            : time.reservas![x].pontoCor!;
       }
     }
     return time;

@@ -65,7 +65,7 @@ class ClientHttp {
       final body = jsonDecode(response.toString());
       return body;
     } catch (e) {
-      rethrow;
+      return <String, dynamic>{};
     }
   }
 

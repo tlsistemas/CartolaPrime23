@@ -118,12 +118,12 @@ class _AtletasPage extends State<AtletasPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      item!.urlEscudoPng!.isEmpty
+                      item!.urlEscudoPng.isEmpty
                           ? const Image(
                               height: 50,
                               image: AssetImage('assets/images/iconp.png'))
                           : Image.network(
-                              item.urlEscudoPng!,
+                              item.urlEscudoPng,
                               height: 50,
                               alignment: Alignment.center,
                               centerSlice: Rect.largest,
@@ -259,7 +259,7 @@ class _AtletasPage extends State<AtletasPage> {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(
-          padding: const EdgeInsets.all(5.0),
+          padding: const EdgeInsets.all(3.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -267,12 +267,20 @@ class _AtletasPage extends State<AtletasPage> {
             children: [
               Image.network(
                 atleta.foto!,
-                height: 90,
-                width: 90,
+                height: 80,
+                width: 80,
                 centerSlice: Rect.largest,
+                fit: BoxFit.fill,
+                alignment: Alignment.centerLeft,
               ),
+              Icon(atleta.iconSubstituicao,
+                  color: atleta.iconSubstituicao == Icons.arrow_circle_up
+                      ? Colors.green
+                      : Colors.red),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Text(
                     atleta.apelido!.toString(),
@@ -344,20 +352,44 @@ class _AtletasPage extends State<AtletasPage> {
                 ],
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
                 children: [
+                  Visibility(
+                    visible: atleta.capitao!,
+                    child: Image.asset(
+                      'assets/images/ic_capita.png',
+                      height: 30,
+                      width: 30,
+                    ),
+                  ),
+                  Visibility(
+                    visible: atleta.capitao!,
+                    child: Text(
+                      "${NumberFormat.decimalPatternDigits(decimalDigits: 2).format(atleta.pontosNum!)} X1.5",
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   Text(
-                    NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                        .format(atleta.pontosNum!),
+                    atleta.capitao!
+                        ? NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                            .format(atleta.pontosNum! * 1.5)
+                        : NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                            .format(atleta.pontosNum!),
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: atleta.pontoCor),
                     textAlign: TextAlign.right,
                   ),
-                  const Text(
-                    "Pts",
-                    style: TextStyle(color: Colors.black, fontSize: 10),
-                  ),
+                  // const Text(
+                  //   "Pts",
+                  //   style: TextStyle(color: Colors.black, fontSize: 10),
+                  // ),
                 ],
               )
               // Row(
