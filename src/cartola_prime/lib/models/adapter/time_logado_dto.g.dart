@@ -13,7 +13,7 @@ class TimeLogadoDtoAdapter extends TypeAdapter<TimeLogadoDto> {
     return TimeLogadoDto(
         atletas: fields['atletas'] as List<AtletaDto>?,
         capitaoId: fields['capitaoId'] as int?,
-        patrimonio: fields['patrimonio'] as int?,
+        patrimonio: fields['patrimonio'] as double?,
         esquemaId: fields['esquemaId'] as int?,
         pontos: fields['pontos'] as double?,
         pontosCampeonato: fields['pontosCampeonato'] as double?,
@@ -22,9 +22,9 @@ class TimeLogadoDtoAdapter extends TypeAdapter<TimeLogadoDto> {
         time: fields['time'] as TimeDto?,
         totalLigas: fields['totalLigas'] as int?,
         totalLigasMatamata: fields['totalLigasMatamata'] as int?,
-        valorTime: fields['valorTime'] as int?,
-        variacaoPatrimonio: fields['variacaoPatrimonio'] as int?,
-        variacaoPontos: fields['variacaoPontos'] as String?);
+        valorTime: fields['valorTime'] as double?,
+        variacaoPatrimonio: fields['variacaoPatrimonio'] as double?,
+        variacaoPontos: fields['variacaoPontos'] as double?);
   }
 
   @override

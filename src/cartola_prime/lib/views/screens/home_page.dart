@@ -217,20 +217,12 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 timeLog.urlEscudoPng != ""
-                    ? CachedNetworkImage(
-                        imageUrl: timeLog.urlEscudoPng,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: imageProvider,
-                              fit: BoxFit.cover,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.red,
-                                BlendMode.colorBurn,
-                              ),
-                            ),
-                          ),
-                        ),
+                    ? Image.network(
+                        timeLog.urlEscudoPng,
+                        height: 70,
+                        width: 70,
+                        alignment: Alignment.center,
+                        centerSlice: Rect.largest,
                       )
                     : const CircleAvatar(
                         backgroundColor: Colors.transparent,

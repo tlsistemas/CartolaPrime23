@@ -17,12 +17,12 @@ class TimeLogadoDto {
   double? pontos;
   int? esquemaId;
   int? rodadaAtual;
-  int? patrimonio;
-  int? valorTime;
+  double? patrimonio;
+  double? valorTime;
   int? totalLigas;
   int? totalLigasMatamata;
-  int? variacaoPatrimonio;
-  String? variacaoPontos;
+  double? variacaoPatrimonio;
+  double? variacaoPontos;
   //List<Null>? servicos;
   RankingDto? ranking;
 
@@ -57,17 +57,18 @@ class TimeLogadoDto {
       });
     }
     time = json['time'] != null ? TimeDto.fromJson(json['time']) : null;
-    pontosCampeonato = json['pontos_campeonato'];
+    pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());
     capitaoId = json['capitao_id'];
-    pontos = json['pontos'];
+    pontos = double.tryParse(json['pontos'].toString());
     esquemaId = json['esquema_id'];
     rodadaAtual = json['rodada_atual'];
-    patrimonio = json['patrimonio'];
-    valorTime = json['valor_time'];
+    patrimonio = double.tryParse(json['patrimonio'].toString());
+    valorTime = double.tryParse(json['valor_time'].toString());
     totalLigas = json['total_ligas'];
     totalLigasMatamata = json['total_ligas_matamata'];
-    variacaoPatrimonio = json['variacao_patrimonio'];
-    variacaoPontos = json['variacao_pontos'];
+    variacaoPatrimonio =
+        double.tryParse(json['variacao_patrimonio'].toString());
+    variacaoPontos = double.tryParse(json['variacao_pontos'].toString());
     // if (json['servicos'] != null) {
     //   servicos = <Null>[];
     //   json['servicos'].forEach((v) {
