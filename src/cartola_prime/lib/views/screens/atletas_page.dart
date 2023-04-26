@@ -173,7 +173,7 @@ class _AtletasPage extends State<AtletasPage> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(
-                                    width: 100.0,
+                                    width: 90.0,
                                     height: 0.0,
                                   ),
                                   const Text(
@@ -265,18 +265,32 @@ class _AtletasPage extends State<AtletasPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Image.network(
-                atleta.foto!,
-                height: 80,
-                width: 80,
-                centerSlice: Rect.largest,
-                fit: BoxFit.fill,
-                alignment: Alignment.centerLeft,
+              Stack(
+                alignment: Alignment.topLeft,
+                children: [
+                  Visibility(
+                    visible: atleta.capitao!,
+                    child: Image.asset(
+                      'assets/images/ic_capita.png',
+                      height: 25,
+                      width: 25,
+                    ),
+                  ),
+                  Image.network(
+                    atleta.foto!,
+                    height: 90,
+                    width: 90,
+                    centerSlice: Rect.largest,
+                    fit: BoxFit.fitHeight,
+                    alignment: Alignment.topLeft,
+                  ),
+                  Icon(atleta.iconSubstituicao,
+                      color: atleta.iconSubstituicao == Icons.arrow_circle_up
+                          ? Colors.green
+                          : Colors.red),
+                ],
               ),
-              Icon(atleta.iconSubstituicao,
-                  color: atleta.iconSubstituicao == Icons.arrow_circle_up
-                      ? Colors.green
-                      : Colors.red),
+
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -319,7 +333,7 @@ class _AtletasPage extends State<AtletasPage> {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
-                            width: 90.0,
+                            width: 80.0,
                             height: 0.0,
                           ),
                           const Text(
@@ -338,7 +352,7 @@ class _AtletasPage extends State<AtletasPage> {
                             textAlign: TextAlign.right,
                           ),
                           const SizedBox(
-                            width: 90.0,
+                            width: 80.0,
                             height: 0.0,
                           ),
                           const Text(
@@ -356,18 +370,18 @@ class _AtletasPage extends State<AtletasPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Visibility(
-                    visible: atleta.capitao!,
-                    child: Image.asset(
-                      'assets/images/ic_capita.png',
-                      height: 30,
-                      width: 30,
-                    ),
-                  ),
+                  // Visibility(
+                  //   visible: atleta.capitao!,
+                  //   child: Image.asset(
+                  //     'assets/images/ic_capita.png',
+                  //     height: 30,
+                  //     width: 30,
+                  //   ),
+                  // ),
                   Visibility(
                     visible: atleta.capitao!,
                     child: Text(
-                      "${NumberFormat.decimalPatternDigits(decimalDigits: 2).format(atleta.pontosNum!)} X1.5",
+                      "${NumberFormat.decimalPatternDigits(decimalDigits: 2).format(atleta.pontosNum!)} x1.5",
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 12,
