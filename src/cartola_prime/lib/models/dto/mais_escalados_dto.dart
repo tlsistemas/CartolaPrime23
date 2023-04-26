@@ -73,7 +73,7 @@ class MaisEscaladosDto {
     clubeNome = json['clube_nome'];
     escudoClube = json['escudo_clube'];
     atleta = json['Atleta'] != null
-        ? AtletaDto.fromJson(json['Atleta'], CondicaoAtletaEnum.titular)
+        ? AtletaDto.fromJsonMin(json['Atleta'], CondicaoAtletaEnum.titular)
         : null;
     clubeId = json['clube_id'];
     escalacoes = json['escalacoes'];

@@ -66,9 +66,9 @@ class AtletaDto {
     scout = json['scout'] != null ? ScoutDto.fromJson(json['scout']) : null;
     atletaId = json['atleta_id'];
     rodadaId = json['rodada_id'];
-    clubeId = json['clube_id'];
+    clubeId = json['clube_id'] ?? 0;
     ClubeRepository().getId(clubeId!).then((value) => clube = value);
-    posicaoId = json['posicao_id'];
+    posicaoId = json['posicao_id'] ?? 0;
     posicao = PosicaoConverter.getPosicaoMin(posicaoId!);
     statusId = json['status_id'];
     pontosNum = double.tryParse(json['pontos_num'].toString());
@@ -89,6 +89,20 @@ class AtletaDto {
     precoEditorial = json['preco_editorial'];
     titularReserva = eTitulaOuReserva.texto;
     pontoCor = pontosNum! > 0 ? Colors.green : Colors.red;
+  }
+
+  AtletaDto.fromJsonMin(
+      Map<String, dynamic> json, CondicaoAtletaEnum eTitulaOuReserva) {
+    scout = json['scout'] != null ? ScoutDto.fromJson(json['scout']) : null;
+    atletaId = json['atleta_id'];
+    rodadaId = json['rodada_id'];
+    slug = json['slug'];
+    apelido = json['apelido'];
+    apelidoAbreviado = json['apelido_abreviado'];
+    nome = json['nome'];
+    foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
+    precoEditorial = json['preco_editorial'];
+    titularReserva = eTitulaOuReserva.texto;
   }
 
   Map<String, dynamic> toJson() {
