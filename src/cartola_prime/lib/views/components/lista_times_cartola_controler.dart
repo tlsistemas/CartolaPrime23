@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../models/time_cartola_model.dart';
 import 'resource_colors.dart';
@@ -17,25 +18,29 @@ class ListaTimesCartolaControler extends StatelessWidget {
       future: myData,
       builder: (context, AsyncSnapshot<List<TimeCartolaModel>> snapshot) {
         if (!snapshot.hasData) {
-          return const Padding(
-            padding: EdgeInsets.all(50.0),
-            child: Align(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  CircularProgressIndicator(
-                    backgroundColor: backgroundPageColor,
-                    color: backgroundColor,
-                    strokeWidth: 2,
-                  ),
-                  SizedBox(height: 15),
-                  Text("Carregando...",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.end),
-                ],
+          return Container(
+            color: const Color(0xFF9d9d9d),
+            height: 600,
+            width: double.infinity,
+            child: Dialog(
+              // The background color
+              backgroundColor: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // The loading indicator
+                    //CircularProgressIndicator(),
+                    Lottie.asset('assets/json/football.json'),
+                    const Text(
+                      'Carregando...',
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
           );

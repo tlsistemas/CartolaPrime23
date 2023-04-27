@@ -1,9 +1,9 @@
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/time_cartola_model.dart';
-import 'package:cartola_prime/shared/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../viewmodel/time_cartola_vm.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -36,33 +36,34 @@ class _AtletasPage extends State<AtletasPage> {
   }
 
   void _fetchData(BuildContext context, [bool mounted = true]) async {
-    // show the loading dialog
+    // // show the loading dialog
     showDialog(
-        // The user CANNOT close this dialog  by pressing outsite it
-        barrierDismissible: false,
-        context: context,
-        builder: (_) {
-          return const Dialog(
-            // The background color
-            backgroundColor: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // The loading indicator
-                  CircularProgressIndicator(),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  // Some text
-                  Text('Carregando...')
-                ],
-              ),
+      // The user CANNOT close this dialog  by pressing outsite it
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          // The background color
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // The loading indicator
+                //CircularProgressIndicator(),
+                Lottie.asset('assets/json/football.json'),
+                const Text(
+                  'Carregando...',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-          );
-        });
-
+          ),
+        );
+      },
+    );
     // Your asynchronous computation here (fetching data from an API, processing files, inserting something to the database, etc)
     _myData = _updateTimes();
     await Future.delayed(const Duration(seconds: 3));
@@ -74,13 +75,9 @@ class _AtletasPage extends State<AtletasPage> {
   }
 
   Future<TimeCartolaModel> _getTimes() async {
-    // var times = await timeViewModel.getTimeIdDbAtletas(widget.idTime);
-    // times.atletas?.addAll(times.reservas!);
-    // return times;
     if (widget.timeAtletas.atletas!.length < 13) {
       widget.timeAtletas.atletas?.addAll(widget.timeAtletas.reservas!);
     }
-    //widget.timeAtletas.atletas!.unique((x) => x.atletaId);
     return widget.timeAtletas;
   }
 
@@ -128,24 +125,22 @@ class _AtletasPage extends State<AtletasPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<TimeCartolaModel> snapshot) {
         if (!snapshot.hasData) {
-          return const Padding(
-            padding: EdgeInsets.all(50.0),
-            child: Align(
-              alignment: Alignment.center,
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircularProgressIndicator(
-                    backgroundColor: backgroundPageColor,
-                    color: backgroundColor,
-                    strokeWidth: 2,
+                  // The loading indicator
+                  //CircularProgressIndicator(),
+                  Lottie.asset('assets/json/football.json'),
+                  const Text(
+                    'Carregando...',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 15),
-                  Text("Carregando...",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.end),
                 ],
               ),
             ),

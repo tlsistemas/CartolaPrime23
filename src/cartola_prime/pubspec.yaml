@@ -97,6 +97,7 @@ flutter:
     - assets/images/fundo_home.png
     - assets/json/splash_icon.json
     - assets/json/pontuados.json
+    - assets/json/football.json
     - assets/svg/selo-cartoleiro-pro.svg
   
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../models/dto/partida_dto.dart';
 import '../../viewmodel/rodada_vm.dart';
@@ -63,24 +64,22 @@ class _RodadaPage extends State<RodadaPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<List<PartidaDto>> snapshot) {
         if (!snapshot.hasData) {
-          return const Padding(
-            padding: EdgeInsets.all(50.0),
-            child: Align(
-              alignment: Alignment.center,
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircularProgressIndicator(
-                    backgroundColor: backgroundPageColor,
-                    color: backgroundColor,
-                    strokeWidth: 2,
+                  // The loading indicator
+                  //CircularProgressIndicator(),
+                  Lottie.asset('assets/json/football.json'),
+                  const Text(
+                    'Carregando...',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 15),
-                  Text("Carregando...",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.end),
                 ],
               ),
             ),

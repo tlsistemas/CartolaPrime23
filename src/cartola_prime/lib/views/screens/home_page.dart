@@ -3,6 +3,7 @@ import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/viewmodel/mercado_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../../models/time_cartola_model.dart';
@@ -110,6 +111,45 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _fetchData(BuildContext context, [bool mounted = true]) async {
+    // // show the loading dialog
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          // The background color
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // The loading indicator
+                //CircularProgressIndicator(),
+                Lottie.asset('assets/json/football.json'),
+                const Text(
+                  'Carregando...',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    // Your asynchronous computation here (fetching data from an API, processing files, inserting something to the database, etc)
+    _myData = _setTimes();
+    await Future.delayed(const Duration(seconds: 3));
+
+    // Close the dialog programmatically
+    // We use "mounted" variable to get rid of the "Do not use BuildContexts across async gaps" warning
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     _timeLogadoVM.isLogado().then((value) => _isLogado = value);
@@ -189,7 +229,8 @@ class _HomePageState extends State<HomePage> {
             floatingActionButton: FloatingActionButton(
               onPressed: () {
                 setState(() {
-                  _myData = _setTimes();
+                  _fetchData(context);
+                  //_myData = _setTimes();
                 });
               },
               backgroundColor: foregroundColor,
