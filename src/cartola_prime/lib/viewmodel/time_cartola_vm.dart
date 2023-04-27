@@ -102,6 +102,24 @@ class TimeCartolaViewModel {
         return retorno;
       }
 
+      if (mercado.statusMercado == StatusMercadoEnum.aberto.index) {
+        var timeCompleto = await _service.getTimeBuscaId(time.timeId!);
+        var substituicoes = await _service.getTimeSubtituicoesRodada(
+            time.timeId!, (mercado.rodadaAtual! - 1));
+
+        if (substituicoes.isNotEmpty) {
+          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+        }
+
+        var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
+        timeModel.atletas!
+            .firstWhere((element) => element.atletaId == timeModel.capitaoId)
+            .capitao = true;
+
+        updateTime(timeModel);
+        return timeModel;
+      }
+
       return time;
     } catch (ex) {
       return TimeCartolaModel();

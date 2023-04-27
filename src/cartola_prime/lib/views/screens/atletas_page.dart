@@ -1,5 +1,6 @@
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/time_cartola_model.dart';
+import 'package:cartola_prime/shared/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -12,11 +13,11 @@ import '../components/resource_colors.dart';
 
 class AtletasPage extends StatefulWidget {
   const AtletasPage(
-    this.idTime, {
+    this.timeAtletas, {
     Key? key,
   }) : super(key: key);
 
-  final TimeCartolaModel idTime;
+  final TimeCartolaModel timeAtletas;
 
   @override
   State<AtletasPage> createState() => _AtletasPage();
@@ -34,16 +35,59 @@ class _AtletasPage extends State<AtletasPage> {
     super.initState();
   }
 
+  void _fetchData(BuildContext context, [bool mounted = true]) async {
+    // show the loading dialog
+    showDialog(
+        // The user CANNOT close this dialog  by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return const Dialog(
+            // The background color
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // The loading indicator
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  // Some text
+                  Text('Carregando...')
+                ],
+              ),
+            ),
+          );
+        });
+
+    // Your asynchronous computation here (fetching data from an API, processing files, inserting something to the database, etc)
+    _myData = _updateTimes();
+    await Future.delayed(const Duration(seconds: 3));
+
+    // Close the dialog programmatically
+    // We use "mounted" variable to get rid of the "Do not use BuildContexts across async gaps" warning
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
+
   Future<TimeCartolaModel> _getTimes() async {
     // var times = await timeViewModel.getTimeIdDbAtletas(widget.idTime);
     // times.atletas?.addAll(times.reservas!);
     // return times;
-    var times = widget.idTime.atletas?.addAll(widget.idTime.reservas!);
-    return widget.idTime;
+    if (widget.timeAtletas.atletas!.length < 13) {
+      widget.timeAtletas.atletas?.addAll(widget.timeAtletas.reservas!);
+    }
+    //widget.timeAtletas.atletas!.unique((x) => x.atletaId);
+    return widget.timeAtletas;
   }
 
   Future<TimeCartolaModel> _updateTimes() async {
-    var times = await _timeViewModel.getTimeIdDbAtletas(widget.idTime.timeId!);
+    var times =
+        await _timeViewModel.getTimeIdDbAtletas(widget.timeAtletas.timeId!);
+    times.atletas!.addAll(times.reservas!);
     return times;
   }
 
@@ -56,7 +100,8 @@ class _AtletasPage extends State<AtletasPage> {
         onPressedUpdate: () => {
           setState(
             () {
-              _myData = _updateTimes();
+              _fetchData(context);
+              //_myData = _updateTimes();
             },
           ),
         },
