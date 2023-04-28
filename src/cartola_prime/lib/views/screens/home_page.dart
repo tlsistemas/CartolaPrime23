@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/viewmodel/mercado_vm.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +49,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     _loadBannerAd();
     _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     preecherStatusMercado();
     verificarClubes();
     preencherInfoTime();
-    super.initState();
     _myData = _setTimes();
   }
 
@@ -190,18 +189,6 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () => toggleMenu(),
               ),
               actions: [
-                // Visibility(
-                //   visible: _isLogado ? false : true,
-                //   child: IconButton(
-                //     icon: const Icon(
-                //       Icons.login,
-                //       color: iconColorPrimary,
-                //     ),
-                //     onPressed: () {
-                //       Navigator.pushNamed(context, "/login");
-                //     },
-                //   ),
-                // ),
                 IconButton(
                   icon: const Icon(
                     Icons.add,
@@ -230,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                   if (_isBannerAdReady)
                     Align(
                       alignment: Alignment.bottomCenter,
-                      child: Container(
+                      child: SizedBox(
                         width: _bannerAd.size.width.toDouble(),
                         height: _bannerAd.size.height.toDouble(),
                         child: AdWidget(ad: _bannerAd),
@@ -446,7 +433,7 @@ class _HomePageState extends State<HomePage> {
   void _loadBannerAd() {
     _bannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
-      request: AdRequest(),
+      request: const AdRequest(),
       size: AdSize.banner,
       listener: BannerAdListener(
         onAdLoaded: (_) {
