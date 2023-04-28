@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                 style: const TextStyle(color: textColorPrimary),
               ),
             ),
-            body: Stack(
+            body: Column(
               children: <Widget>[
                 SizedBox(
                   height: height - 135,
