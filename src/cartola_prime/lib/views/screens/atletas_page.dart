@@ -1,7 +1,7 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/time_cartola_model.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -31,15 +31,42 @@ class _AtletasPage extends State<AtletasPage> {
   final TimeCartolaViewModel _timeViewModel = TimeCartolaViewModel();
   late Future<TimeCartolaModel>? _myData;
 
-  late BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
-  InterstitialAd? _interstitialAd;
+  AdmobBannerSize? bannerSize;
+  late AdmobInterstitial interstitialAd;
+  late AdmobReward rewardAd;
+
+  @override
+  void dispose() {
+    interstitialAd.dispose();
+    rewardAd.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
-    _loadBannerAd();
     _myData = _getTimes();
+
+    bannerSize = AdmobBannerSize.BANNER;
+
+    interstitialAd = AdmobInterstitial(
+      adUnitId: AdHelper.bannerAdUnitId,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) interstitialAd.load();
+        //handleEvent(event, args, 'Interstitial');
+      },
+    );
+
+    rewardAd = AdmobReward(
+      adUnitId: AdHelper.bannerAdUnitId,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) rewardAd.load();
+        //handleEvent(event, args, 'Reward');
+      },
+    );
+
+    interstitialAd.load();
+    rewardAd.load();
   }
 
   void _fetchData(BuildContext context, [bool mounted = true]) async {
@@ -295,17 +322,19 @@ class _AtletasPage extends State<AtletasPage> {
                   },
                 ),
               ),
-              if (_isBannerAdReady)
-                Expanded(
-                  child: Align(
-                    alignment: FractionalOffset.bottomCenter,
-                    child: SizedBox(
-                      width: _bannerAd.size.width.toDouble(),
-                      height: _bannerAd.size.height.toDouble(),
-                      child: AdWidget(ad: _bannerAd),
-                    ),
-                  ),
-                ),
+              AdmobBanner(
+                adUnitId: AdHelper.bannerAdUnitId,
+                adSize: bannerSize!,
+                listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+                  // handleEvent(event, args, 'Banner');
+                },
+                onBannerCreated: (AdmobBannerController controller) {
+                  // Dispose is called automatically for you when Flutter removes the banner from the widget tree.
+                  // Normally you don't need to worry about disposing this yourself, it's handled.
+                  // If you need direct access to dispose, this is your guy!
+                  // controller.dispose();
+                },
+              ),
             ],
           );
         }
@@ -501,26 +530,5 @@ class _AtletasPage extends State<AtletasPage> {
                 },
           child: child),
     );
-  }
-
-  void _loadBannerAd() {
-    _bannerAd = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          _isBannerAdReady = false;
-          ad.dispose();
-        },
-      ),
-    );
-
-    _bannerAd.load();
   }
 }
