@@ -5,6 +5,7 @@ import 'package:cartola_prime/models/dto/ranking_dto.dart';
 import 'package:cartola_prime/models/dto/time_dto.dart';
 import 'package:cartola_prime/models/dto/time_logado_dto.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:cartola_prime/app_widget.dart';
 import 'package:flutter/foundation.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
   runApp(const AppWidget());
 
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   if (kIsWeb) {
     await Hive.initFlutter();
   } else {

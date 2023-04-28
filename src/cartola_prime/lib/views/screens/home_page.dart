@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/viewmodel/mercado_vm.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -10,6 +11,7 @@ import '../../models/time_cartola_model.dart';
 import '../../models/time_logado_model.dart';
 import '../../repositories/clube_repository.dart';
 import '../../services/clube_service.dart';
+import '../../shared/utils/ad_helper.dart';
 import '../../viewmodel/time_cartola_vm.dart';
 import '../../viewmodel/time_logado_vm.dart';
 import '../components/divider_controler.dart';
@@ -42,9 +44,13 @@ class _HomePageState extends State<HomePage> {
   late double height = MediaQuery.of(context).size.height;
   String statusMercado = "";
   String fechamentoMercado = "";
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+  InterstitialAd? _interstitialAd;
 
   @override
   void initState() {
+    _loadBannerAd();
     _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     preecherStatusMercado();
     verificarClubes();
@@ -221,6 +227,15 @@ class _HomePageState extends State<HomePage> {
                   ListaTimesCartolaControler(
                     myData: _myData,
                   ),
+                  if (_isBannerAdReady)
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        width: _bannerAd.size.width.toDouble(),
+                        height: _bannerAd.size.height.toDouble(),
+                        child: AdWidget(ad: _bannerAd),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -426,5 +441,26 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void _loadBannerAd() {
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          _isBannerAdReady = false;
+          ad.dispose();
+        },
+      ),
+    );
+
+    _bannerAd.load();
   }
 }
