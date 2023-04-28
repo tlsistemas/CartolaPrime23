@@ -1,10 +1,12 @@
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/time_cartola_model.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../shared/utils/ad_helper.dart';
 import '../../viewmodel/time_cartola_vm.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -29,10 +31,15 @@ class _AtletasPage extends State<AtletasPage> {
   final TimeCartolaViewModel _timeViewModel = TimeCartolaViewModel();
   late Future<TimeCartolaModel>? _myData;
 
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+  InterstitialAd? _interstitialAd;
+
   @override
   void initState() {
-    _myData = _getTimes();
     super.initState();
+    _loadBannerAd();
+    _myData = _getTimes();
   }
 
   void _fetchData(BuildContext context, [bool mounted = true]) async {
@@ -288,6 +295,17 @@ class _AtletasPage extends State<AtletasPage> {
                   },
                 ),
               ),
+              if (_isBannerAdReady)
+                Expanded(
+                  child: Align(
+                    alignment: FractionalOffset.bottomCenter,
+                    child: SizedBox(
+                      width: _bannerAd.size.width.toDouble(),
+                      height: _bannerAd.size.height.toDouble(),
+                      child: AdWidget(ad: _bannerAd),
+                    ),
+                  ),
+                ),
             ],
           );
         }
@@ -483,5 +501,26 @@ class _AtletasPage extends State<AtletasPage> {
                 },
           child: child),
     );
+  }
+
+  void _loadBannerAd() {
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: const AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          _isBannerAdReady = false;
+          ad.dispose();
+        },
+      ),
+    );
+
+    _bannerAd.load();
   }
 }
