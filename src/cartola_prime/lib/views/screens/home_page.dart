@@ -204,27 +204,29 @@ class _HomePageState extends State<HomePage> {
                 style: const TextStyle(color: textColorPrimary),
               ),
             ),
-            body: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ListaTimesCartolaControler(
-                    myData: _myData,
+            body: Stack(
+              children: <Widget>[
+                SizedBox(
+                  height: height - 135,
+                  child: SingleChildScrollView(
+                    //scrollDirection: Axis.vertical,
+                    child: ListaTimesCartolaControler(
+                      myData: _myData,
+                    ),
                   ),
-                  if (_isBannerAdReady)
-                    Align(
-                      alignment: Alignment.bottomCenter,
+                ),
+                if (_isBannerAdReady)
+                  Expanded(
+                    child: Align(
+                      alignment: FractionalOffset.bottomCenter,
                       child: SizedBox(
                         width: _bannerAd.size.width.toDouble(),
                         height: _bannerAd.size.height.toDouble(),
                         child: AdWidget(ad: _bannerAd),
                       ),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
             extendBody: true,
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
