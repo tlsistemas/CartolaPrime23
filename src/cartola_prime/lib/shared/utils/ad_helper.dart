@@ -11,15 +11,15 @@ class AdHelper {
     }
   }
 
-  // static String get bannerAdUnitId {
-  //   if (Platform.isAndroid) {
-  //     return 'ca-app-pub-2375658831220075~2899038961';
-  //   } else if (Platform.isIOS) {
-  //     return 'ca-app-pub-2375658831220075~2899038961';
-  //   } else {
-  //     throw UnsupportedError('Unsupported platform');
-  //   }
-  // }
+  static String get bannerAdUnitIdTest {
+    if (Platform.isAndroid) {
+      return 'ca-app-pub-2375658831220075~2899038961';
+    } else if (Platform.isIOS) {
+      return 'ca-app-pub-2375658831220075~2899038961';
+    } else {
+      throw UnsupportedError('Unsupported platform');
+    }
+  }
 
   static String get interstitialAdUnitId {
     if (Platform.isAndroid) {

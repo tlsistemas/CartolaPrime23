@@ -9,7 +9,7 @@ import 'enums/esquema_time_enum.dart';
 class TimeCartolaModel {
   int? index;
   int? temporadaInicial;
-  String nomeCartola = "Cartola Prime";
+  String nomeCartola = "CartoPrime FC";
   String? globoId;
   String? nome;
   String urlEscudoPng = '';
@@ -33,7 +33,7 @@ class TimeCartolaModel {
 
   TimeCartolaModel(
       {this.temporadaInicial,
-      this.nomeCartola = "Cartola Prime",
+      this.nomeCartola = "CartoPrime FC",
       this.globoId,
       this.nome,
       this.urlEscudoPng = '',
@@ -140,7 +140,7 @@ class TimeCartolaModel {
 
   TimeCartolaModel.fromTimeDTO(TimeDto time) {
     temporadaInicial = time.temporadaInicial;
-    nomeCartola = time.nomeCartola ?? "Cartola Prime";
+    nomeCartola = time.nomeCartola ?? "CartoPrime FC";
     globoId = time.globoId;
     nome = time.nome;
     urlEscudoPng = time.urlEscudoPng ?? '';
@@ -155,7 +155,7 @@ class TimeCartolaModel {
     atletas = time.atletas;
     reservas = time.reservas;
     temporadaInicial = time.time!.temporadaInicial;
-    nomeCartola = time.time!.nomeCartola ?? "Cartola Prime";
+    nomeCartola = time.time!.nomeCartola ?? "CartoPrime FC";
     globoId = time.time!.globoId;
     nome = time.time!.nome;
     urlEscudoPng = time.time!.urlEscudoPng ?? '';

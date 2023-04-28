@@ -27,7 +27,7 @@ class AppWidget extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Cartola Prime',
+        title: 'CartoPrime FC',
         //home: const MenuDashboardPage(),
         theme: ThemeData(
             useMaterial3: true,
@@ -38,7 +38,7 @@ class AppWidget extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const SplashPage(),
-          '/home': (context) => const HomePage(title: 'Cartola Prime'),
+          '/home': (context) => const HomePage(title: 'CartoPrime FC'),
           '/login': (context) => const AuthPage(),
           '/classificacao': (context) => const ClassificacaoPage(),
           '/rodada': (context) => const RodadaPage(),
