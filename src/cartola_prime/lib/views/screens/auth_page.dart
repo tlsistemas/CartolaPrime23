@@ -54,6 +54,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
                     "Tivemos um problema no seu login, tente novamente mais tarde. \nClique em HOME para continuar no aplicativo.";
               }
               showDialog<String>(
+                barrierDismissible: false,
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   title: const Text(
