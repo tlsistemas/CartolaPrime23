@@ -1,6 +1,7 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/time_cartola_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -48,9 +49,9 @@ class _AtletasPage extends State<AtletasPage> {
     _myData = _getTimes();
 
     bannerSize = AdmobBannerSize.BANNER;
-
     interstitialAd = AdmobInterstitial(
-      adUnitId: AdHelper.bannerAdUnitId,
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
       listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
         if (event == AdmobAdEvent.closed) interstitialAd.load();
         //handleEvent(event, args, 'Interstitial');
@@ -58,7 +59,8 @@ class _AtletasPage extends State<AtletasPage> {
     );
 
     rewardAd = AdmobReward(
-      adUnitId: AdHelper.bannerAdUnitId,
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
       listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
         if (event == AdmobAdEvent.closed) rewardAd.load();
         //handleEvent(event, args, 'Reward');
@@ -323,7 +325,9 @@ class _AtletasPage extends State<AtletasPage> {
                 ),
               ),
               AdmobBanner(
-                adUnitId: AdHelper.bannerAdUnitId,
+                adUnitId: kReleaseMode
+                    ? AdHelper.bannerAdUnitId
+                    : AdHelper.bannerAdUnitIdTest,
                 adSize: bannerSize!,
                 listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
                   // handleEvent(event, args, 'Banner');

@@ -20,7 +20,7 @@ class AtletaDtoAdapter extends TypeAdapter<AtletaDto> {
         mediaNum: fields['mediaNum'] as double?,
         pontosNum: fields['pontosNum'] as double?,
         posicaoId: fields['posicaoId'] as int?,
-        precoEditorial: fields['precoEditorial'] as int?,
+        precoEditorial: fields['precoEditorial'] as double?,
         precoNum: fields['precoNum'] as double?,
         rodadaId: fields['rodadaId'] as int?,
         scout: fields['scout'] as ScoutDto?,

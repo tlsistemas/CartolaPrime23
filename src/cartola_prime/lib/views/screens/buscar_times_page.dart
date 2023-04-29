@@ -1,9 +1,12 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cartola_prime/views/components/dialog_popup.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../models/dto/time_busca_dto.dart';
+import '../../shared/utils/ad_helper.dart';
 import '../../shared/utils/base_svg.dart';
 
 import '../../viewmodel/time_cartola_vm.dart';
@@ -22,6 +25,9 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
   final TimeCartolaViewModel timeLogadoVM = TimeCartolaViewModel();
   late Future<List<TimeBuscaDto>>? _myData;
   String textoFiltro = "";
+  AdmobBannerSize? bannerSize;
+  late AdmobInterstitial interstitialAd;
+  late AdmobReward rewardAd;
   Icon customIcon = const Icon(
     Icons.search,
     color: Colors.white,
@@ -34,8 +40,36 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
 
   @override
   void initState() {
-    _myData = _setPartidas("");
     super.initState();
+    _myData = _setPartidas("");
+    bannerSize = AdmobBannerSize.BANNER;
+    interstitialAd = AdmobInterstitial(
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) interstitialAd.load();
+        //handleEvent(event, args, 'Interstitial');
+      },
+    );
+
+    rewardAd = AdmobReward(
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) rewardAd.load();
+        //handleEvent(event, args, 'Reward');
+      },
+    );
+
+    interstitialAd.load();
+    rewardAd.load();
+  }
+
+  @override
+  void dispose() {
+    interstitialAd.dispose();
+    rewardAd.dispose();
+    super.dispose();
   }
 
   Future<List<TimeBuscaDto>> _setPartidas(String q) async {
@@ -111,16 +145,31 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
         ],
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            listaTimesWidget(),
-          ],
-        ),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: height - 135,
+            child: SingleChildScrollView(
+              //scrollDirection: Axis.vertical,
+              child: listaTimesWidget(),
+            ),
+          ),
+          AdmobBanner(
+            adUnitId: kReleaseMode
+                ? AdHelper.bannerAdUnitId
+                : AdHelper.bannerAdUnitIdTest,
+            adSize: bannerSize!,
+            listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+              // handleEvent(event, args, 'Banner');
+            },
+            onBannerCreated: (AdmobBannerController controller) {
+              // Dispose is called automatically for you when Flutter removes the banner from the widget tree.
+              // Normally you don't need to worry about disposing this yourself, it's handled.
+              // If you need direct access to dispose, this is your guy!
+              // controller.dispose();
+            },
+          ),
+        ],
       ),
     );
   }

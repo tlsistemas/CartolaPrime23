@@ -1,8 +1,11 @@
+import 'package:admob_flutter/admob_flutter.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../models/dto/partida_dto.dart';
+import '../../shared/utils/ad_helper.dart';
 import '../../viewmodel/rodada_vm.dart';
 import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -23,10 +26,43 @@ class _RodadaPage extends State<RodadaPage> {
   late int _rodada = 0;
   late Future<List<PartidaDto>>? _myData;
 
+  AdmobBannerSize? bannerSize;
+  late AdmobInterstitial interstitialAd;
+  late AdmobReward rewardAd;
+
   @override
   void initState() {
-    _myData = _setPartidas();
     super.initState();
+    _myData = _setPartidas();
+
+    bannerSize = AdmobBannerSize.BANNER;
+    interstitialAd = AdmobInterstitial(
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) interstitialAd.load();
+        //handleEvent(event, args, 'Interstitial');
+      },
+    );
+
+    rewardAd = AdmobReward(
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
+      listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+        if (event == AdmobAdEvent.closed) rewardAd.load();
+        //handleEvent(event, args, 'Reward');
+      },
+    );
+
+    interstitialAd.load();
+    rewardAd.load();
+  }
+
+  @override
+  void dispose() {
+    interstitialAd.dispose();
+    rewardAd.dispose();
+    super.dispose();
   }
 
   Future<List<PartidaDto>> _setPartidas() async {
@@ -54,9 +90,35 @@ class _RodadaPage extends State<RodadaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: backgroundPageColor,
-        appBar: AppBarControler(title: 'Partidas'),
-        body: listaPartidastWidget());
+      backgroundColor: backgroundPageColor,
+      appBar: AppBarControler(title: 'Partidas'),
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: height - 135,
+            child: SingleChildScrollView(
+              //scrollDirection: Axis.vertical,
+              child: listaPartidastWidget(),
+            ),
+          ),
+          AdmobBanner(
+            adUnitId: kReleaseMode
+                ? AdHelper.bannerAdUnitId
+                : AdHelper.bannerAdUnitIdTest,
+            adSize: bannerSize!,
+            listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+              // handleEvent(event, args, 'Banner');
+            },
+            onBannerCreated: (AdmobBannerController controller) {
+              // Dispose is called automatically for you when Flutter removes the banner from the widget tree.
+              // Normally you don't need to worry about disposing this yourself, it's handled.
+              // If you need direct access to dispose, this is your guy!
+              // controller.dispose();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   Widget listaPartidastWidget() {

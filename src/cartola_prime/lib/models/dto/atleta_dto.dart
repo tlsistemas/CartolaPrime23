@@ -33,7 +33,7 @@ class AtletaDto {
   String? apelidoAbreviado;
   String? nome;
   String? foto;
-  int? precoEditorial;
+  double? precoEditorial;
   List<AtletaDto>? atletas;
   String? titularReserva;
   IconData? iconSubstituicao;
@@ -101,7 +101,7 @@ class AtletaDto {
     apelidoAbreviado = json['apelido_abreviado'];
     nome = json['nome'];
     foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
-    precoEditorial = json['preco_editorial'];
+    precoEditorial = double.tryParse(json['preco_editorial'].toString());
     titularReserva = eTitulaOuReserva.texto;
   }
 

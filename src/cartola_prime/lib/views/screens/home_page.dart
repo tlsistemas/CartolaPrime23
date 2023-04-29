@@ -1,6 +1,7 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/viewmodel/mercado_vm.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -60,7 +61,8 @@ class _HomePageState extends State<HomePage> {
     bannerSize = AdmobBannerSize.BANNER;
 
     interstitialAd = AdmobInterstitial(
-      adUnitId: AdHelper.bannerAdUnitId,
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
       listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
         if (event == AdmobAdEvent.closed) interstitialAd.load();
         //handleEvent(event, args, 'Interstitial');
@@ -68,7 +70,8 @@ class _HomePageState extends State<HomePage> {
     );
 
     rewardAd = AdmobReward(
-      adUnitId: AdHelper.bannerAdUnitId,
+      adUnitId:
+          kReleaseMode ? AdHelper.bannerAdUnitId : AdHelper.bannerAdUnitIdTest,
       listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
         if (event == AdmobAdEvent.closed) rewardAd.load();
         //handleEvent(event, args, 'Reward');
@@ -237,7 +240,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 AdmobBanner(
-                  adUnitId: AdHelper.bannerAdUnitId,
+                  adUnitId: kReleaseMode
+                      ? AdHelper.bannerAdUnitId
+                      : AdHelper.bannerAdUnitIdTest,
                   adSize: bannerSize!,
                   listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
                     // handleEvent(event, args, 'Banner');
