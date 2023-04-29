@@ -235,23 +235,46 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                   )
                 ],
               ),
-              Row(
+              Column(
                 children: [
-                  Image.network(
-                    escaldo.partida!.clubeCasa.escudos!.s30x30!,
-                    height: 25,
-                    width: 25,
-                    centerSlice: Rect.largest,
+                  Row(
+                    children: [
+                      Image.network(
+                        escaldo.partida!.clubeCasa.escudos!.s30x30!,
+                        height: 25,
+                        width: 25,
+                        centerSlice: Rect.largest,
+                      ),
+                      const Text(" X "),
+                      Image.network(
+                        escaldo.partida!.clubeVisitante.escudos!.s30x30!,
+                        height: 25,
+                        width: 25,
+                        centerSlice: Rect.largest,
+                      ),
+                    ],
                   ),
-                  const Text(" X "),
-                  Image.network(
-                    escaldo.partida!.clubeVisitante.escudos!.s30x30!,
-                    height: 25,
-                    width: 25,
-                    centerSlice: Rect.largest,
+                  const SizedBox(height: 30),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(
+                        NumberFormat.decimalPattern('pt-BR')
+                            .format(escaldo.atleta!.minimoParaValorizar ?? 0),
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                      const Text(
+                        "MÍN Val",
+                        style: TextStyle(color: Colors.black, fontSize: 10),
+                      ),
+                    ],
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

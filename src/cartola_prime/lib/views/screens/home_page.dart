@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _timeLogadoVM.isLogado().then((value) => _isLogado = value);
+    // _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     preecherStatusMercado();
     verificarClubes();
     preencherInfoTime();
@@ -123,6 +123,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   toggleMenu([bool end = false]) {
+    _timeLogadoVM.isLogado().then((value) => _isLogado = value);
     if (end) {
       final _state = _endSideMenuKey.currentState!;
       if (_state.isOpened) {
