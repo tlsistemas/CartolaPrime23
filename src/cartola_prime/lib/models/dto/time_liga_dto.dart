@@ -18,6 +18,7 @@ class TimesLigaDto {
   RankingDto? ranking;
   PontosDto? pontos;
   VariacaoDto? variacao;
+  double? parcial;
 
   TimesLigaDto(
       {urlEscudoPng,

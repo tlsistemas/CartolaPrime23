@@ -38,9 +38,11 @@ class TimeCartolaDto {
     atletas = List.from(json['atletas'])
         .map((e) => AtletaDto.fromJson(e, CondicaoAtletaEnum.titular))
         .toList();
-    reservas = List.from(json['reservas'])
-        .map((e) => AtletaDto.fromJson(e, CondicaoAtletaEnum.reserva))
-        .toList();
+    if (json.containsKey('reservas')) {
+      reservas = List.from(json['reservas'])
+          .map((e) => AtletaDto.fromJson(e, CondicaoAtletaEnum.reserva))
+          .toList();
+    }
     atletas?.sort((a, b) => a.posicaoId!.compareTo(b.posicaoId!));
     time = json['time'] != null ? TimeDto.fromJson(json['time']) : null;
     pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());

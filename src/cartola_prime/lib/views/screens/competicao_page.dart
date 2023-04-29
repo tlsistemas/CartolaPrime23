@@ -45,7 +45,7 @@ class _CompeticaoPage extends State<CompeticaoPage> {
   @override
   void initState() {
     super.initState();
-    _myData = _getTimes();
+    _myData = _getLiga();
 
     bannerSize = AdmobBannerSize.BANNER;
     interstitialAd = AdmobInterstitial(
@@ -100,7 +100,7 @@ class _CompeticaoPage extends State<CompeticaoPage> {
       },
     );
     // Your asynchronous computation here (fetching data from an API, processing files, inserting something to the database, etc)
-    _myData = _getTimes();
+    _myData = _getLiga();
     await Future.delayed(const Duration(seconds: 3));
 
     // Close the dialog programmatically
@@ -109,7 +109,7 @@ class _CompeticaoPage extends State<CompeticaoPage> {
     Navigator.of(context).pop();
   }
 
-  Future<LigaCompletaDto> _getTimes() async {
+  Future<LigaCompletaDto> _getLiga() async {
     var liga = await _competicoesViewModel.buscarLigaCompleta(widget.slugLiga);
     return liga;
   }
@@ -426,10 +426,12 @@ class _CompeticaoPage extends State<CompeticaoPage> {
                   )
                 ],
               ),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  "0",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                      .format(timeCartola.parcial ?? 0),
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.end,
                 ),
               )

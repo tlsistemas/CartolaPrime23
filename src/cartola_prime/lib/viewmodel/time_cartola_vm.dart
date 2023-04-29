@@ -139,8 +139,8 @@ class TimeCartolaViewModel {
       pontuados = await mercadoViewModel.pontuadosMercado();
       for (var i = 0; i < times.length; i++) {
         var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
-        var substituicoes =
-            await _service.getTimeSubtituicoes(times[i].timeId!);
+        // var substituicoes =
+        //     await _service.getTimeSubtituicoes(times[i].timeId!);
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
 
         var retorno = await preencherPontosAtletas(timeModel, pontuados);
@@ -176,6 +176,44 @@ class TimeCartolaViewModel {
     }
 
     return timesRetorno;
+  }
+
+  Future<TimeCartolaModel> getTimesDBIdTime(int idTime) async {
+    var mercado = await mercadoViewModel.getMercado();
+    List<PontuadosDto>? pontuados = <PontuadosDto>[];
+
+    if (mercado.statusMercado == StatusMercadoEnum.fechado.index) {
+      pontuados = await mercadoViewModel.pontuadosMercado();
+
+      var timeCompleto = await _service.getTimeBuscaId(idTime);
+      var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
+
+      var retorno = await preencherPontosAtletas(timeModel, pontuados);
+
+      retorno.pontos = retorno.getParcialTimeSemCapitao();
+      retorno.pontosCampeonato = retorno.pontosCampeonato! + retorno.pontos!;
+
+      return retorno;
+    }
+
+    if (mercado.statusMercado == StatusMercadoEnum.aberto.index) {
+      var timeCompleto = await _service.getTimeBuscaId(idTime);
+      var substituicoes = await _service.getTimeSubtituicoesRodada(
+          idTime, (mercado.rodadaAtual! - 1));
+
+      if (substituicoes.isNotEmpty) {
+        timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+      }
+
+      var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
+      timeModel.atletas!
+          .firstWhere((element) => element.atletaId == timeModel.capitaoId)
+          .capitao = true;
+
+      return timeModel;
+    }
+
+    return TimeCartolaModel();
   }
 
   TimeCartolaDto preencherSubstituicoes(
@@ -215,21 +253,22 @@ class TimeCartolaViewModel {
             : time.atletas![x].pontoCor!;
       }
     }
-
-    for (var x = 0; x < time.reservas!.length; x++) {
-      var exist = pontuados!.indexWhere(
-          (element) => element.atletaId == time.reservas![x].atletaId);
-      if (exist > 0) {
-        var altletaPontuado = pontuados.firstWhere(
+    if (time.reservas != null) {
+      for (var x = 0; x < time.reservas!.length; x++) {
+        var exist = pontuados!.indexWhere(
             (element) => element.atletaId == time.reservas![x].atletaId);
+        if (exist > 0) {
+          var altletaPontuado = pontuados.firstWhere(
+              (element) => element.atletaId == time.reservas![x].atletaId);
 
-        time.reservas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
+          time.reservas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
 
-        time.reservas![x].pontoCor =
-            time.reservas![x].pontosNum! > 0 ? Colors.green : Colors.red;
-        time.reservas![x].pontoCor = time.reservas![x].pontosNum! == 0
-            ? const Color.fromARGB(255, 90, 90, 90)
-            : time.reservas![x].pontoCor!;
+          time.reservas![x].pontoCor =
+              time.reservas![x].pontosNum! > 0 ? Colors.green : Colors.red;
+          time.reservas![x].pontoCor = time.reservas![x].pontosNum! == 0
+              ? const Color.fromARGB(255, 90, 90, 90)
+              : time.reservas![x].pontoCor!;
+        }
       }
     }
     return time;
