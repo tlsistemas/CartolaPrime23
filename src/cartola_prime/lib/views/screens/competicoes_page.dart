@@ -353,7 +353,13 @@ class _CompeticoesPage extends State<CompeticoesPage> {
             ],
           ),
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            "/competicao",
+            arguments: liga.slug,
+          );
+        },
       )
     ]);
   }

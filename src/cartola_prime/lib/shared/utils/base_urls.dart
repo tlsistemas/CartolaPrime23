@@ -14,4 +14,5 @@ mixin baseUrls {
   String buscaTimeId = '$_baseUrl/time/id/';
   String buscaTimeIdSubstituicoes = '$_baseUrl/time/substituicoes/';
   String ligasLogado = '$_baseUrl/auth/ligas';
+  String ligaCompleta = '$_baseUrl/auth/liga/';
 }

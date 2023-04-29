@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'services/client_http.dart';
 import 'views/screens/auth_page.dart';
 import 'views/screens/classificacao_bra_page.dart';
+import 'views/screens/competicao_page.dart';
 import 'views/screens/mais_escalados_page.dart';
 import 'views/screens/rodada_page.dart';
 import 'views/screens/home_page.dart';
@@ -48,6 +49,8 @@ class AppWidget extends StatelessWidget {
           '/competicoes': (context) => const CompeticoesPage(),
           '/atletas': (context) => AtletasPage(
               ModalRoute.of(context)!.settings.arguments as TimeCartolaModel),
+          '/competicao': (context) => CompeticaoPage(
+              ModalRoute.of(context)!.settings.arguments as String),
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:cartola_prime/models/dto/competicoes_dto.dart';
+import 'package:cartola_prime/models/dto/liga_completa.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../models/dto/time_busca_dto.dart';
@@ -23,6 +24,20 @@ class CompeticoesService extends ChangeNotifier with baseUrls {
       return CompeticoesDto();
     } else {
       var dados = CompeticoesDto.fromJson(response);
+      return dados;
+    }
+  }
+
+  Future<LigaCompletaDto> getLigaComopleta(String slugLiga) async {
+    var glbid = await authRepository.getGLBID();
+
+    final response =
+        await _clientHttp.getLogado(ligaCompleta + slugLiga, glbid);
+
+    if (response['status'] == 'erro') {
+      return LigaCompletaDto();
+    } else {
+      var dados = LigaCompletaDto.fromJson(response);
       return dados;
     }
   }
