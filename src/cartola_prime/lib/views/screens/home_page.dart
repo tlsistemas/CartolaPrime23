@@ -378,11 +378,14 @@ class _HomePageState extends State<HomePage> {
           Visibility(
             visible: _isLogado,
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                toggleMenu();
+                Navigator.pushNamed(context, "/competicoes");
+              },
               leading: const Icon(Icons.military_tech,
                   size: 25.0, color: Colors.white),
               title: const Text(
-                "Minhas Ligas",
+                "Competições",
                 style: TextStyle(fontSize: 14),
               ),
               textColor: Colors.white,
