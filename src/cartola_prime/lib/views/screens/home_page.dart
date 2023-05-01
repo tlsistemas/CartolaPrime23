@@ -440,10 +440,13 @@ class _HomePageState extends State<HomePage> {
             // padding: EdgeInsets.zero,
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/pontuados");
+            },
             leading:
                 const Icon(Icons.star_border, size: 20.0, color: Colors.white),
-            title: const Text("Favorites"),
+            title: const Text("Pontuados"),
             textColor: Colors.white,
             dense: true,
 

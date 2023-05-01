@@ -42,6 +42,22 @@ class MercadoViewModel {
     return retorno;
   }
 
+  Future<List<PontuadosDto>?> pontuadosTela() async {
+    // bool exists = await hiveService.isExists(boxName: baseTable.pontuadosTable);
+    List<PontuadosDto>? retorno = <PontuadosDto>[];
+    retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
+    // if (exists) {
+    //   var pontuados = await hiveService.getBoxes(baseTable.pontuadosTable);
+    //   var lstPontuados = PontuadosDto.fromJsonListDynamic(pontuados);
+    //   retorno = lstPontuados.atletas;
+    // } else {
+    //   hiveService.clearBox(boxName: baseTable.pontuadosTable);
+    //   retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
+    //   await hiveService.addBoxes(retorno, baseTable.pontuadosTable);
+    // }
+    return retorno;
+  }
+
   Future<List<PontuadosDto>?> pontuadosRodadaMercado(int rodada) async {
     var retorno =
         await _service.getPontuadosRodadaMercado(rodada) ?? <PontuadosDto>[];

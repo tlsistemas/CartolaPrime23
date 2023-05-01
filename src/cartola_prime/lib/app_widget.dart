@@ -3,6 +3,7 @@ import 'package:cartola_prime/models/time_cartola_model.dart';
 import 'package:cartola_prime/views/screens/atletas_page.dart';
 import 'package:cartola_prime/views/screens/buscar_times_page.dart';
 import 'package:cartola_prime/views/screens/competicoes_page.dart';
+import 'package:cartola_prime/views/screens/pontuados_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,6 +48,7 @@ class AppWidget extends StatelessWidget {
           '/mais_escalados': (context) => const MaisEscaldosPage(),
           '/buscar_times': (context) => const BuscarTimePage(),
           '/competicoes': (context) => const CompeticoesPage(),
+          '/pontuados': (context) => const PontuadosPage(),
           '/atletas': (context) => AtletasPage(
               ModalRoute.of(context)!.settings.arguments as TimeCartolaModel),
           '/competicao': (context) => CompeticaoPage(
