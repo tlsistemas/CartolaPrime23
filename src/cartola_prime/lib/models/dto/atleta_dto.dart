@@ -89,7 +89,6 @@ class AtletaDto {
     foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
     precoEditorial = json['preco_editorial'];
     titularReserva = eTitulaOuReserva.texto;
-    pontoCor = pontosNum! > 0 ? Colors.green : Colors.red;
   }
 
   AtletaDto.fromJsonMin(
@@ -167,6 +166,5 @@ class AtletaDto {
     foto = json.foto.toString().replaceAll("FORMATO", "220x220");
     precoEditorial = json.preco_editorial;
     timeId = json.time_id;
-    pontoCor = pontosNum! > 0 ? Colors.green : Colors.red;
   }
 }

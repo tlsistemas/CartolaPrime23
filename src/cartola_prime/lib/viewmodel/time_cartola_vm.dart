@@ -247,9 +247,10 @@ class TimeCartolaViewModel {
         } else {
           time.atletas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
         }
+
         time.atletas![x].pontoCor =
             time.atletas![x].pontosNum! > 0 ? Colors.green : Colors.red;
-        time.atletas![x].pontoCor = time.atletas![x].pontosNum! == 0
+        time.atletas![x].pontoCor = time.atletas![x].pontosNum! == 0.0
             ? const Color.fromARGB(255, 90, 90, 90)
             : time.atletas![x].pontoCor!;
       }
