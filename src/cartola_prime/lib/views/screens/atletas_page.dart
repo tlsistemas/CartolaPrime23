@@ -396,53 +396,75 @@ class _AtletasPage extends State<AtletasPage> {
                   ),
                   Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-                    child: Row(
+                    child: Column(
                       children: [
-                        Text("${atleta.posicao} ",
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold)),
-                        Image.network(
-                          atleta.clube!.escudos!.s30x30!,
-                          height: 15,
-                          width: 15,
-                          centerSlice: Rect.largest,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        atleta.minimoParaValorizar! < atleta.pontosNum!
-                            ? const Row(children: [
-                                Text(
-                                  "valorizando",
-                                  style: TextStyle(
+                        Row(
+                          children: [
+                            Text("${atleta.posicao} ",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold)),
+                            Image.network(
+                              atleta.clube!.escudos!.s30x30!,
+                              height: 15,
+                              width: 15,
+                              centerSlice: Rect.largest,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            atleta.minimoParaValorizar! < atleta.pontosNum!
+                                ? const Row(children: [
+                                    Text(
+                                      "valorizando",
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_outward,
                                       color: Colors.green,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Icon(
-                                  Icons.arrow_outward,
-                                  color: Colors.green,
-                                  size: 14,
-                                ),
-                              ])
-                            : const Row(
-                                children: [
-                                  Text(
-                                    "desvalorizando",
-                                    style: TextStyle(
+                                      size: 14,
+                                    ),
+                                  ])
+                                : const Row(
+                                    children: [
+                                      Text(
+                                        "desvalorizando",
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Icon(
+                                        Icons.south_east,
+                                        size: 14,
                                         color: Colors.red,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
-                                  Icon(
-                                    Icons.south_east,
-                                    size: 14,
-                                    color: Colors.red,
-                                  ),
-                                ],
-                              ),
+                          ],
+                        ),
+                        // Column(
+                        //   children: [
+                        //     Text(
+                        //       atleta.entrouEmCampo!
+                        //           ? atleta.scout!.toScoutAtString()
+                        //           : "",
+                        //       style: const TextStyle(
+                        //           fontSize: 8, color: Colors.green),
+                        //     ),
+                        //     Text(
+                        //       atleta.entrouEmCampo!
+                        //           ? atleta.scout!.toScoutDEFString()
+                        //           : "",
+                        //       style: const TextStyle(
+                        //           fontSize: 8, color: Colors.red),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),

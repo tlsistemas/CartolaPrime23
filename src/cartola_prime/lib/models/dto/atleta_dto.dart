@@ -40,6 +40,7 @@ class AtletaDto {
   IconData? iconSubstituicao;
   Color? pontoCor = const Color.fromARGB(255, 118, 118, 118);
   bool? capitao = false;
+  bool? entrouEmCampo = false;
 
   AtletaDto(
       {this.scout,
@@ -60,7 +61,8 @@ class AtletaDto {
       this.apelidoAbreviado,
       this.nome,
       this.foto,
-      this.precoEditorial});
+      this.precoEditorial,
+      this.entrouEmCampo});
 
   AtletaDto.fromJson(
       Map<String, dynamic> json, CondicaoAtletaEnum eTitulaOuReserva) {

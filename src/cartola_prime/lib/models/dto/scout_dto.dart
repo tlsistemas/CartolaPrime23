@@ -25,6 +25,8 @@ class ScoutDto {
   int? pI = 0;
   int? dS = 0;
   int? dE = 0;
+  int? pS = 0;
+  int? pC = 0;
 
   ScoutDto(
       {this.A,
@@ -47,55 +49,61 @@ class ScoutDto {
       this.sG,
       this.pI,
       this.dS,
-      this.dE});
+      this.dE,
+      this.pS,
+      this.pC});
 
   ScoutDto.fromJson(Map<String, dynamic> json) {
-    A = json['A'];
-    cA = json['CA'];
-    cV = json['CV'];
-    dD = json['DD'];
-    dP = json['DP'];
-    fC = json['FC'];
-    fD = json['FD'];
-    fF = json['FF'];
-    fS = json['FS'];
-    fT = json['FT'];
-    G = json['G'];
-    gC = json['GC'];
-    gS = json['GS'];
-    I = json['I'];
-    pE = json['PE'];
-    pP = json['PP'];
-    rB = json['RB'];
-    sG = json['SG'];
-    pI = json['PI'];
-    dS = json['DS'];
-    dE = json['DE'];
+    A = json['A'] ?? 0;
+    cA = json['CA'] ?? 0;
+    cV = json['CV'] ?? 0;
+    dD = json['DD'] ?? 0;
+    dP = json['DP'] ?? 0;
+    fC = json['FC'] ?? 0;
+    fD = json['FD'] ?? 0;
+    fF = json['FF'] ?? 0;
+    fS = json['FS'] ?? 0;
+    fT = json['FT'] ?? 0;
+    G = json['G'] ?? 0;
+    gC = json['GC'] ?? 0;
+    gS = json['GS'] ?? 0;
+    I = json['I'] ?? 0;
+    pE = json['PE'] ?? 0;
+    pP = json['PP'] ?? 0;
+    rB = json['RB'] ?? 0;
+    sG = json['SG'] ?? 0;
+    pI = json['PI'] ?? 0;
+    dS = json['DS'] ?? 0;
+    dE = json['DE'] ?? 0;
+    pS = json['PS'] ?? 0;
+    pC = json['PC'] ?? 0;
   }
 
   ScoutDto.fromJsonDynamic(dynamic json) {
     if (json != null) {
-      A = json.A;
-      cA = json.cA;
-      cV = json.cV;
-      dD = json.dD;
-      dP = json.dP;
-      fC = json.fC;
-      fD = json.fD;
-      fF = json.fF;
-      fS = json.fS;
-      fT = json.fT;
-      G = json.G;
-      gC = json.gC;
-      gS = json.gS;
-      I = json.I;
-      pE = json.pE;
-      pP = json.pP;
-      rB = json.rB;
-      sG = json.sG;
-      pI = json.pI;
-      dS = json.dS;
-      dE = json.dE;
+      A = json.A ?? 0;
+      cA = json.cA ?? 0;
+      cV = json.cV ?? 0;
+      dD = json.dD ?? 0;
+      dP = json.dP ?? 0;
+      fC = json.fC ?? 0;
+      fD = json.fD ?? 0;
+      fF = json.fF ?? 0;
+      fS = json.fS ?? 0;
+      fT = json.fT ?? 0;
+      G = json.G ?? 0;
+      gC = json.gC ?? 0;
+      gS = json.gS ?? 0;
+      I = json.I ?? 0;
+      pE = json.pE ?? 0;
+      pP = json.pP ?? 0;
+      rB = json.rB ?? 0;
+      sG = json.sG ?? 0;
+      pI = json.pI ?? 0;
+      dS = json.dS ?? 0;
+      dE = json.dE ?? 0;
+      pS = json.pS ?? 0;
+      pC = json.pC ?? 0;
     }
   }
 
@@ -122,6 +130,46 @@ class ScoutDto {
     data['PI'] = pI;
     data['DS'] = dS;
     data['DE'] = dE;
+    data['PS'] = pS;
+    data['PC'] = pC;
     return data;
+  }
+
+  String toScoutDEFString() {
+    var retorno2 = "";
+    if (sG! > 0) retorno2 = "${retorno2}SG: $sG ";
+    if (dP! > 0) retorno2 = "${retorno2}DP: $dP ";
+    if (dD! > 0) retorno2 = "${retorno2}DD: $dD ";
+    if (dS! > 0) retorno2 = "${retorno2}DS: $dS ";
+    if (gC! > 0) retorno2 = "${retorno2}GC: $gC ";
+    if (cV! > 0) retorno2 = "${retorno2}CV: $cV ";
+    if (cA! > 0) retorno2 = "${retorno2}CA: $cA ";
+    if (gS! > 0) retorno2 = "${retorno2}GS: $gS ";
+    if (fC! > 0) retorno2 = "${retorno2}FC: $fC ";
+    if (pC! > 0) retorno2 = "${retorno2}PC: $pC ";
+
+    // var retorno =
+    //     "SG: $sG DP: $dP DD: $dD DS: $dS GC: $gC CV: $cV CA: $cA GS: $gS FC: $fC PC: $pC";
+
+    return retorno2;
+  }
+
+  String toScoutAtString() {
+    var retorno2 = "";
+    if (G! > 0) retorno2 = "${retorno2}G: $G ";
+    if (A! > 0) retorno2 = "${retorno2}A: $A ";
+    if (fT! > 0) retorno2 = "${retorno2}FT: $fT ";
+    if (fD! > 0) retorno2 = "${retorno2}FD: $fD ";
+    if (fF! > 0) retorno2 = "${retorno2}FF: $fF ";
+    if (fS! > 0) retorno2 = "${retorno2}FS: $fS ";
+    if (pS! > 0) retorno2 = "${retorno2}PS: $pS ";
+    if (pP! > 0) retorno2 = "${retorno2}PP: $pP ";
+    if (I! > 0) retorno2 = "${retorno2}I: $I ";
+    if (pI! > 0) retorno2 = "${retorno2}PI: $pI ";
+
+    // var retorno =
+    //     "G: $G A: $A FT: $fT FD: $fD FF: $fF FS: $fS PS: $pS PP: $pP I: $I PI: $pI";
+
+    return retorno2;
   }
 }

@@ -253,6 +253,9 @@ class TimeCartolaViewModel {
         time.atletas![x].pontoCor = time.atletas![x].pontosNum! == 0.0
             ? const Color.fromARGB(255, 90, 90, 90)
             : time.atletas![x].pontoCor!;
+
+        time.atletas![x].scout = altletaPontuado.scout;
+        time.atletas![x].entrouEmCampo = true;
       }
     }
     if (time.reservas != null) {
@@ -270,9 +273,12 @@ class TimeCartolaViewModel {
           time.reservas![x].pontoCor = time.reservas![x].pontosNum! == 0
               ? const Color.fromARGB(255, 90, 90, 90)
               : time.reservas![x].pontoCor!;
+          time.atletas![x].scout = altletaPontuado.scout;
+          time.atletas![x].entrouEmCampo = true;
         }
       }
     }
+
     return time;
   }
 
