@@ -381,7 +381,6 @@ class _AtletasPage extends State<AtletasPage> {
                           : Colors.red),
                 ],
               ),
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -410,6 +409,40 @@ class _AtletasPage extends State<AtletasPage> {
                           width: 15,
                           centerSlice: Rect.largest,
                         ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        atleta.minimoParaValorizar! < atleta.pontosNum!
+                            ? const Row(children: [
+                                Text(
+                                  "valorizando",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_outward,
+                                  color: Colors.green,
+                                  size: 14,
+                                ),
+                              ])
+                            : const Row(
+                                children: [
+                                  Text(
+                                    "desvalorizando",
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Icon(
+                                    Icons.south_east,
+                                    size: 14,
+                                    color: Colors.red,
+                                  ),
+                                ],
+                              ),
                       ],
                     ),
                   ),
@@ -461,14 +494,6 @@ class _AtletasPage extends State<AtletasPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  // Visibility(
-                  //   visible: atleta.capitao!,
-                  //   child: Image.asset(
-                  //     'assets/images/ic_capita.png',
-                  //     height: 30,
-                  //     width: 30,
-                  //   ),
-                  // ),
                   Visibility(
                     visible: atleta.capitao!,
                     child: Text(
@@ -486,34 +511,28 @@ class _AtletasPage extends State<AtletasPage> {
                         : NumberFormat.decimalPatternDigits(decimalDigits: 2)
                             .format(atleta.pontosNum!),
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: atleta.pontoCor),
                     textAlign: TextAlign.right,
                   ),
-                  // const Text(
-                  //   "Pts",
-                  //   style: TextStyle(color: Colors.black, fontSize: 10),
-                  // ),
+                  // Row(
+                  //   children: [
+                  //     Image.network(
+                  //       atleta.clube!.escudos!.s30x30!,
+                  //       height: 20,
+                  //       centerSlice: Rect.largest,
+                  //     ),
+                  //     const Text(" X "),
+                  //     Image.network(
+                  //       atleta.clube!.escudos!.s30x30!,
+                  //       height: 20,
+                  //       centerSlice: Rect.largest,
+                  //     ),
+                  //   ],
+                  // )
                 ],
-              )
-              // Row(
-              //   children: [
-              //     Image.network(
-              //       escaldo.partida!.clubeCasa.escudos.s30x30!,
-              //       height: 25,
-              //       width: 25,
-              //       centerSlice: Rect.largest,
-              //     ),
-              //     const Text(" X "),
-              //     Image.network(
-              //       escaldo.partida!.clubeVisitante.escudos.s30x30!,
-              //       height: 25,
-              //       width: 25,
-              //       centerSlice: Rect.largest,
-              //     ),
-              //   ],
-              // )
+              ),
             ],
           ),
         ),
