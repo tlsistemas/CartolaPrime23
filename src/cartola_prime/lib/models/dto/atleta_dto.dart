@@ -22,6 +22,7 @@ class AtletaDto {
   String? posicao;
   int? statusId;
   double? pontosNum;
+  double? pontosNumCapitao;
   double? precoNum;
   double? variacaoNum;
   double? mediaNum;

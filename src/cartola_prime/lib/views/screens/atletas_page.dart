@@ -472,7 +472,7 @@ class _AtletasPage extends State<AtletasPage> {
                   Visibility(
                     visible: atleta.capitao!,
                     child: Text(
-                      "${NumberFormat.decimalPatternDigits(decimalDigits: 2).format(atleta.pontosNum!)} x1.5",
+                      "${NumberFormat.decimalPatternDigits(decimalDigits: 2).format(atleta.pontosNumCapitao ?? 0)} x1.5",
                       style: const TextStyle(
                           color: Colors.black,
                           fontSize: 12,
@@ -482,7 +482,7 @@ class _AtletasPage extends State<AtletasPage> {
                   Text(
                     atleta.capitao!
                         ? NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                            .format(atleta.pontosNum! * 1.5)
+                            .format(atleta.pontosNum!)
                         : NumberFormat.decimalPatternDigits(decimalDigits: 2)
                             .format(atleta.pontosNum!),
                     style: TextStyle(

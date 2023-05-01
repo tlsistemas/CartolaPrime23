@@ -242,6 +242,7 @@ class TimeCartolaViewModel {
         if (time.atletas![x].atletaId == time.capitaoId) {
           time.atletas![x].pontosNum =
               time.atletas![x].pontosNum! + (altletaPontuado.pontuacao! * 1.5);
+          time.atletas![x].pontosNumCapitao = altletaPontuado.pontuacao ?? 0;
           time.atletas![x].capitao = true;
         } else {
           time.atletas![x].pontosNum = altletaPontuado.pontuacao ?? 0;
