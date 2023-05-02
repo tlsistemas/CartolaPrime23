@@ -7,6 +7,7 @@ mixin baseUrls {
   String maisEscaldos = '$_baseUrl/mercado/destaques';
   String statusMercado = '$_baseUrl/mercado/status';
   String pontuadosMercado = '$_baseUrl/atletas/pontuados';
+  String atletasMercado = '$_baseUrl/atletas/mercado';
   String login =
       'https://login.globo.com/login/438?url=https://cartolafc.globo.com';
   String authTime = '$_baseUrl/auth/time';

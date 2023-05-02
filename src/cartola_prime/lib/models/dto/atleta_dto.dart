@@ -93,6 +93,33 @@ class AtletaDto {
     titularReserva = eTitulaOuReserva.texto;
   }
 
+  AtletaDto.fromJsonMercado(Map<String, dynamic> json) {
+    scout = json['scout'] != null ? ScoutDto.fromJson(json['scout']) : null;
+    atletaId = json['atleta_id'];
+    rodadaId = json['rodada_id'];
+    clubeId = json['clube_id'] ?? 0;
+    ClubeRepository().getId(clubeId!).then((value) => clube = value);
+    posicaoId = json['posicao_id'] ?? 0;
+    posicao = PosicaoConverter.getPosicaoMin(posicaoId!);
+    statusId = json['status_id'];
+    pontosNum = double.tryParse(json['pontos_num'].toString());
+    precoNum = double.tryParse(json['preco_num'].toString());
+    variacaoNum = double.tryParse(json['variacao_num'].toString());
+    mediaNum = double.tryParse(json['media_num'].toString());
+    jogosNum = json['jogos_num'];
+    minimoParaValorizar =
+        double.tryParse(json['minimo_para_valorizar'].toString());
+    gatoMestre = json['gato_mestre'] != null
+        ? GatoMestreDto.fromJson(json['gato_mestre'])
+        : null;
+    slug = json['slug'];
+    apelido = json['apelido'];
+    apelidoAbreviado = json['apelido_abreviado'];
+    nome = json['nome'];
+    foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
+    precoEditorial = json['preco_editorial'];
+  }
+
   AtletaDto.fromJsonMin(
       Map<String, dynamic> json, CondicaoAtletaEnum eTitulaOuReserva) {
     scout = json['scout'] != null ? ScoutDto.fromJson(json['scout']) : null;

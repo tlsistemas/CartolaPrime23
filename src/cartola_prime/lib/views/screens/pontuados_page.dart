@@ -175,7 +175,7 @@ class _PontuadosPage extends State<PontuadosPage> {
                     escaldo.apelido!.toString(),
                     style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 21,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   ),
@@ -188,9 +188,46 @@ class _PontuadosPage extends State<PontuadosPage> {
                                 color: Colors.black,
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold)),
-                        Text(" ${escaldo.clube!.nome!}",
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 10))
+                        Image.network(
+                          escaldo.clube!.escudos!.s30x30!,
+                          height: 20,
+                          width: 20,
+                          centerSlice: Rect.largest,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        escaldo.minimoParaValorizar! < escaldo.pontuacao!
+                            ? const Row(children: [
+                                Text(
+                                  "valorizando",
+                                  style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_outward,
+                                  color: Colors.green,
+                                  size: 14,
+                                ),
+                              ])
+                            : const Row(
+                                children: [
+                                  Text(
+                                    "desvalorizando",
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Icon(
+                                    Icons.south_east,
+                                    size: 14,
+                                    color: Colors.red,
+                                  ),
+                                ],
+                              ),
                       ],
                     ),
                   ),
@@ -200,7 +237,7 @@ class _PontuadosPage extends State<PontuadosPage> {
                         children: [
                           Text(
                             NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                                .format(escaldo.pontuacao!),
+                                .format(escaldo.precoNum!),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -218,7 +255,7 @@ class _PontuadosPage extends State<PontuadosPage> {
                         children: [
                           Text(
                             NumberFormat.decimalPattern('pt-BR')
-                                .format(escaldo.pontuacao!),
+                                .format(escaldo.minimoParaValorizar!),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.right,
@@ -234,7 +271,7 @@ class _PontuadosPage extends State<PontuadosPage> {
                         ],
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
               Column(

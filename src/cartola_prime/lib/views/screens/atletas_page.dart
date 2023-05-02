@@ -390,7 +390,7 @@ class _AtletasPage extends State<AtletasPage> {
                     atleta.apelido!.toString(),
                     style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 21,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   ),
@@ -407,8 +407,8 @@ class _AtletasPage extends State<AtletasPage> {
                                     fontWeight: FontWeight.bold)),
                             Image.network(
                               atleta.clube!.escudos!.s30x30!,
-                              height: 15,
-                              width: 15,
+                              height: 20,
+                              width: 20,
                               centerSlice: Rect.largest,
                             ),
                             const SizedBox(

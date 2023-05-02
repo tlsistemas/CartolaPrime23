@@ -24,6 +24,8 @@ class PontuadosDto {
   bool? entrouEmCampo;
   List<PontuadosDto>? atletas;
   Color? pontoCor = const Color.fromARGB(255, 118, 118, 118);
+  double? minimoParaValorizar = 0;
+  double? precoNum = 0;
 
   PontuadosDto(
       {this.atletaId,
@@ -53,10 +55,10 @@ class PontuadosDto {
       pontuado.atletaId = int.parse(key);
       pontuado.clube = ClubeDto();
       ClubeRepository()
-          .getId(json.clubeId!)
+          .getId(pontuado.clubeId!)
           .then((value) => pontuado.clube = value);
 
-      posicao = PosicaoConverter.getPosicaoMin(posicaoId!);
+      posicao = PosicaoConverter.getPosicaoMin(pontuado.posicaoId!);
 
       pontuado.pontoCor = pontuado.pontuacao! > 0 ? Colors.green : Colors.red;
       pontuado.pontoCor = pontuado.pontuacao! == 0

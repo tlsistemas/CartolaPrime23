@@ -46,6 +46,17 @@ class MercadoViewModel {
     // bool exists = await hiveService.isExists(boxName: baseTable.pontuadosTable);
     List<PontuadosDto>? retorno = <PontuadosDto>[];
     retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
+    var retornoMercado = await _service.getAtletasMercado();
+    for (var i = 0; i < retorno.length; i++) {
+      var itemSelecionado = retornoMercado!.atletas!
+          .firstWhere((element) => element.atletaId == retorno![i].atletaId);
+      retorno[i].minimoParaValorizar = itemSelecionado.minimoParaValorizar;
+      retorno[i].precoNum = itemSelecionado.precoNum;
+
+      // retorno[i].minimoParaValorizar = retornoMercado!.atletas!
+      //     .firstWhere((element) => element.atletaId == retorno![i].atletaId)
+      //     .minimoParaValorizar;
+    }
     // if (exists) {
     //   var pontuados = await hiveService.getBoxes(baseTable.pontuadosTable);
     //   var lstPontuados = PontuadosDto.fromJsonListDynamic(pontuados);
@@ -55,6 +66,7 @@ class MercadoViewModel {
     //   retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
     //   await hiveService.addBoxes(retorno, baseTable.pontuadosTable);
     // }
+    retorno.sort((a, b) => b.pontuacao!.compareTo(a.pontuacao!));
     return retorno;
   }
 
