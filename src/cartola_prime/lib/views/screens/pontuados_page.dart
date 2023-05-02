@@ -5,11 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../models/dto/mais_escalados_dto.dart';
 import '../../shared/utils/ad_helper.dart';
-import '../../viewmodel/mais_escalados_vm.dart';
 import '../../viewmodel/mercado_vm.dart';
-import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../components/resource_colors.dart';
@@ -26,6 +23,7 @@ class _PontuadosPage extends State<PontuadosPage> {
   late double height = MediaQuery.of(context).size.height;
   final MercadoViewModel viewModel = MercadoViewModel();
   late Future<List<PontuadosDto>>? _myData;
+  late Future<List<PontuadosDto>>? _myDataHistorica;
   AdmobBannerSize? bannerSize;
   late AdmobInterstitial interstitialAd;
   late AdmobReward rewardAd;
@@ -40,17 +38,11 @@ class _PontuadosPage extends State<PontuadosPage> {
     style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
   );
 
-  void filterSearchResults(String query) {
-    setState(() {
-      //_myData = _setPartidas(query);
-    });
-  }
-
   @override
   void initState() {
     super.initState();
     _myData = _setFutureBuilder();
-
+    _myDataHistorica = _myData;
     bannerSize = AdmobBannerSize.BANNER;
     interstitialAd = AdmobInterstitial(
       adUnitId:
@@ -81,9 +73,55 @@ class _PontuadosPage extends State<PontuadosPage> {
     super.dispose();
   }
 
+  void _fetchData(BuildContext context, String query,
+      [bool mounted = true]) async {
+    // // show the loading dialog
+    showDialog(
+      // The user CANNOT close this dialog  by pressing outsite it
+      barrierDismissible: false,
+      context: context,
+      builder: (_) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Lottie.asset('assets/json/football.json'),
+                const Text(
+                  'Carregando...',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    setState(() {
+      _myData = searchPontuados(query);
+    });
+    await Future.delayed(const Duration(seconds: 2));
+    if (!mounted) return;
+    Navigator.of(context).pop();
+  }
+
   Future<List<PontuadosDto>> _setFutureBuilder() async {
     var retorno = await viewModel.pontuadosTela();
     return retorno!;
+  }
+
+  Future<List<PontuadosDto>> searchPontuados(String busca) async {
+    var atletas = await viewModel.pontuadosTela();
+    if (busca.isEmpty) return atletas!;
+    var retorno = atletas!
+        .where((element) =>
+            element.apelido!.toUpperCase().contains(busca.toUpperCase()))
+        .toList();
+    if (retorno.isEmpty) return atletas;
+    return retorno;
   }
 
   @override
@@ -114,7 +152,7 @@ class _PontuadosPage extends State<PontuadosPage> {
                       autofocus: true,
                       onSubmitted: (value) {
                         textoFiltro = value;
-                        filterSearchResults(value);
+                        _fetchData(context, value);
                       },
                       decoration: const InputDecoration(
                         hintText: 'Nome do Time',
