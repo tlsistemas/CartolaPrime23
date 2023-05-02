@@ -29,6 +29,22 @@ class _PontuadosPage extends State<PontuadosPage> {
   AdmobBannerSize? bannerSize;
   late AdmobInterstitial interstitialAd;
   late AdmobReward rewardAd;
+  String textoFiltro = "";
+  Icon customIcon = const Icon(
+    Icons.search,
+    color: Colors.white,
+    size: 28,
+  );
+  Widget customSearchBar = const Text(
+    'Parciais Jogadores',
+    style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
+  );
+
+  void filterSearchResults(String query) {
+    setState(() {
+      //_myData = _setPartidas(query);
+    });
+  }
 
   @override
   void initState() {
@@ -74,9 +90,63 @@ class _PontuadosPage extends State<PontuadosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPageColor,
-      appBar: AppBarControler(title: 'Parciais Jogadores'),
-      body: Column(
-        children: <Widget>[
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.white, // <-- SEE HERE
+        ),
+        title: customSearchBar,
+        automaticallyImplyLeading: false,
+        backgroundColor: backgroundColor,
+        actions: [
+          IconButton(
+            color: Colors.white,
+            onPressed: () {
+              setState(() {
+                if (customIcon.icon == Icons.search) {
+                  customIcon = const Icon(Icons.cancel);
+                  customSearchBar = ListTile(
+                    leading: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                    title: TextField(
+                      autofocus: true,
+                      onSubmitted: (value) {
+                        textoFiltro = value;
+                        filterSearchResults(value);
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Nome do Time',
+                        hintStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                } else {
+                  customIcon = const Icon(Icons.search);
+                  customSearchBar = const Text(
+                    'Buscar Jogador',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.normal),
+                  );
+                }
+              });
+            },
+            icon: customIcon,
+          )
+        ],
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: [
           SizedBox(
             height: height - 135,
             child: SingleChildScrollView(

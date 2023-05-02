@@ -145,7 +145,7 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
         ],
         centerTitle: true,
       ),
-      body: Column(
+      body: Stack(
         children: <Widget>[
           SizedBox(
             height: height - 135,
