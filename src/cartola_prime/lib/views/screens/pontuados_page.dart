@@ -3,12 +3,12 @@ import 'package:cartola_prime/models/dto/pontuados_dto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../shared/utils/ad_helper.dart';
 import '../../viewmodel/mercado_vm.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../components/loading_controle.dart';
 import '../components/resource_colors.dart';
 
 class PontuadosPage extends StatefulWidget {
@@ -81,23 +81,7 @@ class _PontuadosPage extends State<PontuadosPage> {
       barrierDismissible: false,
       context: context,
       builder: (_) {
-        return Dialog(
-          backgroundColor: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Lottie.asset('assets/json/football.json'),
-                const Text(
-                  'Carregando...',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        );
+        return const LoadingControle();
       },
     );
     setState(() {
@@ -217,26 +201,7 @@ class _PontuadosPage extends State<PontuadosPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<List<PontuadosDto>> snapshot) {
         if (!snapshot.hasData) {
-          return Dialog(
-            // The background color
-            backgroundColor: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // The loading indicator
-                  //CircularProgressIndicator(),
-                  Lottie.asset('assets/json/football.json'),
-                  const Text(
-                    'Carregando...',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          );
+          return const LoadingControle();
         } else {
           var item = snapshot.data;
           return SingleChildScrollView(
