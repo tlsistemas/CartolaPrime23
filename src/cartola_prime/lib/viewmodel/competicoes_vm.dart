@@ -24,7 +24,15 @@ class CompeticoesViewModel {
   ) async {
     var mercado = await _mercadoVm.getMercado();
 
-    var ligas = await _service.getLigaComopleta(slugLiga, 1, "rodada");
+    int page = 1;
+    String orderBy = "rodada";
+
+    if (slugLiga == "patrimonio") {
+      page = 1;
+      orderBy = "patrimonio";
+    }
+
+    var ligas = await _service.getLigaComopleta(slugLiga, page, orderBy);
 
     if (mercado.statusMercado == StatusMercadoEnum.fechado.index) {
       for (var i = 0; i < ligas.times!.length; i++) {
