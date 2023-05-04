@@ -49,7 +49,7 @@ class TimesLigaDto {
     assinante = json['assinante'];
     lgpdRemovido = json['lgpd_removido'];
     lgpdQuarentena = json['lgpd_quarentena'];
-    patrimonio = json['patrimonio'];
+    patrimonio = double.tryParse(json['patrimonio'].toString());
     ranking =
         json['ranking'] != null ? RankingDto.fromJson(json['ranking']) : null;
     pontos = json['pontos'] != null ? PontosDto.fromJson(json['pontos']) : null;

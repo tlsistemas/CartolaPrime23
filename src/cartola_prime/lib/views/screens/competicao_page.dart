@@ -341,7 +341,7 @@ class _CompeticaoPage extends State<CompeticaoPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              timeCartola.urlEscudoPng!.isEmpty
+              timeCartola.urlEscudoPng == null
                   ? const Image(
                       height: 50, image: AssetImage('assets/images/iconp.png'))
                   : Image.network(
@@ -372,11 +372,11 @@ class _CompeticaoPage extends State<CompeticaoPage> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Row(
                       children: [
-                        Text("${timeCartola.slug} ",
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold)),
+                        // Text("${timeCartola.slug} ",
+                        //     style: const TextStyle(
+                        //         color: Colors.black,
+                        //         fontSize: 12,
+                        //         fontWeight: FontWeight.bold)),
                         Text(" ${timeCartola.nomeCartola}",
                             style: const TextStyle(
                                 color: Colors.black, fontSize: 12))
@@ -428,8 +428,8 @@ class _CompeticaoPage extends State<CompeticaoPage> {
               ),
               Expanded(
                 child: Text(
-                  NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                      .format(timeCartola.parcial ?? 0),
+                  NumberFormat.decimalPatternDigits(decimalDigits: 2).format(
+                      timeCartola.parcial ?? timeCartola.pontos!.rodada),
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.end,

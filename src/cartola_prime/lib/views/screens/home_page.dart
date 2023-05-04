@@ -397,9 +397,26 @@ class _HomePageState extends State<HomePage> {
               toggleMenu();
               Navigator.pushNamed(context, "/mais_escalados");
             },
-            leading: const Icon(Icons.subject, size: 25.0, color: Colors.white),
+            leading: const Icon(Icons.format_list_bulleted,
+                size: 25.0, color: Colors.white),
             title: const Text(
               "Mais Escalados",
+              style: TextStyle(fontSize: 14),
+            ),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+          ListTile(
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/pontuados");
+            },
+            leading: const Icon(Icons.format_list_numbered_rtl,
+                size: 25.0, color: Colors.white),
+            title: const Text(
+              "Parciais Jogadores",
               style: TextStyle(fontSize: 14),
             ),
             textColor: Colors.white,
@@ -434,19 +451,6 @@ class _HomePageState extends State<HomePage> {
               "Classificação",
               style: TextStyle(fontSize: 14),
             ),
-            textColor: Colors.white,
-            dense: true,
-
-            // padding: EdgeInsets.zero,
-          ),
-          ListTile(
-            onTap: () {
-              toggleMenu();
-              Navigator.pushNamed(context, "/pontuados");
-            },
-            leading:
-                const Icon(Icons.star_border, size: 20.0, color: Colors.white),
-            title: const Text("Pontuados"),
             textColor: Colors.white,
             dense: true,
 

@@ -28,16 +28,17 @@ class CompeticoesService extends ChangeNotifier with baseUrls {
     }
   }
 
-  Future<LigaCompletaDto> getLigaComopleta(String slugLiga) async {
+  Future<LigaCompletaDto> getLigaComopleta(
+      String slugLiga, int page, String orderBy) async {
     var glbid = await authRepository.getGLBID();
-
-    final response =
-        await _clientHttp.getLogado(ligaCompleta + slugLiga, glbid);
+    var url = "$ligaCompleta/$slugLiga?page=$page&orderBy=$orderBy";
+    final response = await _clientHttp.getLogado(url, glbid);
 
     if (response['status'] == 'erro') {
       return LigaCompletaDto();
     } else {
       var dados = LigaCompletaDto.fromJson(response);
+      dados.times?.take(50);
       return dados;
     }
   }
