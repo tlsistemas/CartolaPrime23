@@ -1,4 +1,5 @@
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:cartola_prime/models/dto/mercado_status_dto.dart';
 import 'package:cartola_prime/models/dto/pontuados_dto.dart';
 import 'package:cartola_prime/models/enums/status_mercado_enum.dart';
 import 'package:flutter/foundation.dart';
@@ -29,6 +30,7 @@ class _PontuadosPage extends State<PontuadosPage> {
   late AdmobInterstitial interstitialAd;
   late AdmobReward rewardAd;
   String textoFiltro = "";
+  late MercadoStatusDto mercadoStatus;
   Icon customIcon = const Icon(
     Icons.search,
     color: Colors.white,
@@ -94,8 +96,8 @@ class _PontuadosPage extends State<PontuadosPage> {
   }
 
   Future<List<PontuadosDto>> _setFutureBuilder() async {
-    var statusMercado = await viewModel.getMercado();
-    if (statusMercado.statusMercado == StatusMercadoEnum.fechado.index) {
+    mercadoStatus = await viewModel.getMercado();
+    if (mercadoStatus.statusMercado == StatusMercadoEnum.fechado.index) {
       var retorno = await viewModel.pontuadosTela();
       return retorno!;
     }
@@ -104,14 +106,18 @@ class _PontuadosPage extends State<PontuadosPage> {
   }
 
   Future<List<PontuadosDto>> searchPontuados(String busca) async {
-    var atletas = await viewModel.pontuadosTela();
-    if (busca.isEmpty) return atletas!;
-    var retorno = atletas!
-        .where((element) =>
-            element.apelido!.toUpperCase().contains(busca.toUpperCase()))
-        .toList();
-    if (retorno.isEmpty) return atletas;
-    return retorno;
+    mercadoStatus = await viewModel.getMercado();
+    if (mercadoStatus.statusMercado == StatusMercadoEnum.fechado.index) {
+      var atletas = await viewModel.pontuadosTela();
+      if (busca.isEmpty) return atletas!;
+      var retorno = atletas!
+          .where((element) =>
+              element.apelido!.toUpperCase().contains(busca.toUpperCase()))
+          .toList();
+      if (retorno.isEmpty) return atletas;
+      return retorno;
+    }
+    return <PontuadosDto>[];
   }
 
   @override
