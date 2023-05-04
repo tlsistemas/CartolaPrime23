@@ -213,7 +213,13 @@ class _PontuadosPage extends State<PontuadosPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<List<PontuadosDto>> snapshot) {
         if (!snapshot.hasData) {
-          return const LoadingControle();
+          return SizedBox(
+            width: width,
+            height: height - 150,
+            child: const Center(
+              child: (LoadingControle()),
+            ),
+          );
         } else {
           var item = snapshot.data;
           if (item!.isEmpty) {

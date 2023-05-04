@@ -16,6 +16,7 @@ import '../../viewmodel/time_cartola_vm.dart';
 import '../../viewmodel/time_logado_vm.dart';
 import '../components/divider_controler.dart';
 import '../components/lista_times_cartola_controler.dart';
+import '../components/loading_controle.dart';
 import '../components/resource_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -148,26 +149,7 @@ class _HomePageState extends State<HomePage> {
       barrierDismissible: false,
       context: context,
       builder: (_) {
-        return Dialog(
-          // The background color
-          backgroundColor: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // The loading indicator
-                //CircularProgressIndicator(),
-                Lottie.asset('assets/json/football.json'),
-                const Text(
-                  'Carregando...',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        );
+        return const LoadingControle();
       },
     );
     // Your asynchronous computation here (fetching data from an API, processing files, inserting something to the database, etc)

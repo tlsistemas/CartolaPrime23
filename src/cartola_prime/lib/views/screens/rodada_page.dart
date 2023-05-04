@@ -10,6 +10,7 @@ import '../../viewmodel/rodada_vm.dart';
 import '../components/app_bar_controle.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../components/loading_controle.dart';
 import '../components/resource_colors.dart';
 
 class RodadaPage extends StatefulWidget {
@@ -126,24 +127,11 @@ class _RodadaPage extends State<RodadaPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<List<PartidaDto>> snapshot) {
         if (!snapshot.hasData) {
-          return Dialog(
-            // The background color
-            backgroundColor: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // The loading indicator
-                  //CircularProgressIndicator(),
-                  Lottie.asset('assets/json/football.json'),
-                  const Text(
-                    'Carregando...',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+          return SizedBox(
+            width: width,
+            height: height - 150,
+            child: const Center(
+              child: (LoadingControle()),
             ),
           );
         } else {

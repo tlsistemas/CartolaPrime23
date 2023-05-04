@@ -11,6 +11,7 @@ import '../../shared/utils/ad_helper.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../components/app_bar_update_controle.dart';
+import '../components/loading_controle.dart';
 import '../components/resource_colors.dart';
 
 class CompeticaoPage extends StatefulWidget {
@@ -77,26 +78,7 @@ class _CompeticaoPage extends State<CompeticaoPage> {
       barrierDismissible: false,
       context: context,
       builder: (_) {
-        return Dialog(
-          // The background color
-          backgroundColor: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // The loading indicator
-                //CircularProgressIndicator(),
-                Lottie.asset('assets/json/football.json'),
-                const Text(
-                  'Carregando...',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        );
+        return const LoadingControle();
       },
     );
     // Your asynchronous computation here (fetching data from an API, processing files, inserting something to the database, etc)
@@ -151,24 +133,11 @@ class _CompeticaoPage extends State<CompeticaoPage> {
       future: _myData,
       builder: (context, AsyncSnapshot<LigaCompletaDto> snapshot) {
         if (!snapshot.hasData) {
-          return Dialog(
-            // The background color
-            backgroundColor: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // The loading indicator
-                  //CircularProgressIndicator(),
-                  Lottie.asset('assets/json/football.json'),
-                  const Text(
-                    'Carregando...',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+          return SizedBox(
+            width: width,
+            height: height - 150,
+            child: const Center(
+              child: (LoadingControle()),
             ),
           );
         } else {

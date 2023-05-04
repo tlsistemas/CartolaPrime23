@@ -13,7 +13,7 @@ class LoadingControle extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Lottie.asset('assets/json/football.json'),
+            Lottie.asset('assets/json/loading_blue.json'),
             const Text(
               'Carregando...',
               textAlign: TextAlign.center,

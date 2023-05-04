@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../models/time_cartola_model.dart';
+import 'loading_controle.dart';
 import 'resource_colors.dart';
 
 class ListaTimesCartolaControler extends StatelessWidget {
@@ -14,34 +14,17 @@ class ListaTimesCartolaControler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late double width = MediaQuery.of(context).size.width;
+    late double height = MediaQuery.of(context).size.height;
     return FutureBuilder(
       future: myData,
       builder: (context, AsyncSnapshot<List<TimeCartolaModel>> snapshot) {
         if (!snapshot.hasData) {
-          return Container(
-            color: const Color(0xFF9d9d9d),
-            height: 600,
-            width: double.infinity,
-            child: Dialog(
-              // The background color
-              backgroundColor: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // The loading indicator
-                    //CircularProgressIndicator(),
-                    Lottie.asset('assets/json/football.json'),
-                    const Text(
-                      'Carregando...',
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
+          return SizedBox(
+            width: width,
+            height: height - 150,
+            child: const Center(
+              child: (LoadingControle()),
             ),
           );
         } else {
