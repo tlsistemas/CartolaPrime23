@@ -169,6 +169,24 @@ class TimeCartolaViewModel {
             .firstWhere((element) => element.atletaId == timeModel.capitaoId)
             .capitao = true;
 
+        for (var x = 0; x < timeModel.atletas!.length; x++) {
+          timeModel.atletas![x].pontoCor =
+              timeModel.atletas![x].pontosNum! > 0 ? Colors.green : Colors.red;
+          timeModel.atletas![x].pontoCor =
+              timeModel.atletas![x].pontosNum! == 0.0
+                  ? const Color.fromARGB(255, 90, 90, 90)
+                  : timeModel.atletas![x].pontoCor!;
+        }
+
+        for (var x = 0; x < timeModel.reservas!.length; x++) {
+          timeModel.reservas![x].pontoCor =
+              timeModel.reservas![x].pontosNum! > 0 ? Colors.green : Colors.red;
+          timeModel.reservas![x].pontoCor =
+              timeModel.reservas![x].pontosNum! == 0.0
+                  ? const Color.fromARGB(255, 90, 90, 90)
+                  : timeModel.reservas![x].pontoCor!;
+        }
+
         updateTime(timeModel);
 
         timesRetorno.add(timeModel);
