@@ -1,5 +1,6 @@
 import 'package:admob_flutter/admob_flutter.dart';
 import 'package:cartola_prime/models/dto/pontuados_dto.dart';
+import 'package:cartola_prime/models/enums/status_mercado_enum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -93,8 +94,13 @@ class _PontuadosPage extends State<PontuadosPage> {
   }
 
   Future<List<PontuadosDto>> _setFutureBuilder() async {
-    var retorno = await viewModel.pontuadosTela();
-    return retorno!;
+    var statusMercado = await viewModel.getMercado();
+    if (statusMercado.statusMercado == StatusMercadoEnum.fechado.index) {
+      var retorno = await viewModel.pontuadosTela();
+      return retorno!;
+    }
+
+    return <PontuadosDto>[];
   }
 
   Future<List<PontuadosDto>> searchPontuados(String busca) async {
@@ -204,22 +210,49 @@ class _PontuadosPage extends State<PontuadosPage> {
           return const LoadingControle();
         } else {
           var item = snapshot.data;
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: height,
-                  child: ListView.builder(
-                    itemCount: item!.length,
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-                    itemBuilder: (BuildContext context, int index) {
-                      return customCard(item[index]);
-                    },
+          if (item!.isEmpty) {
+            return SizedBox(
+              width: width,
+              height: height - 150,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/iconp.png',
+                    height: 200,
+                    width: 200,
                   ),
-                ),
-              ],
-            ),
-          );
+                  const Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      "Os atletas pontuados são liberados assim que o primeiro jogo da rodada começar.",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: height,
+                    child: ListView.builder(
+                      itemCount: item!.length,
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
+                      itemBuilder: (BuildContext context, int index) {
+                        return customCard(item[index]);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
         }
       },
     );
@@ -405,5 +438,12 @@ class _PontuadosPage extends State<PontuadosPage> {
                 },
           child: child),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<Future<List<PontuadosDto>>?>(
+        '_myDataHistorica', _myDataHistorica));
   }
 }
