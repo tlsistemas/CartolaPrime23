@@ -2,8 +2,10 @@ import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
 import 'package:cartola_prime/models/time_cartola_model.dart';
 import 'package:cartola_prime/views/screens/atletas_page.dart';
 import 'package:cartola_prime/views/screens/buscar_times_page.dart';
+import 'package:cartola_prime/views/screens/classificacao_bons_bico_page.dart';
 import 'package:cartola_prime/views/screens/competicoes_page.dart';
 import 'package:cartola_prime/views/screens/pontuados_page.dart';
+import 'package:cartola_prime/views/screens/rodadas_bons_bico_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +47,9 @@ class AppWidget extends StatelessWidget {
           '/home': (context) => const HomePage(title: 'CartoPrime FC'),
           '/login': (context) => const AuthPage(),
           '/escalar': (context) => const EscalarPage(),
+          '/rodada_bons_bico': (context) => const RodadasBonsBicoPage(),
+          '/classificacao_bons_bico': (context) =>
+              const ClassificacaoBonsBicoPage(),
           '/classificacao': (context) => const ClassificacaoPage(),
           '/rodada': (context) => const RodadaPage(),
           '/mais_escalados': (context) => const MaisEscaldosPage(),

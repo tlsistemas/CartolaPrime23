@@ -455,6 +455,38 @@ class _HomePageState extends State<HomePage> {
 
             // padding: EdgeInsets.zero,
           ),
+          ListTile(
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/rodada_bons_bico");
+            },
+            leading: const Icon(Icons.format_list_numbered,
+                size: 25.0, color: Colors.white),
+            title: const Text(
+              "Rodadas",
+              style: TextStyle(fontSize: 14),
+            ),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+          ListTile(
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/classificacao_bons_bico");
+            },
+            leading: const Icon(Icons.format_list_numbered,
+                size: 25.0, color: Colors.white),
+            title: const Text(
+              "Classificação",
+              style: TextStyle(fontSize: 14),
+            ),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
         ],
       ),
     );

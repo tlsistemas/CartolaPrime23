@@ -1,11 +1,8 @@
 import 'package:cartola_prime/repositories/auth_repository.dart';
 import 'package:cartola_prime/viewmodel/time_logado_vm.dart';
-import 'package:cartola_prime/views/screens/splash_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../../models/dto/time_logado_dto.dart';
 import '../../repositories/contracts/i_auth_repository.dart';
 import '../../shared/utils/base_urls.dart';
 

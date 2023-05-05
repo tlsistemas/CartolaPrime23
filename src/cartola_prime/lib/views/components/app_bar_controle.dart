@@ -40,13 +40,13 @@ class _AppBarControlerState extends State<AppBarControler> {
         style: const TextStyle(color: Colors.white),
       ),
       backgroundColor: backgroundColor,
-      actions: [
-        IconButton(
-          color: Colors.white,
-          onPressed: () {},
-          icon: const Icon(Icons.settings),
-        ),
-      ],
+      // actions: [
+      //   IconButton(
+      //     color: Colors.white,
+      //     onPressed: () {},
+      //     icon: const Icon(Icons.settings),
+      //   ),
+      // ],
     );
   }
 }
