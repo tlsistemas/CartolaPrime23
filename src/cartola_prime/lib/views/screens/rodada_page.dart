@@ -139,39 +139,38 @@ class _RodadaPage extends State<RodadaPage> {
           return SingleChildScrollView(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      IconButton(
-                        iconSize: 30,
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          setState(() {
-                            _myData = _voltarRodada();
-                          });
-                        },
-                      ),
-                      Text("Rodada ${_rodada.toString()}",
-                          style: const TextStyle(
-                              color: Colors.black, fontSize: 20)),
-                      IconButton(
-                        iconSize: 30,
-                        icon: const Icon(Icons.arrow_forward_ios),
-                        onPressed: () async {
-                          setState(() {
-                            _myData = _proximaRodada();
-                          });
-                        },
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    IconButton(
+                      padding: const EdgeInsets.only(left: 50),
+                      iconSize: 30,
+                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        setState(() {
+                          _myData = _voltarRodada();
+                        });
+                      },
+                    ),
+                    Text("Rodada ${_rodada.toString()}",
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 20)),
+                    IconButton(
+                      iconSize: 30,
+                      padding: const EdgeInsets.only(right: 50),
+                      icon: const Icon(Icons.arrow_forward_ios),
+                      onPressed: () async {
+                        setState(() {
+                          _myData = _proximaRodada();
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 Container(
-                  height: height,
+                  height: height - 150,
                   child: ListView.builder(
                     itemCount: item!.length,
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
@@ -207,14 +206,17 @@ class _RodadaPage extends State<RodadaPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Text("${partida.clubeCasaPosicao.toString()}°",
+                      Text(
+                          partida.clubeCasaPosicao > 0
+                              ? "${partida.clubeCasaPosicao.toString()}°"
+                              : "",
                           style: const TextStyle(
                               color: Colors.black, fontSize: 16.0),
                           textAlign: TextAlign.end),
-                      const SizedBox(width: 30),
+                      const SizedBox(width: 20),
                       Text(partida.clubeCasa.abreviacao!,
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 24.0),
+                              color: Colors.black, fontSize: 18.0),
                           textAlign: TextAlign.end)
                     ],
                   ),
@@ -225,11 +227,29 @@ class _RodadaPage extends State<RodadaPage> {
                     alignment: Alignment.centerRight,
                     centerSlice: Rect.largest,
                   ),
+                  Text(
+                      partida.placarOficialMandante != null
+                          ? partida.placarOficialMandante!.toString()
+                          : "",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Color.fromRGBO(0, 0, 0, 1),
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal)),
                   const Text("X",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 30,
+                          fontSize: 18,
+                          fontWeight: FontWeight.normal)),
+                  Text(
+                      partida.placarOficialVisitante != null
+                          ? partida.placarOficialVisitante!.toString()
+                          : "",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
                           fontWeight: FontWeight.normal)),
                   Image.network(
                     partida.clubeVisitante.escudos!.s60x60!,
@@ -245,10 +265,13 @@ class _RodadaPage extends State<RodadaPage> {
                     children: <Widget>[
                       Text(partida.clubeVisitante.abreviacao!,
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 24.0),
+                              color: Colors.black, fontSize: 18.0),
                           textAlign: TextAlign.start),
-                      const SizedBox(width: 30),
-                      Text("${partida.clubeVisitantePosicao.toString()}°",
+                      const SizedBox(width: 20),
+                      Text(
+                          partida.clubeVisitantePosicao > 0
+                              ? "${partida.clubeVisitantePosicao.toString()}°"
+                              : "",
                           style: const TextStyle(
                               color: Colors.black, fontSize: 16.0),
                           textAlign: TextAlign.start),
