@@ -1,4 +1,5 @@
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:cartola_prime/views/components/resource_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -27,6 +28,7 @@ class _ClassificacaoBonsBicoPageState extends State<ClassificacaoBonsBicoPage>
   void initState() {
     super.initState();
     controller = WebViewController()
+      ..setBackgroundColor(backgroundColor)
       ..loadRequest(Uri.parse(classificacaoBonsBico));
 
     bannerSize = AdmobBannerSize.BANNER;

@@ -6,6 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../shared/utils/ad_helper.dart';
 import '../../shared/utils/base_urls.dart';
 import '../components/app_bar_controle.dart';
+import '../components/resource_colors.dart';
 
 class RodadasBonsBicoPage extends StatefulWidget {
   const RodadasBonsBicoPage({Key? key}) : super(key: key);
@@ -25,7 +26,9 @@ class _RodadasBonsBicoPageState extends State<RodadasBonsBicoPage>
   @override
   void initState() {
     super.initState();
-    controller = WebViewController()..loadRequest(Uri.parse(rodadasBonsBico));
+    controller = WebViewController()
+      ..setBackgroundColor(backgroundColor)
+      ..loadRequest(Uri.parse(rodadasBonsBico));
 
     bannerSize = AdmobBannerSize.BANNER;
     interstitialAd = AdmobInterstitial(

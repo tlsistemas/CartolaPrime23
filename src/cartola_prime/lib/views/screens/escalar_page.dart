@@ -1,5 +1,6 @@
 import 'package:cartola_prime/repositories/auth_repository.dart';
 import 'package:cartola_prime/viewmodel/time_logado_vm.dart';
+import 'package:cartola_prime/views/components/resource_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -23,7 +24,7 @@ class _AuthPageState extends State<EscalarPage> with baseUrls {
     super.initState();
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(const Color(0x00000000))
+      ..setBackgroundColor(backgroundColor)
       ..setNavigationDelegate(
         NavigationDelegate(),
       )

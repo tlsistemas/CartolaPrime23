@@ -347,16 +347,16 @@ class _HomePageState extends State<HomePage> {
                 style: const TextStyle(fontSize: 14, color: Colors.white)),
           ),
           const SizedBox(height: 15),
-          ListTile(
-            onTap: () {},
-            leading: const Icon(Icons.home, size: 25.0, color: Colors.white),
-            title: const Text(
-              "Home",
-              style: TextStyle(fontSize: 14),
-            ),
-            textColor: Colors.white,
-            dense: true,
-          ),
+          // ListTile(
+          //   onTap: () {},
+          //   leading: const Icon(Icons.home, size: 25.0, color: Colors.white),
+          //   title: const Text(
+          //     "Home",
+          //     style: TextStyle(fontSize: 14),
+          //   ),
+          //   textColor: Colors.white,
+          //   dense: true,
+          // ),
           Visibility(
             visible: _isLogado,
             child: ListTile(
@@ -447,7 +447,7 @@ class _HomePageState extends State<HomePage> {
             leading: const Icon(Icons.format_list_numbered,
                 size: 25.0, color: Colors.white),
             title: const Text(
-              "Classificação",
+              "Classificação Brasileirão",
               style: TextStyle(fontSize: 14),
             ),
             textColor: Colors.white,
@@ -455,38 +455,45 @@ class _HomePageState extends State<HomePage> {
 
             // padding: EdgeInsets.zero,
           ),
-          ListTile(
-            onTap: () {
-              toggleMenu();
-              Navigator.pushNamed(context, "/rodada_bons_bico");
-            },
-            leading: const Icon(Icons.format_list_numbered,
-                size: 25.0, color: Colors.white),
-            title: const Text(
-              "Rodadas",
-              style: TextStyle(fontSize: 14),
-            ),
-            textColor: Colors.white,
-            dense: true,
+          Visibility(
+              visible: _isLogado,
+              child: Column(
+                children: [
+                  const DividerControler(texto: "Bons de Bico"),
+                  ListTile(
+                    onTap: () {
+                      toggleMenu();
+                      Navigator.pushNamed(context, "/rodada_bons_bico");
+                    },
+                    leading: const Icon(Icons.event_repeat,
+                        size: 25.0, color: Colors.white),
+                    title: const Text(
+                      "Rodadas",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    textColor: Colors.white,
+                    dense: true,
 
-            // padding: EdgeInsets.zero,
-          ),
-          ListTile(
-            onTap: () {
-              toggleMenu();
-              Navigator.pushNamed(context, "/classificacao_bons_bico");
-            },
-            leading: const Icon(Icons.format_list_numbered,
-                size: 25.0, color: Colors.white),
-            title: const Text(
-              "Classificação",
-              style: TextStyle(fontSize: 14),
-            ),
-            textColor: Colors.white,
-            dense: true,
+                    // padding: EdgeInsets.zero,
+                  ),
+                  ListTile(
+                    onTap: () {
+                      toggleMenu();
+                      Navigator.pushNamed(context, "/classificacao_bons_bico");
+                    },
+                    leading: const Icon(Icons.fact_check_outlined,
+                        size: 25.0, color: Colors.white),
+                    title: const Text(
+                      "Classificação Liga",
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    textColor: Colors.white,
+                    dense: true,
 
-            // padding: EdgeInsets.zero,
-          ),
+                    // padding: EdgeInsets.zero,
+                  ),
+                ],
+              ))
         ],
       ),
     );
