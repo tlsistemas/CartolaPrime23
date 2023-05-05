@@ -33,8 +33,9 @@ class _AuthPageState extends State<EscalarPage> with baseUrls {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: WebViewWidget(controller: controller),
-    );
+        backgroundColor: Colors.transparent,
+        body: Padding(
+            padding: const EdgeInsets.only(top: 30.0),
+            child: WebViewWidget(controller: controller)));
   }
 }
