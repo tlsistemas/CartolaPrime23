@@ -1,6 +1,7 @@
 enum CondicaoAtletaEnum {
   titular,
-  reserva;
+  reserva,
+  capitao;
 
   String? get texto {
     switch (this) {
@@ -8,6 +9,8 @@ enum CondicaoAtletaEnum {
         return 'Titular ';
       case CondicaoAtletaEnum.reserva:
         return 'Reserva';
+      case CondicaoAtletaEnum.capitao:
+        return 'Capitão';
     }
   }
 }
