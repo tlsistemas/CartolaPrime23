@@ -374,6 +374,23 @@ class _HomePageState extends State<HomePage> {
               dense: true,
             ),
           ),
+          Visibility(
+            visible: _isLogado,
+            child: ListTile(
+              onTap: () {
+                toggleMenu();
+                Navigator.pushNamed(context, "/escalar");
+              },
+              leading: const Icon(Icons.sports_soccer,
+                  size: 25.0, color: Colors.white),
+              title: const Text(
+                "Escalar",
+                style: TextStyle(fontSize: 14),
+              ),
+              textColor: Colors.white,
+              dense: true,
+            ),
+          ),
           ListTile(
             onTap: () {
               toggleMenu();
@@ -433,16 +450,6 @@ class _HomePageState extends State<HomePage> {
               "Classificação",
               style: TextStyle(fontSize: 14),
             ),
-            textColor: Colors.white,
-            dense: true,
-
-            // padding: EdgeInsets.zero,
-          ),
-          ListTile(
-            onTap: () {},
-            leading:
-                const Icon(Icons.settings, size: 20.0, color: Colors.white),
-            title: const Text("Settings"),
             textColor: Colors.white,
             dense: true,
 

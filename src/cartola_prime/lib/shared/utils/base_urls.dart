@@ -10,6 +10,7 @@ mixin baseUrls {
   String atletasMercado = '$_baseUrl/atletas/mercado';
   String login =
       'https://login.globo.com/login/438?url=https://cartolafc.globo.com';
+  String escalar = "https://cartola.globo.com/#!/time";
   String authTime = '$_baseUrl/auth/time';
   String buscaTime = '$_baseUrl/busca?q=';
   String buscaTimeId = '$_baseUrl/time/id/';

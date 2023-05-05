@@ -11,6 +11,7 @@ import 'services/client_http.dart';
 import 'views/screens/auth_page.dart';
 import 'views/screens/classificacao_bra_page.dart';
 import 'views/screens/competicao_page.dart';
+import 'views/screens/escalar_page.dart';
 import 'views/screens/mais_escalados_page.dart';
 import 'views/screens/rodada_page.dart';
 import 'views/screens/home_page.dart';
@@ -43,6 +44,7 @@ class AppWidget extends StatelessWidget {
           '/': (context) => const SplashPage(),
           '/home': (context) => const HomePage(title: 'CartoPrime FC'),
           '/login': (context) => const AuthPage(),
+          '/escalar': (context) => const EscalarPage(),
           '/classificacao': (context) => const ClassificacaoPage(),
           '/rodada': (context) => const RodadaPage(),
           '/mais_escalados': (context) => const MaisEscaldosPage(),
