@@ -30,16 +30,27 @@ class ListaTimesCartolaControler extends StatelessWidget {
         } else {
           var item = snapshot.data;
           if (item!.isEmpty) {
-            return Center(
+            return SizedBox(
+              width: width,
+              height: height - 150,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                      width: MediaQuery.of(context).size.width * 1,
-                      height: MediaQuery.of(context).size.height * 0.80,
-                      color: backgroundPageColor,
-                      child: Image.asset('assets/images/fundo_home.png')),
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/iconp.png',
+                    height: 200,
+                    width: 200,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      "Adicione times na sua lista de favoritos ee acompanhe o desempenho, e as informaçõs de seus amigos.",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ],
               ),
             );

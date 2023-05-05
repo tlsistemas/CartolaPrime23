@@ -10,6 +10,7 @@ import '../../shared/utils/ad_helper.dart';
 import '../../shared/utils/base_svg.dart';
 
 import '../../viewmodel/time_cartola_vm.dart';
+import '../components/loading_controle.dart';
 import '../components/resource_colors.dart';
 
 class BuscarTimePage extends StatefulWidget {
@@ -179,44 +180,56 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
       future: _myData,
       builder: (context, AsyncSnapshot<List<TimeBuscaDto>> snapshot) {
         if (!snapshot.hasData) {
-          return const Padding(
-            padding: EdgeInsets.all(50.0),
-            child: Align(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  CircularProgressIndicator(
-                    backgroundColor: backgroundPageColor,
-                    color: backgroundColor,
-                    strokeWidth: 2,
-                  ),
-                  SizedBox(height: 15),
-                  Text("Carregando...",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.end),
-                ],
-              ),
+          return SizedBox(
+            width: width,
+            height: height - 150,
+            child: const Center(
+              child: (LoadingControle()),
             ),
           );
         } else {
           var item = snapshot.data;
-          return Column(
-            children: [
-              SizedBox(
-                child: ListView.builder(
-                  itemCount: item!.length,
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return customCard(item[index]);
-                  },
-                ),
+          if (item!.isEmpty) {
+            return SizedBox(
+              width: width,
+              height: height - 150,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/iconp.png',
+                    height: 200,
+                    width: 200,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      "Click no icone de busca e digite o nome do time. Adicione ele a sua lista de favoritos.",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          );
+            );
+          } else {
+            return Column(
+              children: [
+                SizedBox(
+                  child: ListView.builder(
+                    itemCount: item!.length,
+                    shrinkWrap: true,
+                    physics: const ScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      return customCard(item[index]);
+                    },
+                  ),
+                ),
+              ],
+            );
+          }
         }
       },
     );
