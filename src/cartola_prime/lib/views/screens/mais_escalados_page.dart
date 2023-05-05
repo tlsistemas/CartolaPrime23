@@ -121,7 +121,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
             child: Column(
               children: [
                 Container(
-                  height: height,
+                  height: height - 100,
                   child: ListView.builder(
                     itemCount: item!.length,
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
@@ -161,7 +161,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                     escaldo.atleta!.apelido!.toString(),
                     style: const TextStyle(
                         color: Colors.black,
-                        fontSize: 21,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   ),
@@ -249,8 +249,8 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
-                        NumberFormat.decimalPattern('pt-BR')
-                            .format(escaldo.atleta!.minimoParaValorizar ?? 0),
+                        NumberFormat.decimalPatternDigits(decimalDigits: 2)
+                            .format(escaldo.atleta!.minimoParaValorizar!),
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.left,

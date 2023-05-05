@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/dto/pontuados_dto.dart';
 import 'package:cartola_prime/repositories/mercado_repository.dart';
 import 'package:cartola_prime/shared/utils/base_table.dart';
@@ -42,11 +43,26 @@ class MercadoViewModel {
     return retorno;
   }
 
-  Future<List<PontuadosDto>?> pontuadosTela() async {
-    // bool exists = await hiveService.isExists(boxName: baseTable.pontuadosTable);
+  Future<List<PontuadosDto>?> atletasPontuadosNoMercado() async {
     List<PontuadosDto>? retorno = <PontuadosDto>[];
     retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
     var retornoMercado = await _service.getAtletasMercado();
+    for (var i = 0; i < retorno.length; i++) {
+      var itemSelecionado = retornoMercado!.atletas!
+          .firstWhere((element) => element.atletaId == retorno![i].atletaId);
+      retorno[i].minimoParaValorizar = itemSelecionado.minimoParaValorizar;
+      retorno[i].precoNum = itemSelecionado.precoNum;
+    }
+    retorno.sort((a, b) => b.pontuacao!.compareTo(a.pontuacao!));
+    return retorno;
+  }
+
+  Future<List<PontuadosDto>?> atletasPontuadosNoMercadoPorClube(
+      int clubeId) async {
+    // bool exists = await hiveService.isExists(boxName: baseTable.pontuadosTable);
+    List<PontuadosDto>? retorno = <PontuadosDto>[];
+    retorno = await _service.getPontuadosMercado() ?? <PontuadosDto>[];
+    var retornoMercado = await _service.getAtletasMercadoClube(clubeId);
     for (var i = 0; i < retorno.length; i++) {
       var itemSelecionado = retornoMercado!.atletas!
           .firstWhere((element) => element.atletaId == retorno![i].atletaId);
@@ -85,5 +101,10 @@ class MercadoViewModel {
 
     var lstPontuados = PontuadosDto.fromJsonWithAtletaPontuado(data);
     return lstPontuados.atletas;
+  }
+
+  Future<List<AtletaDto>?> atletasNoMercado() async {
+    var retornoMercado = await _service.getAtletasMercado();
+    return retornoMercado!.atletas;
   }
 }

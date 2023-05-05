@@ -52,4 +52,15 @@ class MercadoService extends ChangeNotifier with baseUrls {
       return dados;
     }
   }
+
+  Future<AtletaMercadoDto?> getAtletasMercadoClube(int clubeId) async {
+    final response = await _dio.get("$atletasMercado/$clubeId");
+
+    if (response['status'] == 'erro') {
+      return AtletaMercadoDto();
+    } else {
+      var dados = AtletaMercadoDto.fromJson(response);
+      return dados;
+    }
+  }
 }

@@ -98,7 +98,7 @@ class _PontuadosPage extends State<PontuadosPage> {
   Future<List<PontuadosDto>> _setFutureBuilder() async {
     mercadoStatus = await viewModel.getMercado();
     if (mercadoStatus.statusMercado == StatusMercadoEnum.fechado.index) {
-      var retorno = await viewModel.pontuadosTela();
+      var retorno = await viewModel.atletasPontuadosNoMercado();
       return retorno!;
     }
 
@@ -108,7 +108,7 @@ class _PontuadosPage extends State<PontuadosPage> {
   Future<List<PontuadosDto>> searchPontuados(String busca) async {
     mercadoStatus = await viewModel.getMercado();
     if (mercadoStatus.statusMercado == StatusMercadoEnum.fechado.index) {
-      var atletas = await viewModel.pontuadosTela();
+      var atletas = await viewModel.atletasPontuadosNoMercado();
       if (busca.isEmpty) return atletas!;
       var retorno = atletas!
           .where((element) =>
@@ -254,7 +254,7 @@ class _PontuadosPage extends State<PontuadosPage> {
                   Container(
                     height: height,
                     child: ListView.builder(
-                      itemCount: item!.length,
+                      itemCount: item.length,
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
                       itemBuilder: (BuildContext context, int index) {
                         return customCard(item[index]);
