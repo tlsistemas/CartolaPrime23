@@ -28,6 +28,6 @@ class RodadaDto {
     rodada = json['rodada'];
     var partidasJson = json['partidas'];
     var partidaDto = PartidaDto.fromJsonList(partidasJson);
-    partidas = partidaDto.partidas;
+    partidas = partidaDto.partidas!;
   }
 }

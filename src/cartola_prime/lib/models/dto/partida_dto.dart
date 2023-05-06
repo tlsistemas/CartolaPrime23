@@ -25,28 +25,28 @@ class PartidaDto {
     required this.transmissao,
   });
 
-  late final int partidaId;
-  late final int clubeCasaId;
-  late final ClubeDto clubeCasa;
-  late final int clubeCasaPosicao;
-  late final int clubeVisitanteId;
-  late final ClubeDto clubeVisitante;
-  late final List<String> aproveitamentoMandante;
-  late final List<String> aproveitamentoVisitante;
-  late final int clubeVisitantePosicao;
-  late final String partidaData;
-  late final int timestamp;
-  late final String local;
-  late final bool valida;
-  late final int? placarOficialMandante;
-  late final int? placarOficialVisitante;
-  late final String statusTransmissaoTr;
-  late final String inicioCronometroTr;
-  late final String statusCronometroTr;
-  late final String periodoTr;
-  late final TransmissaoDto transmissao;
+  int? partidaId;
+  int? clubeCasaId;
+  ClubeDto? clubeCasa;
+  int? clubeCasaPosicao;
+  int? clubeVisitanteId;
+  ClubeDto? clubeVisitante;
+  List<String>? aproveitamentoMandante;
+  List<String>? aproveitamentoVisitante;
+  int? clubeVisitantePosicao;
+  String? partidaData;
+  int? timestamp;
+  String? local;
+  bool? valida;
+  int? placarOficialMandante;
+  int? placarOficialVisitante;
+  String? statusTransmissaoTr;
+  String? inicioCronometroTr;
+  String? statusCronometroTr;
+  String? periodoTr;
+  TransmissaoDto? transmissao;
 
-  late final List<PartidaDto> partidas;
+  List<PartidaDto>? partidas;
 
   PartidaDto.fromJson(Map<String, dynamic> json) {
     partidaId = json['partida_id'];
@@ -90,14 +90,14 @@ class PartidaDto {
     data['inicio_cronometro_tr'] = inicioCronometroTr;
     data['status_cronometro_tr'] = statusCronometroTr;
     data['periodo_tr'] = periodoTr;
-    data['transmissao'] = transmissao.toJson();
+    data['transmissao'] = transmissao!.toJson();
     return data;
   }
 
   PartidaDto.fromJsonList(List json) {
     partidas = <PartidaDto>[];
     for (var element in json) {
-      partidas.add(PartidaDto.fromJson(element));
+      partidas!.add(PartidaDto.fromJson(element));
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:cartola_prime/views/screens/classificacao_bons_bico_page.dart';
 import 'package:cartola_prime/views/screens/competicoes_page.dart';
 import 'package:cartola_prime/views/screens/pontuados_page.dart';
 import 'package:cartola_prime/views/screens/rodadas_bons_bico_page.dart';
+import 'package:cartola_prime/views/screens/selecoes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,6 +57,7 @@ class AppWidget extends StatelessWidget {
           '/buscar_times': (context) => const BuscarTimePage(),
           '/competicoes': (context) => const CompeticoesPage(),
           '/pontuados': (context) => const PontuadosPage(),
+          '/selecao_rodada': (context) => const SelecoesPage(),
           '/atletas': (context) => AtletasPage(
               ModalRoute.of(context)!.settings.arguments as TimeCartolaModel),
           '/competicao': (context) => CompeticaoPage(

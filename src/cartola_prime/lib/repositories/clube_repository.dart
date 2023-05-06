@@ -37,17 +37,13 @@ class ClubeRepository implements IClubeRepository {
 
   @override
   Future<ClubeDto> getId(int idClube) async {
-    // var storageJson = await _storage.read(key: "clubes");
-
-    // var list = (json.decode(storageJson!) as List)
-    //     .map((i) => ClubeDto.fromJson(i))
-    //     .toList();
-
     var clubes = await hiveService.getBoxes(baseTable.clubesTable);
     var list = ClubeDto.fromJsonListDynamic(clubes);
+    if (idClube > 0) {
+      return list.clubes!.firstWhere((element) => element.id == idClube);
+    }
 
-    var clube = list.clubes!.firstWhere((element) => element.id == idClube);
-    return clube;
+    return ClubeDto();
   }
 
   @override

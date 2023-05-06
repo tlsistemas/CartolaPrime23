@@ -129,7 +129,7 @@ class _AtletasPage extends State<AtletasPage> {
             Expanded(
               child: SingleChildScrollView(
                 physics: const NeverScrollableScrollPhysics(),
-                child: listaPartidastWidget(),
+                child: listaWidget(),
               ),
             ),
           ],
@@ -138,7 +138,7 @@ class _AtletasPage extends State<AtletasPage> {
     );
   }
 
-  Widget listaPartidastWidget() {
+  Widget listaWidget() {
     return FutureBuilder(
       future: _myData,
       builder: (context, AsyncSnapshot<TimeCartolaModel> snapshot) {

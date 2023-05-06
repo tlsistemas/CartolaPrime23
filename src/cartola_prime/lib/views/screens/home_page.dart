@@ -455,6 +455,21 @@ class _HomePageState extends State<HomePage> {
 
             // padding: EdgeInsets.zero,
           ),
+          ListTile(
+            onTap: () {
+              toggleMenu();
+              Navigator.pushNamed(context, "/selecao_rodada");
+            },
+            leading: const Icon(Icons.grading, size: 25.0, color: Colors.white),
+            title: const Text(
+              "Seleções da Rodada",
+              style: TextStyle(fontSize: 14),
+            ),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
           Visibility(
               visible: _isLogado,
               child: Column(

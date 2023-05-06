@@ -195,7 +195,7 @@ class _RodadaPage extends State<RodadaPage> {
           child: Column(
             children: [
               Text(DateFormat('dd/MM/yyyy kk:mm')
-                  .format(DateTime.parse(partida.partidaData))),
+                  .format(DateTime.parse(partida.partidaData!))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
@@ -207,21 +207,21 @@ class _RodadaPage extends State<RodadaPage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                          partida.clubeCasaPosicao > 0
+                          partida.clubeCasaPosicao! > 0
                               ? "${partida.clubeCasaPosicao.toString()}°"
                               : "",
                           style: const TextStyle(
                               color: Colors.black, fontSize: 16.0),
                           textAlign: TextAlign.end),
                       const SizedBox(width: 20),
-                      Text(partida.clubeCasa.abreviacao!,
+                      Text(partida.clubeCasa!.abreviacao!,
                           style: const TextStyle(
                               color: Colors.black, fontSize: 18.0),
                           textAlign: TextAlign.end)
                     ],
                   ),
                   Image.network(
-                    partida.clubeCasa.escudos!.s60x60!,
+                    partida.clubeCasa!.escudos!.s60x60!,
                     height: 40,
                     width: 40,
                     alignment: Alignment.centerRight,
@@ -252,7 +252,7 @@ class _RodadaPage extends State<RodadaPage> {
                           fontSize: 20,
                           fontWeight: FontWeight.normal)),
                   Image.network(
-                    partida.clubeVisitante.escudos!.s60x60!,
+                    partida.clubeVisitante!.escudos!.s60x60!,
                     height: 40,
                     width: 40,
                     alignment: Alignment.centerRight,
@@ -263,13 +263,13 @@ class _RodadaPage extends State<RodadaPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(partida.clubeVisitante.abreviacao!,
+                      Text(partida.clubeVisitante!.abreviacao!,
                           style: const TextStyle(
                               color: Colors.black, fontSize: 18.0),
                           textAlign: TextAlign.start),
                       const SizedBox(width: 20),
                       Text(
-                          partida.clubeVisitantePosicao > 0
+                          partida.clubeVisitantePosicao! > 0
                               ? "${partida.clubeVisitantePosicao.toString()}°"
                               : "",
                           style: const TextStyle(
@@ -279,7 +279,7 @@ class _RodadaPage extends State<RodadaPage> {
                   ),
                 ],
               ),
-              Text(partida.local)
+              Text(partida.local!)
             ],
           ),
         ),

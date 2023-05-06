@@ -12,9 +12,9 @@ class RodadaViewModel {
     var rodada = await _service.getRodadaAtual();
     for (var i = 0; i < rodada.partidas.length; i++) {
       rodada.partidas[i].clubeCasa =
-          await _repClube.getId(rodada.partidas[i].clubeCasaId);
+          await _repClube.getId(rodada.partidas[i].clubeCasaId!);
       rodada.partidas[i].clubeVisitante =
-          await _repClube.getId(rodada.partidas[i].clubeVisitanteId);
+          await _repClube.getId(rodada.partidas[i].clubeVisitanteId!);
     }
     return rodada;
   }
@@ -23,9 +23,9 @@ class RodadaViewModel {
     var rodada = await _service.getRodada(numero);
     for (var i = 0; i < rodada.partidas.length; i++) {
       rodada.partidas[i].clubeCasa =
-          await _repClube.getId(rodada.partidas[i].clubeCasaId);
+          await _repClube.getId(rodada.partidas[i].clubeCasaId!);
       rodada.partidas[i].clubeVisitante =
-          await _repClube.getId(rodada.partidas[i].clubeVisitanteId);
+          await _repClube.getId(rodada.partidas[i].clubeVisitanteId!);
     }
     return rodada;
   }

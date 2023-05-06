@@ -1,3 +1,4 @@
+import 'package:cartola_prime/models/dto/partida_dto.dart';
 import 'package:cartola_prime/repositories/clube_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -41,6 +42,7 @@ class AtletaDto {
   Color? pontoCor = const Color.fromARGB(255, 118, 118, 118);
   bool? capitao = false;
   bool? entrouEmCampo = false;
+  PartidaDto? partida;
 
   AtletaDto(
       {this.scout,
@@ -89,7 +91,7 @@ class AtletaDto {
     apelidoAbreviado = json['apelido_abreviado'];
     nome = json['nome'];
     foto = json['foto'].toString().replaceAll("FORMATO", "220x220");
-    precoEditorial = json['preco_editorial'];
+    precoEditorial = double.tryParse(json['preco_editorial'].toString());
     titularReserva = eTitulaOuReserva.texto;
   }
 

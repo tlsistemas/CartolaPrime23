@@ -1,29 +1,40 @@
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:cartola_prime/models/dto/atleta_dto.dart';
+import 'package:cartola_prime/models/dto/selecoes_dto.dart';
+import 'package:cartola_prime/viewmodel/selecao_vm.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/dto/mais_escalados_dto.dart';
+import '../../models/dto/selecao_dto.dart';
 import '../../shared/utils/ad_helper.dart';
-import '../../viewmodel/mais_escalados_vm.dart';
 import '../components/app_bar_controle.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import '../components/loading_controle.dart';
 import '../components/resource_colors.dart';
 
-class MaisEscaldosPage extends StatefulWidget {
-  const MaisEscaldosPage({Key? key}) : super(key: key);
+class SelecoesPage extends StatefulWidget {
+  const SelecoesPage({Key? key}) : super(key: key);
 
   @override
-  State<MaisEscaldosPage> createState() => _MaisEscaldosPage();
+  State<SelecoesPage> createState() => _SelecoesPage();
 }
 
-class _MaisEscaldosPage extends State<MaisEscaldosPage> {
+class _SelecoesPage extends State<SelecoesPage>
+    with SingleTickerProviderStateMixin {
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
-  final MaisEscaladosViewModel viewModel = MaisEscaladosViewModel();
-  late Future<List<MaisEscaladosDto>>? _myData;
+  final viewModel = SelecaoViewModel();
+  late Future<SelecoesDto>? _myData;
+
+  var _titulares = <SelecaoDto>[];
+  var _reservas = <SelecaoDto>[];
+  var _capitaes = <SelecaoDto>[];
+
+  late TabController _tabController;
+
+  int _selectedTab = 0;
+
   AdmobBannerSize? bannerSize;
   late AdmobInterstitial interstitialAd;
   late AdmobReward rewardAd;
@@ -31,7 +42,17 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
   @override
   void initState() {
     super.initState();
-    _myData = _setFutureBuilder();
+    _myData = _setSelecoes();
+
+    _tabController = TabController(vsync: this, length: 3, initialIndex: 0);
+
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        setState(() {
+          _selectedTab = _tabController.index;
+        });
+      }
+    });
 
     bannerSize = AdmobBannerSize.BANNER;
     interstitialAd = AdmobInterstitial(
@@ -56,31 +77,30 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
     rewardAd.load();
   }
 
-  @override
-  void dispose() {
-    interstitialAd.dispose();
-    rewardAd.dispose();
-    super.dispose();
-  }
+  Future<SelecoesDto> _setSelecoes() async {
+    var selecoes = await viewModel.selecaoAtual();
+    _titulares = selecoes.selecao!;
+    _titulares.sort((a, b) => a.posicaoId!.compareTo(b.posicaoId!));
 
-  Future<List<MaisEscaladosDto>> _setFutureBuilder() async {
-    var retorno = await viewModel.maisEscaldosRodadaAtual();
-    return retorno;
+    _reservas = selecoes.reservas!;
+    _reservas.sort((a, b) => a.posicaoId!.compareTo(b.posicaoId!));
+
+    _capitaes = selecoes.capitaes!;
+    _capitaes.sort((a, b) => a.posicaoId!.compareTo(b.posicaoId!));
+
+    return selecoes;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundPageColor,
-      appBar: AppBarControler(title: 'Mais Escalados'),
+      appBar: AppBarControler(title: 'Seleções'),
       body: Column(
         children: <Widget>[
           SizedBox(
             height: height - 135,
-            child: SingleChildScrollView(
-              //scrollDirection: Axis.vertical,
-              child: listaPartidastWidget(),
-            ),
+            child: tabsSelecoes(),
           ),
           AdmobBanner(
             adUnitId: kReleaseMode
@@ -102,42 +122,135 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
     );
   }
 
-  Widget listaPartidastWidget() {
-    return FutureBuilder(
-      future: _myData,
-      builder: (context, AsyncSnapshot<List<MaisEscaladosDto>> snapshot) {
-        if (!snapshot.hasData) {
-          return SizedBox(
-            width: width,
-            height: height - 150,
-            child: const Center(
-              child: (LoadingControle()),
+  Widget tabsSelecoes() {
+    return DefaultTabController(
+      length: 3,
+      child: Column(
+        children: <Widget>[
+          Material(
+            color: Colors.grey.shade300,
+            child: TabBar(
+              unselectedLabelColor: Colors.blue,
+              labelColor: Colors.blue,
+              indicatorColor: Colors.white,
+              controller: _tabController,
+              labelPadding: const EdgeInsets.all(0.0),
+              tabs: [
+                _getTab(0, const Center(child: Text("Titulares"))),
+                _getTab(1, const Center(child: Text("Reservas"))),
+                _getTab(2, const Center(child: Text("Capitães"))),
+              ],
             ),
-          );
-        } else {
-          var item = snapshot.data;
-          return SingleChildScrollView(
-            child: Column(
+          ),
+          Expanded(
+            child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _tabController,
               children: [
-                Container(
-                  height: height - 100,
-                  child: ListView.builder(
-                    itemCount: item!.length,
-                    padding: const EdgeInsets.fromLTRB(0, 10, 0, 30),
-                    itemBuilder: (BuildContext context, int index) {
-                      return customCard(item[index]);
-                    },
-                  ),
+                ListView.builder(
+                  itemCount: _titulares.length,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return customCard(
+                        _titulares[index].atleta!,
+                        _titulares[index].escalacoes!,
+                        _titulares[index].posicaoAbreviacao!);
+                  },
+                ),
+                ListView.builder(
+                  itemCount: _reservas.length,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return customCard(
+                        _reservas[index].atleta!,
+                        _reservas[index].escalacoes!,
+                        _reservas[index].posicaoAbreviacao!);
+                  },
+                ),
+                ListView.builder(
+                  itemCount: _capitaes.length,
+                  shrinkWrap: true,
+                  physics: const ScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return customCard(
+                        _capitaes[index].atleta!,
+                        _capitaes[index].escalacoes!,
+                        _capitaes[index].posicaoAbreviacao!);
+                  },
                 ),
               ],
             ),
-          );
-        }
-      },
+          ),
+        ],
+      ),
     );
   }
 
-  Widget customCard(MaisEscaladosDto escaldo) {
+  Widget tabsSelecoes2() {
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+          body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            const SliverAppBar(
+              title: Text('Tabs Demo'),
+              pinned: true,
+              floating: true,
+              bottom: TabBar(
+                isScrollable: true,
+                tabs: [
+                  Tab(child: Text('Titulares')),
+                  Tab(child: Text('Reservas')),
+                  Tab(child: Text('Car')),
+                  Tab(child: Text('Cycle')),
+                  Tab(child: Text('Boat')),
+                ],
+              ),
+            ),
+          ];
+        },
+        body: const TabBarView(
+          children: <Widget>[
+            Icon(Icons.flight, size: 350),
+            Icon(Icons.directions_transit, size: 350),
+            Icon(Icons.directions_car, size: 350),
+            Icon(Icons.directions_bike, size: 350),
+            Icon(Icons.directions_boat, size: 350),
+          ],
+        ),
+      )),
+    );
+  }
+
+  _getTab(index, child) {
+    return Tab(
+      child: SizedBox.expand(
+        child: Container(
+          child: child,
+          decoration: BoxDecoration(
+              color:
+                  (_selectedTab == index ? Colors.white : Colors.grey.shade300),
+              borderRadius: _generateBorderRadius(index)),
+        ),
+      ),
+    );
+  }
+
+  _generateBorderRadius(index) {
+    if ((index + 1) == _selectedTab) {
+      return const BorderRadius.only(bottomRight: Radius.circular(10.0));
+    } else if ((index - 1) == _selectedTab) {
+      return const BorderRadius.only(bottomLeft: Radius.circular(10.0));
+    } else {
+      return BorderRadius.zero;
+    }
+  }
+
+  Widget customCard(
+      AtletaDto atleta, int escalacoes, String posicaoAbreviacao) {
     return StaggeredGrid.count(crossAxisCount: 1, children: <Widget>[
       _buildTile(
         Padding(
@@ -148,7 +261,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Image.network(
-                escaldo.atleta!.foto!,
+                atleta.foto!,
                 height: 90,
                 width: 90,
                 centerSlice: Rect.largest,
@@ -157,7 +270,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    escaldo.atleta!.apelido!.toString(),
+                    atleta.apelido!.toString(),
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -168,14 +281,17 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
                     child: Row(
                       children: [
-                        Text("${escaldo.posicaoAbreviacao} ",
+                        Text("$posicaoAbreviacao ".toUpperCase(),
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold)),
-                        Text(" ${escaldo.clube}",
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 10))
+                        Image.network(
+                          atleta.clube!.escudos!.s30x30!,
+                          height: 20,
+                          width: 20,
+                          centerSlice: Rect.largest,
+                        ),
                       ],
                     ),
                   ),
@@ -185,7 +301,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                         children: [
                           Text(
                             NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                                .format(escaldo.atleta!.precoEditorial!),
+                                .format(atleta.precoEditorial!),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -203,7 +319,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                         children: [
                           Text(
                             NumberFormat.decimalPattern('pt-BR')
-                                .format(escaldo.escalacoes!),
+                                .format(escalacoes),
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.right,
@@ -227,14 +343,14 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                   Row(
                     children: [
                       Image.network(
-                        escaldo.partida!.clubeCasa!.escudos!.s30x30!,
+                        atleta.partida!.clubeCasa!.escudos!.s45x45!,
                         height: 25,
                         width: 25,
                         centerSlice: Rect.largest,
                       ),
                       const Text(" X "),
                       Image.network(
-                        escaldo.partida!.clubeVisitante!.escudos!.s30x30!,
+                        atleta.partida!.clubeVisitante!.escudos!.s45x45!,
                         height: 25,
                         width: 25,
                         centerSlice: Rect.largest,
@@ -249,7 +365,7 @@ class _MaisEscaldosPage extends State<MaisEscaldosPage> {
                     children: [
                       Text(
                         NumberFormat.decimalPatternDigits(decimalDigits: 2)
-                            .format(escaldo.atleta!.minimoParaValorizar!),
+                            .format(atleta.minimoParaValorizar!),
                         style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.left,

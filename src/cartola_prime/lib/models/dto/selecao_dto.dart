@@ -11,6 +11,7 @@ class SelecaoDto {
   AtletaDto? atleta;
   int? clubeId;
   int? escalacoes;
+  int? posicaoId;
 
   SelecaoDto(
       {posicao,
@@ -33,6 +34,7 @@ class SelecaoDto {
         ? AtletaDto.fromJson(json['Atleta'], eTitulaOuReserva)
         : null;
     clubeId = json['clube_id'];
+    atleta!.clubeId = clubeId;
     escalacoes = json['escalacoes'];
   }
 
