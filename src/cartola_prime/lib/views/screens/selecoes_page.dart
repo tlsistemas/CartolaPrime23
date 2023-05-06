@@ -44,7 +44,7 @@ class _SelecoesPage extends State<SelecoesPage>
     super.initState();
     _myData = _setSelecoes();
 
-    _tabController = TabController(vsync: this, length: 3, initialIndex: 0);
+    _tabController = TabController(vsync: this, length: 3);
 
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) {
@@ -135,10 +135,35 @@ class _SelecoesPage extends State<SelecoesPage>
               indicatorColor: Colors.white,
               controller: _tabController,
               labelPadding: const EdgeInsets.all(0.0),
+              onTap: (value) => {},
               tabs: [
-                _getTab(0, const Center(child: Text("Titulares"))),
-                _getTab(1, const Center(child: Text("Reservas"))),
-                _getTab(2, const Center(child: Text("Capitães"))),
+                _getTab(
+                  0,
+                  const Center(
+                    child: Text(
+                      "Titulares",
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                  ),
+                ),
+                _getTab(
+                  1,
+                  const Center(
+                    child: Text(
+                      "Reservas",
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                  ),
+                ),
+                _getTab(
+                  2,
+                  const Center(
+                    child: Text(
+                      "Capitães",
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -190,7 +215,7 @@ class _SelecoesPage extends State<SelecoesPage>
 
   Widget tabsSelecoes2() {
     return DefaultTabController(
-      length: 5,
+      length: 3,
       child: Scaffold(
           body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -204,9 +229,7 @@ class _SelecoesPage extends State<SelecoesPage>
                 tabs: [
                   Tab(child: Text('Titulares')),
                   Tab(child: Text('Reservas')),
-                  Tab(child: Text('Car')),
-                  Tab(child: Text('Cycle')),
-                  Tab(child: Text('Boat')),
+                  Tab(child: Text('Capitães')),
                 ],
               ),
             ),
@@ -217,8 +240,6 @@ class _SelecoesPage extends State<SelecoesPage>
             Icon(Icons.flight, size: 350),
             Icon(Icons.directions_transit, size: 350),
             Icon(Icons.directions_car, size: 350),
-            Icon(Icons.directions_bike, size: 350),
-            Icon(Icons.directions_boat, size: 350),
           ],
         ),
       )),
