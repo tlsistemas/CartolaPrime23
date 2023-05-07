@@ -39,3 +39,9 @@ time: "//api.cartolafc.globo.com/auth/time",
 validarAssinaturaUsuarioSemTime: "//api.cartolafc.globo.com/logged/time/validar-pro"
 time_substituição: https://api.cartolafc.globo.com/time/substituicoes/961332
 liga_slug_filtro: https://api.cartolafc.globo.com/auth/liga/nacional?page=1&orderBy=rodada
+
+Create Build
+
+    flutter build apk --no-shrink
+    flutter build apk --release
+    flutter build appbundle
