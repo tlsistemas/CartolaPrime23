@@ -439,22 +439,22 @@ class _HomePageState extends State<HomePage> {
 
             // padding: EdgeInsets.zero,
           ),
-          ListTile(
-            onTap: () {
-              toggleMenu();
-              Navigator.pushNamed(context, "/classificacao");
-            },
-            leading: const Icon(Icons.format_list_numbered,
-                size: 25.0, color: Colors.white),
-            title: const Text(
-              "Classificação Brasileirão",
-              style: TextStyle(fontSize: 14),
-            ),
-            textColor: Colors.white,
-            dense: true,
+          // ListTile(
+          //   onTap: () {
+          //     toggleMenu();
+          //     Navigator.pushNamed(context, "/classificacao");
+          //   },
+          //   leading: const Icon(Icons.format_list_numbered,
+          //       size: 25.0, color: Colors.white),
+          //   title: const Text(
+          //     "Classificação Brasileirão",
+          //     style: TextStyle(fontSize: 14),
+          //   ),
+          //   textColor: Colors.white,
+          //   dense: true,
 
-            // padding: EdgeInsets.zero,
-          ),
+          //   // padding: EdgeInsets.zero,
+          // ),
           ListTile(
             onTap: () {
               toggleMenu();

@@ -104,7 +104,9 @@ class _AtletasPage extends State<AtletasPage> {
   Future<TimeCartolaModel> _updateTimes() async {
     var times =
         await _timeViewModel.getTimeIdDbAtletas(widget.timeAtletas.timeId!);
-    times.atletas!.addAll(times.reservas!);
+    if (times.reservas != null) {
+      times.atletas!.addAll(times.reservas!);
+    }
     return times;
   }
 
