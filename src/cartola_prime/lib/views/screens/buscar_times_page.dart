@@ -147,7 +147,7 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
         centerTitle: true,
       ),
       body: Stack(
-        children: <Widget>[
+        children: [
           SizedBox(
             height: height - 135,
             child: SingleChildScrollView(
@@ -155,21 +155,26 @@ class _BuscarTimePage extends State<BuscarTimePage> with baseSvg {
               child: listaTimesWidget(),
             ),
           ),
-          AdmobBanner(
-            adUnitId: kReleaseMode
-                ? AdHelper.bannerAdUnitId
-                : AdHelper.bannerAdUnitIdTest,
-            adSize: bannerSize!,
-            listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
-              // handleEvent(event, args, 'Banner');
-            },
-            onBannerCreated: (AdmobBannerController controller) {
-              // Dispose is called automatically for you when Flutter removes the banner from the widget tree.
-              // Normally you don't need to worry about disposing this yourself, it's handled.
-              // If you need direct access to dispose, this is your guy!
-              // controller.dispose();
-            },
-          ),
+          Positioned(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: AdmobBanner(
+                adUnitId: kReleaseMode
+                    ? AdHelper.bannerAdUnitId
+                    : AdHelper.bannerAdUnitIdTest,
+                adSize: bannerSize!,
+                listener: (AdmobAdEvent event, Map<String, dynamic>? args) {
+                  // handleEvent(event, args, 'Banner');
+                },
+                onBannerCreated: (AdmobBannerController controller) {
+                  // Dispose is called automatically for you when Flutter removes the banner from the widget tree.
+                  // Normally you don't need to worry about disposing this yourself, it's handled.
+                  // If you need direct access to dispose, this is your guy!
+                  // controller.dispose();
+                },
+              ),
+            ),
+          )
         ],
       ),
     );

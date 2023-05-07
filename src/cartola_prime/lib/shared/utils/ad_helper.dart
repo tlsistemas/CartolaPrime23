@@ -5,7 +5,7 @@ class AdHelper {
     if (Platform.isAndroid) {
       return 'ca-app-pub-2375658831220075/4526255482';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-2375658831220075/2899038961';
+      return 'ca-app-pub-2375658831220075/2446887057';
     } else {
       throw UnsupportedError('Unsupported platform');
     }
@@ -13,7 +13,7 @@ class AdHelper {
 
   static String get bannerAdUnitIdTest {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-2375658831220075~2899038961';
+      return 'ca-app-pub-3940256099942544/7049598008';
     } else if (Platform.isIOS) {
       return 'ca-app-pub-2375658831220075~2899038961';
     } else {

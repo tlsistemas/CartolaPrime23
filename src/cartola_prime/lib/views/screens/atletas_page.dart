@@ -94,7 +94,9 @@ class _AtletasPage extends State<AtletasPage> {
 
   Future<TimeCartolaModel> _getTimes() async {
     if (widget.timeAtletas.atletas!.length < 13) {
-      widget.timeAtletas.atletas?.addAll(widget.timeAtletas.reservas!);
+      if (widget.timeAtletas.reservas != null) {
+        widget.timeAtletas.atletas?.addAll(widget.timeAtletas.reservas!);
+      }
     }
     return widget.timeAtletas;
   }

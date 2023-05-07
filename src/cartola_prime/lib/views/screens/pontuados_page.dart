@@ -179,7 +179,7 @@ class _PontuadosPage extends State<PontuadosPage> {
         ],
         centerTitle: true,
       ),
-      body: Stack(
+      body: Column(
         children: [
           SizedBox(
             height: height - 135,
