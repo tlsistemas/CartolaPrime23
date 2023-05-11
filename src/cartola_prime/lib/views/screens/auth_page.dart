@@ -25,6 +25,7 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
   void initState() {
     super.initState();
     controller = WebViewController()
+      ..setUserAgent("random")
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
@@ -91,7 +92,9 @@ class _AuthPageState extends State<AuthPage> with baseUrls {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: WebViewWidget(controller: controller),
+      body: WebViewWidget(
+        controller: controller,
+      ),
     );
   }
 }
