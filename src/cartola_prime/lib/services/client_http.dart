@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class ClientHttp {
@@ -33,6 +34,11 @@ class ClientHttp {
         return jsonDecode(json!);
       }
     } catch (e) {
+      if (url.contains("substituicoes")) {
+        final String response =
+            await rootBundle.loadString('assets/json/substituicoes.json');
+        return json.decode(response);
+      }
       rethrow;
     }
   }

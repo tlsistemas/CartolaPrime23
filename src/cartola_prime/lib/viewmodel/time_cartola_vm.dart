@@ -10,6 +10,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../data/data_base_repository.dart';
 import '../models/dto/pontuados_dto.dart';
 import '../models/dto/time_subtituicoes_dto.dart';
+import '../models/enums/condicao_atleta_enum.dart';
 import '../models/time_cartola_model.dart';
 import '../repositories/contracts/i_mercado_repository.dart';
 import '../repositories/contracts/i_time_cartola_repository.dart';
@@ -90,6 +91,14 @@ class TimeCartolaViewModel {
         pontuados = await mercadoViewModel.pontuadosMercado();
 
         var timeCompleto = await _service.getTimeBuscaId(time.timeId!);
+
+        var substituicoes = await _service.getTimeSubtituicoesRodada(
+            timeCompleto.time!.timeId!, (mercado.rodadaAtual!));
+
+        if (substituicoes.isNotEmpty) {
+          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+        }
+
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
 
         var retorno = await preencherPontosAtletas(timeModel, pontuados);
@@ -120,6 +129,29 @@ class TimeCartolaViewModel {
         return timeModel;
       }
 
+      if (mercado.statusMercado == StatusMercadoEnum.suporte.index) {
+        pontuados = await mercadoViewModel.pontuadosMercado();
+
+        var timeCompleto = await _service.getTimeBuscaId(time.timeId!);
+
+        var substituicoes = await _service.getTimeSubtituicoesRodada(
+            timeCompleto.time!.timeId!, (mercado.rodadaAtual!));
+
+        if (substituicoes.isNotEmpty) {
+          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+        }
+
+        var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
+
+        var retorno = await preencherPontosAtletas(timeModel, pontuados);
+
+        retorno.pontos = retorno.getParcialTimeSemCapitao();
+        retorno.pontosCampeonato =
+            retorno.pontosCampeonato ?? 0 + retorno.pontos!;
+
+        return retorno;
+      }
+
       return time;
     } catch (ex) {
       return TimeCartolaModel();
@@ -139,14 +171,21 @@ class TimeCartolaViewModel {
       pontuados = await mercadoViewModel.pontuadosMercado();
       for (var i = 0; i < times.length; i++) {
         var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
-        // var substituicoes =
-        //     await _service.getTimeSubtituicoes(times[i].timeId!);
+
+        var substituicoes = await _service.getTimeSubtituicoesRodada(
+            times[i].timeId!, (mercado.rodadaAtual!));
+
+        if (substituicoes.isNotEmpty) {
+          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+        }
+
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
 
         var retorno = await preencherPontosAtletas(timeModel, pontuados);
 
         retorno.pontos = retorno.getParcialTimeSemCapitao();
-        retorno.pontosCampeonato = retorno.pontosCampeonato! + retorno.pontos!;
+        retorno.pontosCampeonato =
+            retorno.pontosCampeonato ?? 0! + retorno.pontos!;
 
         updateTime(retorno);
 
@@ -193,6 +232,34 @@ class TimeCartolaViewModel {
       }
     }
 
+    if (mercado.statusMercado == StatusMercadoEnum.suporte.index) {
+      pontuados = await mercadoViewModel.pontuadosMercado();
+      for (var i = 0; i < times.length; i++) {
+        var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
+
+        var substituicoes = await _service.getTimeSubtituicoesRodada(
+            times[i].timeId!, (mercado.rodadaAtual!));
+
+        //if (timeCompleto == null) return <TimeCartolaModel>[];
+
+        if (substituicoes.isNotEmpty) {
+          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+        }
+
+        var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
+
+        var retorno = await preencherPontosAtletas(timeModel, pontuados);
+
+        retorno.pontos = retorno.getParcialTimeSemCapitao();
+        retorno.pontosCampeonato =
+            retorno.pontosCampeonato ?? 0! + retorno.pontos!;
+
+        updateTime(retorno);
+
+        timesRetorno.add(retorno);
+      }
+    }
+
     return timesRetorno;
   }
 
@@ -204,6 +271,14 @@ class TimeCartolaViewModel {
       pontuados = await mercadoViewModel.pontuadosMercado();
 
       var timeCompleto = await _service.getTimeBuscaId(idTime);
+
+      var substituicoes = await _service.getTimeSubtituicoesRodada(
+          idTime, (mercado.rodadaAtual! - 1));
+
+      if (substituicoes.isNotEmpty) {
+        timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+      }
+
       var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
 
       var retorno = await preencherPontosAtletas(timeModel, pontuados);
@@ -237,13 +312,24 @@ class TimeCartolaViewModel {
   TimeCartolaDto preencherSubstituicoes(
       List<TimeSubtituicoesDto> substituicoes, TimeCartolaDto timeCompleto) {
     for (var itemSubs in substituicoes) {
-      var entrou = timeCompleto.atletas!.firstWhere(
+      var entrou = timeCompleto.reservas!.firstWhere(
           (element) => element.atletaId == itemSubs.entrou!.atletaId);
       entrou.iconSubstituicao = Icons.arrow_circle_up;
 
-      var saiu = timeCompleto.reservas!
+      var saiu = timeCompleto.atletas!
           .firstWhere((element) => element.atletaId == itemSubs.saiu!.atletaId);
       saiu.iconSubstituicao = Icons.arrow_circle_down;
+
+      timeCompleto.atletas!
+          .removeWhere((element) => element.atletaId == saiu.atletaId);
+      timeCompleto.reservas!
+          .removeWhere((element) => element.atletaId == entrou.atletaId);
+
+      entrou.titularReserva = CondicaoAtletaEnum.titular.texto;
+      saiu.titularReserva = CondicaoAtletaEnum.reserva.texto;
+
+      timeCompleto.atletas!.add(entrou);
+      timeCompleto.reservas!.add(saiu);
     }
 
     return timeCompleto;

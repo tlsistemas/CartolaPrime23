@@ -66,7 +66,8 @@ class TimeCartolaModel {
     assinante = assinante;
     patrimonio = double.tryParse(json['patrimonio'].toString());
     esquemaId = json['esquemaId'];
-    pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());
+    pontosCampeonato =
+        double.tryParse(json['pontos_campeonato'].toString()) ?? 0;
     pontos = double.tryParse(json['pontos'].toString());
     capitaoId = json['capitao_id'];
     valorTime = double.tryParse(json['valor_time'].toString());
@@ -89,8 +90,9 @@ class TimeCartolaModel {
     assinante = assinante;
     patrimonio = double.tryParse(json['patrimonio'].toString());
     esquemaId = json['esquemaId'];
-    pontosCampeonato = double.tryParse(json['pontos_campeonato'].toString());
-    pontos = double.tryParse(json['pontos'].toString());
+    pontosCampeonato =
+        double.tryParse(json['pontos_campeonato'].toString()) ?? 0;
+    pontos = double.tryParse(json['pontos'].toString()) ?? 0;
     capitaoId = json['capitao_id'];
     valorTime = double.tryParse(json['valor_time'].toString());
     rodadaAtual = json['rodada_atual'];

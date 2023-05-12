@@ -1,0 +1,296 @@
+[
+    {
+        "entrou": {
+            "scout": {
+                "FC": 1,
+                "SG": 1
+            },
+            "atleta_id": 104085,
+            "rodada_id": 4,
+            "clube_id": 282,
+            "posicao_id": 3,
+            "status_id": 7,
+            "pontos_num": 0,
+            "preco_num": 4.34,
+            "variacao_num": 0,
+            "media_num": 2.35,
+            "jogos_num": 2,
+            "minimo_para_valorizar": 1.8,
+            "gato_mestre": {
+                "media_pontos_mandante": 0,
+                "media_pontos_visitante": 4.7,
+                "media_minutos_jogados": 56,
+                "minutos_jogados": 13,
+                "scouts": {
+                    "media": {
+                        "SG": 0.5,
+                        "FC": 0.5
+                    },
+                    "mandante": {},
+                    "visitante": {
+                        "SG": 1,
+                        "FC": 1
+                    }
+                }
+            },
+            "slug": "bruno-fuchs",
+            "apelido": "Bruno Fuchs",
+            "apelido_abreviado": "B. Fuchs",
+            "nome": "Bruno de Lara Fuchs",
+            "foto": "https://s.sde.globo.com/media/person_role/2023/03/01/photo_FORMATO_qjyhb3e.png"
+        },
+        "saiu": {
+            "scout": {
+                "DS": 4,
+                "FC": 1,
+                "FF": 1,
+                "FS": 1,
+                "SG": 2
+            },
+            "atleta_id": 112136,
+            "rodada_id": 4,
+            "clube_id": 276,
+            "posicao_id": 3,
+            "status_id": 7,
+            "pontos_num": 0,
+            "preco_num": 6.53,
+            "variacao_num": 1.74,
+            "media_num": 5.27,
+            "jogos_num": 3,
+            "minimo_para_valorizar": 4.28,
+            "gato_mestre": {
+                "media_pontos_mandante": 7.050000000000001,
+                "media_pontos_visitante": 1.7,
+                "media_minutos_jogados": 100,
+                "minutos_jogados": 101,
+                "scouts": {
+                    "media": {
+                        "SG": 0.67,
+                        "FS": 0.33,
+                        "DS": 1.33,
+                        "FC": 0.33,
+                        "FF": 0.33
+                    },
+                    "mandante": {
+                        "SG": 2,
+                        "FS": 1,
+                        "DS": 3
+                    },
+                    "visitante": {
+                        "DS": 1,
+                        "FC": 1,
+                        "FF": 1
+                    }
+                }
+            },
+            "slug": "lucas-beraldo",
+            "apelido": "Lucas Beraldo",
+            "apelido_abreviado": "L. Beraldo",
+            "nome": "Lucas Lopes Beraldo",
+            "foto": "https://s.sde.globo.com/media/person_role/2022/07/22/aef0c837cb53876eb1509bd8c3eaa586_FORMATO.png"
+        },
+        "posicao_id": 3
+    },
+    {
+        "entrou": {
+            "scout": {
+                "CA": 2,
+                "FC": 7,
+                "SG": 1
+            },
+            "atleta_id": 81150,
+            "rodada_id": 4,
+            "clube_id": 275,
+            "posicao_id": 2,
+            "status_id": 7,
+            "pontos_num": 0,
+            "preco_num": 4.78,
+            "variacao_num": 0.79,
+            "media_num": 0.45,
+            "jogos_num": 2,
+            "minimo_para_valorizar": 2.42,
+            "gato_mestre": {
+                "media_pontos_mandante": -2.5,
+                "media_pontos_visitante": 3.4,
+                "media_minutos_jogados": 72,
+                "minutos_jogados": 70,
+                "scouts": {
+                    "media": {
+                        "SG": 0.5,
+                        "FC": 3.5,
+                        "CA": 1
+                    },
+                    "mandante": {
+                        "FC": 5,
+                        "CA": 1
+                    },
+                    "visitante": {
+                        "SG": 1,
+                        "FC": 2,
+                        "CA": 1
+                    }
+                }
+            },
+            "slug": "mayke",
+            "apelido": "Mayke",
+            "apelido_abreviado": "Mayke",
+            "nome": "Mayke Rocha de Oliveira",
+            "foto": "https://s.sde.globo.com/media/person_role/2023/03/15/photo_FORMATO_VrbLrFd.png"
+        },
+        "saiu": {
+            "scout": {
+                "CA": 1,
+                "DS": 4,
+                "FC": 5,
+                "SG": 1
+            },
+            "atleta_id": 38877,
+            "rodada_id": 4,
+            "clube_id": 282,
+            "posicao_id": 2,
+            "status_id": 7,
+            "pontos_num": 0,
+            "preco_num": 5.58,
+            "variacao_num": 0.21,
+            "media_num": 1.82,
+            "jogos_num": 4,
+            "minimo_para_valorizar": 1.89,
+            "gato_mestre": {
+                "media_pontos_mandante": 1.05,
+                "media_pontos_visitante": 2.6,
+                "media_minutos_jogados": 50,
+                "minutos_jogados": 97,
+                "scouts": {
+                    "media": {
+                        "SG": 0.25,
+                        "DS": 1,
+                        "FC": 1.25,
+                        "CA": 0.25
+                    },
+                    "mandante": {
+                        "DS": 2,
+                        "FC": 1
+                    },
+                    "visitante": {
+                        "SG": 1,
+                        "DS": 2,
+                        "FC": 4,
+                        "CA": 1
+                    }
+                }
+            },
+            "slug": "mariano",
+            "apelido": "Mariano",
+            "apelido_abreviado": "Mariano",
+            "nome": "Mariano Ferreira Filho",
+            "foto": "https://s.sde.globo.com/media/person_role/2023/03/01/photo_FORMATO_JIN8fSy.png"
+        },
+        "posicao_id": 2
+    },
+    {
+        "entrou": {
+            "scout": {
+                "CA": 1,
+                "DS": 8,
+                "FC": 7,
+                "FF": 2,
+                "FS": 1,
+                "G": 1
+            },
+            "atleta_id": 113359,
+            "rodada_id": 4,
+            "clube_id": 276,
+            "posicao_id": 4,
+            "status_id": 7,
+            "pontos_num": 0,
+            "preco_num": 6.49,
+            "variacao_num": 2.35,
+            "media_num": 4.15,
+            "jogos_num": 4,
+            "minimo_para_valorizar": 5.38,
+            "gato_mestre": {
+                "media_pontos_mandante": 5.95,
+                "media_pontos_visitante": 2.35,
+                "media_minutos_jogados": 79,
+                "minutos_jogados": 101,
+                "scouts": {
+                    "media": {
+                        "FS": 0.25,
+                        "G": 0.25,
+                        "DS": 2,
+                        "FC": 1.75,
+                        "CA": 0.25,
+                        "FF": 0.5
+                    },
+                    "mandante": {
+                        "G": 1,
+                        "DS": 4,
+                        "FC": 5,
+                        "CA": 1,
+                        "FF": 2
+                    },
+                    "visitante": {
+                        "FS": 1,
+                        "DS": 4,
+                        "FC": 2
+                    }
+                }
+            },
+            "slug": "pablo-maia",
+            "apelido": "Pablo Maia",
+            "apelido_abreviado": "P. Maia",
+            "nome": "Pablo Gonçalves Maia Fortunato",
+            "foto": "https://s.sde.globo.com/media/person_role/2022/03/05/e91f0953fe782088f01eda528fd69b2f_FORMATO.png"
+        },
+        "saiu": {
+            "scout": {
+                "CA": 1,
+                "DS": 12,
+                "FC": 6,
+                "FD": 3
+            },
+            "atleta_id": 72497,
+            "rodada_id": 4,
+            "clube_id": 285,
+            "posicao_id": 4,
+            "status_id": 6,
+            "pontos_num": 0,
+            "preco_num": 6.66,
+            "variacao_num": 1.16,
+            "media_num": 5.07,
+            "jogos_num": 3,
+            "minimo_para_valorizar": 4.29,
+            "gato_mestre": {
+                "media_pontos_mandante": 7.4,
+                "media_pontos_visitante": 3.9,
+                "media_minutos_jogados": 53,
+                "minutos_jogados": 48,
+                "scouts": {
+                    "media": {
+                        "DS": 4,
+                        "FC": 2,
+                        "CA": 0.33,
+                        "FD": 1
+                    },
+                    "mandante": {
+                        "DS": 6,
+                        "FC": 4,
+                        "CA": 1,
+                        "FD": 2
+                    },
+                    "visitante": {
+                        "DS": 6,
+                        "FC": 2,
+                        "FD": 1
+                    }
+                }
+            },
+            "slug": "gustavo-campanharo",
+            "apelido": "Gustavo Campanharo",
+            "apelido_abreviado": "G. Campanharo",
+            "nome": "Gustavo Campanharo",
+            "foto": "https://s.sde.globo.com/media/person_role/2023/04/02/photo_FORMATO_Fbab3V0.png"
+        },
+        "posicao_id": 4
+    }
+]
