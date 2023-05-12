@@ -368,7 +368,7 @@ class _AtletasPage extends State<AtletasPage> {
                     textAlign: TextAlign.start,
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                     child: Column(
                       children: [
                         Row(
@@ -420,24 +420,31 @@ class _AtletasPage extends State<AtletasPage> {
                                   ),
                           ],
                         ),
-                        // Column(
-                        //   children: [
-                        //     Text(
-                        //       atleta.entrouEmCampo!
-                        //           ? atleta.scout!.toScoutAtString()
-                        //           : "",
-                        //       style: const TextStyle(
-                        //           fontSize: 8, color: Colors.green),
-                        //     ),
-                        //     Text(
-                        //       atleta.entrouEmCampo!
-                        //           ? atleta.scout!.toScoutDEFString()
-                        //           : "",
-                        //       style: const TextStyle(
-                        //           fontSize: 8, color: Colors.red),
-                        //     ),
-                        //   ],
-                        // ),
+                        Row(
+                          children: [
+                            const Padding(
+                                padding: EdgeInsets.fromLTRB(0, 5, 0, 5)),
+                            Text(
+                              atleta.entrouEmCampo!
+                                  ? atleta.scout!.toScoutAtString()
+                                  : "",
+                              style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const Text(" | "),
+                            Text(
+                              atleta.entrouEmCampo!
+                                  ? atleta.scout!.toScoutDEFString()
+                                  : "",
+                              style: const TextStyle(
+                                  fontSize: 10,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

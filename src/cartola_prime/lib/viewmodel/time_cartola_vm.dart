@@ -196,12 +196,13 @@ class TimeCartolaViewModel {
     if (mercado.statusMercado == StatusMercadoEnum.aberto.index) {
       for (var i = 0; i < times.length; i++) {
         var timeCompleto = await _service.getTimeBuscaId(times[i].timeId!);
+
         var substituicoes = await _service.getTimeSubtituicoesRodada(
             times[i].timeId!, (mercado.rodadaAtual! - 1));
 
-        if (substituicoes.isNotEmpty) {
-          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
-        }
+        // if (substituicoes.isNotEmpty) {
+        //   timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+        // }
 
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
         timeModel.atletas!

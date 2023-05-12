@@ -28,7 +28,7 @@ class AtletaDto {
   double? variacaoNum;
   double? mediaNum;
   int? jogosNum;
-  double? minimoParaValorizar;
+  double? minimoParaValorizar = 0;
   GatoMestreDto? gatoMestre;
   String? slug;
   String? apelido;
@@ -82,7 +82,7 @@ class AtletaDto {
     mediaNum = double.tryParse(json['media_num'].toString());
     jogosNum = json['jogos_num'];
     minimoParaValorizar =
-        double.tryParse(json['minimo_para_valorizar'].toString());
+        double.tryParse(json['minimo_para_valorizar'].toString()) ?? 0;
     gatoMestre = json['gato_mestre'] != null
         ? GatoMestreDto.fromJson(json['gato_mestre'])
         : null;
@@ -110,7 +110,7 @@ class AtletaDto {
     mediaNum = double.tryParse(json['media_num'].toString());
     jogosNum = json['jogos_num'];
     minimoParaValorizar =
-        double.tryParse(json['minimo_para_valorizar'].toString());
+        double.tryParse(json['minimo_para_valorizar'].toString()) ?? 0;
     gatoMestre = json['gato_mestre'] != null
         ? GatoMestreDto.fromJson(json['gato_mestre'])
         : null;
@@ -186,7 +186,7 @@ class AtletaDto {
     variacaoNum = double.tryParse(json.variacao_num.toString());
     mediaNum = double.tryParse(json.media_num.toString());
     jogosNum = json.jogos_num;
-    minimoParaValorizar = json.minimo_para_valorizar;
+    minimoParaValorizar = json.minimo_para_valorizar ?? 0;
     gatoMestre = json.gato_mestre != null
         ? GatoMestreDto.fromJson(json.gato_mestre)
         : null;
