@@ -24,6 +24,7 @@ class _AuthPageState extends State<EscalarPage> with baseUrls {
     super.initState();
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setUserAgent("random")
       ..setBackgroundColor(backgroundColor)
       ..setNavigationDelegate(
         NavigationDelegate(),

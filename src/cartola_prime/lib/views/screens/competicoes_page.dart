@@ -212,13 +212,13 @@ class _CompeticoesPage extends State<CompeticoesPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    padding: const EdgeInsets.only(top: 15),
                     child: Image.network(
                       liga.urlFlamulaPng!,
-                      height: 70,
-                      width: 70,
+                      height: 50,
+                      width: 50,
                       centerSlice: Rect.largest,
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.fill,
                       alignment: Alignment.center,
                     ),
                   ),
