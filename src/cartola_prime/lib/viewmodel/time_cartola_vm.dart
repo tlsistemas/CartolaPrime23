@@ -1,3 +1,4 @@
+import 'package:cartola_prime/models/dto/atleta_dto.dart';
 import 'package:cartola_prime/models/enums/status_mercado_enum.dart';
 import 'package:cartola_prime/repositories/mercado_repository.dart';
 import 'package:cartola_prime/shared/utils/base_table.dart';
@@ -217,7 +218,7 @@ class TimeCartolaViewModel {
                   ? const Color.fromARGB(255, 90, 90, 90)
                   : timeModel.atletas![x].pontoCor!;
         }
-
+        timeModel.reservas = timeModel.reservas ?? <AtletaDto>[];
         for (var x = 0; x < timeModel.reservas!.length; x++) {
           timeModel.reservas![x].pontoCor =
               timeModel.reservas![x].pontosNum! > 0 ? Colors.green : Colors.red;
