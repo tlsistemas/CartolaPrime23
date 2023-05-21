@@ -425,7 +425,7 @@ class _AtletasPage extends State<AtletasPage> {
                             const Padding(
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5)),
                             Text(
-                              atleta.entrouEmCampo!
+                              atleta.entrouEmCampo! && atleta.scout != null
                                   ? atleta.scout!.toScoutAtString()
                                   : "",
                               style: const TextStyle(
@@ -435,7 +435,7 @@ class _AtletasPage extends State<AtletasPage> {
                             ),
                             const Text(" | "),
                             Text(
-                              atleta.entrouEmCampo!
+                              atleta.entrouEmCampo! && atleta.scout != null
                                   ? atleta.scout!.toScoutDEFString()
                                   : "",
                               style: const TextStyle(
