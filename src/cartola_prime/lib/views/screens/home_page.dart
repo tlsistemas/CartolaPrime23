@@ -4,7 +4,6 @@ import 'package:cartola_prime/viewmodel/mercado_vm.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../../models/time_cartola_model.dart';

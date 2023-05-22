@@ -1,4 +1,7 @@
 import 'package:cartola_prime/models/dto/atleta_dto.dart';
+import 'package:cartola_prime/models/dto/clube_dto.dart';
+import 'package:cartola_prime/repositories/clube_repository.dart';
+import 'package:cartola_prime/viewmodel/clube_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -30,6 +33,7 @@ class TimeCartolaModel {
   int? rodadaAtual;
   List<AtletaDto>? atletas;
   List<AtletaDto>? reservas;
+  ClubeDto? clube = ClubeDto();
 
   TimeCartolaModel(
       {this.temporadaInicial,

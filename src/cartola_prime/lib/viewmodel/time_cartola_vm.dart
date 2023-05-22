@@ -4,6 +4,7 @@ import 'package:cartola_prime/repositories/mercado_repository.dart';
 import 'package:cartola_prime/shared/utils/base_table.dart';
 import 'package:cartola_prime/models/dto/time_busca_dto.dart';
 import 'package:cartola_prime/models/dto/time_cartola_dto.dart';
+import 'package:cartola_prime/viewmodel/clube_vm.dart';
 import 'package:cartola_prime/viewmodel/mercado_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -28,6 +29,7 @@ class TimeCartolaViewModel {
   final IMercadoRepository _mercadoRepository = MercadoRepository();
   final HiveService hiveService = locator<HiveService>();
   final MercadoViewModel mercadoViewModel = MercadoViewModel();
+  final ClubeViewModel clubeViewModel = ClubeViewModel();
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
@@ -190,6 +192,8 @@ class TimeCartolaViewModel {
 
         updateTime(retorno);
 
+        retorno.clube = await clubeViewModel.getOneId(retorno.clubeId ?? 0);
+
         timesRetorno.add(retorno);
       }
     }
@@ -229,7 +233,7 @@ class TimeCartolaViewModel {
         }
 
         updateTime(timeModel);
-
+        timeModel.clube = await clubeViewModel.getOneId(timeModel.clubeId ?? 0);
         timesRetorno.add(timeModel);
       }
     }
@@ -257,7 +261,7 @@ class TimeCartolaViewModel {
             retorno.pontosCampeonato ?? 0! + retorno.pontos!;
 
         updateTime(retorno);
-
+        retorno.clube = await clubeViewModel.getOneId(retorno.clubeId ?? 0);
         timesRetorno.add(retorno);
       }
     }

@@ -100,7 +100,7 @@ class ListaTimesCartolaControler extends StatelessWidget {
                       centerSlice: Rect.largest,
                     ),
               const SizedBox(
-                width: 20.0,
+                width: 10.0,
                 height: 0.0,
               ),
               Column(
@@ -142,7 +142,7 @@ class ListaTimesCartolaControler extends StatelessWidget {
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
-                            width: 100.0,
+                            width: 90.0,
                             height: 0.0,
                           ),
                           const Text(
@@ -161,12 +161,26 @@ class ListaTimesCartolaControler extends StatelessWidget {
                             textAlign: TextAlign.right,
                           ),
                           const SizedBox(
-                            width: 100.0,
+                            width: 90.0,
                             height: 0.0,
                           ),
                           const Text(
                             "Pontos CA",
                             style: TextStyle(color: Colors.black, fontSize: 10),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Image.network(
+                            timeCartola.clube!.escudos!.s60x60!,
+                            height: 20,
+                            width: 20,
+                          ),
+                          Text(
+                            timeCartola.clube!.abreviacao!,
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 10),
                           ),
                         ],
                       ),

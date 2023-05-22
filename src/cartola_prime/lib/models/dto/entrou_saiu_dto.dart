@@ -53,7 +53,8 @@ class EntrouSaiuDto {
     variacaoNum = double.tryParse(json['variacao_num'].toString());
     mediaNum = double.tryParse(json['media_num'].toString());
     jogosNum = json['jogos_num'];
-    minimoParaValorizar = json['minimo_para_valorizar'];
+    minimoParaValorizar =
+        double.tryParse(json['minimo_para_valorizar'].toString());
     gatoMestre = json['gato_mestre'] != null
         ? GatoMestreDto.fromJson(json['gato_mestre'])
         : null;

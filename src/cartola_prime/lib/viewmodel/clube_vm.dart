@@ -29,4 +29,10 @@ class ClubeViewModel extends ChangeNotifier {
     notifyListeners();
     return itens.first;
   }
+
+  Future<ClubeDto> getOneId(int clubeId) async {
+    final itens = await _service.getAllClubes();
+    notifyListeners();
+    return itens.where((element) => element.id == clubeId).first;
+  }
 }
