@@ -93,9 +93,11 @@ class _AtletasPage extends State<AtletasPage> {
   }
 
   Future<TimeCartolaModel> _getTimes() async {
-    if (widget.timeAtletas.atletas!.length < 13) {
-      if (widget.timeAtletas.reservas != null) {
-        widget.timeAtletas.atletas?.addAll(widget.timeAtletas.reservas!);
+    if (widget.timeAtletas.atletas != null) {
+      if (widget.timeAtletas.atletas!.length < 13) {
+        if (widget.timeAtletas.reservas != null) {
+          widget.timeAtletas.atletas?.addAll(widget.timeAtletas.reservas!);
+        }
       }
     }
     return widget.timeAtletas;
@@ -273,30 +275,52 @@ class _AtletasPage extends State<AtletasPage> {
                 ),
                 onTap: () {},
               ),
-              SizedBox(
-                height: height - 230,
-                child: GroupedListView<dynamic, String>(
-                  elements: item.atletas!,
-                  groupBy: (element) => element.titularReserva.toString(),
-                  groupComparator: (value1, value2) => value2.compareTo(value1),
-                  itemComparator: (item1, item2) =>
-                      item1.posicaoId.compareTo(item2.posicaoId),
-                  order: GroupedListOrder.ASC,
-                  // useStickyGroupSeparators: true,
-                  groupSeparatorBuilder: (String value) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      value,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+              item.atletas != null
+                  ? SizedBox(
+                      height: height - 230,
+                      child: GroupedListView<dynamic, String>(
+                        elements: item.atletas!,
+                        groupBy: (element) => element.titularReserva.toString(),
+                        groupComparator: (value1, value2) =>
+                            value2.compareTo(value1),
+                        itemComparator: (item1, item2) =>
+                            item1.posicaoId.compareTo(item2.posicaoId),
+                        order: GroupedListOrder.ASC,
+                        // useStickyGroupSeparators: true,
+                        groupSeparatorBuilder: (String value) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            value,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        itemBuilder: (c, element) {
+                          return customCard(element);
+                        },
+                      ),
+                    )
+                  : SizedBox(
+                      width: width,
+                      height: height - 300,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Lottie.asset('assets/json/loading_blue.json'),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Text(
+                              "Não há escalação disponível para a rodada ${item.rodadaAtual}.",
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.normal),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  itemBuilder: (c, element) {
-                    return customCard(element);
-                  },
-                ),
-              ),
               AdmobBanner(
                 adUnitId: kReleaseMode
                     ? AdHelper.bannerAdUnitId
