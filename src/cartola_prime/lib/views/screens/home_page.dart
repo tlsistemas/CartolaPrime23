@@ -247,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                   //_myData = _setTimes();
                 });
               },
-              backgroundColor: foregroundColor,
+              backgroundColor: backgroundColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100)),
               child: const Icon(Icons.refresh, color: iconColorPrimary),
