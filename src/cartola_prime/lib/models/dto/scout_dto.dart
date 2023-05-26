@@ -7,7 +7,6 @@ class ScoutDto {
   int? A = 0;
   int? cA = 0;
   int? cV = 0;
-  int? dD = 0;
   int? dP = 0;
   int? fC = 0;
   int? fD = 0;
@@ -32,7 +31,7 @@ class ScoutDto {
       {this.A,
       this.cA,
       this.cV,
-      this.dD,
+      this.dE,
       this.dP,
       this.fC,
       this.fD,
@@ -49,7 +48,6 @@ class ScoutDto {
       this.sG,
       this.pI,
       this.dS,
-      this.dE,
       this.pS,
       this.pC});
 
@@ -57,7 +55,7 @@ class ScoutDto {
     A = json['A'] ?? 0;
     cA = json['CA'] ?? 0;
     cV = json['CV'] ?? 0;
-    dD = json['DD'] ?? 0;
+    dE = json['DE'] ?? 0;
     dP = json['DP'] ?? 0;
     fC = json['FC'] ?? 0;
     fD = json['FD'] ?? 0;
@@ -84,7 +82,7 @@ class ScoutDto {
       A = json.A ?? 0;
       cA = json.cA ?? 0;
       cV = json.cV ?? 0;
-      dD = json.dD ?? 0;
+      dE = json.dE ?? 0;
       dP = json.dP ?? 0;
       fC = json.fC ?? 0;
       fD = json.fD ?? 0;
@@ -112,7 +110,6 @@ class ScoutDto {
     data['A'] = A;
     data['CA'] = cA;
     data['CV'] = cV;
-    data['DD'] = dD;
     data['DP'] = dP;
     data['FC'] = fC;
     data['FD'] = fD;
@@ -137,16 +134,14 @@ class ScoutDto {
 
   String toScoutDEFString() {
     var retorno2 = "";
-    if (sG! > 0) retorno2 = "${retorno2}SG: $sG ";
     if (dP! > 0) retorno2 = "${retorno2}DP: $dP ";
-    if (dD! > 0) retorno2 = "${retorno2}DD: $dD ";
-    if (dS! > 0) retorno2 = "${retorno2}DS: $dS ";
     if (gC! > 0) retorno2 = "${retorno2}GC: $gC ";
     if (cV! > 0) retorno2 = "${retorno2}CV: $cV ";
     if (cA! > 0) retorno2 = "${retorno2}CA: $cA ";
     if (gS! > 0) retorno2 = "${retorno2}GS: $gS ";
     if (fC! > 0) retorno2 = "${retorno2}FC: $fC ";
     if (pC! > 0) retorno2 = "${retorno2}PC: $pC ";
+    if (I! > 0) retorno2 = "${retorno2}IP: $I ";
 
     // var retorno =
     //     "SG: $sG DP: $dP DD: $dD DS: $dS GC: $gC CV: $cV CA: $cA GS: $gS FC: $fC PC: $pC";
@@ -156,6 +151,7 @@ class ScoutDto {
 
   String toScoutAtString() {
     var retorno2 = "";
+    if (sG! > 0) retorno2 = "${retorno2}SG: $sG ";
     if (G! > 0) retorno2 = "${retorno2}G: $G ";
     if (A! > 0) retorno2 = "${retorno2}A: $A ";
     if (fT! > 0) retorno2 = "${retorno2}FT: $fT ";
@@ -166,6 +162,8 @@ class ScoutDto {
     if (pP! > 0) retorno2 = "${retorno2}PP: $pP ";
     if (I! > 0) retorno2 = "${retorno2}I: $I ";
     if (pI! > 0) retorno2 = "${retorno2}PI: $pI ";
+    if (dE! > 0) retorno2 = "${retorno2}DE: $dE ";
+    if (dS! > 0) retorno2 = "${retorno2}DS: $dS ";
 
     // var retorno =
     //     "G: $G A: $A FT: $fT FD: $fD FF: $fF FS: $fS PS: $pS PP: $pP I: $I PI: $pI";

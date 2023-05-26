@@ -35,7 +35,7 @@ class TimeCartolaDto {
       this.ranking});
 
   TimeCartolaDto.fromJson(Map<String, dynamic> json) {
-    if (json.containsKey('reservas')) {
+    if (json.containsKey('atletas')) {
       atletas = List.from(json['atletas'])
           .map((e) => AtletaDto.fromJson(e, CondicaoAtletaEnum.titular))
           .toList();

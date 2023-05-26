@@ -212,7 +212,7 @@ class TimeCartolaViewModel {
         }
 
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
-        if (timeModel.atletas != null) {
+        if (timeModel.atletas != null && timeModel.atletas!.length! > 0) {
           timeModel.atletas!
               .firstWhere((element) => element.atletaId == timeModel.capitaoId)
               .capitao = true;
