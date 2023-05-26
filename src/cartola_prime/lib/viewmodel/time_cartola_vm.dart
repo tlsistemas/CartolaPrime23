@@ -120,7 +120,8 @@ class TimeCartolaViewModel {
             time.timeId!, (mercado.rodadaAtual! - 1));
 
         if (substituicoes.isNotEmpty) {
-          timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
+          timeCompleto =
+              preencherSubstituicoesMercadoAberto(substituicoes, timeCompleto);
         }
 
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
@@ -205,9 +206,10 @@ class TimeCartolaViewModel {
         var substituicoes = await _service.getTimeSubtituicoesRodada(
             times[i].timeId!, (mercado.rodadaAtual! - 1));
 
-        // if (substituicoes.isNotEmpty) {
-        //   timeCompleto = preencherSubstituicoes(substituicoes, timeCompleto);
-        // }
+        if (substituicoes.isNotEmpty) {
+          timeCompleto =
+              preencherSubstituicoesMercadoAberto(substituicoes, timeCompleto);
+        }
 
         var timeModel = TimeCartolaModel.fromTimeCartolaDTO(timeCompleto);
         if (timeModel.atletas != null) {
@@ -342,6 +344,21 @@ class TimeCartolaViewModel {
 
       timeCompleto.atletas!.add(entrou);
       timeCompleto.reservas!.add(saiu);
+    }
+
+    return timeCompleto;
+  }
+
+  TimeCartolaDto preencherSubstituicoesMercadoAberto(
+      List<TimeSubtituicoesDto> substituicoes, TimeCartolaDto timeCompleto) {
+    for (var atletaSub in substituicoes) {
+      timeCompleto.atletas!
+          .firstWhere((x) => x.atletaId == atletaSub.entrou!.atletaId)
+          .iconSubstituicao = Icons.arrow_circle_up;
+
+      timeCompleto.reservas!
+          .firstWhere((x) => x.atletaId == atletaSub.saiu!.atletaId)
+          .iconSubstituicao = Icons.arrow_circle_down;
     }
 
     return timeCompleto;

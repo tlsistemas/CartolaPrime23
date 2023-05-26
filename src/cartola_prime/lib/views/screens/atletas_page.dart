@@ -73,6 +73,9 @@ class _AtletasPage extends State<AtletasPage> {
   }
 
   void _fetchData(BuildContext context, [bool mounted = true]) async {
+    if (widget.timeAtletas.atletas == null) {
+      return;
+    }
     // // show the loading dialog
     showDialog(
       // The user CANNOT close this dialog  by pressing outsite it
